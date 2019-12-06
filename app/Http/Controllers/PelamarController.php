@@ -1,0 +1,142 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Validator, Redirect, Response;
+
+class PelamarController extends Controller
+{
+    public function index() {
+        $data = [
+            'title' => "Manajemen Data Pelamar",
+            'breadcrumb' => "Data Pelamar",
+            'pelamar' => DB::table('tb_pelamar')->get()
+        ];
+        
+        return view ('/admin/content/view_pelamar', $data);
+    }
+    
+    public function tambah_pelamar() {
+        $data = [
+            'title' => "Form Tambah Pelamar",
+            'breadcrumb' => "Tambah Pelamar"
+        ];
+        
+        return view ('/admin/content/view_pelamar_tambah', $data);
+    }
+    
+    public function store_pelamar(Request $insert) {
+        $messages = [
+            'required' => 'Field Wajib Diisi *',
+            'max' => 'Input Tidak Sesuai'
+        ];
+
+        //validasi form
+        $this->validate($insert, [
+            'a' => 'required|max:17',
+            'b' => 'required|max:50',
+            'c' => 'required|max:50',
+            'd' => 'required',
+            'e' => 'required|max:1',
+            'f' => 'required|max:50',
+            'g' => 'required',
+            'h' => 'required|max:10',
+            'i' => 'required|max:2',
+            'j' => 'required|max:3',
+            'k' => 'required|max:3',
+            'l' => 'required|max:15',
+            'm' => 'required|max:50',
+            'n' => 'required|max:64',
+            'o' => 'required|max:64'
+        ], $messages);
+        
+        $checknik = DB::table('tb_pelamar')->where('nik_pelamar', $insert->a)->get()->count();
+        
+        if ($checknik == 0) {
+            DB::table('tb_pelamar')->insert([
+                'nik_pelamar' => $insert->a,
+                'npwp_pelamar' => $insert->b,
+                'nama_pelamar' => $insert->c,
+                'alamat_pelamar' => $insert->d,
+                'kelamin_pelamar' => $insert->e,
+                'tplahir_pelamar' => $insert->f,
+                'tglahir_pelamar' => $insert->g,
+                'agama_pelamar' => $insert->h,
+                'status_pelamar' => $insert->i,
+                'tinggi_pelamar' => $insert->j,
+                'berat_pelamar' => $insert->k,
+                'telp_pelamar' => $insert->l,
+                'email_pelamar' => $insert->m,
+                'password_pelamar' => md5($insert->n),
+                'confirm_password_pelamar' => md5($insert->o)
+            ]);
+            
+            return redirect ('/admin/halaman-manajemen-pelamar')->with('success-alert', 'Disimpan');
+        } else {
+            return redirect ('/admin/halaman-tambah-pelamar')->with('error-alert', 'Pelamar Telah Terdaftar Sebelumnya');
+        }
+    }
+    
+    public function edit_pelamar($id) {
+        $data = [
+            'title' => "Form Edit Pelamar",
+            'breadcrumb' => "Edit Pelamar",
+            'pelamar' => DB::table('tb_pelamar')->where('id_pelamar', $id)->first()
+        ];
+        
+        return view ('/admin/content/view_pelamar_edit', $data);
+    }
+    
+    public function update_pelamar(Request $update) {
+        $messages = [
+            'required' => 'Field Wajib Diisi *',
+            'max' => 'Input Tidak Sesuai'
+        ];
+
+        //validasi form
+        $this->validate($update, [
+            'a' => 'required|max:17',
+            'b' => 'required|max:50',
+            'c' => 'required|max:50',
+            'd' => 'required',
+            'e' => 'required|max:1',
+            'f' => 'required|max:50',
+            'g' => 'required',
+            'h' => 'required|max:10',
+            'i' => 'required|max:2',
+            'j' => 'required|max:3',
+            'k' => 'required|max:3',
+            'l' => 'required|max:15',
+            'm' => 'required|max:50',
+            'n' => 'required|max:64',
+            'o' => 'required|max:64'
+        ], $messages);
+        
+        DB::table('tb_pelamar')->where('id_pelamar', $update->inpid)->update([
+            'npwp_pelamar' => $update->b,
+            'nama_pelamar' => $update->c,
+            'alamat_pelamar' => $update->d,
+            'kelamin_pelamar' => $update->e,
+            'tplahir_pelamar' => $update->f,
+            'tglahir_pelamar' => $update->g,
+            'agama_pelamar' => $update->h,
+            'status_pelamar' => $update->i,
+            'tinggi_pelamar' => $update->j,
+            'berat_pelamar' => $update->k,
+            'telp_pelamar' => $update->l,
+            'email_pelamar' => $update->m,
+            'password_pelamar' => md5($update->n),
+            'confirm_password_pelamar' => md5($update->o)
+        ]);
+        
+        return redirect ('/admin/halaman-manajemen-pelamar')->with('success-alert', 'Disimpan');
+    }
+    
+    public function delete_pelamar(Request $delete) {
+        DB::table('tb_pelamar')->where('id_pelamar', $delete->idpelamar)->delete();
+        
+        return redirect ('/admin/halaman-manajemen-pelamar')->with('success-alert', 'Dihapus');
+    }
+}
