@@ -66,6 +66,22 @@
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
+              <div class="input-field col s12 m6 l6">
+                <i class="material-icons prefix">email</i>
+                <input name="inppassword" id="inppassword" type="password" class="validate" required>
+                <label for="inppassword">Password</label>
+                @error('g')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="input-field col s12 m6 l6">
+                <i class="material-icons prefix">email</i>
+                <input name="inpconfirm" id="inpconfirm" type="password" class="validate" required>
+                <label for="inpconfirm">Confirm Password</label>
+                @error('h')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
             </div>
             <div class="row">
               <div class="input-field col s12">

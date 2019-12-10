@@ -56,11 +56,11 @@
         <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="#"><span class="logo-text hide-on-med-and-down">Disnaker Solo</span></a></h1>
       </div>
       <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="accordion">
+        @if (Session::get('login-pr') == false)
         <li class="bold"><a class="waves-effect waves-cyan " href="/admin/halaman-dashboard-admin"><i class="material-icons">laptop_windows</i><span class="menu-title" data-i18n="">Dashboard</span></a>
         </li>
         <li class="navigation-header"><a class="navigation-header-text">main menu</a><i class="navigation-header-icon material-icons">more_horiz</i>
         </li>
-          
         @if (Session::get('roleuser') == 'Super Admin')
         <li class="bold"><a class="waves-effect waves-cyan " href="/admin/halaman-manajemen-user"><i class="material-icons">account_circle</i><span class="menu-title" data-i18n="">Pengguna</span></a>
         </li>
@@ -78,6 +78,11 @@
         </li>
         <li class="bold"><a class="waves-effect waves-cyan " href="/admin/halaman-manajemen-workshop"><i class="material-icons">extension</i><span class="menu-title" data-i18n="">Workshop</span></a>
         </li>
+        @elseif (Session::get('login-pr') == true)
+        <li class="navigation-header"><a class="navigation-header-text">main menu</a><i class="navigation-header-icon material-icons">more_horiz</i>
+        <li class="bold"><a class="waves-effect waves-cyan " href="/perusahaan/halaman-manajemen-lowongan"><i class="material-icons">exit_to_app</i><span class="menu-title" data-i18n="">Lowongan</span></a>
+        </li>
+        @endif
       </ul>
       <div class="navigation-background"></div><a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
     </aside>

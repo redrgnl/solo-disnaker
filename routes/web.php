@@ -77,6 +77,22 @@ Route::get('/admin/tambah-detail-workshop/{idpl}/{idwr}', 'WorkshopController@ta
 Route::post('/admin/delete-data-detail-workshop', 'WorkshopController@delete_detail_workshop');
 });
 
+//Check Login Perusahaan
+Route::group(['middleware' => 'perusahaansession'], function () {
+
+//Route Khusus Perusahaan
+Route::get('/perusahaan/halaman-manajemen-lowongan', 'PerusahaanController@dashboard');//
+Route::get('/perusahaan/halaman-tambah-lowongan', 'PerusahaanController@tambah_lowongan');//
+Route::post('/perusahaan/simpan-data-lowongan', 'PerusahaanController@store_lowongan');//
+Route::get('/perusahaan/halaman-edit-lowongan/{id}', 'PerusahaanController@edit_lowongan');//
+Route::post('/perusahaan/update-data-lowongan', 'PerusahaanController@update_lowongan');//
+Route::post('/perusahaan/delete-data-lowongan', 'PerusahaanController@delete_lowongan');//
+// - Detail Lowongan
+Route::get('/perusahaan/halaman-detail-lowongan/{id}/{per}', 'PerusahaanController@detail_lowongan')->name('perusahaan_detail_lowongan');//
+Route::get('/perusahaan/tambah-pelamar-lowongan/{low}/{pl}/{per}', 'PerusahaanController@tambah_detail_lowongan');//
+Route::post('/perusahaan/delete-data-detail-lowongan', 'PerusahaanController@delete_detail_lowongan');
+});
+
 //Route Login
 Route::get('/', 'AdminController@login')->name('login');
 Route::post('/post-login', 'AdminController@postLogin');
