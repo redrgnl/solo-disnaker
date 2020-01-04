@@ -103,7 +103,11 @@ class PerusahaanController extends Controller
             'confirm_password_perusahaan' => md5($update->inpconfirm)
         ]);
         
-        return redirect ('/admin/halaman-manajemen-perusahaan')->with('success-alert', 'Disimpan');
+        if (Session::get('login-pr') == true) {
+            return redirect ('/perusahaan/halaman-profile-perusahaan')->with('success-alert', 'Disimpan');
+        } else {
+            return redirect ('/admin/halaman-manajemen-perusahaan')->with('success-alert', 'Disimpan');
+        }
     }
     
     public function delete_perusahaan(Request $delete) {
@@ -246,5 +250,70 @@ class PerusahaanController extends Controller
         DB::table('tb_det_lowongan')->where('id_detlow', $delete->iddetail)->delete();
         
         return redirect()->route('perusahaan_detail_lowongan', ['id' => $delete->idlowongan, 'per' => $delete->idperusahaan])->with('success-alert', 'Dihapus');
+    }
+    
+    public function detail_perusahaan($id) {
+        $perusahaan = DB::table('tb_perusahaan')->where('id_perusahaan', $id)->first();
+        
+        $data = [
+            'title' => "Detail Perusahaan",
+            'breadcrumb' => $perusahaan->nama_perusahaan,
+            'perusahaan' => $perusahaan,
+            'gallery' => DB::table('tb_det_gallery')->where('id_perusahaan', $id)->get()
+        ];
+        
+        return view ('/admin/content/view_perusahaan_detail', $data);
+    }
+    
+    public function store_gal_perusahaan(Request $upload) {
+        $this->validate($upload, [
+			'pict_gall' => 'required',
+			'ket_gall' => 'required',
+		]);
+        
+        $img = $upload->file('pict_gall');
+        $imgname = $upload->nmper_gall."-".$img->getClientOriginalName();
+        
+        $location = 'perusahaan/gallery';
+		$img->move($location,$imgname);
+        
+        DB::table('tb_det_gallery')->insert([
+            'id_perusahaan' => $upload->idper_gall,
+            'nama_detgal' => $imgname,
+            'ket_detgal' => $upload->ket_gall
+        ]);
+        
+        return redirect()->back();
+    }
+    
+    public function change_pro_perusahaan(Request $update) {
+        $this->validate($update, [
+			'pict_corp' => 'required'
+		]);
+        
+        $img = $update->file('pict_corp');
+        $imgname = $update->nmper_corp."-".$img->getClientOriginalName();
+        
+        $location = 'perusahaan';
+		$img->move($location,$imgname);
+        
+        DB::table('tb_perusahaan')->where('id_perusahaan', $update->idper_corp)->update([
+            'logo_perusahaan' => $imgname
+        ]);
+        
+        return redirect()->back();
+    }
+    
+    public function profile() {
+        $perusahaan = DB::table('tb_perusahaan')->where('id_perusahaan', Session::get('iduser'))->first();
+        
+        $data = [
+            'title' => "Detail Perusahaan",
+            'breadcrumb' => $perusahaan->nama_perusahaan,
+            'perusahaan' => $perusahaan,
+            'gallery' => DB::table('tb_det_gallery')->where('id_perusahaan', Session::get('iduser'))->get()
+        ];
+        
+        return view ('/admin/content/view_perusahaan_detail', $data);
     }
 }

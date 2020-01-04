@@ -6,7 +6,11 @@
       <div id="validation" class="card card card-default scrollspy">
         <div class="card-content">
           <h4 class="card-title">Form Data Perusahaan</h4>
+          @if (Session::get('login-pr') == true)
+          <form class="col s12" method="post" action="/perusahaan/update-data-perusahaan">
+          @else
           <form class="col s12" method="post" action="/admin/update-data-perusahaan">
+          @endif
             @csrf
             <input type="hidden" name="inpid" value="{{ $perusahaan->id_perusahaan }}">
             <div class="row">

@@ -139,4 +139,18 @@ class PelamarController extends Controller
         
         return redirect ('/admin/halaman-manajemen-pelamar')->with('success-alert', 'Dihapus');
     }
+    
+    public function riwayat_pelamar($id) {
+        $data = [
+            'title' => "Form Edit Pelamar",
+            'breadcrumb' => "Edit Pelamar",
+            'pelamar' => DB::table('tb_pelamar')->where('id_pelamar', $id)->first(),
+            'riwayat' => DB::table('tb_det_workshop')
+                            ->join('tb_workshop', 'tb_workshop.id_workshop', '=', 'tb_det_workshop.id_workshop')
+                            ->join('tb_pelamar', 'tb_pelamar.id_pelamar', '=', 'tb_det_workshop.id_pelamar')
+                            ->where('tb_pelamar.id_pelamar', $id)->get()
+        ];
+        
+        return view ('/admin/content/view_pelamar_riwayat', $data);
+    }
 }

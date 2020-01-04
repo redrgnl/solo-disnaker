@@ -4,16 +4,22 @@
 <div class="row">
     <div class="col s12">
       <div class="card">
-        <a href="#modalpelamar" class="waves-effect waves-light btn gradient-45deg-light-blue-cyan gradient-shadow mt-2 modal-trigger">TAMBAH PELAMAR<i class="material-icons right">vpn_key</i></a>
+        <?php if ($endworkshop <= date('Y-m-d')) { ?>
+          <a class="waves-effect waves-light btn gradient-45deg-red-pink gradient-shadow mt-2 ">PENDAFTARAN DITUTUP<i class="material-icons right">cloud_off</i></a>
+        <?php } else { ?>
+          <a href="#modalpelamar" class="waves-effect waves-light btn gradient-45deg-light-blue-cyan gradient-shadow mt-2 modal-trigger">TAMBAH PESERTA<i class="material-icons right">vpn_key</i></a>
+        <?php } ?>
         <div class="card-content">
           <div class="row">
-            <div class="col s12">
+            <div class="col s8 l8 xl8">
               <table id="page-length-option" class="display">
                 <thead>
                   <tr>
+                    <th>Keterangan</th>
                     <th>NIK</th>
-                    <th>NPWP</th>
                     <th>Nama</th>
+                    <?php if ($detpelamar->count() == 0) { } else { ?>
+                    <th>NPWP</th>
                     <th>Alamat</th>
                     <th>Gender</th>
                     <th>Tempat / Tanggal Lahir</th>
@@ -24,14 +30,16 @@
                     <th>Telepon</th>
                     <th>Email</th>
                     <th>#</th>
+                    <?php }  ?>
                   </tr>
                 </thead>
                 <tbody>
                 @foreach($detpelamar as $pll)
                   <tr>
+                    @if($pll->status_detwork == 1)<td><a style="color: green; font-weight: bold">Approved</a></td> @else <td><a style="color: red; font-weight: bold">Tunda</a></td> @endif
                     <td>{{ $pll->nik_pelamar }}</td>
-                    <td>{{ $pll->npwp_pelamar }}</td>
                     <td>{{ $pll->nama_pelamar }}</td>
+                    <td>{{ $pll->npwp_pelamar }}</td>
                     <td>
                         <a class="truncate" title="{{ $pll->alamat_pelamar }}">{!! Str::limit($pll->alamat_pelamar, 120, ' ...') !!}</a>
                     </td>
@@ -44,6 +52,11 @@
                     <td>{{ $pll->telp_pelamar }}</td>
                     <td>{{ $pll->email_pelamar }}</td>
                     <td>
+                      @if($pll->status_detwork == 0)
+                      <a class="btn-floating waves-effect waves-light btn gradient-45deg-green-teal gradient-shadow" title="Approve Peserta" href="/admin/approve-data-workshop/{{ $pll->id_detwork }}/{{ $workshopID }}">
+                        <i class="material-icons">verified_user</i>
+                      </a>
+                      @endif
                       <a class="btn-floating modal-trigger waves-effect waves-light btn gradient-45deg-red-pink gradient-shadow" href="#modaldelete" onclick="deletedetail('{{ $pll->id_detwork }}', '{{ $pll->nama_pelamar }}', '{{ $pll->alamat_pelamar }}', '{{ $workshopID }}')">
                         <i class="material-icons">delete_forever</i>
                       </a>
@@ -53,9 +66,11 @@
                 </tbody>
                 <tfoot>
                   <tr>
+                    <th>Keterangan</th>
                     <th>NIK</th>
-                    <th>NPWP</th>
                     <th>Nama</th>
+                    <?php if ($detpelamar->count() == 0) { } else { ?>
+                    <th>NPWP</th>
                     <th>Alamat</th>
                     <th>Gender</th>
                     <th>Tempat / Tanggal Lahir</th>
@@ -66,9 +81,26 @@
                     <th>Telepon</th>
                     <th>Email</th>
                     <th>#</th>
+                    <?php } ?>
                   </tr>
                 </tfoot>
               </table>
+            </div>
+            <div class="col s4 l4 right-content border-radius-6">
+              <ul class="navbar-list right mt-0">               
+                <li class="hide-on-med-and-down">
+                  <a class="waves-effect waves-block waves-light modal-trigger" href="#modallog">
+                    <i class="material-icons float-right">more_vert</i>
+                  </a>
+                </li>
+              </ul>
+              <h5 class="mt-0">Banner / Logo</h5>
+              <p></p>
+              <?php if ($datworkshop->poster_workshop == '') { ?>
+                <img class="responsive-img mt-4 p-3 border-radius-6" src="{{ asset('admin/images/gallery/404_not_found_2x.png') }}" alt="">
+              <?php } else { ?>
+                <img class="responsive-img mt-4 p-3 border-radius-6" src="{{ asset('workshop') }}/{{ $datworkshop->poster_workshop }}" alt="">
+              <?php } ?>
             </div>
           </div>
         </div>
@@ -123,18 +155,34 @@
           </tr>
         @endforeach
       </tbody>
-      <tfoot>
-        <tr>
-          <th>#</th>
-          <th>NIK</th>
-          <th>Nama</th>
-          <th>Alamat</th>
-          <th>Tempat / Tanggal Lahir</th>
-        </tr>
-      </tfoot>
     </table>
   </div>
-</div> 
+</div>
+
+<div id="modallog" class="modal">
+  <div class="modal-content">
+    <h5>Logo Pelatihan</h5>
+    <form method="post" action="/admin/ganti-profile-workshop" enctype="multipart/form-data">
+      @csrf
+      <input type="hidden" value="{{ $datworkshop->id_workshop }}" name="id_work">
+      <input type="hidden" value="{{ $datworkshop->nama_workshop }}" name="nm_work">
+      <div class="row">
+        <div class="file-field input-field col s12">
+          <div class="btn">
+            <span>File</span>
+            <input type="file" name="pict_work">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" required>
+          </div>
+        </div>
+      </div>
+      <button class="waves-effect waves-light btn right gradient-45deg-light-blue-cyan gradient-shadow" type="submit">
+        <i class="material-icons right">collections</i> Simpan</button><br>
+    </form>
+  </div>
+</div>
+
 @endsection
 
 @section('customjs')

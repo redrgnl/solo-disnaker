@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col s12">
       <div class="card">
-        <a href="/admin/halaman-tambah-workshop" class="waves-effect waves-light btn gradient-45deg-light-blue-cyan gradient-shadow mt-2">TAMBAH WORKSHOP<i class="material-icons right">vpn_key</i></a>
+        <a href="/admin/halaman-tambah-workshop" class="waves-effect waves-light btn gradient-45deg-light-blue-cyan gradient-shadow mt-2">TAMBAH PELATIHAN<i class="material-icons right">vpn_key</i></a>
         <div class="card-content">
           <div class="row">
             <div class="col s12">
@@ -12,11 +12,13 @@
                 <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Workshop</th>
+                    <th>Pelatihan</th>
                     <th>Lokasi</th>
                     <th>Tanggal</th>
                     <th>Kuota</th>
                     <th>Status</th>
+                    <th>Pendaftaran</th>
+                    <th>Kategori</th>
                     <th>#</th>
                   </tr>
                 </thead>
@@ -27,11 +29,13 @@
                     <td>{{ $no++ }}</td>
                     <td>{{ $wr->nama_workshop }}</td>
                     <td>
-                        <a class="truncate" title="{{ $wr->lokasi_workshop }}">{!! Str::limit($wr->lokasi_workshop, 120, ' ...') !!}</a>
+                        <a class="truncate modal-trigger" title="{{ $wr->lokasi_workshop }}" onclick="return popup('{{ $wr->maps_workshop }}')" href="#">{!! Str::limit($wr->lokasi_workshop, 100, ' ...') !!}</a>
                     </td>
-                    <td>{{ $wr->tanggal_workshop }}</td>
+                    <td>{{ date("j F Y", strtotime($wr->tanggal_workshop)) }}</td>
                     <td>{{ $wr->kuota_workshop }} Peserta</td>
-                    <td>{{ $wr->status_workshop }}</td>
+                    <td><?php if ($wr->end_workshop <= date('Y-m-d')) { echo "Non-Active"; } else { echo "Active"; } ?></td>
+                    <td>{{ date("j F Y", strtotime($wr->str_workshop)) }} - {{ date("j F Y", strtotime($wr->end_workshop)) }}</td>
+                    <td>{{ $wr->kategori_workshop }}</td>
                     <td>
                         <a class="btn-floating btn-flat waves-effect waves-light gradient-45deg-green-teal gradient-shadow" href="/admin/halaman-detail-workshop/{{ $wr->id_workshop }}">
                             <i class="material-icons">help_outline</i>
@@ -51,11 +55,13 @@
                 <tfoot>
                   <tr>
                     <th>No.</th>
-                    <th>Workshop</th>
+                    <th>Pelatihan</th>
                     <th>Lokasi</th>
                     <th>Tanggal</th>
                     <th>Kuota</th>
                     <th>Status</th>
+                    <th>Pendaftaran</th>
+                    <th>Kategori</th>
                     <th>#</th>
                   </tr>
                 </tfoot>
@@ -82,6 +88,7 @@
     </form>
   </div>
 </div> 
+
 @endsection
 
 @section('customjs')
@@ -90,6 +97,11 @@ function deleteworkshop($idwork, $namawork, $lokwork) {
     $('#idworkshop').val($idwork);
     $('#shnama').html($namawork);
     $('#shlengkap').html($lokwork);
+}
+function popup(url) {
+  newwindow = window.open(url,'name','height=500,width=1050');
+  if (window.focus) { newwindow.focus() }
+  return false;
 }
 </script>
 @endsection

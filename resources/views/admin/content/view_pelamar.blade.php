@@ -47,6 +47,10 @@
                       <a class="btn-floating btn-flat waves-effect waves-light gradient-45deg-light-blue-cyan gradient-shadow" href="/admin/halaman-edit-pelamar/{{ $pl->id_pelamar }}">
                         <i class="material-icons">build</i>
                       </a>
+                      
+                      <a class="btn-floating btn-flat waves-effect waves-light gradient-45deg-green-teal gradient-shadow" href="/admin/riwayat-lamaran/{{ $pl->id_pelamar }}">
+                        <i class="material-icons">access_time</i>
+                      </a>
                         
                       <a class="btn-floating modal-trigger waves-effect waves-light btn gradient-45deg-red-pink gradient-shadow" href="#modaldelete" onclick="deletepelamar('{{ $pl->id_pelamar }}', '{{ $pl->nama_pelamar }}', '{{ $pl->alamat_pelamar }}')">
                         <i class="material-icons">delete_forever</i>

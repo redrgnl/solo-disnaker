@@ -1,0 +1,11 @@
+return $this->from('no-reply@disnakersolo.gov.id')
+                   ->view('admin/content/view_email_daftar'.$this->data['type'])
+                   ->with([
+                            'workshop' => $this->data['workshop'],
+                            'pelamar' => $this->data['pelamar'],
+                            'tanggal' => $this->data['tanggal'],
+                            'kategori' => $this->data['kategori'],
+                            'image' => $this->data['image'],
+                            'maps' => $this->data['maps'],
+                            'lokasi' => $this->data['lokasi']
+                        ]);

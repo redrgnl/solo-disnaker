@@ -43,6 +43,9 @@ Route::post('/admin/simpan-data-perusahaan', 'PerusahaanController@store_perusah
 Route::get('/admin/halaman-edit-perusahaan/{id}', 'PerusahaanController@edit_perusahaan');
 Route::post('/admin/update-data-perusahaan', 'PerusahaanController@update_perusahaan');
 Route::post('/admin/delete-data-perusahaan', 'PerusahaanController@delete_perusahaan');
+Route::get('/admin/halaman-detail-perusahaan/{id}', 'PerusahaanController@detail_perusahaan');
+Route::post('/admin/tambah-gallery', 'PerusahaanController@store_gal_perusahaan');
+Route::post('/admin/ganti-profile-perusahaan', 'PerusahaanController@change_pro_perusahaan');
 
 //Route Pelamar
 Route::get('/admin/halaman-manajemen-pelamar', 'PelamarController@index');
@@ -51,6 +54,7 @@ Route::post('/admin/simpan-data-pelamar', 'PelamarController@store_pelamar');
 Route::get('/admin/halaman-edit-pelamar/{id}', 'PelamarController@edit_pelamar');
 Route::post('/admin/update-data-pelamar', 'PelamarController@update_pelamar');
 Route::post('/admin/delete-data-pelamar', 'PelamarController@delete_pelamar');
+Route::get('/admin/riwayat-lamaran/{id}', 'PelamarController@riwayat_pelamar');
 
 //Route Lowongan
 Route::get('/admin/halaman-manajemen-lowongan', 'LowonganController@index');
@@ -71,16 +75,21 @@ Route::post('/admin/simpan-data-workshop', 'WorkshopController@store_workshop');
 Route::get('/admin/halaman-edit-workshop/{id}', 'WorkshopController@edit_workshop');
 Route::post('/admin/update-data-workshop', 'WorkshopController@update_workshop');
 Route::post('/admin/delete-data-workshop', 'WorkshopController@delete_workshop');
+Route::post('/admin/ganti-profile-workshop', 'WorkshopController@change_pro_workshop');
 // - Detail Workshop
 Route::get('/admin/halaman-detail-workshop/{id}', 'WorkshopController@detail_workshop')->name('detail_workshop');
 Route::get('/admin/tambah-detail-workshop/{idpl}/{idwr}', 'WorkshopController@tambah_detail_workshop');
 Route::post('/admin/delete-data-detail-workshop', 'WorkshopController@delete_detail_workshop');
+Route::get('/admin/approve-data-workshop/{iddet}/{idwr}', 'WorkshopController@approve_workshop');
 });
 
 //Check Login Perusahaan
 Route::group(['middleware' => 'perusahaansession'], function () {
 
 //Route Khusus Perusahaan
+Route::get('/perusahaan/halaman-profile-perusahaan', 'PerusahaanController@profile');//
+Route::get('/perusahaan/halaman-edit-perusahaan/{id}', 'PerusahaanController@edit_perusahaan');//
+Route::post('/perusahaan/update-data-perusahaan', 'PerusahaanController@update_perusahaan');    
 Route::get('/perusahaan/halaman-manajemen-lowongan', 'PerusahaanController@dashboard');//
 Route::get('/perusahaan/halaman-tambah-lowongan', 'PerusahaanController@tambah_lowongan');//
 Route::post('/perusahaan/simpan-data-lowongan', 'PerusahaanController@store_lowongan');//
@@ -92,6 +101,11 @@ Route::get('/perusahaan/halaman-detail-lowongan/{id}/{per}', 'PerusahaanControll
 Route::get('/perusahaan/tambah-pelamar-lowongan/{low}/{pl}/{per}', 'PerusahaanController@tambah_detail_lowongan');//
 Route::post('/perusahaan/delete-data-detail-lowongan', 'PerusahaanController@delete_detail_lowongan');
 });
+
+//dev test
+Route::get('/kirimemail','LowonganController@emailll');
+Route::get('/testemail','LowonganController@emailllo');
+//dev test
 
 //Route Login
 Route::get('/', 'AdminController@login')->name('login');

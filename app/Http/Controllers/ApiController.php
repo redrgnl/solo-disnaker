@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+use App\Mail\GatewayMailLow;
+use App\Mail\GatewayMailWorkPend;
+use Illuminate\Support\Facades\Mail;
+
 class ApiController extends Controller
 {
     //api admin
@@ -118,6 +122,12 @@ class ApiController extends Controller
         $kuota = DB::table('tb_workshop')->where('id_workshop', $idworkshop)->first();
         $jmlpelamar = DB::table('tb_det_workshop')->where('id_workshop', $idworkshop)->get()->count();
         
+        $checkpemula = DB::table('tb_det_workshop')
+                            ->join('tb_workshop', 'tb_workshop.id_workshop', '=', 'tb_det_workshop.id_workshop')
+                            ->join('tb_pelamar', 'tb_pelamar.id_pelamar', '=', 'tb_det_workshop.id_pelamar')
+                            ->where('tb_workshop.kategori_workshop', 'Pemula')
+                            ->where('tb_pelamar.id_pelamar', $idpelamar)->get()->count();
+        
         if ($pelamar != 0) {
             if ($workshop != 0) {
                 if ($kuota->kuota_workshop > $jmlpelamar) {
@@ -125,17 +135,67 @@ class ApiController extends Controller
                                 ->where('id_workshop', $idworkshop)->where('id_pelamar', $idpelamar)->count();
 
                     if ($checkdet == 0) {
-                        DB::table('tb_det_workshop')->insert([
-                            'id_workshop' => $idworkshop,
-                            'id_pelamar' => $idpelamar
-                        ]);
+                        $workshops = DB::table('tb_workshop')->where('id_workshop', $idworkshop)->first();
+                        $pelamars = DB::table('tb_pelamar')->where('id_pelamar', $idpelamar)->first();
+                        
+                        if ($checkpemula == 0) {
+                            DB::table('tb_det_workshop')->insert([
+                                'id_workshop' => $idworkshop,
+                                'id_pelamar' => $idpelamar
+                            ]);
+                            
+                            $datamail = [
+                                'workshop' => $workshops->nama_workshop,
+                                'pelamar' => $pelamars->nama_pelamar,
+                                'tanggal' => $workshops->tanggal_workshop,
+                                'kategori' => $workshops->kategori_workshop,
+                                'image' => $workshops->poster_workshop,
+                                'maps' => $workshops->maps_workshop,
+                                'lokasi' => $workshops->lokasi_workshop
+                            ];
 
-                        $data = [
-                            'status' => 'SUCCESS',
-                            'data' => 'DATA HAS BEEN SAVED!'
-                        ];
+                            Mail::to($pelamars->email_pelamar)->send(new GatewayMailWorkPend($datamail));
+                            
+                            $data = [
+                                'status' => 'SUCCESS',
+                                'data' => 'DATA HAS BEEN SAVED!'
+                            ];
 
-                        return $data;
+                            return $data;
+                        } else {
+                            if ($kuota->kategori_workshop != 'Pemula') {
+                                DB::table('tb_det_workshop')->insert([
+                                    'id_workshop' => $idworkshop,
+                                    'id_pelamar' => $idpelamar
+                                ]);
+                                
+                                $datamail = [
+                                    'workshop' => $workshops->nama_workshop,
+                                    'pelamar' => $pelamars->nama_pelamar,
+                                    'tanggal' => $workshops->tanggal_workshop,
+                                    'kategori' => $workshops->kategori_workshop,
+                                    'image' => $workshops->poster_workshop,
+                                    'maps' => $workshops->maps_workshop,
+                                    'lokasi' => $workshops->lokasi_workshop
+                                ];
+
+                                Mail::to($pelamars->email_pelamar)->send(new GatewayMailWorkPend($datamail));
+                                
+                                $data = [
+                                    'status' => 'SUCCESS',
+                                    'data' => 'DATA HAS BEEN SAVED!'
+                                ];
+
+                                return $data;
+                            } else {
+                                $data = [
+                                    'status' => 'ERROR',
+                                    'data' => 'ERROR : FAILED!'
+                                ];
+
+                                return $data;
+                            }
+                        }
                     } else {
                         $data = [
                             'status' => 'ERROR',
@@ -186,7 +246,23 @@ class ApiController extends Controller
                         'id_lowongan' => $idlowongan,
                         'id_pelamar' => $idpelamar
                     ]);
+                    
+                    $pelamars = DB::table('tb_pelamar')->where('id_pelamar', $idpelamar)->first();
+                    $lowongans = DB::table('tb_lowongan')
+                            ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                            ->where('tb_lowongan.id_lowongan', $idlowongan)->first();
+                    
+                    $datamail = [
+                        'perusahaan' => $lowongans->nama_perusahaan." - ".$lowongans->lengkap_perusahaan,
+                        'pelamar' => $pelamars->nama_pelamar,
+                        'posisi' => $lowongans->posisi_lowongan,
+                        'gaji' => $lowongans->gaji_lowongan,
+                        'image' => $lowongans->logo_perusahaan,
+                        'email' => $lowongans->email_perusahaan
+                    ];
 
+                    Mail::to($pelamars->email_pelamar)->send(new GatewayMailLow($datamail));
+                    
                     $data = [
                         'status' => 'SUCCESS',
                         'data' => 'DATA HAS BEEN SAVED!'

@@ -35,6 +35,10 @@
                     <td>{{ $pr->telp_perusahaan }}</td>
                     <td>{{ $pr->email_perusahaan }}</td>
                     <td>
+                        <a class="btn-floating btn-flat waves-effect waves-light gradient-45deg-green-teal gradient-shadow" href="/admin/halaman-detail-perusahaan/{{ $pr->id_perusahaan }}">
+                            <i class="material-icons">help_outline</i>
+                        </a>
+                        
                         <a class="btn-floating btn-flat waves-effect waves-light gradient-45deg-light-blue-cyan gradient-shadow" href="/admin/halaman-edit-perusahaan/{{ $pr->id_perusahaan }}">
                             <i class="material-icons">build</i>
                         </a>

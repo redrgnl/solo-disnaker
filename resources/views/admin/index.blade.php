@@ -24,6 +24,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/themes/vertical-dark-menu-template/materialize.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/themes/vertical-dark-menu-template/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/pages/data-tables.css') }}">
+      
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/vendors/hover-effects/media-hover-effects.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/pages/page-search.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/vendors/magnific-popup/magnific-popup.css') }}">
+      
     <!-- END: Page Level CSS-->
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/custom/custom.css') }}">
@@ -76,10 +81,12 @@
         </li>
         <li class="bold"><a class="waves-effect waves-cyan " href="/admin/halaman-manajemen-lowongan"><i class="material-icons">exit_to_app</i><span class="menu-title" data-i18n="">Lowongan</span></a>
         </li>
-        <li class="bold"><a class="waves-effect waves-cyan " href="/admin/halaman-manajemen-workshop"><i class="material-icons">extension</i><span class="menu-title" data-i18n="">Workshop</span></a>
+        <li class="bold"><a class="waves-effect waves-cyan " href="/admin/halaman-manajemen-workshop"><i class="material-icons">extension</i><span class="menu-title" data-i18n="">Pelatihan</span></a>
         </li>
         @elseif (Session::get('login-pr') == true)
         <li class="navigation-header"><a class="navigation-header-text">main menu</a><i class="navigation-header-icon material-icons">more_horiz</i>
+        <li class="bold"><a class="waves-effect waves-cyan " href="/perusahaan/halaman-profile-perusahaan"><i class="material-icons">domain</i><span class="menu-title" data-i18n="">Profile Perusahaan</span></a>
+        </li>
         <li class="bold"><a class="waves-effect waves-cyan " href="/perusahaan/halaman-manajemen-lowongan"><i class="material-icons">exit_to_app</i><span class="menu-title" data-i18n="">Lowongan</span></a>
         </li>
         @endif
@@ -100,7 +107,7 @@
               </div>
               <div class="col s12 m6 l6 right-align-md">
                 <ol class="breadcrumbs mb-0">
-                  <li class="breadcrumb-item active"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active"><a href="#"></a></li>
                 </ol>
               </div>
             </div>
@@ -150,6 +157,11 @@
     <script src="{{ asset('admin/js/scripts/advance-ui-modals.js') }}" type="text/javascript"></script>
     <script src="{{ asset('admin/js/scripts/sweetalert2/sweetalert2.all.min.js') }}"></script>
     
+    <!--  Gallery  -->
+    <script src="{{ asset('admin/vendors/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('admin/js/scripts/media-gallery-page.js') }}"></script>
+      
     <script type="text/javascript">
         const flash = $('.flash-data').data('flashdata');
             if (flash) {
