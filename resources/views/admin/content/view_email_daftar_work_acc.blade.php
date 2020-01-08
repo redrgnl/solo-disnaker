@@ -9,7 +9,7 @@
     <p>Selamat!, Kepada Bapak/Ibu <span style="color: #020561; font-size: 15px">{{ $pelamar }}</span></p>
     <p>Selamat anda telah terpilih untuk mengikuti kegiatan <span style="color: #020561; font-size: 15px">{{ $workshop }}</span> di {{ $lokasi }}</p><br>
     
-    <img src="{{ $image }}" style="width: 100%; border-radius: 0px 20px 0px 20px;"><br><br> 
+    <img src="{{ asset('workshop') }}/{{ $image }}" style="width: 100%; border-radius: 0px 20px 0px 20px;"><br><br> 
     
     <p>Berikut adalah detail acara yang anda pilih:</p>
     <table>

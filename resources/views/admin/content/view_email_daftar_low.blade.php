@@ -9,7 +9,7 @@
     <p>Kepada Yth. Bapak/Ibu <span style="color: #020561; font-size: 15px">{{ $pelamar }}</span></p>
     <p>Terima kasih anda telah mendaftar pada Lowongan Kerja yang diadakan oleh <span style="color: #020561; font-size: 15px">{{ $perusahaan }}</span>.</p><br>
     
-    <img src="{{ $image }}" style="width: 100%; border-radius: 0px 20px 0px 20px;"><br><br> 
+    <img src="{{ asset('perusahaan') }}/{{ $image }}" style="width: 100%; border-radius: 0px 20px 0px 20px;"><br><br> 
       
     <p>Berikut adalah detail lowongan yang anda pilih:</p>
     <table>

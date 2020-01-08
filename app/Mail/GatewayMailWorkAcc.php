@@ -31,6 +31,7 @@ class GatewayMailWorkAcc extends Mailable
     {
 //        return $this->view('view.name');
         return $this->from('no-reply@disnakersolo.gov.id')
+                   ->subject(strtoupper($this->data['workshop']))
                    ->view('admin/content/view_email_daftar_work_acc')
                    ->with([
                             'workshop' => $this->data['workshop'],

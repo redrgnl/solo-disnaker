@@ -29,6 +29,7 @@ class GatewayMailLow extends Mailable
     public function build()
     {
         return $this->from('no-reply@disnakersolo.gov.id')
+               ->subject('PENDAFTARAN LOWONGAN '.strtoupper($this->data['perusahaan']).' SUKSES!')
                ->view('admin/content/view_email_daftar_low')
                ->with([
                         'perusahaan' => $this->data['perusahaan'],

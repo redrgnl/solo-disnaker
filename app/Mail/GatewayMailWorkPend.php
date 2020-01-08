@@ -31,6 +31,7 @@ class GatewayMailWorkPend extends Mailable
     {
 //        return $this->view('view.name');
         return $this->from('no-reply@disnakersolo.gov.id')
+                   ->subject('PENDAFTARAN ACARA '.strtoupper($this->data['workshop']).' SUKSES!')
                    ->view('admin/content/view_email_daftar_work')
                    ->with([
                             'workshop' => $this->data['workshop'],
