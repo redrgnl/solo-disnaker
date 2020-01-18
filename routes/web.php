@@ -103,8 +103,9 @@ Route::post('/perusahaan/delete-data-detail-lowongan', 'PerusahaanController@del
 });
 
 //dev test
-Route::get('/kirimemail','LowonganController@emailll');
-Route::get('/testemail','LowonganController@emailllo');
+//Route::get('/kirimemail','LowonganController@emailll');
+//Route::get('/testemail','LowonganController@emailllo');
+Route::get('/testpostview', 'ApiController@testpost');
 //dev test
 
 //Route Login

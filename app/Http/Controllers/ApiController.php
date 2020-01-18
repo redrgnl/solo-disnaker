@@ -78,25 +78,25 @@ class ApiController extends Controller
     }
     
     public function pelamar_signup(Request $insert) {
-        $checknik = DB::table('tb_pelamar')->where('nik_pelamar', $insert->a)->get()->count();
+        $checknik = DB::table('tb_pelamar')->where('nik_pelamar', $insert->inpnik)->get()->count();
         
         if ($checknik == 0) {
             DB::table('tb_pelamar')->insert([
-                'nik_pelamar' => $insert->a,
-                'npwp_pelamar' => $insert->b,
-                'nama_pelamar' => $insert->c,
-                'alamat_pelamar' => $insert->d,
-                'kelamin_pelamar' => $insert->e,
-                'tplahir_pelamar' => $insert->f,
-                'tglahir_pelamar' => $insert->g,
-                'agama_pelamar' => $insert->h,
-                'status_pelamar' => $insert->i,
-                'tinggi_pelamar' => $insert->j,
-                'berat_pelamar' => $insert->k,
-                'telp_pelamar' => $insert->l,
-                'email_pelamar' => $insert->m,
-                'password_pelamar' => md5($insert->n),
-                'confirm_password_pelamar' => md5($insert->o)
+                'nik_pelamar' => $insert->inpnik,
+                'npwp_pelamar' => $insert->inpnpwp,
+                'nama_pelamar' => $insert->inpnama,
+                'alamat_pelamar' => $insert->inpalamat,
+                'kelamin_pelamar' => $insert->inpgender,
+                'tplahir_pelamar' => $insert->inptempat,
+                'tglahir_pelamar' => $insert->inptanggal,
+                'agama_pelamar' => $insert->inpagama,
+                'status_pelamar' => $insert->inpstatus,
+                'tinggi_pelamar' => $insert->inptinggi,
+                'berat_pelamar' => $insert->inpberat,
+                'telp_pelamar' => $insert->inptelepon,
+                'email_pelamar' => $insert->inpemail,
+                'password_pelamar' => md5($insert->inppassword),
+                'confirm_password_pelamar' => md5($insert->inpconfirm)
             ]);
             
             $data = [
@@ -340,4 +340,15 @@ class ApiController extends Controller
         return $data;
     }
     //================= END API WORKSHOP =================//
+    
+    //================= DEV API =================//
+    public function testpost() {
+        $data = [
+            'title' => "Form Tambah Pelamar testpost",
+            'breadcrumb' => "Tambah Pelamar testpost"
+        ];
+        
+        return view ('/admin/content/testview', $data);
+    }
+    //================= END DEV API =================//
 }
