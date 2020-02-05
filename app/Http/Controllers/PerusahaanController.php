@@ -23,7 +23,8 @@ class PerusahaanController extends Controller
     public function tambah_perusahaan() {
         $data = [
             'title' => "Form Tambah Perusahaan",
-            'breadcrumb' => "Tambah Perusahaan"
+            'breadcrumb' => "Tambah Perusahaan",
+            'jenis' => DB::table('tb_jenisper')->get()
         ];
         
         return view ('/admin/content/view_perusahaan_tambah', $data);
@@ -35,26 +36,46 @@ class PerusahaanController extends Controller
             'max' => 'Input Tidak Sesuai',
             'email' => 'Format Email Salah'
         ];
-
+        
         //validasi form
         $this->validate($insert, [
             'inpnama' => 'required|max:100',
             'inplengkap' => 'required',
             'inpnpwp' => 'required|max:50',
             'inpalamat' => 'required',
+            'inpjenis' => 'required|max:3',
+            'inppos' => 'required|max:1',
+            'inpkode' => 'required|max:8',
+            'inpweb' => 'required',
+            'inpdesk' => 'required',
+            'inpjawab' => 'required|max:100',
             'inptelepon' => 'required|max:15',
             'inpemail' => 'required|max:50|email',
+            'inppict' => 'required',
             'inppassword' => 'required|max:64',
             'inpconfirm' => 'required|max:64'
         ], $messages);
+        
+        $img = $insert->file('inppict');
+        $imgname = date('Y_m_d_H_i_s').$img->getClientOriginalExtension();
+        
+        $location = 'perusahaan';
+		$img->move($location,$imgname);
         
         DB::table('tb_perusahaan')->insert([
             'nama_perusahaan' => $insert->inpnama,
             'lengkap_perusahaan' => $insert->inplengkap,
             'npwp_perusahaan' => $insert->inpnpwp,
             'alamat_perusahaan' => $insert->inpalamat,
+            'id_jenis' => $insert->inpjenis,
+            'lokasi_perusahaan' => $insert->inppos,
+            'kodepos_perusahaan' => $insert->inpkode,
+            'web_perusahaan' => $insert->inpweb,
+            'desk_perusahaan' => $insert->inpdesk,
+            'penanggung_perusahaan' => $insert->inpjawab,
             'telp_perusahaan' => $insert->inptelepon,
             'email_perusahaan' => $insert->inpemail,
+            'logo_perusahaan' => $imgname,
             'password_perusahaan' => md5($insert->inppassword),
             'confirm_password_perusahaan' => md5($insert->inpconfirm),
             'date_created' => date('Y-m-d')
@@ -67,7 +88,8 @@ class PerusahaanController extends Controller
         $data = [
             'title' => "Form Edit Data Perusahaan",
             'breadcrumb' => "Edit Data Perusahaan",
-            'perusahaan' => DB::table('tb_perusahaan')->where('id_perusahaan', $id)->first()
+            'perusahaan' => DB::table('tb_perusahaan')->where('id_perusahaan', $id)->first(),
+            'jenis' => DB::table('tb_jenisper')->get()
         ];
         
         return view ('/admin/content/view_perusahaan_edit', $data);
@@ -86,17 +108,40 @@ class PerusahaanController extends Controller
             'inplengkap' => 'required',
             'inpnpwp' => 'required|max:50',
             'inpalamat' => 'required',
+            'inpjenis' => 'required|max:3',
+            'inppos' => 'required|max:1',
+            'inpkode' => 'required|max:8',
+            'inpweb' => 'required',
+            'inpdesk' => 'required',
+            'inpjawab' => 'required|max:100',
             'inptelepon' => 'required|max:15',
             'inpemail' => 'required|max:50|email',
             'inppassword' => 'required|max:64',
             'inpconfirm' => 'required|max:64'
         ], $messages);
         
+        if ($update->inppict != '') {
+            $check = DB::table('tb_perusahaan')->where('id_perusahaan', $update->inpid)->first();
+            $ims = $check->logo_perusahaan;
+
+            $img = $update->file('inppict');
+            $imgname = $ims;
+
+            $location = 'perusahaan';
+            $img->move($location,$imgname);
+        }
+        
         DB::table('tb_perusahaan')->where('id_perusahaan', $update->inpid)->update([
             'nama_perusahaan' => $update->inpnama,
             'lengkap_perusahaan' => $update->inplengkap,
             'npwp_perusahaan' => $update->inpnpwp,
             'alamat_perusahaan' => $update->inpalamat,
+            'id_jenis' => $update->inpjenis,
+            'lokasi_perusahaan' => $update->inppos,
+            'kodepos_perusahaan' => $update->inpkode,
+            'web_perusahaan' => $update->inpweb,
+            'desk_perusahaan' => $update->inpdesk,
+            'penanggung_perusahaan' => $update->inpjawab,
             'telp_perusahaan' => $update->inptelepon,
             'email_perusahaan' => $update->inpemail,
             'password_perusahaan' => md5($update->inppassword),
@@ -272,7 +317,7 @@ class PerusahaanController extends Controller
 		]);
         
         $img = $upload->file('pict_gall');
-        $imgname = $upload->nmper_gall."-".$img->getClientOriginalName();
+        $imgname = date('Y_m_d_H_i_s').$img->getClientOriginalExtension();
         
         $location = 'perusahaan/gallery';
 		$img->move($location,$imgname);
@@ -291,8 +336,11 @@ class PerusahaanController extends Controller
 			'pict_corp' => 'required'
 		]);
         
+        $check = DB::table('tb_perusahaan')->where('id_perusahaan', $update->idper_corp)->first();
+        $ims = $check->logo_perusahaan;
+        
         $img = $update->file('pict_corp');
-        $imgname = $update->nmper_corp."-".$img->getClientOriginalName();
+        $imgname = $ims;
         
         $location = 'perusahaan';
 		$img->move($location,$imgname);

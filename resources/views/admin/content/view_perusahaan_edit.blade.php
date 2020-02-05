@@ -7,9 +7,9 @@
         <div class="card-content">
           <h4 class="card-title">Form Data Perusahaan</h4>
           @if (Session::get('login-pr') == true)
-          <form class="col s12" method="post" action="/perusahaan/update-data-perusahaan">
+          <form class="col s12" method="post" action="/perusahaan/update-data-perusahaan"  enctype="multipart/form-data">
           @else
-          <form class="col s12" method="post" action="/admin/update-data-perusahaan">
+          <form class="col s12" method="post" action="/admin/update-data-perusahaan"  enctype="multipart/form-data">
           @endif
             @csrf
             <input type="hidden" name="inpid" value="{{ $perusahaan->id_perusahaan }}">
@@ -17,17 +17,46 @@
               <div class="input-field col s12 m6 l6">
                 <i class="material-icons prefix">art_track</i>
                 <input name="inpnama" id="inpnama" type="text" class="validate"  value="{{ $perusahaan->nama_perusahaan }}">
-                <label for="inpnama">Nama</label>
+                <label for="inpnama">User ID</label>
                 @error('a')
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
             <div class="row">
+              <div class="input-field col s12 m6 l6">
+                <i class="material-icons prefix">email</i>
+                <input name="inppassword" id="inppassword" type="password" class="validate" required>
+                <label for="inppassword">Password</label>
+                @error('g')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="input-field col s12 m6 l6">
+                <i class="material-icons prefix">email</i>
+                <input name="inpconfirm" id="inpconfirm" type="password" class="validate" required>
+                <label for="inpconfirm">Confirm Password</label>
+                @error('h')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="file-field input-field col s12">
+                <div class="btn">
+                  <span>Gambar</span>
+                  <input type="file" name="inppict">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text">
+                </div>
+              </div>
+            </div>
+            <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">domain</i>
                 <input name="inplengkap" id="inplengkap" type="text" class="validate"  value="{{ $perusahaan->lengkap_perusahaan }}">
-                <label for="inplengkap">Nama Lengkap Perusahaan</label>
+                <label for="inplengkap">Nama Perusahaan</label>
                 @error('b')
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
@@ -44,11 +73,85 @@
               </div>
             </div>
             <div class="row">
+              <div class="input-field col s12 m6 l6">
+                <i class="material-icons prefix">business_center</i>
+                <select  name="inpjenis" id="inpjenis">
+                  <option value="">- Pilih Jenis Perusahaan -</option>
+                  @foreach($jenis as $jn)
+                  <?php if ($jn->id_jenis == $perusahaan->id_jenis) { $slct = "selected"; } else { $slct = ""; }?> 
+                  <option value="{{ $jn->id_jenis }}" <?= $slct?>>{{ $jn->nama_jenis }}</option>
+                  @endforeach
+                </select>
+                <label>Jenis Perusahaan</label>
+                @error('c1')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 l12 ml">
+                  <div class="row ml-3">
+                    <label style="font-size: 18px">Lokasi Perusahaan &ensp; - &ensp;</label>
+                    <label>
+                      <input name="inppos" type="radio" value="1" <?php if ($perusahaan->lokasi_perusahaan == 1) { echo "checked"; } else { echo ""; }?>/>
+                      <span>Dalam Negeri</span>
+                    </label> &emsp;
+                    <label>
+                      <input name="inppos" type="radio" value="2" <?php if ($perusahaan->lokasi_perusahaan == 2) { echo "checked"; } else { echo ""; } ?> />
+                      <span>Luar Negeri</span>
+                    </label>
+                  </div>
+                @error('c2')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">location_on</i>
                 <textarea name="inpalamat" id="inpalamat" type="text" class="validate materialize-textarea" >{{ $perusahaan->alamat_perusahaan }}</textarea>
                 <label for="inpalamat">Alamat</label>
                 @error('d')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 l6">
+                <i class="material-icons prefix">markunread_mailbox</i>
+                <input name="inpkode" id="inpkode" type="number" class="validate" required max="99999999" value="{{ $perusahaan->kodepos_perusahaan }}">
+                <label>Kode Pos</label>
+                @error('d1')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">language</i>
+                <input name="inpweb" id="inpweb" type="text" class="validate" required value="{{ $perusahaan->web_perusahaan }}">
+                <label>Website</label>
+                @error('d2')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">view_headline</i>
+                <textarea name="inpdesk" id="inpdesk" type="text" class="validate materialize-textarea" required>{{ $perusahaan->desk_perusahaan }}</textarea>
+                <label for="inpdesk">Deskripsi</label>
+                @error('d3')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 l6">
+                <i class="material-icons prefix">directions_run</i>
+                <input name="inpjawab" id="inpjawab" type="text" class="validate" required value="{{ $perusahaan->penanggung_perusahaan }}">
+                <label>Nama Penanggung Jawab</label>
+                @error('d4')
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
@@ -67,22 +170,6 @@
                 <input name="inpemail" id="inpemail" type="email" class="validate"  value="{{ $perusahaan->email_perusahaan }}">
                 <label for="inpemail">Email</label>
                 @error('f')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-                @enderror
-              </div>
-              <div class="input-field col s12 m6 l6">
-                <i class="material-icons prefix">email</i>
-                <input name="inppassword" id="inppassword" type="password" class="validate" required>
-                <label for="inppassword">Password</label>
-                @error('g')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-                @enderror
-              </div>
-              <div class="input-field col s12 m6 l6">
-                <i class="material-icons prefix">email</i>
-                <input name="inpconfirm" id="inpconfirm" type="password" class="validate" required>
-                <label for="inpconfirm">Confirm Password</label>
-                @error('h')
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
