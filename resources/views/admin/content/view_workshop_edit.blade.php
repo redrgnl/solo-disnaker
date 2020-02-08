@@ -66,7 +66,7 @@
               <div class="input-field col s12 m6 l6">
                 <i class="material-icons prefix">directions_run</i>
                 <input name="c1" id="inptanggal" type="date" class="validate"  value="<?php echo strftime('%Y-%m-%d', strtotime($workshop->str_workshop)); ?>">
-                <label for="c1">Tanggal Pendaftaran</label>
+                <label for="c1">Tanggal Dibuka Pendaftaran</label>
                 @error('c1')
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
@@ -74,7 +74,7 @@
               <div class="input-field col s12 m6 l6">
                 <i class="material-icons prefix">golf_course</i>
                 <input name="c2" id="inptanggal" type="date" class="validate"  value="<?php echo strftime('%Y-%m-%d', strtotime($workshop->end_workshop)); ?>">
-                <label for="c2">Tanggal Penutupan</label>
+                <label for="c2">Tanggal Penutupan Pendaftaran</label>
                 @error('c2')
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror

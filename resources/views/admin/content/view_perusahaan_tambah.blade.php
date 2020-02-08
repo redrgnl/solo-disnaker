@@ -88,11 +88,11 @@
                     <label style="font-size: 18px">Lokasi Perusahaan &ensp; - &ensp;</label>
                     <label>
                       <input name="inppos" type="radio" value="1"/>
-                      <span>Dalam Negeri</span>
+                      <span>Dalam Solo</span>
                     </label> &emsp;
                     <label>
                       <input name="inppos" type="radio" value="2"/>
-                      <span>Luar Negeri</span>
+                      <span>Luar Solo</span>
                     </label>
                   </div>
                 @error('c2')
@@ -108,6 +108,21 @@
                 @error('d')
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s11">
+                <i class="material-icons prefix">gps_fixed</i>
+                <textarea name="inpmap" id="inpmap" type="text" class="validate materialize-textarea" ></textarea>
+                <label for="inpmap">Link Posisi Peta</label>
+                @error('inpmap')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="input-field col s1">
+                <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-light-blue-cyan" href="#" onclick="return popup('https://www.google.com/maps')">
+                  <i class="material-icons">gps_fixed</i>
+                </a>
               </div>
             </div>
             <div class="row">
@@ -167,6 +182,14 @@
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
+              <div class="input-field col s12 m6 l6">
+                <i class="material-icons prefix">call</i>
+                <input name="inpfax" id="inpfax" type="text" class="validate" required>
+                <label for="inpfax">No. Fax</label>
+                @error('e1')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
@@ -183,5 +206,11 @@
 @endsection
 
 @section('customjs')
-
+<script>
+    function popup(url) {
+      newwindow = window.open(url,'name','height=500,width=1050');
+      if (window.focus) { newwindow.focus() }
+      return false;
+    }
+</script>
 @endsection

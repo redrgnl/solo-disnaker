@@ -108,7 +108,12 @@ Route::post('/perusahaan/delete-data-detail-lowongan', 'PerusahaanController@del
 Route::get('/testpostview', 'ApiController@testpost');
 //dev test
 
-//Route Login
+//Route Login Admin
 Route::get('/', 'AdminController@login')->name('login');
 Route::post('/post-login', 'AdminController@postLogin');
 Route::get('/logout', 'AdminController@logout');
+
+//Route Login Perusahaan
+Route::get('/halaman-daftar-perusahaan', 'AdminController@daftar_perusahaan');
+Route::post('/post-perusahaan', 'AdminController@postPerusahaan');
+Route::post('/save-perusahaan', 'AdminController@storePerusahaan');

@@ -50,6 +50,7 @@ class PerusahaanController extends Controller
             'inpdesk' => 'required',
             'inpjawab' => 'required|max:100',
             'inptelepon' => 'required|max:15',
+            'inpfax' => 'required|max:15',
             'inpemail' => 'required|max:50|email',
             'inppict' => 'required',
             'inppassword' => 'required|max:64',
@@ -74,6 +75,7 @@ class PerusahaanController extends Controller
             'desk_perusahaan' => $insert->inpdesk,
             'penanggung_perusahaan' => $insert->inpjawab,
             'telp_perusahaan' => $insert->inptelepon,
+            'fax_perusahaan' => $insert->inpfax,
             'email_perusahaan' => $insert->inpemail,
             'logo_perusahaan' => $imgname,
             'password_perusahaan' => md5($insert->inppassword),
@@ -115,6 +117,7 @@ class PerusahaanController extends Controller
             'inpdesk' => 'required',
             'inpjawab' => 'required|max:100',
             'inptelepon' => 'required|max:15',
+            'inpfax' => 'required|max:15',
             'inpemail' => 'required|max:50|email',
             'inppassword' => 'required|max:64',
             'inpconfirm' => 'required|max:64'
@@ -143,6 +146,7 @@ class PerusahaanController extends Controller
             'desk_perusahaan' => $update->inpdesk,
             'penanggung_perusahaan' => $update->inpjawab,
             'telp_perusahaan' => $update->inptelepon,
+            'fax_perusahaan' => $update->inpfax,
             'email_perusahaan' => $update->inpemail,
             'password_perusahaan' => md5($update->inppassword),
             'confirm_password_perusahaan' => md5($update->inpconfirm)
