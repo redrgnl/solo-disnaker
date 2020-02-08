@@ -10,33 +10,44 @@ use Session;
 
 class PerusahaanController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $data = [
             'title' => "Manajemen Perusahaan",
             'breadcrumb' => "Manajemen Perusahaan",
             'perusahaan' => DB::table('tb_perusahaan')->get()
         ];
-        
-        return view ('/admin/content/view_perusahaan', $data);
+
+        return view('/admin/content/view_perusahaan', $data);
     }
-    
-    public function tambah_perusahaan() {
+
+    public function tambah_perusahaan()
+    {
         $data = [
             'title' => "Form Tambah Perusahaan",
             'breadcrumb' => "Tambah Perusahaan",
-            'jenis' => DB::table('tb_jenisper')->get()
+            'jenis' => DB::table('tb_jenisper')->get(),
+            'provinsi' => DB::table('tb_provinsi')->get()
         ];
-        
-        return view ('/admin/content/view_perusahaan_tambah', $data);
+
+        return view('/admin/content/view_perusahaan_tambah', $data);
     }
-    
-    public function store_perusahaan(Request $insert) {
+
+    public function get_kota($id)
+    {
+        $kota = DB::table('tb_kota')->where('province_id', $id)->get();
+
+        return $kota;
+    }
+
+    public function store_perusahaan(Request $insert)
+    {
         $messages = [
             'required' => 'Field Wajib Diisi *',
             'max' => 'Input Tidak Sesuai',
             'email' => 'Format Email Salah'
         ];
-        
+
         //validasi form
         $this->validate($insert, [
             'inpnama' => 'required|max:100',
@@ -56,18 +67,19 @@ class PerusahaanController extends Controller
             'inppassword' => 'required|max:64',
             'inpconfirm' => 'required|max:64'
         ], $messages);
-        
+
         $img = $insert->file('inppict');
-        $imgname = date('Y_m_d_H_i_s').$img->getClientOriginalExtension();
-        
+        $imgname = date('Y_m_d_H_i_s') . $img->getClientOriginalExtension();
+
         $location = 'perusahaan';
-		$img->move($location,$imgname);
-        
+        $img->move($location, $imgname);
+
         DB::table('tb_perusahaan')->insert([
             'nama_perusahaan' => $insert->inpnama,
             'lengkap_perusahaan' => $insert->inplengkap,
             'npwp_perusahaan' => $insert->inpnpwp,
             'alamat_perusahaan' => $insert->inpalamat,
+            'map_perusahaan' => $insert->inpmap,
             'id_jenis' => $insert->inpjenis,
             'lokasi_perusahaan' => $insert->inppos,
             'kodepos_perusahaan' => $insert->inpkode,
@@ -82,22 +94,26 @@ class PerusahaanController extends Controller
             'confirm_password_perusahaan' => md5($insert->inpconfirm),
             'date_created' => date('Y-m-d')
         ]);
-        
-        return redirect ('/admin/halaman-manajemen-perusahaan')->with('success-alert', 'Disimpan');
+
+        return redirect('/admin/halaman-manajemen-perusahaan')->with('success-alert', 'Disimpan');
     }
-    
-    public function edit_perusahaan($id) {
+
+    public function edit_perusahaan($id)
+    {
         $data = [
             'title' => "Form Edit Data Perusahaan",
             'breadcrumb' => "Edit Data Perusahaan",
             'perusahaan' => DB::table('tb_perusahaan')->where('id_perusahaan', $id)->first(),
-            'jenis' => DB::table('tb_jenisper')->get()
+            'jenis' => DB::table('tb_jenisper')->get(),
+            'provinsi' => DB::table('tb_provinsi')->get(),
+            'kota' => DB::table('tb_kota')->get()
         ];
-        
-        return view ('/admin/content/view_perusahaan_edit', $data);
+
+        return view('/admin/content/view_perusahaan_edit', $data);
     }
-    
-    public function update_perusahaan(Request $update) {
+
+    public function update_perusahaan(Request $update)
+    {
         $messages = [
             'required' => 'Field Wajib Diisi *',
             'max' => 'Input Tidak Sesuai',
@@ -122,7 +138,7 @@ class PerusahaanController extends Controller
             'inppassword' => 'required|max:64',
             'inpconfirm' => 'required|max:64'
         ], $messages);
-        
+
         if ($update->inppict != '') {
             $check = DB::table('tb_perusahaan')->where('id_perusahaan', $update->inpid)->first();
             $ims = $check->logo_perusahaan;
@@ -131,9 +147,9 @@ class PerusahaanController extends Controller
             $imgname = $ims;
 
             $location = 'perusahaan';
-            $img->move($location,$imgname);
+            $img->move($location, $imgname);
         }
-        
+
         DB::table('tb_perusahaan')->where('id_perusahaan', $update->inpid)->update([
             'nama_perusahaan' => $update->inpnama,
             'lengkap_perusahaan' => $update->inplengkap,
@@ -151,45 +167,49 @@ class PerusahaanController extends Controller
             'password_perusahaan' => md5($update->inppassword),
             'confirm_password_perusahaan' => md5($update->inpconfirm)
         ]);
-        
+
         if (Session::get('login-pr') == true) {
-            return redirect ('/perusahaan/halaman-profile-perusahaan')->with('success-alert', 'Disimpan');
+            return redirect('/perusahaan/halaman-profile-perusahaan')->with('success-alert', 'Disimpan');
         } else {
-            return redirect ('/admin/halaman-manajemen-perusahaan')->with('success-alert', 'Disimpan');
+            return redirect('/admin/halaman-manajemen-perusahaan')->with('success-alert', 'Disimpan');
         }
     }
-    
-    public function delete_perusahaan(Request $delete) {
+
+    public function delete_perusahaan(Request $delete)
+    {
         DB::table('tb_perusahaan')->where('id_perusahaan', $delete->idperusahaan)->delete();
-        
-        return redirect ('/admin/halaman-manajemen-perusahaan')->with('success-alert', 'Dihapus');
+
+        return redirect('/admin/halaman-manajemen-perusahaan')->with('success-alert', 'Dihapus');
     }
-    
+
     //login perusahaan
-    public function dashboard() {
+    public function dashboard()
+    {
         $idperusahaan = Session::get('iduser');
-        
+
         $data = [
             'title' => "Manajemen Lowongan",
             'breadcrumb' => "Manajemen Lowongan",
             'lowongan' => DB::table('tb_lowongan')
                 ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
-                ->where('tb_perusahaan.id_perusahaan', $idperusahaan)->get()            
+                ->where('tb_perusahaan.id_perusahaan', $idperusahaan)->get()
         ];
-        
-        return view ('/admin/content/perusahaan/view_log_perusahaan', $data);
+
+        return view('/admin/content/perusahaan/view_log_perusahaan', $data);
     }
-    
-    public function tambah_lowongan() {
+
+    public function tambah_lowongan()
+    {
         $data = [
             'title' => "Form Tambah Lowongan",
-            'breadcrumb' => "Tambah Lowongan - ".Session::get('lengkapuser')
+            'breadcrumb' => "Tambah Lowongan - " . Session::get('lengkapuser')
         ];
-        
-        return view ('/admin/content/perusahaan/view_log_perusahaan_tambah', $data);
+
+        return view('/admin/content/perusahaan/view_log_perusahaan_tambah', $data);
     }
-    
-    public function store_lowongan(Request $insert) {
+
+    public function store_lowongan(Request $insert)
+    {
         $messages = [
             'required' => 'Field Wajib Diisi *',
             'max' => 'Input Tidak Sesuai'
@@ -203,7 +223,7 @@ class PerusahaanController extends Controller
             'e' => 'required',
             'f' => 'required'
         ], $messages);
-        
+
         DB::table('tb_lowongan')->insert([
             'id_perusahaan' => Session::get('iduser'),
             'posisi_lowongan' => $insert->b,
@@ -212,23 +232,25 @@ class PerusahaanController extends Controller
             'pengalaman_lowongan' => $insert->e,
             'desk_lowongan' => $insert->f
         ]);
-        
-        return redirect ('/perusahaan/halaman-manajemen-lowongan')->with('success-alert', 'Disimpan');
+
+        return redirect('/perusahaan/halaman-manajemen-lowongan')->with('success-alert', 'Disimpan');
     }
-    
-    public function edit_lowongan($id) {
+
+    public function edit_lowongan($id)
+    {
         $data = [
             'title' => "Form Edit Lowongan",
-            'breadcrumb' => "Edit Lowongan - ".Session::get('lengkapuser'),
+            'breadcrumb' => "Edit Lowongan - " . Session::get('lengkapuser'),
             'lowongan' => DB::table('tb_lowongan')
-                            ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
-                            ->where('id_lowongan', $id)->first()
+                ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                ->where('id_lowongan', $id)->first()
         ];
-        
-        return view ('/admin/content/perusahaan/view_log_perusahaan_edit', $data);
+
+        return view('/admin/content/perusahaan/view_log_perusahaan_edit', $data);
     }
-    
-    public function update_lowongan(Request $update) {
+
+    public function update_lowongan(Request $update)
+    {
         $messages = [
             'required' => 'Field Wajib Diisi *',
             'max' => 'Input Tidak Sesuai'
@@ -242,7 +264,7 @@ class PerusahaanController extends Controller
             'e' => 'required',
             'f' => 'required'
         ], $messages);
-        
+
         DB::table('tb_lowongan')->where('id_lowongan', $update->inpid)->update([
             'id_perusahaan' => Session::get('iduser'),
             'posisi_lowongan' => $update->b,
@@ -251,121 +273,129 @@ class PerusahaanController extends Controller
             'pengalaman_lowongan' => $update->e,
             'desk_lowongan' => $update->f
         ]);
-        
-        return redirect ('/perusahaan/halaman-manajemen-lowongan')->with('success-alert', 'Disimpan');
+
+        return redirect('/perusahaan/halaman-manajemen-lowongan')->with('success-alert', 'Disimpan');
     }
-    
-    public function delete_lowongan(Request $delete) {
+
+    public function delete_lowongan(Request $delete)
+    {
         DB::table('tb_lowongan')->where('id_lowongan', $delete->idlowongan)->delete();
-        
-        return redirect ('/perusahaan/halaman-manajemen-lowongan')->with('success-alert', 'Dihapus');
+
+        return redirect('/perusahaan/halaman-manajemen-lowongan')->with('success-alert', 'Dihapus');
     }
-    
-    public function detail_lowongan($id, $per) {
+
+    public function detail_lowongan($id, $per)
+    {
         $perusahaan = DB::table('tb_perusahaan')->where('id_perusahaan', $per)->first();
         $nama = $perusahaan->nama_perusahaan;
         $lengkap = $perusahaan->lengkap_perusahaan;
-        
+
         $data = [
             'title' => "Form Edit Lowongan",
-            'breadcrumb' => $nama ." - ". $lengkap,
+            'breadcrumb' => $nama . " - " . $lengkap,
             'pelamar' => DB::table('tb_pelamar')->get(),
             'detpelamar' => DB::table('tb_pelamar')
-                                ->join('tb_det_lowongan', 'tb_det_lowongan.id_pelamar', '=', 'tb_pelamar.id_pelamar')
-                                ->where('tb_det_lowongan.id_lowongan', $id)->get(),
+                ->join('tb_det_lowongan', 'tb_det_lowongan.id_pelamar', '=', 'tb_pelamar.id_pelamar')
+                ->where('tb_det_lowongan.id_lowongan', $id)->get(),
             'lowonganID' => $id,
             'perusahaanID' => $per
         ];
-        
-        return view ('/admin/content/perusahaan/view_log_perusahaan_detail', $data);
+
+        return view('/admin/content/perusahaan/view_log_perusahaan_detail', $data);
     }
-    
-    public function tambah_detail_lowongan($low, $pl, $per) {
+
+    public function tambah_detail_lowongan($low, $pl, $per)
+    {
         $check = DB::table('tb_det_lowongan')->where('id_lowongan', $low)->where('id_pelamar', $pl)->get()->count();
-        
+
         if ($check == 0) {
             DB::table('tb_det_lowongan')->insert([
                 'id_lowongan' => $low,
                 'id_pelamar' => $pl
             ]);
-            
-            return redirect()->route('perusahaan_detail_lowongan', ['id' => $low, 'per' => $per])->with('success-alert', 'Disimpan'); 
+
+            return redirect()->route('perusahaan_detail_lowongan', ['id' => $low, 'per' => $per])->with('success-alert', 'Disimpan');
         } else {
             return redirect()->route('perusahaan_detail_lowongan', ['id' => $low, 'per' => $per])->with('error-alert', 'Pelamar Sudah Terdaftar!');
         }
     }
-    
-    public function delete_detail_lowongan(Request $delete) {
+
+    public function delete_detail_lowongan(Request $delete)
+    {
         DB::table('tb_det_lowongan')->where('id_detlow', $delete->iddetail)->delete();
-        
+
         return redirect()->route('perusahaan_detail_lowongan', ['id' => $delete->idlowongan, 'per' => $delete->idperusahaan])->with('success-alert', 'Dihapus');
     }
-    
-    public function detail_perusahaan($id) {
+
+    public function detail_perusahaan($id)
+    {
         $perusahaan = DB::table('tb_perusahaan')->where('id_perusahaan', $id)->first();
-        
+
         $data = [
             'title' => "Detail Perusahaan",
             'breadcrumb' => $perusahaan->nama_perusahaan,
             'perusahaan' => $perusahaan,
             'gallery' => DB::table('tb_det_gallery')->where('id_perusahaan', $id)->get()
         ];
-        
-        return view ('/admin/content/view_perusahaan_detail', $data);
+
+        return view('/admin/content/view_perusahaan_detail', $data);
     }
-    
-    public function store_gal_perusahaan(Request $upload) {
+
+    public function store_gal_perusahaan(Request $upload)
+    {
         $this->validate($upload, [
-			'pict_gall' => 'required',
-			'ket_gall' => 'required',
-		]);
-        
+            'pict_gall' => 'required',
+            'ket_gall' => 'required',
+        ]);
+
         $img = $upload->file('pict_gall');
-        $imgname = date('Y_m_d_H_i_s').$img->getClientOriginalExtension();
-        
+        $imgname = date('Y_m_d_H_i_s') . $img->getClientOriginalExtension();
+
         $location = 'perusahaan/gallery';
-		$img->move($location,$imgname);
-        
+        $img->move($location, $imgname);
+
         DB::table('tb_det_gallery')->insert([
             'id_perusahaan' => $upload->idper_gall,
             'nama_detgal' => $imgname,
             'ket_detgal' => $upload->ket_gall
         ]);
-        
+
         return redirect()->back();
     }
-    
-    public function change_pro_perusahaan(Request $update) {
+
+    public function change_pro_perusahaan(Request $update)
+    {
         $this->validate($update, [
-			'pict_corp' => 'required'
-		]);
-        
+            'pict_corp' => 'required'
+        ]);
+
         $check = DB::table('tb_perusahaan')->where('id_perusahaan', $update->idper_corp)->first();
         $ims = $check->logo_perusahaan;
-        
+
         $img = $update->file('pict_corp');
         $imgname = $ims;
-        
+
         $location = 'perusahaan';
-		$img->move($location,$imgname);
-        
+        $img->move($location, $imgname);
+
         DB::table('tb_perusahaan')->where('id_perusahaan', $update->idper_corp)->update([
             'logo_perusahaan' => $imgname
         ]);
-        
+
         return redirect()->back();
     }
-    
-    public function profile() {
+
+    public function profile()
+    {
         $perusahaan = DB::table('tb_perusahaan')->where('id_perusahaan', Session::get('iduser'))->first();
-        
+
         $data = [
             'title' => "Detail Perusahaan",
             'breadcrumb' => $perusahaan->nama_perusahaan,
             'perusahaan' => $perusahaan,
             'gallery' => DB::table('tb_det_gallery')->where('id_perusahaan', Session::get('iduser'))->get()
         ];
-        
-        return view ('/admin/content/view_perusahaan_detail', $data);
+
+        return view('/admin/content/view_perusahaan_detail', $data);
     }
 }

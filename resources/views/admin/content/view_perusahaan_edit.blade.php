@@ -2,24 +2,24 @@
 
 @section('content')
 <div class="row">
-    <div class="col s12">
-      <div id="validation" class="card card card-default scrollspy">
-        <div class="card-content">
-          <h4 class="card-title">Form Data Perusahaan</h4>
-          @if (Session::get('login-pr') == true)
-          <form class="col s12" method="post" action="/perusahaan/update-data-perusahaan"  enctype="multipart/form-data">
+  <div class="col s12">
+    <div id="validation" class="card card card-default scrollspy">
+      <div class="card-content">
+        <h4 class="card-title">Form Data Perusahaan</h4>
+        @if (Session::get('login-pr') == true)
+        <form class="col s12" method="post" action="/perusahaan/update-data-perusahaan" enctype="multipart/form-data">
           @else
-          <form class="col s12" method="post" action="/admin/update-data-perusahaan"  enctype="multipart/form-data">
-          @endif
+          <form class="col s12" method="post" action="/admin/update-data-perusahaan" enctype="multipart/form-data">
+            @endif
             @csrf
             <input type="hidden" name="inpid" value="{{ $perusahaan->id_perusahaan }}">
             <div class="row">
               <div class="input-field col s12 m6 l6">
                 <i class="material-icons prefix">art_track</i>
-                <input name="inpnama" id="inpnama" type="text" class="validate"  value="{{ $perusahaan->nama_perusahaan }}">
+                <input name="inpnama" id="inpnama" type="text" class="validate" value="{{ $perusahaan->nama_perusahaan }}">
                 <label for="inpnama">User ID</label>
                 @error('a')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
@@ -29,7 +29,7 @@
                 <input name="inppassword" id="inppassword" type="password" class="validate" required>
                 <label for="inppassword">Password</label>
                 @error('g')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
               <div class="input-field col s12 m6 l6">
@@ -37,7 +37,7 @@
                 <input name="inpconfirm" id="inpconfirm" type="password" class="validate" required>
                 <label for="inpconfirm">Confirm Password</label>
                 @error('h')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
@@ -55,74 +55,124 @@
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">domain</i>
-                <input name="inplengkap" id="inplengkap" type="text" class="validate"  value="{{ $perusahaan->lengkap_perusahaan }}">
+                <input name="inplengkap" id="inplengkap" type="text" class="validate" value="{{ $perusahaan->lengkap_perusahaan }}">
                 <label for="inplengkap">Nama Perusahaan</label>
                 @error('b')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12 m6 l6">
                 <i class="material-icons prefix">account_balance</i>
-                <input name="inpnpwp" id="inpnpwp" type="text" class="validate"  value="{{ $perusahaan->npwp_perusahaan }}">
+                <input name="inpnpwp" id="inpnpwp" type="text" class="validate" value="{{ $perusahaan->npwp_perusahaan }}">
                 <label for="inpnpwp">NPWP</label>
                 @error('c')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12 m6 l6">
                 <i class="material-icons prefix">business_center</i>
-                <select  name="inpjenis" id="inpjenis">
+                <select name="inpjenis" id="inpjenis">
                   <option value="">- Pilih Jenis Perusahaan -</option>
                   @foreach($jenis as $jn)
-                  <?php if ($jn->id_jenis == $perusahaan->id_jenis) { $slct = "selected"; } else { $slct = ""; }?> 
-                  <option value="{{ $jn->id_jenis }}" <?= $slct?>>{{ $jn->nama_jenis }}</option>
+                  <?php if ($jn->id_jenis == $perusahaan->id_jenis) {
+                    $slct = "selected";
+                  } else {
+                    $slct = "";
+                  } ?>
+                  <option value="{{ $jn->id_jenis }}" <?= $slct ?>>{{ $jn->nama_jenis }}</option>
                   @endforeach
                 </select>
                 <label>Jenis Perusahaan</label>
                 @error('c1')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12 l12 ml">
-                  <div class="row ml-3">
-                    <label style="font-size: 18px">Lokasi Perusahaan &ensp; - &ensp;</label>
-                    <label>
-                      <input name="inppos" type="radio" value="1" <?php if ($perusahaan->lokasi_perusahaan == 1) { echo "checked"; } else { echo ""; }?>/>
-                      <span>Dalam Solo</span>
-                    </label> &emsp;
-                    <label>
-                      <input name="inppos" type="radio" value="2" <?php if ($perusahaan->lokasi_perusahaan == 2) { echo "checked"; } else { echo ""; } ?> />
-                      <span>Luar Solo</span>
-                    </label>
-                  </div>
+                <div class="row ml-3">
+                  <label style="font-size: 18px">Lokasi Perusahaan &ensp; - &ensp;</label>
+                  <label>
+                    <input name="inppos" type="radio" value="1" <?php if ($perusahaan->lokasi_perusahaan == 1) {
+                                                                  echo "checked";
+                                                                } else {
+                                                                  echo "";
+                                                                } ?> />
+                    <span>Dalam Solo</span>
+                  </label> &emsp;
+                  <label>
+                    <input name="inppos" type="radio" value="2" <?php if ($perusahaan->lokasi_perusahaan == 2) {
+                                                                  echo "checked";
+                                                                } else {
+                                                                  echo "";
+                                                                } ?> />
+                    <span>Luar Solo</span>
+                  </label>
+                </div>
                 @error('c2')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">location_on</i>
-                <textarea name="inpalamat" id="inpalamat" type="text" class="validate materialize-textarea" >{{ $perusahaan->alamat_perusahaan }}</textarea>
+                <textarea name="inpalamat" id="inpalamat" type="text" class="validate materialize-textarea">{{ $perusahaan->alamat_perusahaan }}</textarea>
                 <label for="inpalamat">Alamat</label>
                 @error('d')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 m6 l6">
+                <i class="material-icons prefix">domain</i>
+                <select name="prov" id="prov">
+                  <option value="">- Pilih Provinsi -</option>
+                  @foreach($provinsi as $prov)
+                  <?php if ($prov->id == $perusahaan->id_provinsi) {
+                    $slct = "selected";
+                  } else {
+                    $slct = "";
+                  } ?>
+                  <option value="{{ $prov->id }}" <?= $slct ?>>{{ $prov->name }}</option>
+                  @endforeach
+                </select>
+                <label>Provinsi</label>
+                @error('d')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="input-field col s12 m6 l6">
+                <i class="material-icons prefix">home</i>
+                <select name="kota" id="kota">
+                  <option value="">- Pilih Kota -</option>
+                  @foreach($kota as $kt)
+                  <?php if ($kt->id == $perusahaan->id_kota) {
+                    $slct = "selected";
+                  } else {
+                    $slct = "";
+                  } ?>
+                  <option value="{{ $kt->id }}" <?= $slct ?>>{{ $kt->name }}</option>
+                  @endforeach
+                </select>
+                <label>Kota</label>
+                @error('d')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
             <div class="row">
               <div class="input-field col s11">
                 <i class="material-icons prefix">gps_fixed</i>
-                <textarea name="inpmap" id="inpmap" type="text" class="validate materialize-textarea" >{{ $perusahaan->map_perusahaan }}</textarea>
+                <textarea name="inpmap" id="inpmap" type="text" class="validate materialize-textarea">{{ $perusahaan->map_perusahaan }}</textarea>
                 <label for="inpmap">Link Posisi Peta</label>
                 @error('inpmap')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
               <div class="input-field col s1">
@@ -137,7 +187,7 @@
                 <input name="inpkode" id="inpkode" type="number" class="validate" required max="99999999" value="{{ $perusahaan->kodepos_perusahaan }}">
                 <label>Kode Pos</label>
                 @error('d1')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
@@ -147,7 +197,7 @@
                 <input name="inpweb" id="inpweb" type="text" class="validate" required value="{{ $perusahaan->web_perusahaan }}">
                 <label>Website</label>
                 @error('d2')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
@@ -157,7 +207,7 @@
                 <textarea name="inpdesk" id="inpdesk" type="text" class="validate materialize-textarea" required>{{ $perusahaan->desk_perusahaan }}</textarea>
                 <label for="inpdesk">Deskripsi</label>
                 @error('d3')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
@@ -167,25 +217,25 @@
                 <input name="inpjawab" id="inpjawab" type="text" class="validate" required value="{{ $perusahaan->penanggung_perusahaan }}">
                 <label>Nama Penanggung Jawab</label>
                 @error('d4')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12 m6 l6">
                 <i class="material-icons prefix">call</i>
-                <input name="inptelepon" id="inptelepon" type="text" class="validate"  value="{{ $perusahaan->telp_perusahaan }}">
+                <input name="inptelepon" id="inptelepon" type="text" class="validate" value="{{ $perusahaan->telp_perusahaan }}">
                 <label for="inptelepon">Telepon</label>
                 @error('e')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
               <div class="input-field col s12 m6 l6">
                 <i class="material-icons prefix">email</i>
-                <input name="inpemail" id="inpemail" type="email" class="validate"  value="{{ $perusahaan->email_perusahaan }}">
+                <input name="inpemail" id="inpemail" type="email" class="validate" value="{{ $perusahaan->email_perusahaan }}">
                 <label for="inpemail">Email</label>
                 @error('f')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
               <div class="input-field col s12 m6 l6">
@@ -193,7 +243,7 @@
                 <input name="inpfax" id="inpfax" type="text" class="validate" required value="{{ $perusahaan->fax_perusahaan }}">
                 <label for="inpfax">No. Fax</label>
                 @error('e1')
-                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
@@ -205,18 +255,20 @@
               </div>
             </div>
           </form>
-        </div>
       </div>
     </div>
   </div>
+</div>
 @endsection
 
 @section('customjs')
 <script>
-    function popup(url) {
-      newwindow = window.open(url,'name','height=500,width=1050');
-      if (window.focus) { newwindow.focus() }
-      return false;
+  function popup(url) {
+    newwindow = window.open(url, 'name', 'height=500,width=1050');
+    if (window.focus) {
+      newwindow.focus()
     }
+    return false;
+  }
 </script>
 @endsection
