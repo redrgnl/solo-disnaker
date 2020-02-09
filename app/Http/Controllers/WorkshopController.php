@@ -48,7 +48,8 @@ class WorkshopController extends Controller
             'd' => 'required|max:11',
             'e' => 'required|max:10',
             'e1' => 'required',
-            'f' => 'required'
+            'f' => 'required',
+            'p' => 'required',
         ], $messages);
         
         $img = $insert->file('f');
@@ -67,6 +68,7 @@ class WorkshopController extends Controller
             'kuota_workshop' => $insert->d,
             'status_workshop' => $insert->e,
             'kategori_workshop' => $insert->e1,
+            'persyaratan_workshop' => $insert->p,
             'poster_workshop' => $imgname
         ]);
         
@@ -100,7 +102,9 @@ class WorkshopController extends Controller
             'c2' => 'required',
             'd' => 'required|max:11',
             'e' => 'required|max:10',
-            'e1' => 'required'
+            'e1' => 'required',
+            'p' => 'required'
+
         ], $messages);
         
         DB::table('tb_workshop')->where('id_workshop', $update->inpid)->update([
@@ -112,7 +116,9 @@ class WorkshopController extends Controller
             'end_workshop' => $update->c2,
             'kuota_workshop' => $update->d,
             'status_workshop' => $update->e,
-            'kategori_workshop' => $update->e1
+            'kategori_workshop' => $update->e1,
+            'persyaratan_workshop' => $update->p
+
         ]);
         
         return redirect ('/admin/halaman-manajemen-workshop')->with('success-alert', 'Disimpan');

@@ -52,9 +52,8 @@
                 <i class="material-icons prefix">dvr</i>
                 <select class="js-example-basic-single" name="e1" id="inpstatus" >
                   <option value="">- Kategori Pelatihan -</option>
-                  <option value="Pemula" <?php if ($workshop->kategori_workshop == "Pemula"){ echo "selected"; }?>>Pemula</option>
-                  <option value="Advance" <?php if ($workshop->kategori_workshop == "Advance"){ echo "selected"; }?>>Advance</option>
-                  <option value="Expert" <?php if ($workshop->kategori_workshop == "Expert"){ echo "selected"; }?>>Expert</option>
+                  <option value="Pencari Kerja" <?php if ($workshop->kategori_workshop == "Pencari Kerja"){ echo "selected"; }?>>Pencari Kerja</option>
+                  <option value="Wirausaha" <?php if ($workshop->kategori_workshop == "Wirausaha"){ echo "selected"; }?>>Wirausaha</option>
                 </select>
                 <label for="e1">Kategori Pelatihan</label>
                 @error('e1')
@@ -102,6 +101,12 @@
                 @enderror
               </div>
             </div>
+            <div class="input-field col s12">
+            <i class="material-icons prefix">playlist_add_check</i>
+
+                <textarea id="p" name="p" class="materialize-textarea" >{{ $workshop->persyaratan_workshop }}</textarea>
+                <label for="p">Persyaratan</label>
+           </div> 
             <div class="row">
               <div class="input-field col s12">
                 <button class="btn waves-effect waves-light gradient-45deg-light-blue-cyan gradient-shadow right text-white" type="submit" name="action">Submit

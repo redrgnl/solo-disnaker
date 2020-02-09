@@ -56,9 +56,8 @@
                 <i class="material-icons prefix">dvr</i>
                 <select class="js-example-basic-single" name="e1" id="inpstatus" >
                   <option value="">- Kategori Pelatihan -</option>
-                  <option value="Pemula">Pemula</option>
-                  <option value="Advance">Advance</option>
-                  <option value="Expert">Expert</option>
+                  <option value="Pencari Kerja">Pencari Kerja</option>
+                  <option value="Wirausaha">Wirausaha</option>
                 </select>
                 <label for="e1">Kategori Pelatihan</label>
                 @error('e1')
@@ -107,6 +106,12 @@
               </div>
             </div>
             <div class="row">
+            <div class="input-field col s12">
+            <i class="material-icons prefix">playlist_add_check</i>
+
+                <textarea id="p" name="p" class="materialize-textarea"></textarea>
+                <label for="p">Persyaratan</label>
+           </div> 
               <br>
               <p>Upload Banner atau Logo Pelatihan</p><br>
               <div class="file-field col s12 m6 l6">
@@ -116,12 +121,14 @@
                 </div>
                 <div class="file-path-wrapper">
                   <input class="file-path validate" type="text" required>
+
                 </div>
                 @error('f')
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
-            </div>
+           
+        </div>
             <div class="row">
               <div class="input-field col s12">
                 <button class="btn waves-effect waves-light gradient-45deg-light-blue-cyan gradient-shadow right text-white" type="submit" name="action">Submit
