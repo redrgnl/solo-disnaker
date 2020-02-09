@@ -46,7 +46,6 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::get('/admin/halaman-detail-perusahaan/{id}', 'PerusahaanController@detail_perusahaan');
     Route::post('/admin/tambah-gallery', 'PerusahaanController@store_gal_perusahaan');
     Route::post('/admin/ganti-profile-perusahaan', 'PerusahaanController@change_pro_perusahaan');
-    
     Route::get('/admin/get-kota/{id}', 'PerusahaanController@get_kota');
 
     //Route Pelamar
@@ -57,6 +56,7 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::post('/admin/update-data-pelamar', 'PelamarController@update_pelamar');
     Route::post('/admin/delete-data-pelamar', 'PelamarController@delete_pelamar');
     Route::get('/admin/riwayat-lamaran/{id}', 'PelamarController@riwayat_pelamar');
+    Route::get('/admin/get-kecamatan/{id}', 'PelamarController@get_kecamatan');
 
     //Route Lowongan
     Route::get('/admin/halaman-manajemen-lowongan', 'LowonganController@index');

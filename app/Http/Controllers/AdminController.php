@@ -11,34 +11,37 @@ use Session;
 class AdminController extends Controller
 {
     // ========== Login Admin ========== //
-    public function index() {
+    public function index()
+    {
         $data = [
             'title' => "Dashboard Admin",
             'breadcrumb' => "Dashboard Admin"
         ];
-            
-        return view ('admin/content/view_dashboard_admin', $data);
+
+        return view('admin/content/view_dashboard_admin', $data);
     }
-    
-    public function login() {
-        return view ('/admin/login/login');
+
+    public function login()
+    {
+        return view('/admin/login/login');
     }
-    
-    public function postLogin(Request $request) {
+
+    public function postLogin(Request $request)
+    {
         $messages = [
             'required' => 'Field Wajib Diisi *',
             'max' => 'Input Tidak Sesuai *'
         ];
-        
+
         $this->validate($request, [
             'inpusername' => 'required|max:64',
             'inppassword' => 'required|max:64',
             'inpconfirm' => 'required|max:64'
         ], $messages);
-        
+
         $username = $request->inpusername;
-        
-        if (!filter_var($username, FILTER_VALIDATE_EMAIL)){
+
+        if (!filter_var($username, FILTER_VALIDATE_EMAIL)) {
             $user = DB::table('tb_user')
                 ->join('tb_role', 'tb_role.id_role', '=', 'tb_user.id_role')
                 ->where('tb_user.username_user', $request->inpusername)
@@ -46,7 +49,7 @@ class AdminController extends Controller
                 ->where('tb_user.confirm_password_user', md5($request->inpconfirm))
                 ->where('tb_role.status_role', 'Active')
                 ->first();
-                
+
             if (!empty($user)) {
                 Session::put('iduser', $user->id_user);
                 Session::put('namauser', $user->nama_user);
@@ -63,30 +66,32 @@ class AdminController extends Controller
         } else {
             return redirect('/')->with('error', 'Username atau Password Salah!');
         }
-        
     }
     // ========== Login Admin ========== //
-    
+
     // ========== Login Perusahaan ========== //
-    public function daftar_perusahaan() {
+    public function daftar_perusahaan()
+    {
         $data = [
-            'jenis' => DB::table('tb_jenisper')->get()
+            'jenis' => DB::table('tb_jenisper')->get(),
+            'provinsi' => DB::table('tb_provinsi')->get()
         ];
-        
-        return view ('/admin/content/view_public_daftar', $data);
+
+        return view('/admin/content/view_public_daftar', $data);
     }
-    public function postPerusahaan(Request $request) {
+    public function postPerusahaan(Request $request)
+    {
         $messages = [
             'required' => 'Field Wajib Diisi *',
             'max' => 'Input Tidak Sesuai *'
         ];
-        
+
         $this->validate($request, [
             'iinpusername' => 'required|max:64',
             'iinppassword' => 'required|max:64',
             'iinpconfirm' => 'required|max:64'
         ], $messages);
-        
+
         $perusahaan = DB::table('tb_perusahaan')
             ->where('nama_perusahaan', $request->iinpusername)
             ->where('password_perusahaan', md5($request->iinppassword))
@@ -104,19 +109,23 @@ class AdminController extends Controller
             return redirect('/halaman-daftar-perusahaan')->with('error', 'Username atau Password Salah!');
         }
     }
-    public function storePerusahaan(Request $insert) {
+    public function storePerusahaan(Request $insert)
+    {
+
         $messages = [
             'required' => 'Field Wajib Diisi *',
             'max' => 'Input Tidak Sesuai',
             'email' => 'Format Email Salah'
         ];
-        
+
         //validasi form
         $this->validate($insert, [
             'inpnama' => 'required|max:100',
             'inplengkap' => 'required',
             'inpnpwp' => 'required|max:50',
             'inpalamat' => 'required',
+            'inpprov' => 'required',
+            'inpkota' => 'required',
             'inpmap' => 'required',
             'inpjenis' => 'required|max:3',
             'inppos' => 'required|max:1',
@@ -131,18 +140,20 @@ class AdminController extends Controller
             'inppassword' => 'required|max:64',
             'inpconfirm' => 'required|max:64'
         ], $messages);
-        
+
         $img = $insert->file('inppict');
-        $imgname = date('Y_m_d_H_i_s').$img->getClientOriginalExtension();
-        
+        $imgname = date('Y_m_d_H_i_s') . $img->getClientOriginalExtension();
+
         $location = 'perusahaan';
-		$img->move($location,$imgname);
-        
+        $img->move($location, $imgname);
+
         DB::table('tb_perusahaan')->insert([
             'nama_perusahaan' => $insert->inpnama,
             'lengkap_perusahaan' => $insert->inplengkap,
             'npwp_perusahaan' => $insert->inpnpwp,
             'alamat_perusahaan' => $insert->inpalamat,
+            'id_provinsi' => $insert->inpprov,
+            'id_kota' => $insert->inpkota,
             'map_perusahaan' => $insert->inpmap,
             'id_jenis' => $insert->inpjenis,
             'lokasi_perusahaan' => $insert->inppos,
@@ -158,12 +169,13 @@ class AdminController extends Controller
             'confirm_password_perusahaan' => md5($insert->inpconfirm),
             'date_created' => date('Y-m-d')
         ]);
-        
-        return redirect ('/halaman-daftar-perusahaan')->with('success', 'Disimpan');
+
+        return redirect('/halaman-daftar-perusahaan')->with('success', 'Disimpan');
     }
     // ========== Login Perusahaan ========== //
-    
-    public function logout() {
+
+    public function logout()
+    {
         Session::flush();
         Auth::logout();
         return Redirect('/');

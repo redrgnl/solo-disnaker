@@ -28,11 +28,11 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('admin/vendors/hover-effects/media-hover-effects.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/pages/page-search.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('admin/vendors/magnific-popup/magnific-popup.css') }}">
-    
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    
+
   <!-- END: Page Level CSS-->
   <!-- BEGIN: Custom CSS-->
   <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/custom/custom.css') }}">

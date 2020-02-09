@@ -87,11 +87,11 @@
               <div class="row ml-3">
                 <label style="font-size: 18px">Lokasi Perusahaan &ensp; - &ensp;</label>
                 <label>
-                  <input name="inppos" type="radio" value="1" />
+                  <input name="inppos" type="radio" value="1" id="dalam" />
                   <span>Dalam Solo</span>
                 </label> &emsp;
                 <label>
-                  <input name="inppos" type="radio" value="2" />
+                  <input name="inppos" type="radio" value="2" id="luar" />
                   <span>Luar Solo</span>
                 </label>
               </div>
@@ -126,7 +126,7 @@
             </div>
             <div class="input-field s6 m6 l6">
               <select class="browser-default" name="inpkota" id="inpkota" style="width: 40%; margin: 15px 0px 15px 0px;">
-                 <option value="">- Pilih Kota -</option>
+                <option value="">- Pilih Kota -</option>
               </select>
               @error('d')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
@@ -134,7 +134,7 @@
             </div>
           </div>
           <div class="row">
-            
+
           </div>
           <div class="row">
             <div class="input-field col s11">
@@ -241,36 +241,20 @@
     }
     return false;
   }
-
 </script>
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('#prov').on('change', function(e) {
-        var idprov = e.target.value;
-  
-        //ajax
-        
-        $.get('/admin/get-kota/' + idprov, function(data) {
-          
-          // $('#kota').html('');
-  
-          // $.each(data, function(index, item) {
-  
-          //   // $.each(item, function(we, aw) {
-  
-          //     // $('#kota').append(new Option(item.name, item.id));
-//          $('.kota').html(data);
-          //     $('#kota').append('<option value="'+item.id+'">${item.name}</option>')
-          //     console.log(item);
-  
-          //   // });
-  
-          // });
-          $('#inpkota').html(data)
-          console.log(data);
-        });
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#prov').on('change', function(e) {
+      var idprov = e.target.value;
 
+      //ajax
+
+      $.get('/admin/get-kota/' + idprov, function(data) {
+        $('#inpkota').html(data)
       });
+
     });
-    </script>
+  });
+</script>
+
 @endsection

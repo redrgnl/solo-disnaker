@@ -47,6 +47,9 @@ class PerusahaanController extends Controller
             'inplengkap' => 'required',
             'inpnpwp' => 'required|max:50',
             'inpalamat' => 'required',
+            'inpprov' => 'required',
+            'inpkota' => 'required',
+            'inpmap' => 'required',
             'inpjenis' => 'required|max:3',
             'inppos' => 'required|max:1',
             'inpkode' => 'required|max:8',
@@ -72,6 +75,8 @@ class PerusahaanController extends Controller
             'lengkap_perusahaan' => $insert->inplengkap,
             'npwp_perusahaan' => $insert->inpnpwp,
             'alamat_perusahaan' => $insert->inpalamat,
+            'id_provinsi' => $insert->inpprov,
+            'id_kota' => $insert->inpkota,
             'map_perusahaan' => $insert->inpmap,
             'id_jenis' => $insert->inpjenis,
             'lokasi_perusahaan' => $insert->inppos,
@@ -113,7 +118,7 @@ class PerusahaanController extends Controller
             'email' => 'Format Email Salah'
         ];
 
-        //validasi form
+        //validasi form 
         $this->validate($update, [
             'inpnama' => 'required|max:100',
             'inplengkap' => 'required',
@@ -391,20 +396,19 @@ class PerusahaanController extends Controller
 
         return view('/admin/content/view_perusahaan_detail', $data);
     }
-        
+
     public function get_kota($id)
     {
         $kota = DB::table('tb_kota')->where('province_id', $id)->get();
 
         // kalau mau make respon HTML = "return $output;"
-//        $output = '<select class="select-css">';
+        //        $output = '<select class="select-css">';
         $output = '<option value="">- Pilih Kota -</option>';
 
-        foreach($kota as $k)
-        {
-            $output .= '<option value="'.$k->id.'">'.$k->name.'</option>';
+        foreach ($kota as $k) {
+            $output .= '<option value="' . $k->id . '">' . $k->name . '</option>';
         }
-//        $output .= '</select>';
+        //        $output .= '</select>';
         // kalau mau respon dalam object data db  = "return $kota;"
 
         echo $output;
