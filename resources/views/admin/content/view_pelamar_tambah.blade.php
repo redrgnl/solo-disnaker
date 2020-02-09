@@ -279,7 +279,7 @@
           </div>
           <div class="row">
             <option class="input-field col s12 m6 l6">
-              <i class="material-icons prefix">group</i>
+              <i class="material-icons prefix">Group</i>
               <select name="i" id="inpstatus">
                 <option value="">- Pilih Tingkat Pendidikan -</option>
               </select>
@@ -377,7 +377,7 @@
             <div class="input-field col s12 m4 l4">
               <i class="material-icons prefix">group</i>
               <select class="form-control select2" name="kelompok_jabatan" id="kelompok_jabatan" data-placeholder="Pilih Kelompok Jabatan">
-                <option value=""></option>
+                <option value="">- Pilih Jabatan Yang Diminati -</option>
                 <optgroup label="0111 - PERWIRA MABES TNI">
                   <option value="0111.01">0111.01 - PANGLIMA TNI</option>
                   <option value="0111.02">0111.02 - KEPALA STAF UMUM TNI (KASUM TNI)</option>
@@ -3486,6 +3486,45 @@
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
             </div>
+        <div class="field_wrapper">
+
+            <div>
+              <div class="row">
+                  <option class="input-field col s12 m6 l6">
+                    <i class="material-icons prefix">Data</i>
+                    <select name="i" id="inpstatus">
+                      <option value="">- Pilih Tingkat Pendidikan -</option>
+                    </select>
+                    <label>Pengalaman Kerja</label>
+                    @error('i')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                    @enderror
+                  </option>
+                  <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a>
+
+               </div>
+            </div>
+        </div>
+
+        <div class="field_wrapper_k">
+
+            <div>
+              <div class="row">
+                  <option class="input-field col s12 m6 l6">
+                    <i class="material-icons prefix">Data</i>
+                    <select name="i" id="inpstatus">
+                      <option value="">- Pilih Tingkat Pendidikan -</option>
+                    </select>
+                    <label>Penguasaan Ketrampilan</label>
+                    @error('i')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                    @enderror
+                  </option>
+                  <a href="javascript:void(0);" class="waves-effect waves-light btn add_button_k" title="Add field"><i class="material-icons left">add_box</i>Tambah Keterampilan</a>
+
+               </div>
+            </div>
+        </div>
             <div class="input-field col s12">
               <button class="btn waves-effect waves-light gradient-45deg-light-blue-cyan gradient-shadow right text-white" type="submit" name="action">Submit
                 <i class="material-icons right">send</i>
@@ -3542,4 +3581,33 @@
   });
 </script>
 
+
+<script type="text/javascript">
+$(document).ready(function(){
+    var maxField = 10; //Maximum Field Nya
+    var addButton = $('.add_button'); //Button Class Selectorny
+    var wrapper = $('.field_wrapper'); //Field Dinamis ny
+    var fieldHTML = 
+    '<div class="field_pengalaman" ><div class="row"><div class="input-field col s12 m6 l6"><i class="material-icons prefix">location_city</i><input name="aa[]" id="aa" type="text" class="validate"><label for="aa">Nama Perusahaan</label>@error('aa')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div><div class="input-field col s12 m6 l6"><i class="material-icons prefix">account_balance</i><input name="bb[]" id="bb" type="text" class="validate"><label for="bb">Jabatan</label>@error('b')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div></div><div class="row"><div class="input-field col s6"><i class="material-icons prefix">assignment</i><input name="cc[]" id="cc" type="text" class="validate"><label for="cc">Deskripsi Pekerjaan</label>@error('cc')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div><div class="input-field col s6"><i class="material-icons prefix">attach_money</i><input name="dd[]" id="dd" type="text" class="validate"><label for="dd">Besar Gaji</label>@error('dd')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div></div><div class="row"><div class="input-field col s12 m6 l6"><i class="material-icons prefix"></i><input type="date" name="ee[]" class="datepicker"><label for="inpgelardepan">Lama Kerja Dari</label>@error('ee')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div><div class="input-field col s12 m6 l6"><input type="date" id="ff" name="ff[]" class="datepicker"><label for="ff">Sampai</label>@error('ff')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div></div><a href="javascript:void(0);" class="remove_button"><i class="material-icons red-text">delete_forever</i></a></div> ' ; //input field html 
+    
+
+    var x = 1; //Inisiasi 1
+    
+    //Tombol Terklik
+    $(addButton).click(function(){
+        //Check maximum 
+        if(x < maxField){ 
+            x++; //Field Hituing
+            $(wrapper).append(fieldHTML); //Add field html
+        }
+    });
+    
+    //Remove klik
+    $(wrapper).on('click', '.remove_button', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+        x--; //Pengurangan hitung
+    });
+});
+</script>
 @endsection
