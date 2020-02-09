@@ -126,7 +126,7 @@
             </div>
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">home</i>
-              <select name="kota" id="kota">
+              <select class="kota" name="kota" id="kota">
                 <option value="">- Pilih Kota -</option>
               </select>
               <label>Kota</label>
@@ -239,5 +239,39 @@
     }
     return false;
   }
+
 </script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+  
+  
+      $('#prov').on('change', function(e) {
+        var idprov = e.target.value;
+  
+        //ajax
+        
+        $.get('/admin/get-kota/' + idprov, function(data) {
+          
+          // $('#kota').html('');
+  
+          // $.each(data, function(index, item) {
+  
+          //   // $.each(item, function(we, aw) {
+  
+          //     // $('#kota').append(new Option(item.name, item.id));
+          $('.kota').html(data);
+          //     $('#kota').append('<option value="'+item.id+'">${item.name}</option>')
+          //     console.log(item);
+  
+          //   // });
+  
+          // });
+          console.log(data);
+          $('.kota').html(data);
+
+        });
+
+      });
+    });
+    </script>
 @endsection

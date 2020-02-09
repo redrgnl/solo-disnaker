@@ -12,7 +12,7 @@ class PelamarController extends Controller
         $data = [
             'title' => "Manajemen Data Pelamar",
             'breadcrumb' => "Data Pelamar",
-            'pelamar' => DB::table('tb_pelamar')->get()
+            'pelamar' => DB::table('tb_pelamar')->get(),
         ];
         
         return view ('/admin/content/view_pelamar', $data);
@@ -21,7 +21,9 @@ class PelamarController extends Controller
     public function tambah_pelamar() {
         $data = [
             'title' => "Form Tambah Pelamar",
-            'breadcrumb' => "Tambah Pelamar"
+            'breadcrumb' => "Tambah Pelamar",
+            'provinsi' => DB::table('tb_provinsi')->get()
+
         ];
         
         return view ('/admin/content/view_pelamar_tambah', $data);

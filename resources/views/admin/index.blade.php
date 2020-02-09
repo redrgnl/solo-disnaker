@@ -28,6 +28,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('admin/vendors/hover-effects/media-hover-effects.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/pages/page-search.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('admin/vendors/magnific-popup/magnific-popup.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
   <!-- END: Page Level CSS-->
   <!-- BEGIN: Custom CSS-->
@@ -139,6 +140,7 @@
   <!-- END: Footer-->
   <!-- BEGIN VENDOR JS-->
   @yield('customjs')
+
   <script src="{{ asset('admin/js/vendors.min.js') }}" type="text/javascript"></script>
   <!-- BEGIN VENDOR JS-->
   <!-- BEGIN PAGE VENDOR JS-->
@@ -188,21 +190,7 @@
     }
   </script>
 
-  <script type="text/javascript">
-    $('#prov').on('change', function(e) {
-      var idprov = e.target.value;
 
-      //ajax
-      $.get('/admin/get-kota/' + idprov, function(data) {
-        $('#kota').empty();
-
-        $.each(data, function(index, item) {
-          $('#kota').append(new Option(item.name, item.id));
-        });
-        console.log(data);
-      });
-    });
-  </script>
 
 </body>
 

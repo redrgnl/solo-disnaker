@@ -380,8 +380,9 @@
             </div>
           </div>
           <div class="row">
-            <option class="input-field col s12 m6 l6">
-              <i class="material-icons prefix">group</i>
+
+              <div class="input-field col s12 m4 l4">
+                <i class="material-icons prefix">group</i>
               <select name="i" id="inpstatus">
                 <option value="">- Pilih Jabatan Yang Diminati -</option>
               </select>
@@ -391,8 +392,8 @@
               @enderror
             </option>
           </div>
-          <div class="row">
-            <option class="input-field col s12 m6 l6">
+
+            <div class="input-field col s12 m4 l4">
               <i class="material-icons prefix">group</i>
               <select name="i" id="inpstatus">
                 <option value="">- Pilih Sistem Pengupahan Gaji -</option>
@@ -401,11 +402,9 @@
               @error('i')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
-            </option>
           </div>
-          <div class=<div class="row">
-            <option class="input-field col s12 m6 l6">
-              <i class="material-icons prefix">group</i>
+          <div class="input-field col s12 m4 l4">
+            <i class="material-icons prefix">group</i>
               <select name="i" id="inpstatus">
                 <option value="">- Pilih Harapan Gaji Per Bulan -</option>
               </select>
@@ -413,7 +412,6 @@
               @error('i')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
-            </option>
           </div>
           <div class="input-field col s12">
             <button class="btn waves-effect waves-light gradient-45deg-light-blue-cyan gradient-shadow right text-white" type="submit" name="action">Submit

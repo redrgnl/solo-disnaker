@@ -37,7 +37,21 @@ class PerusahaanController extends Controller
     {
         $kota = DB::table('tb_kota')->where('province_id', $id)->get();
 
-        return $kota;
+        // kalau mau make respon HTML = "return $output;"
+
+        $output = '';
+
+        $output= '<option value="">- Pilih Kota -</option>';
+
+        foreach($kota as $k)
+        {
+            $output .= '<option value="'.$k->id.'">'.$k->name.'</option>';
+        }
+   
+
+        // kalau mau respon dalam object data db  = "return $kota;"
+
+        return $output;
     }
 
     public function store_perusahaan(Request $insert)
