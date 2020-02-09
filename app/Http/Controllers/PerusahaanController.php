@@ -33,27 +33,6 @@ class PerusahaanController extends Controller
         return view('/admin/content/view_perusahaan_tambah', $data);
     }
 
-    public function get_kota($id)
-    {
-        $kota = DB::table('tb_kota')->where('province_id', $id)->get();
-
-        // kalau mau make respon HTML = "return $output;"
-
-        $output = '';
-
-        $output= '<option value="">- Pilih Kota -</option>';
-
-        foreach($kota as $k)
-        {
-            $output .= '<option value="'.$k->id.'">'.$k->name.'</option>';
-        }
-   
-
-        // kalau mau respon dalam object data db  = "return $kota;"
-
-        return $output;
-    }
-
     public function store_perusahaan(Request $insert)
     {
         $messages = [
@@ -411,5 +390,23 @@ class PerusahaanController extends Controller
         ];
 
         return view('/admin/content/view_perusahaan_detail', $data);
+    }
+        
+    public function get_kota($id)
+    {
+        $kota = DB::table('tb_kota')->where('province_id', $id)->get();
+
+        // kalau mau make respon HTML = "return $output;"
+//        $output = '<select class="select-css">';
+        $output = '<option value="">- Pilih Kota -</option>';
+
+        foreach($kota as $k)
+        {
+            $output .= '<option value="'.$k->id.'">'.$k->name.'</option>';
+        }
+//        $output .= '</select>';
+        // kalau mau respon dalam object data db  = "return $kota;"
+
+        echo $output;
     }
 }

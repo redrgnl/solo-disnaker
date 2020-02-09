@@ -46,6 +46,7 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::get('/admin/halaman-detail-perusahaan/{id}', 'PerusahaanController@detail_perusahaan');
     Route::post('/admin/tambah-gallery', 'PerusahaanController@store_gal_perusahaan');
     Route::post('/admin/ganti-profile-perusahaan', 'PerusahaanController@change_pro_perusahaan');
+    
     Route::get('/admin/get-kota/{id}', 'PerusahaanController@get_kota');
 
     //Route Pelamar
