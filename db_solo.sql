@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Feb 2020 pada 06.31
+-- Waktu pembuatan: 09 Feb 2020 pada 18.01
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -7947,7 +7947,8 @@ INSERT INTO `tb_perusahaan` (`id_perusahaan`, `nama_perusahaan`, `lengkap_perusa
 (3, 'OVO', 'PT. Visionet Internasional', '03.026.562.3-805.000', 'Lippo Kuningan Lt. 20, Jl. HR. Rasuna Said Kav. B-12 Setiabudi, Jakarta 12940', '', 0, 11, 1102, 0, 0, '', '', '', '1 500 696', '', 'cs@ovo.id', 'OVO-0.png', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307', '2019-11-30'),
 (5, 'Gojek', 'PT Aplikasi Karya Anak Bangsa', '03.026.562.3-805.000', 'Pasaraya Blok M Gedung B Lt. 6,\r\nJalan Iskandarsyah II No.7, RW. 2, Melawai, Kebayoran Baru, RT.3/RW.1, Melawai, Kby. Baru,\r\nKota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12160', '', 0, 11, 1103, 0, 0, '', '', '', '1 500 445', '', 'gojek@indonesia.com', 'Gojek-1_m6Aa74xFBv8ar8kgd-IW2Q.jpeg', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307', '2019-11-30'),
 (6, 'Grab', 'Grab Holdings Inc', '03.026.562.3-805.000', 'Jl. Klampis Jaya 8H, Klampis Ngasem, Kec. Sukolilo, Kota SBY, Jawa Timur 60117', '', 0, 11, 1104, 0, 0, '', '', '', '(021) 80648777', '', 'grab@indonesia.com', 'Grab-0.jpg', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307', '2019-11-30'),
-(20, 'AIR ASIAs', 'Air Asia', '123123', 'qweqwe', 'qrwqwtqtqwrtqwtq', 1, 11, 1110, 1, 2131218, 'https:kasasdkasd', '123123123dasd', 'bagus', '213123', '2352352362', 'asdas@asdasd.com', '2020_02_05_06_43_30.jpg', '827ccb0eea8a706c4c34a16891f84e7b', '827ccb0eea8a706c4c34a16891f84e7b', '2020-02-05');
+(20, 'AIR ASIAs', 'Air Asia', '123123', 'qweqwe', 'qrwqwtqtqwrtqwtq', 1, 11, 1110, 1, 2131218, 'https:kasasdkasd', '123123123dasd', 'bagus', '213123', '2352352362', 'asdas@asdasd.com', '2020_02_05_06_43_30.jpg', '827ccb0eea8a706c4c34a16891f84e7b', '827ccb0eea8a706c4c34a16891f84e7b', '2020-02-05'),
+(22, 'irfan', 'gagagaga', '98797978779', 'waswawawawawaw', 'https://www.google.com/maps/@-8.1536313,113.7024063,14z', 6, 16, 1607, 1, 8088, 'hgghghgh.com', 'jhguhhjguygvuygyuguiguygyujguyguyguy', 'irfan', '0878677565', '9868567575', 'irfan@gmail.com', '2020_02_09_14_42_19webp', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', '2020-02-09');
 
 -- --------------------------------------------------------
 
@@ -8095,6 +8096,7 @@ CREATE TABLE `tb_workshop` (
   `kuota_workshop` int(11) NOT NULL,
   `kategori_workshop` varchar(30) NOT NULL,
   `poster_workshop` varchar(255) NOT NULL,
+  `persyaratan_workshop` text NOT NULL,
   `status_workshop` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -8102,10 +8104,11 @@ CREATE TABLE `tb_workshop` (
 -- Dumping data untuk tabel `tb_workshop`
 --
 
-INSERT INTO `tb_workshop` (`id_workshop`, `nama_workshop`, `lokasi_workshop`, `maps_workshop`, `tanggal_workshop`, `str_workshop`, `end_workshop`, `kuota_workshop`, `kategori_workshop`, `poster_workshop`, `status_workshop`) VALUES
-(1, 'BYTE (Becraft Young Technology Enterpreneur)', 'Dafam Lotus Jember', 'https://www.google.com/maps/place/Hotel+Dafam+Lotus+Jember/@-8.1723917,113.6994984,15z/data=!4m8!3m7!1s0x2dd69424cadca8b7:0x63e5738090ad08e2!5m2!4m1!1i2!8m2!3d-8.1724453!4d113.6994862', '2020-01-03', '2020-01-01', '2020-01-02', 3, 'Pemula', 'BYTE (Becraft Young Technology Enterpreneur)-CoPVBEDyhwotDsdr2YN3b7XE7ZmtYjCf3AvAcBIa.jpeg', 'Active'),
-(5, 'Expert Marketing', 'Pasar Rogojampi', 'https://www.google.com/maps/place/Pasar+Rogojampi/@-8.3110556,114.2894859,15.21z/data=!4m5!3m4!1s0x2dd150d3292a7c39:0x1a63f07db9ab22a6!8m2!3d-8.3066237!4d114.2951542', '2020-01-20', '2020-01-03', '2020-01-19', 100, 'Expert', 'Expert Marketing-220px-Pasarrogojampi.jpeg', 'Active'),
-(6, 'Pelatihan Tembak - PB Perbakin', 'Polsek Rogojampi', 'asddas', '2020-01-30', '2020-01-03', '2020-01-29', 50, 'Expert', 'Pelatihan -perbakinBigLogo.jpg', 'Active');
+INSERT INTO `tb_workshop` (`id_workshop`, `nama_workshop`, `lokasi_workshop`, `maps_workshop`, `tanggal_workshop`, `str_workshop`, `end_workshop`, `kuota_workshop`, `kategori_workshop`, `poster_workshop`, `persyaratan_workshop`, `status_workshop`) VALUES
+(1, 'BYTE (Becraft Young Technology Enterpreneur)', 'Dafam Lotus Jember', 'https://www.google.com/maps/place/Hotel+Dafam+Lotus+Jember/@-8.1723917,113.6994984,15z/data=!4m8!3m7!1s0x2dd69424cadca8b7:0x63e5738090ad08e2!5m2!4m1!1i2!8m2!3d-8.1724453!4d113.6994862', '2020-01-03', '2020-01-01', '2020-01-02', 3, 'Pemula', 'BYTE (Becraft Young Technology Enterpreneur)-CoPVBEDyhwotDsdr2YN3b7XE7ZmtYjCf3AvAcBIa.jpeg', '', 'Active'),
+(5, 'Expert Marketing', 'Pasar Rogojampi', 'https://www.google.com/maps/place/Pasar+Rogojampi/@-8.3110556,114.2894859,15.21z/data=!4m5!3m4!1s0x2dd150d3292a7c39:0x1a63f07db9ab22a6!8m2!3d-8.3066237!4d114.2951542', '2020-01-20', '2020-01-03', '2020-01-19', 100, 'Expert', 'Expert Marketing-220px-Pasarrogojampi.jpeg', '', 'Active'),
+(6, 'Pelatihan Tembak - PB Perbakin', 'Polsek Rogojampi', 'asddas', '2020-01-30', '2020-01-03', '2020-01-29', 50, 'Expert', 'Pelatihan -perbakinBigLogo.jpg', '', 'Active'),
+(7, 'kompuiter', 'jember', 'https://www.google.com/maps/place/Rujak+Cobik+Sumenep/@-7.0196843,113.856848,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd9e4278309ed13:0xd30bfc485bca7644!8m2!3d-7.0196896!4d113.8590367', '2020-02-14', '2020-02-14', '2020-02-21', 20, 'Wirausaha', '2020-02-09-fishermen-504098__340.webp', 'Harus Pintar Masak dan sgala sdsd', 'Active');
 
 --
 -- Indexes for dumped tables
@@ -8248,7 +8251,7 @@ ALTER TABLE `tb_pelamar`
 -- AUTO_INCREMENT untuk tabel `tb_perusahaan`
 --
 ALTER TABLE `tb_perusahaan`
-  MODIFY `id_perusahaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_perusahaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_role`
@@ -8260,7 +8263,7 @@ ALTER TABLE `tb_role`
 -- AUTO_INCREMENT untuk tabel `tb_workshop`
 --
 ALTER TABLE `tb_workshop`
-  MODIFY `id_workshop` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_workshop` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
