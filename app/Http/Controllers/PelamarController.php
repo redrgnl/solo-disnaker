@@ -34,8 +34,9 @@ class PelamarController extends Controller
     public function store_pelamar(Request $insert)
     {
         $messages = [
-            'required' => 'Field Wajib Diisi *',
-            'max' => 'Input Tidak Sesuai'
+            'required' => 'Field :attribute Wajib Diisi *',
+            'max' => 'Input :attribute Tidak Sesuai',
+            'email' => 'Format Email Salah'
         ];
 
         //validasi form
@@ -54,8 +55,25 @@ class PelamarController extends Controller
             'l' => 'required|max:15',
             'm' => 'required|max:50',
             'n' => 'required|max:64',
-            'o' => 'required|max:64'
+            'o' => 'required|max:64',
+            'p' => 'required',
+            'q' => 'required',
+            'r' => 'required',
+            's' => 'required',
+            't' => 'required',
+            'u' => 'required',
+            'v' => 'required',
+            'w' => 'required',
+
+
+
         ], $messages);
+
+        $img = $insert->file('p');
+        $imgname = date('Y-m-d')."-".$img->getClientOriginalName();
+        
+        $location = 'pelamar';
+		$img->move($location,$imgname);
 
         $checknik = DB::table('tb_pelamar')->where('nik_pelamar', $insert->a)->get()->count();
 
@@ -74,6 +92,16 @@ class PelamarController extends Controller
                 'berat_pelamar' => $insert->k,
                 'telp_pelamar' => $insert->l,
                 'email_pelamar' => $insert->m,
+                //baru di tambahkan irfan
+                'foto_pelamar' => $insert->p,
+                'kondisi_pelamar' => $insert->r,
+                'kewarganegaraan_pelamar' => $insert->s,
+                'provinsi_pelamar' => $insert->t,
+                'kota_pelamar' => $insert->u,
+                'kec_pelamar' => $insert->v,
+                'kodepos_pelamar' => $insert->w,
+
+                //end irfan
                 'password_pelamar' => md5($insert->n),
                 'confirm_password_pelamar' => md5($insert->o)
             ]);

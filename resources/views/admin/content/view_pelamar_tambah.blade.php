@@ -6,13 +6,13 @@
     <div id="validation" class="card card card-default scrollspy">
       <div class="card-content">
         <h4 class="card-title">Form Data Pelamar Baru</h4>
-        <form class="col s12" method="post" action="/admin/simpan-data-pelamar">
+        <form class="col s12" method="post" action="/admin/simpan-data-pelamar" enctype="multipart/form-data">
           @csrf
           <div class="row">
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">art_track</i>
               <input name="inpnama" id="inpnama" type="text" class="validate" required>
-              <label for="inpnama">User ID</label>
+              <label for="inpnama">username / id user</label>
               @error('a')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
@@ -39,7 +39,7 @@
           <div class="row">
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">email</i>
-              <input name="inpemail" id="inpemail" type="text" class="validate" required>
+              <input name="m" id="inpemail" type="text" class="validate" required>
               <label for="inpemail">Email</label>
               @error('a')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
@@ -50,10 +50,10 @@
             <div class="file-field input-field col s12">
               <div class="btn">
                 <span>Foto Pelamar</span>
-                <input type="file" name="inppict">
+                <input type="file" name="p">
               </div>
               <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" required>
+                <input class="file-path validate" name="p" type="text" required>
               </div>
             </div>
           </div>
@@ -176,16 +176,35 @@
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
             </div>
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">accessibility</i>
+              <select name="r" id="r">
+                <option value="">- Pilih Kondisi Fisik -</option>
+                <option value="Non Disabilitas">Non Disabilitas</option>
+                <option value="DISABILITAS">DISABILITAS</option>
+                <option value="Tuna Daksa">Tuna Daksa</option>
+                <option value="Tuna Grahita">Tuna Grahita</option>
+                <option value="Tuna Wicara">Tuna Wicara</option>
+                <option value="Tuna Netra">Tuna Netra</option>
+                <option value="Tuna Netra">Tuna Rungu</option>
+                <option value="Tuna Netra">Tuna Ganda</option>
+
+              </select>
+              <label>Konfisi Fisik</label>
+              @error('r')
+              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+              @enderror
+            </div>
           </div>
           <div class="row">
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">group</i>
               <select name="i" id="inpstatus">
                 <option value="">- Pilih Status -</option>
-                <option value="Belum Kawin"> Belum Kawin </option>
-                <option value="Kawin"> Kawin </option>
-                <option value="Duda"> Duda </option>
-                <option value="Janda"> Janda </option>
+                <option value="BN"> Belum Menikah </option>
+                <option value="SN"> Menikah </option>
+                <option value="DA"> Duda </option>
+                <option value="JA"> Janda </option>
               </select>
               <label>Status Perkawinan</label>
               @error('i')
@@ -196,13 +215,13 @@
           <div class="row">
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">group</i>
-              <select name="i" id="inpstatus">
+              <select name="s" id="s">
                 <option value="">- Pilih Status -</option>
-                <option value="Belum Kawin"> WARGA NEGARA INDONESIA (WNI) </option>
-                <option value="Kawin"> WARGA NEGARA ASING (WNA) </option>
+                <option value="WARGA NEGARA INDONESIA (WNI)"> WARGA NEGARA INDONESIA (WNI) </option>
+                <option value="WARGA NEGARA ASING (WNA)"> WARGA NEGARA ASING (WNA) </option>
               </select>
               <label>KEWARGANEGARAAN</label>
-              @error('i')
+              @error('s')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
             </div>
@@ -240,7 +259,7 @@
           <div class="row">
             <div class="input-field col s12 m4 l4">
               <i class="material-icons prefix">domain</i>
-              <select name="prov" id="prov">
+              <select name="t" id="prov">
                 <option value="">- Pilih Provinsi -</option>
                 @foreach($provinsi as $prov)
                 <option value="{{ $prov->id }}">{{ $prov->name }}</option>
@@ -251,7 +270,7 @@
               @enderror
             </div>
             <div class="input-field col s12 m4 l4">
-              <select class="browser-default" name="kota" id="inpkota">
+              <select class="browser-default" name="u" id="inpkota">
                 <option value="">- Pilih Kota -</option>
               </select>
               @error('d')
@@ -259,7 +278,7 @@
               @enderror
             </div>
             <div class="input-field col s12 m4 l4">
-              <select class="browser-default" name="kecamatan" id="inpkecamatan">
+              <select class="browser-default" name="v" id="inpkecamatan">
                 <option value="">- Pilih Kecamatan -</option>
               </select>
               @error('d')
@@ -270,7 +289,7 @@
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">call</i>
-              <input name="l" id="inptelepon" type="text" class="validate">
+              <input name="w" id="inptelepon" type="text" class="validate">
               <label for="l">Kode Pos</label>
               @error('l')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
@@ -280,7 +299,7 @@
           <div class="row">
             <option class="input-field col s12 m6 l6">
               <i class="material-icons prefix">Group</i>
-              <select name="i" id="inpstatus">
+              <select name="test" id="test">
                 <option value="">- Pilih Tingkat Pendidikan -</option>
               </select>
               <label>Tingkat Pendidikan</label>
@@ -292,7 +311,7 @@
           <div class="row">
             <span class="input-field col s12 m6 l6">
               <i class="material-icons prefix">group</i>
-              <select name="i" id="inpstatus">
+              <select name="test" id="test">
                 <option value="">- Pilih Jenis Jurusan -</option>
               </select>
               <label>Jenis Jurusan</label>
@@ -3478,7 +3497,7 @@
             </div>
             <div class="input-field col s12 m4 l4">
               <i class="material-icons prefix">group</i>
-              <select name="i" id="inpstatus">
+              <select name="test" id="test">
                 <option value="">- Pilih Harapan Gaji Per Bulan -</option>
               </select>
               <label>Harapan Gaji Per Bulan</label>
@@ -3492,7 +3511,7 @@
               <div class="row">
                   <option class="input-field col s12 m6 l6">
                     <i class="material-icons prefix">Data</i>
-                    <select name="i" id="inpstatus">
+                    <select name="test" id="test">
                       <option value="">- Pilih Tingkat Pendidikan -</option>
                     </select>
                     <label>Pengalaman Kerja</label>
@@ -3512,7 +3531,7 @@
               <div class="row">
                   <option class="input-field col s12 m6 l6">
                     <i class="material-icons prefix">Data</i>
-                    <select name="i" id="inpstatus">
+                    <select name="test" id="test">
                       <option value="">- Pilih Tingkat Pendidikan -</option>
                     </select>
                     <label>Penguasaan Ketrampilan</label>
