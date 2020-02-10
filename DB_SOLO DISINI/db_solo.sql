@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Feb 2020 pada 18.01
+-- Waktu pembuatan: 10 Feb 2020 pada 08.16
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -7892,6 +7892,7 @@ CREATE TABLE `tb_pelamar` (
   `provinsi_pelamar` int(5) NOT NULL,
   `kota_pelamar` int(5) NOT NULL,
   `kec_pelamar` int(5) NOT NULL,
+  `kodepos_pelamar` varchar(10) NOT NULL,
   `password_pelamar` varchar(64) NOT NULL,
   `confirm_password_pelamar` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -7900,13 +7901,14 @@ CREATE TABLE `tb_pelamar` (
 -- Dumping data untuk tabel `tb_pelamar`
 --
 
-INSERT INTO `tb_pelamar` (`id_pelamar`, `nik_pelamar`, `npwp_pelamar`, `nama_pelamar`, `alamat_pelamar`, `kelamin_pelamar`, `tplahir_pelamar`, `tglahir_pelamar`, `agama_pelamar`, `status_pelamar`, `tinggi_pelamar`, `berat_pelamar`, `telp_pelamar`, `email_pelamar`, `foto_pelamar`, `kondisi_pelamar`, `kewarganegaraan_pelamar`, `provinsi_pelamar`, `kota_pelamar`, `kec_pelamar`, `password_pelamar`, `confirm_password_pelamar`) VALUES
-(1, '3510130312970001', '03.026.562.3-805.000', 'Ady Bagus Sugih Susanto', 'Rogojampi, Banyuwangi', 'L', 'Banyuwangi', '1997-12-03', 'Islam', 'BN', 172, 65, '082232567731', '4yukihana@gmail.com', '', '', '', 0, 0, 0, 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307'),
-(2, '3510130607690001', '03.026.562.3-805.000', 'Yulianto', 'Rogojampi, Banyuwangi', 'L', 'Yogyakarta', '1969-07-06', 'Islam', 'SN', 170, 70, '082839303948', 'sheteuzth6661@gmail.com', '', '', '', 0, 0, 0, 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307'),
-(5, '3510130607690002', '03.026.562.3-805.000', 'Hatsune Miku', 'UwU', 'P', 'UwU', '2007-08-31', 'Kristen', 'BN', 158, 42, '123', 'sdragneel6661@gmail.com', '', '', '', 0, 0, 0, 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307'),
-(6, '3510130607690003', '03.026.562.3-805.000', 'Kiana Kaslana', 'UwU', 'P', 'UwU', '7777-12-07', 'Kristen', 'BN', 163, 49, '123', 'raidenmei001@gmail.com', '', '', '', 0, 0, 0, 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307'),
-(7, '3510130312970002', '03.026.562.3-805.000', 'yuki', 'Rogojampi, Banyuwangi', 'L', 'Banyuwangi', '1997-12-03', 'Islam', 'BN', 167, 45, '082232567731', '4yukihana@gmail.com', '', '', '', 0, 0, 0, 'b59c67bf196a4758191e42f76670ceba', 'b59c67bf196a4758191e42f76670ceba'),
-(8, '123', '123', '123', '123', 'L', '123', '1990-12-12', 'Islam', 'BN', 123, 123, '123', '123@gmail.com', '', '', '', 0, 0, 0, '202cb962ac59075b964b07152d234b70', '202cb962ac59075b964b07152d234b70');
+INSERT INTO `tb_pelamar` (`id_pelamar`, `nik_pelamar`, `npwp_pelamar`, `nama_pelamar`, `alamat_pelamar`, `kelamin_pelamar`, `tplahir_pelamar`, `tglahir_pelamar`, `agama_pelamar`, `status_pelamar`, `tinggi_pelamar`, `berat_pelamar`, `telp_pelamar`, `email_pelamar`, `foto_pelamar`, `kondisi_pelamar`, `kewarganegaraan_pelamar`, `provinsi_pelamar`, `kota_pelamar`, `kec_pelamar`, `kodepos_pelamar`, `password_pelamar`, `confirm_password_pelamar`) VALUES
+(1, '3510130312970001', '03.026.562.3-805.000', 'Ady Bagus Sugih Susanto', 'Rogojampi, Banyuwangi', 'L', 'Banyuwangi', '1997-12-03', 'Islam', 'BN', 172, 65, '082232567731', '4yukihana@gmail.com', '', '', '', 0, 0, 0, '', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307'),
+(2, '3510130607690001', '03.026.562.3-805.000', 'Yulianto', 'Rogojampi, Banyuwangi', 'L', 'Yogyakarta', '1969-07-06', 'Islam', 'SN', 170, 70, '082839303948', 'sheteuzth6661@gmail.com', '', '', '', 0, 0, 0, '', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307'),
+(5, '3510130607690002', '03.026.562.3-805.000', 'Hatsune Miku', 'UwU', 'P', 'UwU', '2007-08-31', 'Kristen', 'BN', 158, 42, '123', 'sdragneel6661@gmail.com', '', '', '', 0, 0, 0, '', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307'),
+(6, '3510130607690003', '03.026.562.3-805.000', 'Kiana Kaslana', 'UwU', 'P', 'UwU', '7777-12-07', 'Kristen', 'BN', 163, 49, '123', 'raidenmei001@gmail.com', '', '', '', 0, 0, 0, '', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307'),
+(7, '3510130312970002', '03.026.562.3-805.000', 'yuki', 'Rogojampi, Banyuwangi', 'L', 'Banyuwangi', '1997-12-03', 'Islam', 'BN', 167, 45, '082232567731', '4yukihana@gmail.com', '', '', '', 0, 0, 0, '', 'b59c67bf196a4758191e42f76670ceba', 'b59c67bf196a4758191e42f76670ceba'),
+(8, '123', '123', '123', '123', 'L', '123', '1990-12-12', 'Islam', 'BN', 123, 123, '123', '123@gmail.com', '', '', '', 0, 0, 0, '', '202cb962ac59075b964b07152d234b70', '202cb962ac59075b964b07152d234b70'),
+(9, '123123123123', '53245345345', 'irafnas hsidjqiwjdiq', '123qweqwe', 'L', 'maduyre', '2020-02-14', 'Konghuchu', 'BN', 157, 53, '124', 'irfan@gmail.com', 'D:\\xampp\\tmp\\phpCE26.tmp', 'Tuna Netra', 'WARGA NEGARA INDONESIA (WNI)', 21, 2101, 2101032, '353535', 'd41d8cd98f00b204e9800998ecf8427e', 'd41d8cd98f00b204e9800998ecf8427e');
 
 -- --------------------------------------------------------
 
@@ -8245,7 +8247,7 @@ ALTER TABLE `tb_lowongan`
 -- AUTO_INCREMENT untuk tabel `tb_pelamar`
 --
 ALTER TABLE `tb_pelamar`
-  MODIFY `id_pelamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_pelamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_perusahaan`
