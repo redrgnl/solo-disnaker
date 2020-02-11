@@ -101,6 +101,7 @@
       <h5>Data Perusahaan</h5>
       <form class="col s12" method="post" action="/save-perusahaan" name="save_form" id="save_form" enctype="multipart/form-data">
         @csrf
+        @csrf
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">art_track</i>
@@ -170,6 +171,19 @@
               @endforeach
             </select>
             <label>Jenis Perusahaan</label>
+            @error('c1')
+            <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+            @enderror
+          </div>
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix">class</i>
+            <select name="inpkelas" id="inpkelas">
+              <option value="">- Pilih kelas Perusahaan -</option>
+              <option value="Kecil">Kecil</option>
+              <option value="Menengah">Menengah</option>
+              <option value="Besar">Besar</option>
+            </select>
+            <label>Kelas Perusahaan</label>
             @error('c1')
             <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
             @enderror
@@ -245,6 +259,32 @@
           </div>
         </div>
         <div class="row">
+          <div class="input-field col s12 m4 l4">
+            <i class="material-icons prefix">call</i>
+            <input name="inptelepon" id="inptelepon" type="text" class="validate" required>
+            <label for="inptelepon">Telepon</label>
+            @error('e')
+            <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+            @enderror
+          </div>
+          <div class="input-field col s12 m4 l4">
+            <i class="material-icons prefix">call</i>
+            <input name="inpfax" id="inpfax" type="text" class="validate" required>
+            <label for="inpfax">No. Fax</label>
+            @error('e1')
+            <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+            @enderror
+          </div>
+          <div class="input-field col s12 m4 l4">
+            <i class="material-icons prefix">email</i>
+            <input name="inpemail" id="inpemail" type="email" class="validate" required>
+            <label for="inpemail">Email</label>
+            @error('f')
+            <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+            @enderror
+          </div>
+        </div>
+        <div class="row">
           <div class="input-field col s12 l6">
             <i class="material-icons prefix">markunread_mailbox</i>
             <input name="inpkode" id="inpkode" type="number" class="validate" required max="99999999">
@@ -276,6 +316,26 @@
         </div>
         <div class="row">
           <div class="input-field col s12 l6">
+            <i class="material-icons prefix">local_activity</i>
+            <input name="inpaktivitas" id="inpaktivitas" type="text" class="validate" required>
+            <label>Aktivitas Perusahaan</label>
+            @error('d4')
+            <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+            @enderror
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
+            <i class="material-icons prefix">devices</i>
+            <input name="inpproduk" id="inpproduk" type="text" class="validate" required>
+            <label>Produk Perusahaan</label>
+            @error('d4')
+            <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+            @enderror
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 l6">
             <i class="material-icons prefix">directions_run</i>
             <input name="inpjawab" id="inpjawab" type="text" class="validate" required>
             <label>Nama Penanggung Jawab</label>
@@ -285,27 +345,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">call</i>
-            <input name="inptelepon" id="inptelepon" type="text" class="validate" required>
-            <label for="inptelepon">Telepon</label>
-            @error('e')
-            <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-            @enderror
-          </div>
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">email</i>
-            <input name="inpemail" id="inpemail" type="email" class="validate" required>
-            <label for="inpemail">Email</label>
-            @error('f')
-            <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-            @enderror
-          </div>
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">call</i>
-            <input name="inpfax" id="inpfax" type="text" class="validate" required>
-            <label for="inpfax">No. Fax</label>
-            @error('e1')
+          <div class="input-field col s12 l6">
+            <i class="material-icons prefix">link</i>
+            <input name="inpasso" id="inpasso" type="text" class="validate" required>
+            <label>Association</label>
+            @error('d4')
             <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
             @enderror
           </div>
@@ -317,9 +361,8 @@
             </button>
           </div>
         </div>
+      </form>
     </div>
-    </form>
-  </div>
   </div>
   <!-- BEGIN VENDOR JS-->
   <script src="{{ asset('admin/js/vendors.min.js') }}" type="text/javascript"></script>

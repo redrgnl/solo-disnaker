@@ -91,6 +91,25 @@
                 <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
+              <div class="input-field col s12 m6 l6">
+                <i class="material-icons prefix">class</i>
+                <select name="inpkelas" id="inpkelas">
+                  <option value="">- Pilih kelas Perusahaan -</option>
+                  <option value="Kecil" <?php if ($perusahaan->kelas_perusahaan == "Kecil") {
+                                          echo ' selected="selected"';
+                                        } ?>>Kecil</option>
+                  <option value="Menengah" <?php if ($perusahaan->kelas_perusahaan == "Menengah") {
+                                              echo ' selected="selected"';
+                                            } ?>>Menengah</option>
+                  <option value="Besar" <?php if ($perusahaan->kelas_perusahaan == "Besar") {
+                                          echo ' selected="selected"';
+                                        } ?>>Besar</option>
+                </select>
+                <label>Kelas Perusahaan</label>
+                @error('c1')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
             </div>
             <div class="row">
               <div class="input-field col s12 l12 ml">
@@ -131,7 +150,7 @@
             <div class="row">
               <div class="input-field col s12 m6 l6">
                 <i class="material-icons prefix">domain</i>
-                <select name="prov" id="prov">
+                <select name="inpprov" id="inpprov">
                   <option value="">- Pilih Provinsi -</option>
                   @foreach($provinsi as $prov)
                   <?php if ($prov->id == $perusahaan->id_provinsi) {
@@ -149,7 +168,7 @@
               </div>
               <div class="input-field col s12 m6 l6">
                 <i class="material-icons prefix">home</i>
-                <select name="kota" id="kota">
+                <select name="inpkota" id="inpkota">
                   <option value="">- Pilih Kota -</option>
                   @foreach($kota as $kt)
                   <?php if ($kt->id == $perusahaan->id_kota) {
@@ -179,6 +198,32 @@
                 <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-light-blue-cyan" href="#" onclick="return popup('https://www.google.com/maps')">
                   <i class="material-icons">gps_fixed</i>
                 </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 m4 l4">
+                <i class="material-icons prefix">call</i>
+                <input name="inptelepon" id="inptelepon" type="text" class="validate" value="{{ $perusahaan->telp_perusahaan }}">
+                <label for="inptelepon">Telepon</label>
+                @error('e')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="input-field col s12 m4 l4">
+                <i class="material-icons prefix">call</i>
+                <input name="inpfax" id="inpfax" type="text" class="validate" required value="{{ $perusahaan->fax_perusahaan }}">
+                <label for="inpfax">No. Fax</label>
+                @error('e1')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="input-field col s12 m4 l4">
+                <i class="material-icons prefix">email</i>
+                <input name="inpemail" id="inpemail" type="email" class="validate" value="{{ $perusahaan->email_perusahaan }}">
+                <label for="inpemail">Email</label>
+                @error('f')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
               </div>
             </div>
             <div class="row">
@@ -213,6 +258,26 @@
             </div>
             <div class="row">
               <div class="input-field col s12 l6">
+                <i class="material-icons prefix">local_activity</i>
+                <input name="inpaktivitas" id="inpaktivitas" type="text" class="validate" required value="{{ $perusahaan->aktivitas_perusahaan }}">
+                <label>Aktivitas Perusahaan</label>
+                @error('d4')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 l6">
+                <i class="material-icons prefix">devices</i>
+                <input name="inpproduk" id="inpproduk" type="text" class="validate" required value="{{ $perusahaan->produk_perusahaan}}">
+                <label>Produk Perusahaan</label>
+                @error('d4')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 l6">
                 <i class="material-icons prefix">directions_run</i>
                 <input name="inpjawab" id="inpjawab" type="text" class="validate" required value="{{ $perusahaan->penanggung_perusahaan }}">
                 <label>Nama Penanggung Jawab</label>
@@ -222,27 +287,11 @@
               </div>
             </div>
             <div class="row">
-              <div class="input-field col s12 m6 l6">
-                <i class="material-icons prefix">call</i>
-                <input name="inptelepon" id="inptelepon" type="text" class="validate" value="{{ $perusahaan->telp_perusahaan }}">
-                <label for="inptelepon">Telepon</label>
-                @error('e')
-                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-                @enderror
-              </div>
-              <div class="input-field col s12 m6 l6">
-                <i class="material-icons prefix">email</i>
-                <input name="inpemail" id="inpemail" type="email" class="validate" value="{{ $perusahaan->email_perusahaan }}">
-                <label for="inpemail">Email</label>
-                @error('f')
-                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-                @enderror
-              </div>
-              <div class="input-field col s12 m6 l6">
-                <i class="material-icons prefix">call</i>
-                <input name="inpfax" id="inpfax" type="text" class="validate" required value="{{ $perusahaan->fax_perusahaan }}">
-                <label for="inpfax">No. Fax</label>
-                @error('e1')
+              <div class="input-field col s12 l6">
+                <i class="material-icons prefix">link</i>
+                <input name="inpasso" id="inpasso" type="text" class="validate" required value="{{ $perusahaan->association }}">
+                <label>Association</label>
+                @error('d4')
                 <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
@@ -255,6 +304,7 @@
               </div>
             </div>
           </form>
+        </form>
       </div>
     </div>
   </div>
