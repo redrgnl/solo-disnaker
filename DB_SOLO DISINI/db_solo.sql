@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 12, 2020 at 09:51 AM
+-- Generation Time: Feb 12, 2020 at 10:42 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -8413,6 +8413,7 @@ CREATE TABLE `tb_workshop` (
   `end_workshop` date NOT NULL,
   `kuota_workshop` int(11) NOT NULL,
   `kategori_workshop` varchar(30) NOT NULL,
+  `kategori_wirausaha` varchar(15) NOT NULL,
   `poster_workshop` varchar(255) NOT NULL,
   `persyaratan_workshop` text NOT NULL,
   `status_workshop` varchar(10) NOT NULL
@@ -8422,11 +8423,12 @@ CREATE TABLE `tb_workshop` (
 -- Dumping data for table `tb_workshop`
 --
 
-INSERT INTO `tb_workshop` (`id_workshop`, `nama_workshop`, `lokasi_workshop`, `maps_workshop`, `tanggal_workshop`, `str_workshop`, `end_workshop`, `kuota_workshop`, `kategori_workshop`, `poster_workshop`, `persyaratan_workshop`, `status_workshop`) VALUES
-(1, 'BYTE (Becraft Young Technology Enterpreneur)', 'Dafam Lotus Jember', 'https://www.google.com/maps/place/Hotel+Dafam+Lotus+Jember/@-8.1723917,113.6994984,15z/data=!4m8!3m7!1s0x2dd69424cadca8b7:0x63e5738090ad08e2!5m2!4m1!1i2!8m2!3d-8.1724453!4d113.6994862', '2020-01-03', '2020-01-01', '2020-01-02', 3, 'Pemula', 'BYTE (Becraft Young Technology Enterpreneur)-CoPVBEDyhwotDsdr2YN3b7XE7ZmtYjCf3AvAcBIa.jpeg', '', 'Active'),
-(5, 'Expert Marketing', 'Pasar Rogojampi', 'https://www.google.com/maps/place/Pasar+Rogojampi/@-8.3110556,114.2894859,15.21z/data=!4m5!3m4!1s0x2dd150d3292a7c39:0x1a63f07db9ab22a6!8m2!3d-8.3066237!4d114.2951542', '2020-01-20', '2020-01-03', '2020-01-19', 100, 'Expert', 'Expert Marketing-220px-Pasarrogojampi.jpeg', '', 'Active'),
-(6, 'Pelatihan Tembak - PB Perbakin', 'Polsek Rogojampi', 'asddas', '2020-01-30', '2020-01-03', '2020-01-29', 50, 'Expert', 'Pelatihan -perbakinBigLogo.jpg', '', 'Active'),
-(7, 'kompuiter', 'jember', 'https://www.google.com/maps/place/Rujak+Cobik+Sumenep/@-7.0196843,113.856848,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd9e4278309ed13:0xd30bfc485bca7644!8m2!3d-7.0196896!4d113.8590367', '2020-02-14', '2020-02-14', '2020-02-21', 20, 'Wirausaha', '2020-02-09-fishermen-504098__340.webp', 'Harus Pintar Masak dan sgala sdsd', 'Active');
+INSERT INTO `tb_workshop` (`id_workshop`, `nama_workshop`, `lokasi_workshop`, `maps_workshop`, `tanggal_workshop`, `str_workshop`, `end_workshop`, `kuota_workshop`, `kategori_workshop`, `kategori_wirausaha`, `poster_workshop`, `persyaratan_workshop`, `status_workshop`) VALUES
+(1, 'BYTE (Becraft Young Technology Enterpreneur)', 'Dafam Lotus Jember', 'https://www.google.com/maps/place/Hotel+Dafam+Lotus+Jember/@-8.1723917,113.6994984,15z/data=!4m8!3m7!1s0x2dd69424cadca8b7:0x63e5738090ad08e2!5m2!4m1!1i2!8m2!3d-8.1724453!4d113.6994862', '2020-01-03', '2020-01-01', '2020-01-02', 3, 'Pemula', '', 'BYTE (Becraft Young Technology Enterpreneur)-CoPVBEDyhwotDsdr2YN3b7XE7ZmtYjCf3AvAcBIa.jpeg', 'c', 'Active'),
+(5, 'Expert Marketing', 'Pasar Rogojampi', 'https://www.google.com/maps/place/Pasar+Rogojampi/@-8.3110556,114.2894859,15.21z/data=!4m5!3m4!1s0x2dd150d3292a7c39:0x1a63f07db9ab22a6!8m2!3d-8.3066237!4d114.2951542', '2020-01-20', '2020-01-03', '2020-01-19', 100, 'Expert', '', 'Expert Marketing-220px-Pasarrogojampi.jpeg', '', 'Active'),
+(6, 'Pelatihan Tembak - PB Perbakin', 'Polsek Rogojampi', 'asddas', '2020-01-30', '2020-01-03', '2020-01-29', 50, 'Expert', '', 'Pelatihan -perbakinBigLogo.jpg', '', 'Active'),
+(7, 'kompuiter', 'jember', 'https://www.google.com/maps/place/Rujak+Cobik+Sumenep/@-7.0196843,113.856848,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd9e4278309ed13:0xd30bfc485bca7644!8m2!3d-7.0196896!4d113.8590367', '2020-02-14', '2020-02-14', '2020-02-21', 20, 'Wirausaha', '', '2020-02-09-fishermen-504098__340.webp', 'Harus Pintar Masak dan sgala sdsd', 'Active'),
+(8, 'coba', 'jember', 'https://www.google.com/maps/place/Ayam+Goreng+Nelongso+Mastrip+Jember/@-8.1706634,113.7275817,15z/data=!4m5!3m4!1s0x2dd695cf27181faf:0xf78d065b26a0c618!8m2!3d-8.1665196!4d113.7247851', '2020-02-20', '2020-02-06', '2020-02-19', 20, 'Wirausaha', 'Wirausaha baru', '2020-02-12-1.jpeg', 'makan banyak', 'Active');
 
 --
 -- Indexes for dumped tables
@@ -8605,7 +8607,7 @@ ALTER TABLE `tb_role`
 -- AUTO_INCREMENT for table `tb_workshop`
 --
 ALTER TABLE `tb_workshop`
-  MODIFY `id_workshop` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_workshop` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
