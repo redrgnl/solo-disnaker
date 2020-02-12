@@ -123,6 +123,7 @@ class WorkshopController extends Controller
             'kuota_workshop' => $update->d,
             'status_workshop' => $update->e,
             'kategori_workshop' => $update->e1,
+            'kategori_wirausaha' => $update->e2,
             'persyaratan_workshop' => $update->p
 
         ]);
