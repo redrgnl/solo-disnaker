@@ -57,6 +57,7 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::post('/admin/delete-data-pelamar', 'PelamarController@delete_pelamar');
     Route::get('/admin/riwayat-lamaran/{id}', 'PelamarController@riwayat_pelamar');
     Route::get('/admin/get-kecamatan/{id}', 'PelamarController@get_kecamatan');
+    Route::get('/admin/get-dettingkatpdd/{id}', 'PerusahaanController@get_dettingkatpdd');
 
     //Route Lowongan
     Route::get('/admin/halaman-manajemen-lowongan', 'LowonganController@index');

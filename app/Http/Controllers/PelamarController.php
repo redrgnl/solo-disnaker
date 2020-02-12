@@ -24,7 +24,10 @@ class PelamarController extends Controller
         $data = [
             'title' => "Form Tambah Pelamar",
             'breadcrumb' => "Tambah Pelamar",
-            'provinsi' => DB::table('tb_provinsi')->get()
+            'provinsi' => DB::table('tb_provinsi')->get(),
+            'jabatan' => DB::table('tb_jabatan')->get(),
+            'tingkatpdd' => DB::table('tb_tingkatpdd')->get(),
+            'kwn' => DB::table('tb_kwn')->get()
 
         ];
 
@@ -41,69 +44,64 @@ class PelamarController extends Controller
 
         //validasi form
         $this->validate($insert, [
-            'a' => 'required|max:17',
-            'b' => 'required|max:50',
-            'c' => 'required|max:50',
-            'd' => 'required',
-            'e' => 'required|max:1',
-            'f' => 'required|max:50',
-            'g' => 'required',
-            'h' => 'required|max:10',
-            'i' => 'required|max:2',
-            'j' => 'required|max:3',
-            'k' => 'required|max:3',
-            'l' => 'required|max:15',
-            'm' => 'required|max:50',
-            'n' => 'required|max:64',
-            'o' => 'required|max:64',
-            'p' => 'required',
-            'q' => 'required',
-            'r' => 'required',
-            's' => 'required',
-            't' => 'required',
-            'u' => 'required',
-            'v' => 'required',
-            'w' => 'required',
-
-
-
+            'inpnik' => 'required|max:17',
+            'inpnama' => 'required|max:100',
+            'inpusername' => 'required|max:50',
+            'inpemail' => 'required|max:50|email',
+            'inpstatus' => 'required|max:10',
+            'inpgelardepan' => 'max:15',
+            'inpgelarbelakang' => 'max:15',
+            'inpkelamin' => 'required|max:1',
+            'inptempatlhr' => 'required|max:50',
+            'inptinggi' => 'required|max:3',
+            'inpberat' => 'required|max:3',
+            'inptelepon' => 'required|max:15',
+            'inpkodepos' => 'required|max:6',
         ], $messages);
 
-        $img = $insert->file('p');
-        $imgname = date('Y-m-d')."-".$img->getClientOriginalName();
-        
+        $img = $insert->file('inpfoto');
+        $imgname = date('Y-m-d') . "-" . $img->getClientOriginalName();
+
         $location = 'pelamar';
-		$img->move($location,$imgname);
+        $img->move($location, $imgname);
 
         $checknik = DB::table('tb_pelamar')->where('nik_pelamar', $insert->a)->get()->count();
 
         if ($checknik == 0) {
             DB::table('tb_pelamar')->insert([
-                'nik_pelamar' => $insert->a,
-                'npwp_pelamar' => $insert->b,
-                'nama_pelamar' => $insert->c,
-                'alamat_pelamar' => $insert->d,
-                'kelamin_pelamar' => $insert->e,
-                'tplahir_pelamar' => $insert->f,
-                'tglahir_pelamar' => $insert->g,
-                'agama_pelamar' => $insert->h,
-                'status_pelamar' => $insert->i,
-                'tinggi_pelamar' => $insert->j,
-                'berat_pelamar' => $insert->k,
-                'telp_pelamar' => $insert->l,
-                'email_pelamar' => $insert->m,
+                'nama_pelamar' => $insert->inpusername,
+                'email_pelamar' => $insert->inpemail,
+                'status_pelamar' => $insert->inpstatus,
+                'statuskawin_pelamar' => $insert->inpstatuskwn,
+                'nik_pelamar' => $insert->inpnik,
+                'nama_ktp' => $insert->inpnama,
+                'gelardpn_pelamar' => $insert->inpgelardepan,
+                'gelarblk_pelamar' => $insert->inpgelarbelakang,
+                'kelamin_pelamar' => $insert->inpkelamin,
+                'tplahir_pelamar' => $insert->inptempatlhr,
+                'tglahir_pelamar' => $insert->inptanggallhr,
+                'agama_pelamar' => $insert->inpagama,
+                'tinggi_pelamar' => $insert->inptinggi,
+                'berat_pelamar' => $insert->inpberat,
+                'telp_pelamar' => $insert->inptelepon,
+                'alamat_pelamar' => $insert->inpalamat,
+                'id_tingkatpdd' => $insert->inptingkatpdd,
+                'id_det_tingkatpdd' => $insert->inpjurusan,
+                'institusi_pelamar' => $insert->inpinstitusi,
+                'tahunlulus_pelamar' => $insert->inpthnlulus,
+                'nilai_pelamar' => $insert->inpnilai,
                 //baru di tambahkan irfan
-                'foto_pelamar' => $insert->p,
-                'kondisi_pelamar' => $insert->r,
-                'kewarganegaraan_pelamar' => $insert->s,
-                'provinsi_pelamar' => $insert->t,
-                'kota_pelamar' => $insert->u,
-                'kec_pelamar' => $insert->v,
-                'kodepos_pelamar' => $insert->w,
+                'foto_pelamar' => $imgname,
+                'kondisi_pelamar' => $insert->inpkonfis,
+                'kewarganegaraan_pelamar' => $insert->inpkewarganegaraan,
+                'provinsi_pelamar' => $insert->inpprov,
+                'kota_pelamar' => $insert->inpkota,
+                'kec_pelamar' => $insert->inpkecamatan,
+                'kodepos_pelamar' => $insert->inpkodepos,
 
                 //end irfan
-                'password_pelamar' => md5($insert->n),
-                'confirm_password_pelamar' => md5($insert->o)
+                'password_pelamar' => md5($insert->inppassword),
+                'confirm_password_pelamar' => md5($insert->inpconfirm)
             ]);
 
             return redirect('/admin/halaman-manajemen-pelamar')->with('success-alert', 'Disimpan');
@@ -117,7 +115,14 @@ class PelamarController extends Controller
         $data = [
             'title' => "Form Edit Pelamar",
             'breadcrumb' => "Edit Pelamar",
-            'pelamar' => DB::table('tb_pelamar')->where('id_pelamar', $id)->first()
+            'pelamar' => DB::table('tb_pelamar')->where('id_pelamar', $id)->first(),
+            'jabatan' => DB::table('tb_jabatan')->get(),
+            'provinsi' => DB::table('tb_provinsi')->get(),
+            'kota' => DB::table('tb_kota')->get(),
+            'kecamatan' => DB::table('tb_kecamatan')->get(),
+            'tingkatpdd' => DB::table('tb_tingkatpdd')->get(),
+            'dettingkatpdd' => DB::table('tb_det_tingkatpdd')->get(),
+            'kwn' => DB::table('tb_kwn')->get()
         ];
 
         return view('/admin/content/view_pelamar_edit', $data);
@@ -132,38 +137,62 @@ class PelamarController extends Controller
 
         //validasi form
         $this->validate($update, [
-            'a' => 'required|max:17',
-            'b' => 'required|max:50',
-            'c' => 'required|max:50',
-            'd' => 'required',
-            'e' => 'required|max:1',
-            'f' => 'required|max:50',
-            'g' => 'required',
-            'h' => 'required|max:10',
-            'i' => 'required|max:2',
-            'j' => 'required|max:3',
-            'k' => 'required|max:3',
-            'l' => 'required|max:15',
-            'm' => 'required|max:50',
-            'n' => 'required|max:64',
-            'o' => 'required|max:64'
+            'inpnik' => 'required|max:17',
+            'inpnama' => 'required|max:100',
+            'inpusername' => 'required|max:50',
+            'inpemail' => 'required|max:50|email',
+            'inpstatus' => 'required|max:10',
+            'inpgelardepan' => 'max:15',
+            'inpgelarbelakang' => 'max:15',
+            'inpkelamin' => 'required|max:1',
+            'inptempatlhr' => 'required|max:50',
+            'inptinggi' => 'required|max:3',
+            'inpberat' => 'required|max:3',
+            'inptelepon' => 'required|max:15',
+            'inpkodepos' => 'required|max:6',
         ], $messages);
 
+        if ($update->inpfoto != '') {
+            $check = DB::table('tb_pelamar')->where('inpusername', $update->inpid)->first();
+            $ims = $check->logo_perusahaan;
+
+            $img = $update->file('inppict');
+            $imgname = $ims;
+
+            $location = 'perusahaan';
+            $img->move($location, $imgname);
+        }
+
         DB::table('tb_pelamar')->where('id_pelamar', $update->inpid)->update([
-            'npwp_pelamar' => $update->b,
-            'nama_pelamar' => $update->c,
-            'alamat_pelamar' => $update->d,
-            'kelamin_pelamar' => $update->e,
-            'tplahir_pelamar' => $update->f,
-            'tglahir_pelamar' => $update->g,
-            'agama_pelamar' => $update->h,
-            'status_pelamar' => $update->i,
-            'tinggi_pelamar' => $update->j,
-            'berat_pelamar' => $update->k,
-            'telp_pelamar' => $update->l,
-            'email_pelamar' => $update->m,
-            'password_pelamar' => md5($update->n),
-            'confirm_password_pelamar' => md5($update->o)
+            'nama_pelamar' => $update->inpusername,
+            'email_pelamar' => $update->inpemail,
+            'status_pelamar' => $update->inpstatus,
+            'statuskawin_pelamar' => $update->inpstatuskwn,
+            'nik_pelamar' => $update->inpnik,
+            'nama_ktp' => $update->inpnama,
+            'gelardpn_pelamar' => $update->inpgelardepan,
+            'gelarblk_pelamar' => $update->inpgelarbelakang,
+            'kelamin_pelamar' => $update->inpkelamin,
+            'tplahir_pelamar' => $update->inptempatlhr,
+            'tglahir_pelamar' => $update->inptanggallhr,
+            'agama_pelamar' => $update->inpagama,
+            'tinggi_pelamar' => $update->inptinggi,
+            'berat_pelamar' => $update->inpberat,
+            'telp_pelamar' => $update->inptelepon,
+            'alamat_pelamar' => $update->inpalamat,
+            'id_tingkatpdd' => $update->inptingkatpdd,
+            'id_det_tingkatpdd' => $update->inpjurusan,
+            'institusi_pelamar' => $update->inpinstitusi,
+            'tahunlulus_pelamar' => $update->inpthnlulus,
+            'nilai_pelamar' => $update->inpnilai,
+            'kondisi_pelamar' => $update->inpkonfis,
+            'kewarganegaraan_pelamar' => $update->inpkewarganegaraan,
+            'provinsi_pelamar' => $update->inpprov,
+            'kota_pelamar' => $update->inpkota,
+            'kec_pelamar' => $update->inpkecamatan,
+            'kodepos_pelamar' => $update->inpkodepos,
+            'password_pelamar' => md5($update->inppassword),
+            'confirm_password_pelamar' => md5($update->inpconfirm)
         ]);
 
         return redirect('/admin/halaman-manajemen-pelamar')->with('success-alert', 'Disimpan');

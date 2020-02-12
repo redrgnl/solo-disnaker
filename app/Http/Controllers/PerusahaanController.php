@@ -436,4 +436,20 @@ class PerusahaanController extends Controller
 
         echo $output;
     }
+    public function get_dettingkatpdd($id)
+    {
+        $kota = DB::table('tb_det_tingkatpdd')->where('id_tingkatpdd', $id)->get();
+
+        // kalau mau make respon HTML = "return $output;"
+        //        $output = '<select class="select-css">';
+        $output = '<option value="">- Pilih Jurusan -</option>';
+
+        foreach ($kota as $k) {
+            $output .= '<option value="' . $k->id_det_tingkatpdd . '">' . $k->jenis_det_tingkatpdd . '</option>';
+        }
+        //        $output .= '</select>';
+        // kalau mau respon dalam object data db  = "return $kota;"
+
+        echo $output;
+    }
 }
