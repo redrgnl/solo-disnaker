@@ -71,7 +71,10 @@ class LowonganController extends Controller
             'lowongan' => DB::table('tb_lowongan')
                             ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
                             ->where('id_lowongan', $id)->first(),
-            'perusahaan' => DB::table('tb_perusahaan')->orderBy('nama_perusahaan', 'asc')->get()
+            'perusahaan' => DB::table('tb_perusahaan')->orderBy('nama_perusahaan', 'asc')->get(),
+            'jabatan' => DB::table('tb_jabatan')
+                                ->get()
+
         ];
         
         return view ('/admin/content/view_lowongan_edit', $data);

@@ -28,7 +28,16 @@
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">work</i>
-                <input name="b" id="inpposisi" type="text" class="validate"  value="{{ $lowongan->posisi_lowongan }}">
+                <!-- <input name="b" id="inpposisi" type="text" class="validate" > -->
+                <select class="" name="b" id="inpposisi" >
+                  <option value="">- Status -</option>
+                  @foreach($jabatan as $j)
+
+                  <option value="{{ $j->nama_jabatan }}" <?php if($j->nama_jabatan == $lowongan->posisi_lowongan){echo "selected";} ?> >{{ $j->nama_jabatan }}</option>
+
+
+                  @endforeach
+                </select>
                 <label for="b">Jabatan</label>
                 @error('b')
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
