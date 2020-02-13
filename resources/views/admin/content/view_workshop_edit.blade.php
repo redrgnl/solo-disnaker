@@ -6,7 +6,7 @@
     <div id="validation" class="card card card-default scrollspy">
       <div class="card-content">
         <h4 class="card-title">Form Data Pelatihan</h4>
-        <form class="col s12" method="post" action="/admin/update-data-workshop">
+        <form class="col s12" method="post" action="/admin/update-data-workshop" enctype="multipart/form-data">
           @csrf
           <input type="hidden" name="inpid" id="inpid" value="{{ $workshop->id_workshop }}">
           <div class="row">
@@ -30,13 +30,18 @@
             </div>
           </div>
           <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s11">
               <i class="material-icons prefix">gps_fixed</i>
               <textarea name="b1" id="inplokasi" type="text" class="validate materialize-textarea">{{ $workshop->maps_workshop }}</textarea>
               <label for="b1">Posisi Peta</label>
               @error('b1')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
+            </div>
+            <div class="input-field col s1">
+              <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-light-blue-cyan" href="#" onclick="return popup('https://www.google.com/maps')">
+                <i class="material-icons">gps_fixed</i>
+              </a>
             </div>
           </div>
           <div class="row">
@@ -84,7 +89,8 @@
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
             </div>
-            <div class="field-a" style="display: none">
+          @if($workshop->kategori_workshop == "Wirausaha")
+            <div class="field-a">
               <div class="input-field col s6 m6 l6">
                 <i class="material-icons prefix"></i>
                 <select class="js-example-basic-single" name="e2" id="inpstatus">
@@ -102,6 +108,26 @@
                 @enderror
               </div>
             </div>
+          @else
+          <div class="field-a" style="display: none;">
+              <div class="input-field col s6 m6 l6">
+                <i class="material-icons prefix"></i>
+                <select class="js-example-basic-single" name="e2" id="inpstatus">
+                  <option value="-">- Kategori Wirausaha -</option>
+                  <option value="Wirausaha baru" <?php if ($workshop->kategori_wirausaha == "Wirausaha baru") {
+                                                    echo "selected";
+                                                  } ?>>Wirausaha baru</option>
+                  <option value="IKM" <?php if ($workshop->kategori_wirausaha == "IKM") {
+                                        echo "selected";
+                                      } ?>>IKM</option>
+                </select>
+                <label for="e1">Kategori Wirausaha</label>
+                @error('e2')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+          @endif
           </div>
           <div class="row">
             <div class="input-field col s12 m6 l6">
@@ -135,6 +161,23 @@
             <textarea id="p" name="p" class="materialize-textarea">{{ $workshop->persyaratan_workshop }}</textarea>
             <label for="p">Persyaratan</label>
           </div>
+          <br>
+            <p>Upload Banner atau Logo Pelatihan</p><br>
+            <div class="file-field col s12 m6 l6">
+            <input type="hidden" name="old_gambar" value="{{ $workshop->poster_workshop }}">
+
+              <div class="btn">
+                <span>File</span>
+                <input type="file" name="f">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" value="{{ $workshop->poster_workshop }}" required>
+
+              </div>
+              @error('f')
+              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+              @enderror
+            </div>
           <div class="row">
             <div class="input-field col s12">
               <button class="btn waves-effect waves-light gradient-45deg-light-blue-cyan gradient-shadow right text-white" type="submit" name="action">Submit
@@ -150,5 +193,25 @@
 @endsection
 
 @section('customjs')
-
+<script>
+  function popup(url) {
+    newwindow = window.open(url, 'name', 'height=500,width=1050');
+    if (window.focus) {
+      newwindow.focus()
+    }
+    return false;
+  }
+</script>
+<script>
+  $(document).ready(function() {
+    $("#katpel").change(function() {
+      var val = $(this).val();
+      if (val == "Wirausaha") {
+        $('.field-a').show()
+      } else if (val == "Pencari Kerja") {
+        $('.field-a').hide()
+      }
+    });
+  });
+</script>
 @endsection

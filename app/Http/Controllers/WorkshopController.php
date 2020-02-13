@@ -113,20 +113,51 @@ class WorkshopController extends Controller
 
         ], $messages);
 
-        DB::table('tb_workshop')->where('id_workshop', $update->inpid)->update([
-            'nama_workshop' => $update->a,
-            'lokasi_workshop' => $update->b,
-            'maps_workshop' => $update->b1,
-            'tanggal_workshop' => $update->c,
-            'str_workshop' => $update->c1,
-            'end_workshop' => $update->c2,
-            'kuota_workshop' => $update->d,
-            'status_workshop' => $update->e,
-            'kategori_workshop' => $update->e1,
-            'kategori_wirausaha' => $update->e2,
-            'persyaratan_workshop' => $update->p
+        if($update->hasfile('f')){
 
-        ]);
+            $img = $update->file('f');
+            $imgname = date('Y-m-d') . "-" . $img->getClientOriginalName();
+    
+            $location = 'workshop';
+            $img->move($location, $imgname);
+
+            DB::table('tb_workshop')->where('id_workshop', $update->inpid)->update([
+                'nama_workshop' => $update->a,
+                'lokasi_workshop' => $update->b,
+                'maps_workshop' => $update->b1,
+                'tanggal_workshop' => $update->c,
+                'str_workshop' => $update->c1,
+                'end_workshop' => $update->c2,
+                'kuota_workshop' => $update->d,
+                'status_workshop' => $update->e,
+                'kategori_workshop' => $update->e1,
+                'kategori_wirausaha' => $update->e2,
+                'persyaratan_workshop' => $update->p,
+                'poster_workshop' => $imgname
+
+            ]);
+
+            $path = public_path() . "/workshop/" . $update->old_gambar;
+            unlink($path);
+
+        }else{
+            DB::table('tb_workshop')->where('id_workshop', $update->inpid)->update([
+                'nama_workshop' => $update->a,
+                'lokasi_workshop' => $update->b,
+                'maps_workshop' => $update->b1,
+                'tanggal_workshop' => $update->c,
+                'str_workshop' => $update->c1,
+                'end_workshop' => $update->c2,
+                'kuota_workshop' => $update->d,
+                'status_workshop' => $update->e,
+                'kategori_workshop' => $update->e1,
+                'kategori_wirausaha' => $update->e2,
+                'persyaratan_workshop' => $update->p
+    
+            ]);
+        }
+
+
 
         return redirect('/admin/halaman-manajemen-workshop')->with('success-alert', 'Disimpan');
     }
