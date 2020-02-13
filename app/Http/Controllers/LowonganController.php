@@ -16,6 +16,8 @@ class LowonganController extends Controller
             'breadcrumb' => "Data Lowongan",
             'lowongan' => DB::table('tb_lowongan')
                                 ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                                ->get(),
+            'jabatan' => DB::table('tb_jabatan')
                                 ->get()
         ];
         
@@ -26,7 +28,9 @@ class LowonganController extends Controller
         $data = [
             'title' => "Form Tambah Lowongan",
             'breadcrumb' => "Tambah Lowongan",
-            'perusahaan' => DB::table('tb_perusahaan')->orderBy('nama_perusahaan', 'asc')->get()
+            'perusahaan' => DB::table('tb_perusahaan')->orderBy('nama_perusahaan', 'asc')->get(),
+            'jabatan' => DB::table('tb_jabatan')
+                                ->get()
         ];
         
         return view ('/admin/content/view_lowongan_tambah', $data);

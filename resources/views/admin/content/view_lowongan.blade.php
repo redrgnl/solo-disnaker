@@ -6,6 +6,20 @@
       <div class="card">
         <a href="/admin/halaman-tambah-lowongan" class="waves-effect waves-light btn gradient-45deg-light-blue-cyan gradient-shadow mt-2">TAMBAH LOWONGAN<i class="material-icons right">vpn_key</i></a>
         <div class="card-content">
+        <div style="margin: auto; width: 40%; margin-bottom: -30px">
+                <select name=" FilterSktr" id="searchByJabatan">
+                  <option value="">-- Filter Jabatan --</option>
+
+                  @if(!empty($jabatan))
+                  @foreach($jabatan as $s)
+
+                  <option value="{{ $s->nama_jabatan }}">{{ $s->nama_jabatan }}</option>
+
+                  @endforeach
+                  @endif
+
+                </select>
+              </div>
           <div class="row">
             <div class="col s12">
               <table id="page-length-option" class="display">
@@ -97,4 +111,11 @@ function deletelowongan($idlow, $namaper, $poslow) {
     $('#shlengkap').html($poslow);
 }
 </script>
+<script>
+    $('#searchByJabatan').on('change', function() {
+      var table = $('#page-length-option').DataTable();
+      table.column(2).
+      search($(this).val()).draw();
+    });
+  </script>
 @endsection
