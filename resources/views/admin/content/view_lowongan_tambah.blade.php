@@ -43,7 +43,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="input-field col s12">
+              <div class="input-field col s6">
                 <i class="material-icons prefix">history</i>
                 <select class="" name="c" id="inpstatus" >
                   <option value="">- Status -</option>
@@ -51,6 +51,17 @@
                   <option value="Non-Active">Tutup</option>
                 </select>
                 <label for="c">Status</label>
+                @error('c')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="input-field col s6">
+                <i class="material-icons prefix">chrome_reader_mode</i>
+                <select class="" name="cc" id="inpkompetensi" >
+                  <option value="">- Jenis Kompetensi -</option>
+                  <option value="Kompetensi Jabatan">Kompetensi Jabatan</option>
+                </select>
+                <label for="c">Jenis Kompetensi</label>
                 @error('c')
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror

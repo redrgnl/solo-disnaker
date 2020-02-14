@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Feb 13, 2020 at 05:49 AM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.2.22
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 14 Feb 2020 pada 02.23
+-- Versi server: 10.4.8-MariaDB
+-- Versi PHP: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_solo`
+-- Database: `db_disnaker`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_det_gallery`
+-- Struktur dari tabel `tb_det_gallery`
 --
 
 CREATE TABLE `tb_det_gallery` (
@@ -36,7 +36,7 @@ CREATE TABLE `tb_det_gallery` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_det_gallery`
+-- Dumping data untuk tabel `tb_det_gallery`
 --
 
 INSERT INTO `tb_det_gallery` (`id_detgal`, `id_perusahaan`, `nama_detgal`, `ket_detgal`) VALUES
@@ -49,7 +49,7 @@ INSERT INTO `tb_det_gallery` (`id_detgal`, `id_perusahaan`, `nama_detgal`, `ket_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_det_lowongan`
+-- Struktur dari tabel `tb_det_lowongan`
 --
 
 CREATE TABLE `tb_det_lowongan` (
@@ -59,7 +59,7 @@ CREATE TABLE `tb_det_lowongan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_det_lowongan`
+-- Dumping data untuk tabel `tb_det_lowongan`
 --
 
 INSERT INTO `tb_det_lowongan` (`id_detlow`, `id_lowongan`, `id_pelamar`) VALUES
@@ -73,7 +73,7 @@ INSERT INTO `tb_det_lowongan` (`id_detlow`, `id_lowongan`, `id_pelamar`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_det_tingkatpdd`
+-- Struktur dari tabel `tb_det_tingkatpdd`
 --
 
 CREATE TABLE `tb_det_tingkatpdd` (
@@ -83,7 +83,7 @@ CREATE TABLE `tb_det_tingkatpdd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_det_tingkatpdd`
+-- Dumping data untuk tabel `tb_det_tingkatpdd`
 --
 
 INSERT INTO `tb_det_tingkatpdd` (`id_det_tingkatpdd`, `id_tingkatpdd`, `jenis_det_tingkatpdd`) VALUES
@@ -166,7 +166,7 @@ INSERT INTO `tb_det_tingkatpdd` (`id_det_tingkatpdd`, `id_tingkatpdd`, `jenis_de
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_det_workshop`
+-- Struktur dari tabel `tb_det_workshop`
 --
 
 CREATE TABLE `tb_det_workshop` (
@@ -177,7 +177,7 @@ CREATE TABLE `tb_det_workshop` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_det_workshop`
+-- Dumping data untuk tabel `tb_det_workshop`
 --
 
 INSERT INTO `tb_det_workshop` (`id_detwork`, `id_workshop`, `id_pelamar`, `status_detwork`) VALUES
@@ -189,7 +189,7 @@ INSERT INTO `tb_det_workshop` (`id_detwork`, `id_workshop`, `id_pelamar`, `statu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_jabatan`
+-- Struktur dari tabel `tb_jabatan`
 --
 
 CREATE TABLE `tb_jabatan` (
@@ -198,7 +198,7 @@ CREATE TABLE `tb_jabatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_jabatan`
+-- Dumping data untuk tabel `tb_jabatan`
 --
 
 INSERT INTO `tb_jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
@@ -222,12 +222,14 @@ INSERT INTO `tb_jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
 (18, 'KOMANDAN JENDERAL AKADEMI TNI (DANJEN AKADEMI TNI)'),
 (19, 'KEPALA BADAN INTELIJEN STRATEGIS TNI (KABAIS TNI)'),
 (20, 'KOMANDAN PASUKAN PENGAMANAN PRESIDEN (DANPASPAMPRES)'),
-(21, 'KEPALA BADAN PEMBINAAN HUKUM TNI (KABABINKUM TNI)');
+(21, 'KEPALA BADAN PEMBINAAN HUKUM TNI (KABABINKUM TNI)'),
+(22, 'Chief Technology Officer'),
+(23, 'OB');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_jenisper`
+-- Struktur dari tabel `tb_jenisper`
 --
 
 CREATE TABLE `tb_jenisper` (
@@ -236,7 +238,7 @@ CREATE TABLE `tb_jenisper` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_jenisper`
+-- Dumping data untuk tabel `tb_jenisper`
 --
 
 INSERT INTO `tb_jenisper` (`id_jenis`, `nama_jenis`) VALUES
@@ -257,7 +259,7 @@ INSERT INTO `tb_jenisper` (`id_jenis`, `nama_jenis`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_kecamatan`
+-- Struktur dari tabel `tb_kecamatan`
 --
 
 CREATE TABLE `tb_kecamatan` (
@@ -267,7 +269,7 @@ CREATE TABLE `tb_kecamatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `tb_kecamatan`
+-- Dumping data untuk tabel `tb_kecamatan`
 --
 
 INSERT INTO `tb_kecamatan` (`id`, `regency_id`, `name`) VALUES
@@ -7350,7 +7352,7 @@ INSERT INTO `tb_kecamatan` (`id`, `regency_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_kota`
+-- Struktur dari tabel `tb_kota`
 --
 
 CREATE TABLE `tb_kota` (
@@ -7360,7 +7362,7 @@ CREATE TABLE `tb_kota` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `tb_kota`
+-- Dumping data untuk tabel `tb_kota`
 --
 
 INSERT INTO `tb_kota` (`id`, `province_id`, `name`) VALUES
@@ -7882,7 +7884,7 @@ INSERT INTO `tb_kota` (`id`, `province_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_kwn`
+-- Struktur dari tabel `tb_kwn`
 --
 
 CREATE TABLE `tb_kwn` (
@@ -7892,7 +7894,7 @@ CREATE TABLE `tb_kwn` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tb_kwn`
+-- Dumping data untuk tabel `tb_kwn`
 --
 
 INSERT INTO `tb_kwn` (`idKwn`, `country_code`, `country_name`) VALUES
@@ -8146,7 +8148,7 @@ INSERT INTO `tb_kwn` (`idKwn`, `country_code`, `country_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_lowongan`
+-- Struktur dari tabel `tb_lowongan`
 --
 
 CREATE TABLE `tb_lowongan` (
@@ -8156,21 +8158,25 @@ CREATE TABLE `tb_lowongan` (
   `status_lowongan` varchar(10) NOT NULL,
   `gaji_lowongan` int(11) NOT NULL,
   `pengalaman_lowongan` text NOT NULL,
+  `jenis_kompetensi_lowongan` varchar(30) NOT NULL,
   `desk_lowongan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_lowongan`
+-- Dumping data untuk tabel `tb_lowongan`
 --
 
-INSERT INTO `tb_lowongan` (`id_lowongan`, `id_perusahaan`, `posisi_lowongan`, `status_lowongan`, `gaji_lowongan`, `pengalaman_lowongan`, `desk_lowongan`) VALUES
-(1, 1, 'Chief Technology Officer', 'Active', 100000000, '7+ years’ software engineering and IT experience, Proven track record of success in leadership positions, Familiarity with marketing platforms, programs and policies, Extensive experience with MVC frameworks, Exceptional project management and organization skills', '7+ years’ software engineering and IT experience, Proven track record of success in leadership positions, Familiarity with marketing platforms, programs and policies, Extensive experience with MVC frameworks, Exceptional project management and organization skills'),
-(8, 1, 'OB', 'Active', 15000000, 'asdasd', 'asdsad');
+INSERT INTO `tb_lowongan` (`id_lowongan`, `id_perusahaan`, `posisi_lowongan`, `status_lowongan`, `gaji_lowongan`, `pengalaman_lowongan`, `jenis_kompetensi_lowongan`, `desk_lowongan`) VALUES
+(1, 1, 'Chief Technology Officer', 'Active', 100000000, '7+ years’ software engineering and IT experience, Proven track record of success in leadership positions, Familiarity with marketing platforms, programs and policies, Extensive experience with MVC frameworks, Exceptional project management and organization skills', '', '7+ years’ software engineering and IT experience, Proven track record of success in leadership positions, Familiarity with marketing platforms, programs and policies, Extensive experience with MVC frameworks, Exceptional project management and organization skills'),
+(8, 1, 'OB', 'Active', 15000000, 'asdasd', '', 'asdsad'),
+(9, 23, 'PANGLIMA TNI', 'Active', 20000000, 'WW2', '', 'asd'),
+(10, 20, 'INSPEKTUR JENDERAL TNI (IRJEN TNI)', 'Active', 2, '2', '', '2'),
+(11, 23, 'STAF AHLI PANGLIMA TNI (SAHLI PANGLIMA TNI)', 'Active', 24000000, 'tebang sdfefef', 'Kompetensi Jabatan', '2');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_pelamar`
+-- Struktur dari tabel `tb_pelamar`
 --
 
 CREATE TABLE `tb_pelamar` (
@@ -8208,7 +8214,7 @@ CREATE TABLE `tb_pelamar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_pelamar`
+-- Dumping data untuk tabel `tb_pelamar`
 --
 
 INSERT INTO `tb_pelamar` (`id_pelamar`, `nama_ktp`, `gelardpn_pelamar`, `gelarblk_pelamar`, `nik_pelamar`, `nama_pelamar`, `alamat_pelamar`, `kelamin_pelamar`, `tplahir_pelamar`, `tglahir_pelamar`, `agama_pelamar`, `statuskawin_pelamar`, `tinggi_pelamar`, `berat_pelamar`, `telp_pelamar`, `email_pelamar`, `foto_pelamar`, `kondisi_pelamar`, `kewarganegaraan_pelamar`, `provinsi_pelamar`, `kota_pelamar`, `kec_pelamar`, `kodepos_pelamar`, `id_tingkatpdd`, `id_det_tingkatpdd`, `institusi_pelamar`, `tahunlulus_pelamar`, `nilai_pelamar`, `password_pelamar`, `confirm_password_pelamar`, `status_pelamar`) VALUES
@@ -8224,7 +8230,7 @@ INSERT INTO `tb_pelamar` (`id_pelamar`, `nama_ktp`, `gelardpn_pelamar`, `gelarbl
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_perusahaan`
+-- Struktur dari tabel `tb_perusahaan`
 --
 
 CREATE TABLE `tb_perusahaan` (
@@ -8256,7 +8262,7 @@ CREATE TABLE `tb_perusahaan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_perusahaan`
+-- Dumping data untuk tabel `tb_perusahaan`
 --
 
 INSERT INTO `tb_perusahaan` (`id_perusahaan`, `nama_perusahaan`, `lengkap_perusahaan`, `npwp_perusahaan`, `alamat_perusahaan`, `map_perusahaan`, `id_jenis`, `kelas_perusahaan`, `id_provinsi`, `id_kota`, `lokasi_perusahaan`, `kodepos_perusahaan`, `web_perusahaan`, `desk_perusahaan`, `penanggung_perusahaan`, `telp_perusahaan`, `fax_perusahaan`, `email_perusahaan`, `aktivitas_perusahaan`, `produk_perusahaan`, `association`, `logo_perusahaan`, `password_perusahaan`, `confirm_password_perusahaan`, `date_created`) VALUES
@@ -8271,7 +8277,7 @@ INSERT INTO `tb_perusahaan` (`id_perusahaan`, `nama_perusahaan`, `lengkap_perusa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_provinsi`
+-- Struktur dari tabel `tb_provinsi`
 --
 
 CREATE TABLE `tb_provinsi` (
@@ -8280,7 +8286,7 @@ CREATE TABLE `tb_provinsi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `tb_provinsi`
+-- Dumping data untuk tabel `tb_provinsi`
 --
 
 INSERT INTO `tb_provinsi` (`id`, `name`) VALUES
@@ -8322,7 +8328,7 @@ INSERT INTO `tb_provinsi` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_role`
+-- Struktur dari tabel `tb_role`
 --
 
 CREATE TABLE `tb_role` (
@@ -8332,7 +8338,7 @@ CREATE TABLE `tb_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_role`
+-- Dumping data untuk tabel `tb_role`
 --
 
 INSERT INTO `tb_role` (`id_role`, `nama_role`, `status_role`) VALUES
@@ -8343,7 +8349,7 @@ INSERT INTO `tb_role` (`id_role`, `nama_role`, `status_role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_tingkatpdd`
+-- Struktur dari tabel `tb_tingkatpdd`
 --
 
 CREATE TABLE `tb_tingkatpdd` (
@@ -8352,7 +8358,7 @@ CREATE TABLE `tb_tingkatpdd` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_tingkatpdd`
+-- Dumping data untuk tabel `tb_tingkatpdd`
 --
 
 INSERT INTO `tb_tingkatpdd` (`id_tingkatpdd`, `jenis_tingkatpdd`) VALUES
@@ -8372,7 +8378,7 @@ INSERT INTO `tb_tingkatpdd` (`id_tingkatpdd`, `jenis_tingkatpdd`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user`
+-- Struktur dari tabel `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -8387,7 +8393,7 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_user`
+-- Dumping data untuk tabel `tb_user`
 --
 
 INSERT INTO `tb_user` (`id_user`, `nama_user`, `username_user`, `email_user`, `password_user`, `confirm_password_user`, `id_role`, `date_created`) VALUES
@@ -8400,7 +8406,7 @@ INSERT INTO `tb_user` (`id_user`, `nama_user`, `username_user`, `email_user`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_workshop`
+-- Struktur dari tabel `tb_workshop`
 --
 
 CREATE TABLE `tb_workshop` (
@@ -8420,7 +8426,7 @@ CREATE TABLE `tb_workshop` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_workshop`
+-- Dumping data untuk tabel `tb_workshop`
 --
 
 INSERT INTO `tb_workshop` (`id_workshop`, `nama_workshop`, `lokasi_workshop`, `maps_workshop`, `tanggal_workshop`, `str_workshop`, `end_workshop`, `kuota_workshop`, `kategori_workshop`, `kategori_wirausaha`, `poster_workshop`, `persyaratan_workshop`, `status_workshop`) VALUES
@@ -8428,20 +8434,22 @@ INSERT INTO `tb_workshop` (`id_workshop`, `nama_workshop`, `lokasi_workshop`, `m
 (5, 'Expert Marketing', 'Pasar Rogojampi', 'https://www.google.com/maps/place/Pasar+Rogojampi/@-8.3110556,114.2894859,15.21z/data=!4m5!3m4!1s0x2dd150d3292a7c39:0x1a63f07db9ab22a6!8m2!3d-8.3066237!4d114.2951542', '2020-01-20', '2020-01-03', '2020-01-19', 100, 'Expert', '', 'Expert Marketing-220px-Pasarrogojampi.jpeg', '', 'Active'),
 (6, 'Pelatihan Tembak - PB Perbakin', 'Polsek Rogojampi', 'asddas', '2020-01-30', '2020-01-03', '2020-01-29', 50, 'Expert', '', 'Pelatihan -perbakinBigLogo.jpg', '', 'Active'),
 (7, 'kompuiter', 'jember', 'https://www.google.com/maps/place/Rujak+Cobik+Sumenep/@-7.0196843,113.856848,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd9e4278309ed13:0xd30bfc485bca7644!8m2!3d-7.0196896!4d113.8590367', '2020-02-14', '2020-02-14', '2020-02-21', 20, 'Wirausaha', '', '2020-02-09-fishermen-504098__340.webp', 'Harus Pintar Masak dan sgala sdsd', 'Active'),
-(8, 'coba', 'jember', 'https://www.google.com/maps/place/Ayam+Goreng+Nelongso+Mastrip+Jember/@-8.1706634,113.7275817,15z/data=!4m5!3m4!1s0x2dd695cf27181faf:0xf78d065b26a0c618!8m2!3d-8.1665196!4d113.7247851', '2020-02-20', '2020-02-06', '2020-02-19', 20, 'Wirausaha', 'Wirausaha baru', '2020-02-12-1.jpeg', 'makan banyak', 'Active');
+(8, 'coba', 'jember', 'https://www.google.com/maps/place/Ayam+Goreng+Nelongso+Mastrip+Jember/@-8.1706634,113.7275817,15z/data=!4m5!3m4!1s0x2dd695cf27181faf:0xf78d065b26a0c618!8m2!3d-8.1665196!4d113.7247851', '2020-02-20', '2020-02-06', '2020-02-19', 20, 'Wirausaha', 'IKM', '2020-02-12-1.jpeg', 'makan banyak', 'Active'),
+(9, 'Kompi', 'Jember', 'https://www.google.com/maps/place/Rujak+Cobik+Sumenep/@-7.0196843,113.856848,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd9e4278309ed13:0xd30bfc485bca7644!8m2!3d-7.0196896!4d113.8590367', '2020-02-14', '2020-02-29', '2020-02-21', 23, 'Pencari Kerja', '-', '2020-02-13-fishermen-504098__340.webp', 'gak ada', 'Active'),
+(10, 'asd', 'asd', 'https://www.google.com/maps/place/Utara+Jemb.,+Kebunagung,+Kotasumenep,+Kabupaten+Sumenep,+Jawa+Timur/@-7.0028535,113.8469165,17z/data=!3m1!4b1!4m5!3m4!1s0x2dd9e67b7e7de59d:0xee53ee4a38dd672!8m2!3d-7.0028588!4d113.8491052', '2020-02-20', '2020-01-30', '2020-02-27', 3, 'Wirausaha', 'IKM', '2020-02-13-tset asd.webp', 'weasd', 'Active');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `tb_det_gallery`
+-- Indeks untuk tabel `tb_det_gallery`
 --
 ALTER TABLE `tb_det_gallery`
   ADD PRIMARY KEY (`id_detgal`);
 
 --
--- Indexes for table `tb_det_lowongan`
+-- Indeks untuk tabel `tb_det_lowongan`
 --
 ALTER TABLE `tb_det_lowongan`
   ADD PRIMARY KEY (`id_detlow`),
@@ -8449,13 +8457,13 @@ ALTER TABLE `tb_det_lowongan`
   ADD KEY `id_pelamar` (`id_pelamar`);
 
 --
--- Indexes for table `tb_det_tingkatpdd`
+-- Indeks untuk tabel `tb_det_tingkatpdd`
 --
 ALTER TABLE `tb_det_tingkatpdd`
   ADD PRIMARY KEY (`id_det_tingkatpdd`);
 
 --
--- Indexes for table `tb_det_workshop`
+-- Indeks untuk tabel `tb_det_workshop`
 --
 ALTER TABLE `tb_det_workshop`
   ADD PRIMARY KEY (`id_detwork`),
@@ -8463,184 +8471,184 @@ ALTER TABLE `tb_det_workshop`
   ADD KEY `id_pelamar` (`id_pelamar`);
 
 --
--- Indexes for table `tb_jabatan`
+-- Indeks untuk tabel `tb_jabatan`
 --
 ALTER TABLE `tb_jabatan`
   ADD PRIMARY KEY (`id_jabatan`);
 
 --
--- Indexes for table `tb_jenisper`
+-- Indeks untuk tabel `tb_jenisper`
 --
 ALTER TABLE `tb_jenisper`
   ADD PRIMARY KEY (`id_jenis`);
 
 --
--- Indexes for table `tb_kecamatan`
+-- Indeks untuk tabel `tb_kecamatan`
 --
 ALTER TABLE `tb_kecamatan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `districts_regency_id_index` (`regency_id`);
 
 --
--- Indexes for table `tb_kota`
+-- Indeks untuk tabel `tb_kota`
 --
 ALTER TABLE `tb_kota`
   ADD PRIMARY KEY (`id`),
   ADD KEY `regencies_province_id_index` (`province_id`);
 
 --
--- Indexes for table `tb_kwn`
+-- Indeks untuk tabel `tb_kwn`
 --
 ALTER TABLE `tb_kwn`
   ADD PRIMARY KEY (`idKwn`);
 
 --
--- Indexes for table `tb_lowongan`
+-- Indeks untuk tabel `tb_lowongan`
 --
 ALTER TABLE `tb_lowongan`
   ADD PRIMARY KEY (`id_lowongan`),
   ADD KEY `id_perusahaan` (`id_perusahaan`);
 
 --
--- Indexes for table `tb_pelamar`
+-- Indeks untuk tabel `tb_pelamar`
 --
 ALTER TABLE `tb_pelamar`
   ADD PRIMARY KEY (`id_pelamar`),
   ADD UNIQUE KEY `nik_pelamar` (`nik_pelamar`);
 
 --
--- Indexes for table `tb_perusahaan`
+-- Indeks untuk tabel `tb_perusahaan`
 --
 ALTER TABLE `tb_perusahaan`
   ADD PRIMARY KEY (`id_perusahaan`);
 
 --
--- Indexes for table `tb_provinsi`
+-- Indeks untuk tabel `tb_provinsi`
 --
 ALTER TABLE `tb_provinsi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tb_role`
+-- Indeks untuk tabel `tb_role`
 --
 ALTER TABLE `tb_role`
   ADD PRIMARY KEY (`id_role`);
 
 --
--- Indexes for table `tb_tingkatpdd`
+-- Indeks untuk tabel `tb_tingkatpdd`
 --
 ALTER TABLE `tb_tingkatpdd`
   ADD PRIMARY KEY (`id_tingkatpdd`);
 
 --
--- Indexes for table `tb_user`
+-- Indeks untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`id_user`),
   ADD UNIQUE KEY `username_user` (`username_user`);
 
 --
--- Indexes for table `tb_workshop`
+-- Indeks untuk tabel `tb_workshop`
 --
 ALTER TABLE `tb_workshop`
   ADD PRIMARY KEY (`id_workshop`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tb_det_gallery`
+-- AUTO_INCREMENT untuk tabel `tb_det_gallery`
 --
 ALTER TABLE `tb_det_gallery`
   MODIFY `id_detgal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `tb_det_lowongan`
+-- AUTO_INCREMENT untuk tabel `tb_det_lowongan`
 --
 ALTER TABLE `tb_det_lowongan`
   MODIFY `id_detlow` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `tb_det_workshop`
+-- AUTO_INCREMENT untuk tabel `tb_det_workshop`
 --
 ALTER TABLE `tb_det_workshop`
   MODIFY `id_detwork` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT for table `tb_jabatan`
+-- AUTO_INCREMENT untuk tabel `tb_jabatan`
 --
 ALTER TABLE `tb_jabatan`
-  MODIFY `id_jabatan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_jabatan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `tb_kwn`
+-- AUTO_INCREMENT untuk tabel `tb_kwn`
 --
 ALTER TABLE `tb_kwn`
   MODIFY `idKwn` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
 
 --
--- AUTO_INCREMENT for table `tb_lowongan`
+-- AUTO_INCREMENT untuk tabel `tb_lowongan`
 --
 ALTER TABLE `tb_lowongan`
-  MODIFY `id_lowongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_lowongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `tb_pelamar`
+-- AUTO_INCREMENT untuk tabel `tb_pelamar`
 --
 ALTER TABLE `tb_pelamar`
   MODIFY `id_pelamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `tb_perusahaan`
+-- AUTO_INCREMENT untuk tabel `tb_perusahaan`
 --
 ALTER TABLE `tb_perusahaan`
   MODIFY `id_perusahaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `tb_role`
+-- AUTO_INCREMENT untuk tabel `tb_role`
 --
 ALTER TABLE `tb_role`
   MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `tb_workshop`
+-- AUTO_INCREMENT untuk tabel `tb_workshop`
 --
 ALTER TABLE `tb_workshop`
-  MODIFY `id_workshop` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_workshop` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `tb_det_lowongan`
+-- Ketidakleluasaan untuk tabel `tb_det_lowongan`
 --
 ALTER TABLE `tb_det_lowongan`
   ADD CONSTRAINT `tb_det_lowongan_ibfk_1` FOREIGN KEY (`id_lowongan`) REFERENCES `tb_lowongan` (`id_lowongan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_det_lowongan_ibfk_2` FOREIGN KEY (`id_pelamar`) REFERENCES `tb_pelamar` (`id_pelamar`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tb_det_workshop`
+-- Ketidakleluasaan untuk tabel `tb_det_workshop`
 --
 ALTER TABLE `tb_det_workshop`
   ADD CONSTRAINT `tb_det_workshop_ibfk_1` FOREIGN KEY (`id_workshop`) REFERENCES `tb_workshop` (`id_workshop`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_det_workshop_ibfk_2` FOREIGN KEY (`id_pelamar`) REFERENCES `tb_pelamar` (`id_pelamar`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `tb_kecamatan`
+-- Ketidakleluasaan untuk tabel `tb_kecamatan`
 --
 ALTER TABLE `tb_kecamatan`
   ADD CONSTRAINT `districts_regency_id_foreign` FOREIGN KEY (`regency_id`) REFERENCES `tb_kota` (`id`);
 
 --
--- Constraints for table `tb_kota`
+-- Ketidakleluasaan untuk tabel `tb_kota`
 --
 ALTER TABLE `tb_kota`
   ADD CONSTRAINT `regencies_province_id_foreign` FOREIGN KEY (`province_id`) REFERENCES `tb_provinsi` (`id`);
 
 --
--- Constraints for table `tb_lowongan`
+-- Ketidakleluasaan untuk tabel `tb_lowongan`
 --
 ALTER TABLE `tb_lowongan`
   ADD CONSTRAINT `tb_lowongan_ibfk_1` FOREIGN KEY (`id_perusahaan`) REFERENCES `tb_perusahaan` (`id_perusahaan`) ON DELETE CASCADE ON UPDATE CASCADE;

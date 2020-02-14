@@ -49,7 +49,9 @@ class LowonganController extends Controller
             'c' => 'required|max:10',
             'd' => 'required|max:11',
             'e' => 'required',
-            'f' => 'required'
+            'f' => 'required',
+            'cc' => 'required'
+
         ], $messages);
         
         DB::table('tb_lowongan')->insert([
@@ -58,6 +60,7 @@ class LowonganController extends Controller
             'status_lowongan' => $insert->c,
             'gaji_lowongan' => $insert->d,
             'pengalaman_lowongan' => $insert->e,
+            'jenis_kompetensi_lowongan' => $insert->cc,
             'desk_lowongan' => $insert->f
         ]);
         
@@ -93,7 +96,9 @@ class LowonganController extends Controller
             'c' => 'required|max:10',
             'd' => 'required|max:11',
             'e' => 'required',
-            'f' => 'required'
+            'f' => 'required',
+            'cc' => 'required',
+
         ], $messages);
         
         DB::table('tb_lowongan')->where('id_lowongan', $update->inpid)->update([
@@ -102,6 +107,7 @@ class LowonganController extends Controller
             'status_lowongan' => $update->c,
             'gaji_lowongan' => $update->d,
             'pengalaman_lowongan' => $update->e,
+            'jenis_kompetensi_lowongan' => $update->cc,
             'desk_lowongan' => $update->f
         ]);
         

@@ -30,7 +30,7 @@
                 <i class="material-icons prefix">work</i>
                 <!-- <input name="b" id="inpposisi" type="text" class="validate" > -->
                 <select class="" name="b" id="inpposisi" >
-                  <option value="">- Status -</option>
+                  <option value="">- Jabatan -</option>
                   @foreach($jabatan as $j)
 
                   <option value="{{ $j->nama_jabatan }}" <?php if($j->nama_jabatan == $lowongan->posisi_lowongan){echo "selected";} ?> >{{ $j->nama_jabatan }}</option>
@@ -45,7 +45,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="input-field col s12">
+              <div class="input-field col s6">
                 <i class="material-icons prefix">history</i>
                 <select class="js-example-basic-single" name="c" id="inpstatus" >
                   <option value="">- Status -</option>
@@ -53,6 +53,17 @@
                   <option value="Non-Active" <?php if ($lowongan->status_lowongan == "Non-Active"){ echo "selected"; }?>>Tutup</option>
                 </select>
                 <label for="c">Status</label>
+                @error('c')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="input-field col s6">
+                <i class="material-icons prefix">chrome_reader_mode</i>
+                <select class="" name="cc" id="inpkompetensi" >
+                  <option value="">- Jenis Kompetensi -</option>
+                  <option value="Kompetensi Jabatan" <?php if($lowongan->jenis_kompetensi_lowongan == "Kompetensi Jabatan"){echo "selected";} ?> >Kompetensi Jabatan</option>
+                </select>
+                <label for="c">Jenis Kompetensi</label>
                 @error('c')
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
