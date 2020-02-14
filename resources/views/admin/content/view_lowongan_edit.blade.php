@@ -61,7 +61,9 @@
                 <i class="material-icons prefix">chrome_reader_mode</i>
                 <select class="" name="cc" id="inpkompetensi" >
                   <option value="">- Jenis Kompetensi -</option>
-                  <option value="Kompetensi Jabatan" <?php if($lowongan->jenis_kompetensi_lowongan == "Kompetensi Jabatan"){echo "selected";} ?> >Kompetensi Jabatan</option>
+                  @foreach($kompetensi as $komp)
+                  <option value="{{ $komp->nama_kompetensi }}" <?php if($lowongan->jenis_kompetensi_lowongan == $komp->nama_kompetensi){ echo "selected"; } ?>>{{ $komp->nama_kompetensi }}</option>
+                  @endforeach
                 </select>
                 <label for="c">Jenis Kompetensi</label>
                 @error('c')

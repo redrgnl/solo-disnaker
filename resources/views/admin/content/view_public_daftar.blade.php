@@ -220,7 +220,7 @@
         <div class="row">
           <div class="input-field col s6 m6 l6">
             <i class="material-icons prefix">domain</i>
-            <select name="inpprov" id="prov">
+            <select name="inpprov" id="prov" required>
               <option value="">- Pilih Provinsi -</option>
               @foreach($provinsi as $prov)
               <option value="{{ $prov->id }}">{{ $prov->name }}</option>
@@ -231,8 +231,8 @@
             <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
             @enderror
           </div>
-          <div class="input-field s6 m6 l6">
-            <select class="browser-default" name="inpkota" id="inpkota" style="width: 40%; margin: 15px 0px 15px 0px;">
+          <div class="input-field col s6 m6 l6">
+            <select class="browser-default" name="inpkota" id="inpkota" required>
               <option value="">- Pilih Kota -</option>
             </select>
             @error('d')
@@ -421,13 +421,9 @@
     $(document).ready(function() {
       $('#prov').on('change', function(e) {
         var idprov = e.target.value;
-
-        //ajax
-
-        $.get('/admin/get-kota/' + idprov, function(data) {
+        $.get('/get-kota/' + idprov, function(data) {
           $('#inpkota').html(data)
         });
-
       });
     });
   </script>

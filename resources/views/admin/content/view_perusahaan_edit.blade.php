@@ -148,9 +148,9 @@
               </div>
             </div>
             <div class="row">
-              <div class="input-field col s12 m6 l6">
+              <div class="input-field col s6 m6 l6">
                 <i class="material-icons prefix">domain</i>
-                <select name="inpprov" id="inpprov">
+                <select name="inpprov" id="inpprov" required>
                   <option value="">- Pilih Provinsi -</option>
                   @foreach($provinsi as $prov)
                   <?php if ($prov->id == $perusahaan->id_provinsi) {
@@ -166,20 +166,10 @@
                 <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
-              <div class="input-field col s12 m6 l6">
-                <i class="material-icons prefix">home</i>
-                <select name="inpkota" id="inpkota">
+              <div class="input-field col s6 m6 l6">
+                <select class="browser-default" name="inpkota" id="inpkota" required>
                   <option value="">- Pilih Kota -</option>
-                  @foreach($kota as $kt)
-                  <?php if ($kt->id == $perusahaan->id_kota) {
-                    $slct = "selected";
-                  } else {
-                    $slct = "";
-                  } ?>
-                  <option value="{{ $kt->id }}" <?= $slct ?>>{{ $kt->name }}</option>
-                  @endforeach
                 </select>
-                <label>Kota</label>
                 @error('d')
                 <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
@@ -320,5 +310,20 @@
     }
     return false;
   }
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#inpprov').on('change', function(e) {
+      var idprov = e.target.value;
+
+      //ajax
+
+      $.get('/admin/get-kota/' + idprov, function(data) {
+        console.log(data)
+        $('#inpkota').html(data)
+      });
+
+    });
+  });
 </script>
 @endsection

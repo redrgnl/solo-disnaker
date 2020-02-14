@@ -114,9 +114,10 @@
               <div class="input-field col s6 m6 l6">
                 <i class="material-icons prefix"></i>
                 <select class="js-example-basic-single" name="ee2" id="inpstatus">
-                  <option value="-">- kompetensi pelatihan -</option>
-                  <option value="Kompetensi Jabatan">Kompetensi Jabatan</option>
-
+                  <option value="-">- Kompetensi Kelatihan -</option>
+                  @foreach($kompetensi as $komp)
+                  <option value="{{ $komp->nama_kompetensi }}" <?php if ($workshop->jenis_kompetensi_workshop == $komp->nama_kompetensi ) { echo "selected"; } ?>>{{ $komp->nama_kompetensi }}</option>
+                  @endforeach
                 </select>
                 <label for="ee2">Jenis Kompetensi Pelatihan</label>
                 @error('ee2')

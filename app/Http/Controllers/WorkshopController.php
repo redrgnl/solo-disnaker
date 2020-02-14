@@ -26,7 +26,8 @@ class WorkshopController extends Controller
     {
         $data = [
             'title' => "Form Tambah Data Pelatihan",
-            'breadcrumb' => "Tambah Data Pelatihan"
+            'breadcrumb' => "Tambah Data Pelatihan",
+            'kompetensi' => DB::table('tb_kompetensi')->get()
         ];
 
         return view('/admin/content/view_workshop_tambah', $data);
@@ -85,7 +86,8 @@ class WorkshopController extends Controller
         $data = [
             'title' => "Form Edit Data Pelatihan",
             'breadcrumb' => "Edit Data Pelatihan",
-            'workshop' => DB::table('tb_workshop')->where('id_workshop', $id)->first()
+            'workshop' => DB::table('tb_workshop')->where('id_workshop', $id)->first(),
+            'kompetensi' => DB::table('tb_kompetensi')->get()
         ];
 
         return view('/admin/content/view_workshop_edit', $data);

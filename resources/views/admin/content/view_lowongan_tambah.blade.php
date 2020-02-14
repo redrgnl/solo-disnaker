@@ -59,7 +59,9 @@
                 <i class="material-icons prefix">chrome_reader_mode</i>
                 <select class="" name="cc" id="inpkompetensi" >
                   <option value="">- Jenis Kompetensi -</option>
-                  <option value="Kompetensi Jabatan">Kompetensi Jabatan</option>
+                  @foreach($kompetensi as $komp)
+                  <option value="{{ $komp->nama_kompetensi }}">{{ $komp->nama_kompetensi }}</option>
+                  @endforeach
                 </select>
                 <label for="c">Jenis Kompetensi</label>
                 @error('c')

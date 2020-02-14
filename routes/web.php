@@ -118,5 +118,6 @@ Route::get('/logout', 'AdminController@logout');
 
 //Route Login Perusahaan
 Route::get('/halaman-daftar-perusahaan', 'AdminController@daftar_perusahaan');
+Route::get('/get-kota/{id}', 'PerusahaanController@get_kota');
 Route::post('/post-perusahaan', 'AdminController@postPerusahaan');
 Route::post('/save-perusahaan', 'AdminController@storePerusahaan');
