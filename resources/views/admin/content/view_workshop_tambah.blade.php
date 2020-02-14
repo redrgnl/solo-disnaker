@@ -98,6 +98,20 @@
                 @enderror
               </div>
             </div>
+            <div class="field-b" style="display: none">
+              <div class="input-field col s6 m6 l6">
+                <i class="material-icons prefix"></i>
+                <select class="js-example-basic-single" name="ee2" id="inpstatus">
+                  <option value="-">- kompetensi pelatihan -</option>
+                  <option value="Kompetensi Jabatan">Kompetensi Jabatan</option>
+
+                </select>
+                <label for="ee2">Jenis Kompetensi Pelatihan</label>
+                @error('ee2')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
           </div>
           <div class="row">
             <div class="input-field col s12 m6 l6">
@@ -175,8 +189,16 @@
       var val = $(this).val();
       if (val == "Wirausaha") {
         $('.field-a').show()
+        $('.field-b').hide()
+
       } else if (val == "Pencari Kerja") {
         $('.field-a').hide()
+        $('.field-b').show()
+
+      }else{
+        $('.field-a').hide()
+        $('.field-b').hide()
+
       }
     });
   });

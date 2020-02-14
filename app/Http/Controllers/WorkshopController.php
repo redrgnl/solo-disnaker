@@ -72,6 +72,7 @@ class WorkshopController extends Controller
             'status_workshop' => $insert->e,
             'kategori_workshop' => $insert->e1,
             'kategori_wirausaha' => $insert->e2,
+            'jenis_kompetensi_workshop' => $insert->ee2,
             'persyaratan_workshop' => $insert->p,
             'poster_workshop' => $imgname
         ]);
@@ -113,7 +114,23 @@ class WorkshopController extends Controller
 
         ], $messages);
 
-        if($update->hasfile('f')){
+            if($update->ee2 == "Kompetensi Jabatan"){
+                $up_k = "Kompetensi Jabatan";
+                $up_w = "-";
+            }
+            if($update->e2 == "IKM"){
+                $up_k = "-"; 
+                $up_w = "IKM";
+
+            }      
+            if($update->e2 == "Wirausaha baru"){
+                $up_k = "-"; 
+                $up_w = "Wirausaha baru";
+
+            }
+
+
+            if($update->hasfile('f')){
 
             $img = $update->file('f');
             $imgname = date('Y-m-d') . "-" . $img->getClientOriginalName();
@@ -131,7 +148,8 @@ class WorkshopController extends Controller
                 'kuota_workshop' => $update->d,
                 'status_workshop' => $update->e,
                 'kategori_workshop' => $update->e1,
-                'kategori_wirausaha' => $update->e2,
+                'kategori_wirausaha' => $up_w,
+                'jenis_kompetensi_workshop' => $up_k,
                 'persyaratan_workshop' => $update->p,
                 'poster_workshop' => $imgname
 
@@ -151,7 +169,8 @@ class WorkshopController extends Controller
                 'kuota_workshop' => $update->d,
                 'status_workshop' => $update->e,
                 'kategori_workshop' => $update->e1,
-                'kategori_wirausaha' => $update->e2,
+                'kategori_wirausaha' => $up_w,
+                'jenis_kompetensi_workshop' => $up_k,
                 'persyaratan_workshop' => $update->p
     
             ]);
