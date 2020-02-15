@@ -73,44 +73,46 @@ class PelamarController extends Controller
 
         ], $messages);
 
+        $maxid = DB::table('tb_pelamar')->max('id_pelamar') + 1;
+
+
         // foto pelamar
             $img = $insert->file('inpfoto');
-            $imgname = date('Y-m-d') . "-" . $img->getClientOriginalName();
+            $imgname = date('Y-m-d') . "-" . "id" . $maxid . $img->getClientOriginalName();
 
             $location = 'pelamar';
             $img->move($location, $imgname);
         //izin keluarga
             $file_A = $insert->file('inpizin');
-            $file_A_name = date('Y-m-d') . "-" . $file_A->getClientOriginalName();
+            $file_A_name = date('Y-m-d') . "-" . "id" . $maxid . $file_A->getClientOriginalName();
 
             $lokasi_berkas = 'berkas_pelamar';
 
             $file_A->move($lokasi_berkas, $file_A_name);
         //buku nikah
             $file_B = $insert->file('inpnikah');
-            $file_B_name = date('Y-m-d') . "-" . $file_B->getClientOriginalName();
+            $file_B_name = date('Y-m-d') . "-" . "id" . $maxid . $file_B->getClientOriginalName();
 
             $file_B->move($lokasi_berkas, $file_B_name);
         //surat sehat
             $file_C = $insert->file('inpsehat');
-            $file_C_name = date('Y-m-d') . "-" . $file_C->getClientOriginalName();
+            $file_C_name = date('Y-m-d') . "-" . "id" . $maxid . $file_C->getClientOriginalName();
 
             $file_C->move($lokasi_berkas, $file_C_name);
         //sertifikat keahlian
             $file_D = $insert->file('inpkeahlian');
-            $file_D_name = date('Y-m-d') . "-" . $file_D->getClientOriginalName();
+            $file_D_name = date('Y-m-d') . "-" . "id" . $maxid . $file_D->getClientOriginalName();
 
             $file_D->move($lokasi_berkas, $file_D_name);
         //KTP
             $file_E = $insert->file('inpktp');
-            $file_E_name = date('Y-m-d') . "-" . $file_E->getClientOriginalName();
+            $file_E_name = date('Y-m-d') . "-" . "id" . $maxid . $file_E->getClientOriginalName();
 
             $file_E->move($lokasi_berkas, $file_E_name);
         //end berkas pelamar
 
         $checknik = DB::table('tb_pelamar')->where('nik_pelamar', $insert->a)->get()->count();
 
-        $maxid = DB::table('tb_pelamar')->max('id_pelamar') + 1;
 
         if ($checknik == 0) {
 
@@ -208,7 +210,8 @@ class PelamarController extends Controller
             'kecamatan' => DB::table('tb_kecamatan')->get(),
             'tingkatpdd' => DB::table('tb_tingkatpdd')->get(),
             'dettingkatpdd' => DB::table('tb_det_tingkatpdd')->get(),
-            'kwn' => DB::table('tb_kwn')->get()
+            'kwn' => DB::table('tb_kwn')->get(),
+            'harapan' => DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $id)->first()
         ];
 
         return view('/admin/content/view_pelamar_edit', $data);

@@ -55,7 +55,7 @@
                 <input type="file" name="inpfoto" id="inpfoto">
               </div>
               <div class="file-path-wrapper">
-                <input class="file-path validate" name="inpfoto" type="text">
+                <input class="file-path validate" name="inpfoto" value="{{ $pelamar->foto_pelamar }}" type="text">
                 <label for="inpfoto">* foto pelamar saat ini</label>
               </div>
             </div>
@@ -408,11 +408,11 @@
               <div class="row ml-3">
                 <label style="font-size: 18px">Harapan Penempatan</label>
                 <label>
-                  <input name="inppos" type="radio" value="1" checked />
+                  <input name="inppos" type="radio" value="Dalam Negeri" <?php if($harapan->penempatan_harapan == "Dalam Negeri"){echo "checked";} ?> />
                   <span>Dalam Negeri</span>
                 </label> &emsp;
                 <label>
-                  <input name="inppos" type="radio" value="2" />
+                  <input name="inppos" type="radio" value="Luar Negeri" <?php if($harapan->penempatan_harapan == "Luar Negeri"){echo "checked";} ?> />
                   <span>Luar Negeri</span>
                 </label>
               </div>
@@ -421,7 +421,38 @@
               @enderror
             </div>
           </div>
+<!-- DALAM NEGERI -->
+          @if($harapan->penempatan_harapan == "Dalam Negeri")
           <div class="field-a">
+            <div class="row">
+              <div class="input-field col s12 m4 l4">
+                <i class="material-icons prefix">domain</i>
+                <select name="prov_pdd" id="prov_pdd">
+                  <option value="">- Pilih Provinsi -</option>
+                  @foreach($provinsi as $prov)
+                  <option value="{{ $prov->id }}" <?php if($harapan->provinsi_harapan == $prov->id){echo "selected";} ?> >{{ $prov->name }}</option>
+                  @endforeach
+                </select>
+                <label>Provinsi</label>
+                @error('prov_pdd')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="input-field col s12 m4 l4">
+                <select class="browser-default" name="kota_pdd" id="kota_pdd">
+                  <option value="">- Pilih Kota -</option>
+                  @foreach($kota as $kot)
+                  <option value="{{ $kot->id }}" <?php if($harapan->kota_harapan == $kot->id){echo "selected";} ?> >{{ $kot->name }}</option>
+                  @endforeach
+                </select>
+                @error('kota_pdd')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+          </div>
+          @else
+          <div class="field-a" style="display: none;">
             <div class="row">
               <div class="input-field col s12 m4 l4">
                 <i class="material-icons prefix">domain</i>
@@ -446,14 +477,19 @@
               </div>
             </div>
           </div>
-          <div class="field-b" style="display: none">
+          @endif
+<!-- END DALAM NEGERI -->
+<!-- LUAR NEGERI -->
+@if($harapan->penempatan_harapan == "Luar Negeri")
+
+          <div class="field-b">
             <div class="row">
               <div class="input-field col s12 m4 l4">
                 <i class="material-icons prefix">domain</i>
                 <select name="inpnegarahrpn" id="inpnegarahrpn">
                   <option value="">- Pilih Negara -</option>
                   @foreach($kwn as $kwn)
-                  <option value="{{ $kwn->country_code }}">{{ $kwn->country_name }}</option>
+                  <option value="{{ $kwn->country_code }}" <?php if($harapan->negara_luar_harapan == $kwn->country_code){echo "selected";} ?>>{{ $kwn->country_name }}</option>
                   @endforeach
                 </select>
                 <label>Negara</label>
@@ -467,7 +503,7 @@
                   <input type="file" name="izinsiot" id="izinsiot">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" name="izinsiot" type="text">
+                  <input class="file-path validate" value="{{ $harapan->izin_keluarga_harapan }}" name="izinsiot" type="text">
                 </div>
               </div>
               <div class="file-field input-field col s12">
@@ -476,7 +512,7 @@
                   <input type="file" name="bukunikah" id="bukunikah">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" name="bukunikah" type="text">
+                  <input class="file-path validate" value="{{ $harapan->bukunikah_harapan }}" name="bukunikah" type="text">
                 </div>
               </div>
               <div class="file-field input-field col s12">
@@ -485,7 +521,7 @@
                   <input type="file" name="suratsehat" id="suratsehat">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" name="suratsehat" type="text">
+                  <input class="file-path validate" value="{{ $harapan->surat_ket_sehat_harapan }}" name="suratsehat" type="text">
                 </div>
               </div>
               <div class="file-field input-field col s12">
@@ -494,7 +530,7 @@
                   <input type="file" name="serifikatahli" id="serifikatahli">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" name="serifikatahli" type="text">
+                  <input class="file-path validate" value="{{ $harapan->sertifikat_keahlian_harapan }}" name="serifikatahli" type="text">
                 </div>
               </div>
               <div class="file-field input-field col s12">
@@ -503,18 +539,84 @@
                   <input type="file" name="copyktp" id="copyktp">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" name="copyktp" type="text">
+                  <input class="file-path validate" value="{{ $harapan->ktp_harapan }}" name="copyktp" type="text">
                 </div>
               </div>
             </div>
           </div>
+@else
+  <div class="field-b" style="display: none">
+              <div class="row">
+                <div class="input-field col s12 m4 l4">
+                  <i class="material-icons prefix">domain</i>
+                  <select name="inpnegarahrpn" id="inpnegarahrpn">
+                    <option value="">- Pilih Negara -</option>
+                    @foreach($kwn as $kwn)
+                    <option value="{{ $kwn->country_code }}">{{ $kwn->country_name }}</option>
+                    @endforeach
+                  </select>
+                  <label>Negara</label>
+                  @error('inpnegarahrpn')
+                  <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                  @enderror
+                </div>
+                <div class="file-field input-field col s12">
+                  <div class="btn">
+                    <span>Izin Suami/Istri/Orang Tua</span>
+                    <input type="file" name="izinsiot" id="izinsiot">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" value="{{ $harapan->izin_keluarga_harapan }}" name="izinsiot" type="text">
+                  </div>
+                </div>
+                <div class="file-field input-field col s12">
+                  <div class="btn">
+                    <span>Buku Nikah</span>
+                    <input type="file" name="bukunikah" id="bukunikah">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" name="bukunikah" type="text">
+                  </div>
+                </div>
+                <div class="file-field input-field col s12">
+                  <div class="btn">
+                    <span>Surat Sehat</span>
+                    <input type="file" name="suratsehat" id="suratsehat">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" name="suratsehat" type="text">
+                  </div>
+                </div>
+                <div class="file-field input-field col s12">
+                  <div class="btn">
+                    <span>Sertifikat Keahlian</span>
+                    <input type="file" name="serifikatahli" id="serifikatahli">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" name="serifikatahli" type="text">
+                  </div>
+                </div>
+                <div class="file-field input-field col s12">
+                  <div class="btn">
+                    <span>Salinan KTP</span>
+                    <input type="file" name="copyktp" id="copyktp">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" name="copyktp" type="text">
+                  </div>
+                </div>
+              </div>
+            </div>
+@endif
+<!-- END LUAR NEGERI -->
+
           <div class="row">
             <div class="input-field col s12 m4 l4">
               <i class="material-icons prefix">group</i>
               <select class="form-control select2" name="kelompok_jabatan" id="kelompok_jabatan" data-placeholder="Pilih Kelompok Jabatan">
                 <option value="">Semua Jabatan</option>
                 @foreach($jabatan as $jab)
-                <option value="{{ $jab->id_jabatan }}">{{ $jab->nama_jabatan }}</option>
+                <option value="{{ $jab->id_jabatan }}" <?php if($harapan->jabatan_harapan == $jab->id_jabatan){echo "selected";} ?>>{{ $jab->nama_jabatan }}</option>
                 @endforeach
               </select>
               <label>Jabatan Yang Diminati*</label>
@@ -528,10 +630,10 @@
               <i class="material-icons prefix">group</i>
               <select class="form-control" name="sistem_pembayaran_harapan" id="sistem_pembayaran_harapan">
                 <option value="">Pilih Sistem Pengupahan Gaji</option>
-                <option value="BORONGAN">BORONGAN</option>
-                <option value="HARIAN">HARIAN</option>
-                <option value="MINGGUAN">MINGGUAN</option>
-                <option value="BULANAN">BULANAN</option>
+                <option value="BORONGAN" <?php if($harapan->pembayaran_gaji_harapan == "BORONGAN"){echo "selected";} ?>>BORONGAN</option>
+                <option value="HARIAN"<?php if($harapan->pembayaran_gaji_harapan == "HARIAN"){echo "selected";} ?>>HARIAN</option>
+                <option value="MINGGUAN"<?php if($harapan->pembayaran_gaji_harapan == "MINGGUAN"){echo "selected";} ?>>MINGGUAN</option>
+                <option value="BULANAN"<?php if($harapan->pembayaran_gaji_harapan == "BULANAN"){echo "selected";} ?>>BULANAN</option>
               </select>
               <label>Sistem Pembayaran Gaji</label>
               @error('sistem_pembayaran_harapan')
@@ -542,12 +644,12 @@
               <i class="material-icons prefix">group</i>
               <select name="harapan_gaji" id="harapan_gaji">
                 <option value="">- Pilih Harapan Gaji Per Bulan -</option>
-                <option value="1">&lt; 1 jt</option>
-                <option value="2">&gt; 1 jt - 2 jt</option>
-                <option value="3">&gt; 2 jt - 3 jt</option>
-                <option value="4">&gt; 3 jt - 4 jt</option>
-                <option value="5">&gt; 4jt - 5 jt</option>
-                <option value="6">5 jt ke atas</option>
+                <option value="1" <?php if($harapan->besar_gaji_harapan == "1"){echo "selected";} ?>>&lt; 1 jt</option>
+                <option value="2" <?php if($harapan->besar_gaji_harapan == "2"){echo "selected";} ?>>&gt; 1 jt - 2 jt</option>
+                <option value="3" <?php if($harapan->besar_gaji_harapan == "3"){echo "selected";} ?>>&gt; 2 jt - 3 jt</option>
+                <option value="4" <?php if($harapan->besar_gaji_harapan == "4"){echo "selected";} ?>>&gt; 3 jt - 4 jt</option>
+                <option value="5" <?php if($harapan->besar_gaji_harapan == "5"){echo "selected";} ?>>&gt; 4jt - 5 jt</option>
+                <option value="6" <?php if($harapan->besar_gaji_harapan == "6"){echo "selected";} ?>>5 jt ke atas</option>
               </select>
               <label>Harapan Gaji Per Bulan</label>
               @error('harapan_gaji')
@@ -587,5 +689,38 @@
 @endsection
 
 @section('customjs')
+<script>
+  $(document).ready(function() {
+    $('input[name=inppos]:radio').change(function(e) {
+      let value = e.target.value.trim()
 
+      $('[class^="field"]').css('display', 'none');
+
+      switch (value) {
+        case 'Dalam Negeri':
+          $('.field-a').show()
+          break;
+        case 'Luar Negeri':
+          $('.field-b').show()
+          break;
+        default:
+          break;
+      }
+    });
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    $('#prov_pdd').on('change', function(e) {
+      var idprov = e.target.value;
+
+      //ajax
+
+      $.get('/admin/get-kota/' + idprov, function(data) {
+        $('#kota_pdd').html(data)
+      });
+
+    });
+  });
+</script>
 @endsection
