@@ -344,11 +344,11 @@
               <div class="row ml-3">
                 <label style="font-size: 18px">Harapan Penempatan</label>
                 <label>
-                  <input name="inppos" type="radio" value="1" checked />
+                  <input name="inppos" type="radio" value="Dalam Negeri" checked />
                   <span>Dalam Negeri</span>
                 </label> &emsp;
                 <label>
-                  <input name="inppos" type="radio" value="2" />
+                  <input name="inppos" type="radio" value="Luar Negeri" />
                   <span>Luar Negeri</span>
                 </label>
               </div>
@@ -387,7 +387,7 @@
               <div class="input-field col s12 m4 l4">
                 <i class="material-icons prefix">domain</i>
                 <select name="inpnegarahrpn" id="inpnegarahrpn">
-                  <option value="">- Pilih Negara -</option>
+                  <option value="-">- Pilih Negara -</option>
                   @foreach($kwn as $kwn)
                   <option value="{{ $kwn->country_code }}">{{ $kwn->country_name }}</option>
                   @endforeach
@@ -400,46 +400,46 @@
               <div class="file-field input-field col s12">
                 <div class="btn">
                   <span>Izin Suami/Istri/Orang Tua</span>
-                  <input type="file" name="izinsiot" id="izinsiot">
+                  <input type="file" name="inpizin" id="inpizin">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" name="izinsiot" type="text">
+                  <input class="file-path validate" name="inpizin" type="text">
                 </div>
               </div>
               <div class="file-field input-field col s12">
                 <div class="btn">
                   <span>Buku Nikah</span>
-                  <input type="file" name="bukunikah" id="bukunikah">
+                  <input type="file" name="inpnikah" id="inpnikah">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" name="bukunikah" type="text">
+                  <input class="file-path validate" name="inpnikah" type="text">
                 </div>
               </div>
               <div class="file-field input-field col s12">
                 <div class="btn">
                   <span>Surat Sehat</span>
-                  <input type="file" name="suratsehat" id="suratsehat">
+                  <input type="file" name="inpsehat" id="inpsehat">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" name="suratsehat" type="text">
+                  <input class="file-path validate" name="inpsehat" type="text">
                 </div>
               </div>
               <div class="file-field input-field col s12">
                 <div class="btn">
                   <span>Sertifikat Keahlian</span>
-                  <input type="file" name="serifikatahli" id="serifikatahli">
+                  <input type="file" name="inpkeahlian" id="inpkeahlian">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" name="serifikatahli" type="text">
+                  <input class="file-path validate" name="inpkeahlian" type="text">
                 </div>
               </div>
               <div class="file-field input-field col s12">
                 <div class="btn">
                   <span>Salinan KTP</span>
-                  <input type="file" name="copyktp" id="copyktp">
+                  <input type="file" name="inpktp" id="inpktp">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" name="copyktp" type="text">
+                  <input class="file-path validate" name="inpktp" type="text">
                 </div>
               </div>
             </div>
@@ -531,10 +531,10 @@
       $('[class^="field"]').css('display', 'none');
 
       switch (value) {
-        case '1':
+        case 'Dalam Negeri':
           $('.field-a').show()
           break;
-        case '2':
+        case 'Luar Negeri':
           $('.field-b').show()
           break;
         default:

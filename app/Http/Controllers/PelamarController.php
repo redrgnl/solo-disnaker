@@ -57,18 +57,104 @@ class PelamarController extends Controller
             'inpberat' => 'required|max:3',
             'inptelepon' => 'required|max:15',
             'inpkodepos' => 'required|max:6',
+            //irfan
+            'inppos' => 'required',
+            // 'prov_pdd' => 'required',
+            // 'kota_pdd' => 'required',
+            'kelompok_jabatan' => 'required',
+            'sistem_pembayaran_harapan' => 'required',
+            'harapan_gaji' => 'required',
+            // 'penempatan_harapan' => 'required',
+            // 'inpizin' => 'required',
+            // 'inpnikah' => 'required',
+            // 'inpsehat' => 'required',
+            // 'inpkeahlian' => 'required',
+            // 'inpktp' => 'required',
+
         ], $messages);
 
-        $img = $insert->file('inpfoto');
-        $imgname = date('Y-m-d') . "-" . $img->getClientOriginalName();
+        // foto pelamar
+            $img = $insert->file('inpfoto');
+            $imgname = date('Y-m-d') . "-" . $img->getClientOriginalName();
 
-        $location = 'pelamar';
-        $img->move($location, $imgname);
+            $location = 'pelamar';
+            $img->move($location, $imgname);
+        //izin keluarga
+            $file_A = $insert->file('inpizin');
+            $file_A_name = date('Y-m-d') . "-" . $file_A->getClientOriginalName();
+
+            $lokasi_berkas = 'berkas_pelamar';
+
+            $file_A->move($lokasi_berkas, $file_A_name);
+        //buku nikah
+            $file_B = $insert->file('inpnikah');
+            $file_B_name = date('Y-m-d') . "-" . $file_B->getClientOriginalName();
+
+            $file_B->move($lokasi_berkas, $file_B_name);
+        //surat sehat
+            $file_C = $insert->file('inpsehat');
+            $file_C_name = date('Y-m-d') . "-" . $file_C->getClientOriginalName();
+
+            $file_C->move($lokasi_berkas, $file_C_name);
+        //sertifikat keahlian
+            $file_D = $insert->file('inpkeahlian');
+            $file_D_name = date('Y-m-d') . "-" . $file_D->getClientOriginalName();
+
+            $file_D->move($lokasi_berkas, $file_D_name);
+        //KTP
+            $file_E = $insert->file('inpktp');
+            $file_E_name = date('Y-m-d') . "-" . $file_E->getClientOriginalName();
+
+            $file_E->move($lokasi_berkas, $file_E_name);
+        //end berkas pelamar
 
         $checknik = DB::table('tb_pelamar')->where('nik_pelamar', $insert->a)->get()->count();
 
+        $maxid = DB::table('tb_pelamar')->max('id_pelamar') + 1;
+
         if ($checknik == 0) {
+
+            if($insert->inppos == "Dalam Negeri"){
+                DB::table('tb_harapan_kerja')->insert([
+                    'id_pelamar_harapan' => $maxid,
+                    'penempatan_harapan' => $insert->inppos,
+                    'provinsi_harapan' => $insert->prov_pdd,
+                    'kota_harapan' => $insert->kota_pdd,
+                    'jabatan_harapan' => $insert->kelompok_jabatan,
+                    'pembayaran_gaji_harapan' => $insert->sistem_pembayaran_harapan,
+                    'besar_gaji_harapan' => $insert->harapan_gaji,
+                    'negara_luar_harapan' => "-",
+                    'izin_keluarga_harapan' => "-",
+                    'bukunikah_harapan' => "-",
+                    'surat_ket_sehat_harapan' => "-",
+                    'sertifikat_keahlian_harapan' => "-",
+                    'ktp_harapan' => "-",
+    
+                ]);
+            }else{
+
+                DB::table('tb_harapan_kerja')->insert([
+                    'id_pelamar_harapan' => $maxid,
+                    'penempatan_harapan' => $insert->inppos,
+                    'provinsi_harapan' => "-",
+                    'kota_harapan' => "-",
+                    'jabatan_harapan' => $insert->kelompok_jabatan,
+                    'pembayaran_gaji_harapan' => $insert->sistem_pembayaran_harapan,
+                    'besar_gaji_harapan' => $insert->harapan_gaji,
+                    'negara_luar_harapan' => $insert->inpnegarahrpn,
+                    'izin_keluarga_harapan' => $file_A_name,
+                    'bukunikah_harapan' => $file_B_name,
+                    'surat_ket_sehat_harapan' => $file_C_name,
+                    'sertifikat_keahlian_harapan' => $file_D_name,
+                    'ktp_harapan' => $file_E_name,
+    
+                ]);
+            }
+
+
+
             DB::table('tb_pelamar')->insert([
+                'id_pelamar' => $maxid,
                 'nama_pelamar' => $insert->inpusername,
                 'email_pelamar' => $insert->inpemail,
                 'status_pelamar' => $insert->inpstatus,
