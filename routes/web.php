@@ -10,7 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//check login admin
+//check login admin 
+// Route::get('/check', function(){
+//     $check_berkas = DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', 15)->first();
+//     return $check_berkas->bukunikah_harapan;
+
+// });
+
 Route::group(['middleware' => 'usersession'], function () {
 
     //Route Admin

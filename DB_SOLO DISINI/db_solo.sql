@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Feb 2020 pada 16.52
+-- Waktu pembuatan: 16 Feb 2020 pada 09.52
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -219,7 +219,7 @@ INSERT INTO `tb_harapan_kerja` (`id_harapan_kerja`, `id_pelamar_harapan`, `penem
 (3, 14, 'Dalam Negeri', '19', '1903', 11, 'BULANAN', 5, '-', '-', '-', '-', '-', '-'),
 (4, 15, 'Dalam Negeri', '18', '1813', 7, 'MINGGUAN', 3, '-', '-', '-', '-', '-', '-'),
 (5, 16, 'Luar Negeri', '-', '-', 5, 'BORONGAN', 5, 'AI', '2020-02-15-izinkeluarga.pdf', '2020-02-15-nikah.pdf', '2020-02-15-ket_sehat.pdf', '2020-02-15-keahlian.pdf', '2020-02-15-ktp.pdf'),
-(7, 17, 'Luar Negeri', '-', '-', 5, 'BORONGAN', 5, 'AQ', '2020-02-15-id17izinkeluarga.pdf', '2020-02-15-id17nikah.pdf', '2020-02-15-id17ket_sehat.pdf', '2020-02-15-id17keahlian.pdf', '2020-02-15-id17ktp.pdf');
+(7, 17, 'Luar Negeri', '-', '-', 1, 'BULANAN', 3, 'AL', '2020-02-16-id17updateizin124.pdf', '2020-02-16-id17updatenikah.pdf', '2020-02-16-id17updatesehat.pdf', '2020-02-16-id17updateahlian124.pdf', '2020-02-16-id17updatektp.pdf');
 
 -- --------------------------------------------------------
 
@@ -8285,7 +8285,7 @@ INSERT INTO `tb_pelamar` (`id_pelamar`, `nama_ktp`, `gelardpn_pelamar`, `gelarbl
 (14, 'irfan23', 'sf', 'am', '421245224', 'irfan4', '2efwerwef', 'L', 'madure', '2020-02-13', 'Budha', 'DA', 180, 68, '08567565673', 'irfan@gmail.com', '2020-02-15-Pelatihan -perbakinBigLogo.jpg', 'Tuna Netra', 'WARGA NEGARA ASING (WNA)', 19, 1903, 1903040, '23244', 12, 1204, 'sja', '2008', '3.89', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Non-Aktif'),
 (15, 'irfan23325', 'qwe', 'qwe', '8765434322577', 'yanu64', 'wsd,kfmnwkefnm', 'L', 'madure', '2020-02-27', 'Budha', 'BN', 190, 78, '085675675567', 'irfan@gmail.com', '2020-02-15-Pelatihan -perbakinBigLogo.jpg', 'Tuna Netra', 'WARGA NEGARA ASING (WNA)', 19, 1901, 1901092, '23244', 13, 1311, 'SMA', '2008', '3.42', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Aktif'),
 (16, 'bsgoese', 'we', 'we', '09824242424', 'bagoes', 'eqweqe', 'L', 'madure', '2020-02-13', 'Budha', 'BN', 180, 58, '085675675567', 'bagoes@gmail.com', '2020-02-15-1550855391-cc_dark.png', 'DISABILITAS', 'WARGA NEGARA INDONESIA (WNI)', 21, 2103, 2103061, '23244', 13, 1311, 'SMA', '2008', '2.80', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Aktif'),
-(17, 'irfanwe', 'qwe', 'we', '854485766353452', 'yanu23rs', 'seddghfgnfdgh', 'L', 'bwi', '2020-02-22', 'Kristen', 'BN', 180, 34, '9754578778', 'irfan@gmail.com', '2020-02-15-id171550855391-cc_dark.png', 'Tuna Daksa', 'WARGA NEGARA ASING (WNA)', 11, 1103, 1103020, '23244', 13, 1318, 'SMA', '2008', '3.89', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Aktif');
+(17, 'irfanwe', 'qwe', 'we', '854485766353452', 'yanu23rs', 'seddghfgnfdgh', 'L', 'bwi', '2020-02-22', 'Kristen', 'BN', 180, 34, '9754578778', 'irfan@gmail.com', '2020-02-16-id17Pelatihan -perbakinBigLogo.jpg', 'Tuna Daksa', 'WARGA NEGARA INDONESIA (WNI)', 11, 1103, 1103020, '23244', 13, 1318, 'SMA', '2008', '3.89', 'd41d8cd98f00b204e9800998ecf8427e', 'd41d8cd98f00b204e9800998ecf8427e', 'Aktif');
 
 -- --------------------------------------------------------
 

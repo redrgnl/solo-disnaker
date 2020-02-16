@@ -224,7 +224,7 @@ class PelamarController extends Controller
             'max' => 'Input Tidak Sesuai'
         ];
 
-        //validasi form
+//VALIDASI FORM
         $this->validate($update, [
             'inpnik' => 'required|max:17',
             'inpnama' => 'required|max:100',
@@ -241,17 +241,193 @@ class PelamarController extends Controller
             'inpkodepos' => 'required|max:6',
         ], $messages);
 
-        if ($update->inpfoto != '') {
-            $check = DB::table('tb_pelamar')->where('inpusername', $update->inpid)->first();
-            $ims = $check->logo_perusahaan;
 
-            $img = $update->file('inppict');
-            $imgname = $ims;
+        // if ($update->inpfoto != '') {
+        //     $check = DB::table('tb_pelamar')->where('id_pelamar', $update->inpid)->first();
+        //     $ims = $check->logo_perusahaan;
 
-            $location = 'perusahaan';
-            $img->move($location, $imgname);
+        //     $img = $update->file('inppict');
+        //     $imgname = $ims;
+
+        //     $location = 'perusahaan';
+        //     $img->move($location, $imgname);
+        // }
+
+
+        if($update->hasfile('inpfoto')){
+
+            $foto_p = $update->file('inpfoto');
+            $foto_name = date('Y-m-d') . "-" . "id" . $update->inpid . $foto_p->getClientOriginalName();
+            $lokasi_foto = 'pelamar';
+            $foto_p->move($lokasi_foto, $foto_name);
+
+                $path_A = public_path() . "/pelamar/" . $update->old_foto;
+                unlink($path_A);
+        
+            DB::table('tb_pelamar')->where('id_pelamar', $update->inpid)->update([
+                'foto_pelamar' => $foto_name,
+        
+            ]);
+
         }
+// UPDATE TABLE HARAPAN
 
+
+        if($update->inppos == "Dalam Negeri"){
+            // hapus berkas pelamar kalau ada
+            $check_berkas = DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $update->inpid)->first();
+            if($check_berkas->izin_keluarga_harapan != "-"){
+                $path_A = public_path() . "/berkas_pelamar/" . $check_berkas->izin_keluarga_harapan;
+                unlink($path_A);
+            }
+            if($check_berkas->bukunikah_harapan != "-"){
+                $path_B = public_path() . "/berkas_pelamar/" . $check_berkas->bukunikah_harapan;
+                unlink($path_B);
+            }
+            if($check_berkas->surat_ket_sehat_harapan != "-"){
+                $path_C = public_path() . "/berkas_pelamar/" . $check_berkas->surat_ket_sehat_harapan;
+                unlink($path_C);
+            }
+            if($check_berkas->sertifikat_keahlian_harapan != "-"){
+                $path_D = public_path() . "/berkas_pelamar/" . $check_berkas->sertifikat_keahlian_harapan;
+                unlink($path_D);
+            }
+            if($check_berkas->ktp_harapan != "-"){
+                $path_E = public_path() . "/berkas_pelamar/" . $check_berkas->ktp_harapan;
+                unlink($path_E);
+            }
+            // end hapus berkas
+
+            DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $update->inpid)->update([
+                'penempatan_harapan' => $update->inppos,
+                'provinsi_harapan' => $update->prov_pdd,
+                'kota_harapan' => $update->kota_pdd,
+                'jabatan_harapan' => $update->kelompok_jabatan,
+                'pembayaran_gaji_harapan' => $update->sistem_pembayaran_harapan,
+                'besar_gaji_harapan' => $update->harapan_gaji,
+                'negara_luar_harapan' => "-",
+                'izin_keluarga_harapan' => "-",
+                'bukunikah_harapan' => "-",
+                'surat_ket_sehat_harapan' => "-",
+                'sertifikat_keahlian_harapan' => "-",
+                'ktp_harapan' => "-",
+
+            ]);
+
+        }else{
+            //update  izin keluarga
+            $lokasi_berkas = 'berkas_pelamar';
+
+            if($update->hasfile('inpizin')){
+
+                $file_A = $update->file('inpizin');
+                $file_A_name = date('Y-m-d') . "-" . "id" . $update->inpid . $file_A->getClientOriginalName();
+
+                $file_A->move($lokasi_berkas, $file_A_name);
+
+                if($update->old_izin != "-"){
+                    $path_A = public_path() . "/berkas_pelamar/" . $update->old_izin;
+                    unlink($path_A);
+                }
+            
+                DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $update->inpid)->update([
+                    'izin_keluarga_harapan' => $file_A_name,
+            
+                ]);
+
+            }
+
+            //update  buku nikah
+            if($update->hasfile('inpnikah')){
+
+                $file_B = $update->file('inpnikah');
+                $file_B_name = date('Y-m-d') . "-" . "id" . $update->inpid . $file_B->getClientOriginalName();
+
+                $file_B->move($lokasi_berkas, $file_B_name);
+
+                if($update->old_nikah != "-"){
+                    $path_B = public_path() . "/berkas_pelamar/" . $update->old_nikah;
+                    unlink($path_B);
+                }
+            
+                DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $update->inpid)->update([
+                    'bukunikah_harapan' => $file_B_name,
+            
+                ]);
+            }
+
+            //update surat sehat
+            if($update->hasfile('inpsehat')){
+
+                $file_C = $update->file('inpsehat');
+                $file_C_name = date('Y-m-d') . "-" . "id" . $update->inpid . $file_C->getClientOriginalName();
+
+                $file_C->move($lokasi_berkas, $file_C_name);
+                if($update->old_sehat != "-"){
+                    $path_C = public_path() . "/berkas_pelamar/" . $update->old_sehat;
+                    unlink($path_C);
+                }
+                DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $update->inpid)->update([
+                    'surat_ket_sehat_harapan' => $file_C_name,
+            
+                ]);
+            }
+
+            //update sertifikat keahlian
+            if($update->hasfile('inpkeahlian')){
+
+                $file_D = $update->file('inpkeahlian');
+                $file_D_name = date('Y-m-d') . "-" . "id" . $update->inpid . $file_D->getClientOriginalName();
+
+                $file_D->move($lokasi_berkas, $file_D_name);
+
+                if($update->old_ahli != "-"){
+                    $path_D = public_path() . "/berkas_pelamar/" . $update->old_ahli;
+                    unlink($path_D);
+                }
+            
+                DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $update->inpid)->update([
+                    'sertifikat_keahlian_harapan' => $file_D_name,
+            
+                ]);
+            }
+
+            //update KTP
+            if($update->hasfile('inpktp')){
+
+                $file_E = $update->file('inpktp');
+                $file_E_name = date('Y-m-d') . "-" . "id" . $update->inpid . $file_E->getClientOriginalName();
+
+                $file_E->move($lokasi_berkas, $file_E_name);
+
+                if($update->old_ktp != "-"){
+                    $path_E = public_path() . "/berkas_pelamar/" . $update->old_ktp;
+                    unlink($path_E);
+                }
+            
+                DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $update->inpid)->update([
+                    'ktp_harapan' => $file_E_name,
+            
+                ]);
+            }
+
+            //end update  berkas pelamar
+
+                DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $update->inpid)->update([
+                    'penempatan_harapan' => $update->inppos,
+                    'provinsi_harapan' => "-",
+                    'kota_harapan' => "-",
+                    'jabatan_harapan' => $update->kelompok_jabatan,
+                    'pembayaran_gaji_harapan' => $update->sistem_pembayaran_harapan,
+                    'besar_gaji_harapan' => $update->harapan_gaji,
+                    'negara_luar_harapan' => $update->inpnegarahrpn,
+
+                ]);
+        }
+// END UPDATE TABLE HARAPAN
+
+
+// UPDATE TABLE PELAMAR
         DB::table('tb_pelamar')->where('id_pelamar', $update->inpid)->update([
             'nama_pelamar' => $update->inpusername,
             'email_pelamar' => $update->inpemail,
@@ -283,6 +459,8 @@ class PelamarController extends Controller
             'password_pelamar' => md5($update->inppassword),
             'confirm_password_pelamar' => md5($update->inpconfirm)
         ]);
+// END UPDATE TABLE PELAMAR
+
 
         return redirect('/admin/halaman-manajemen-pelamar')->with('success-alert', 'Disimpan');
     }

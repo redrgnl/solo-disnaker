@@ -6,7 +6,7 @@
     <div id="validation" class="card card card-default scrollspy">
       <div class="card-content">
         <h4 class="card-title">Form Data Pelamar</h4>
-        <form class="col s12" method="post" action="/admin/update-data-pelamar">
+        <form class="col s12" method="post" action="/admin/update-data-pelamar" enctype="multipart/form-data">
           @csrf
           <h6 style="color: blue;">Akun Pelamar</h6>
           <div class="row">
@@ -23,7 +23,7 @@
           <div class="row">
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">vpn_key</i>
-              <input name="inppassword" id="inppassword" type="password" class="validate" required>
+              <input name="inppassword" id="inppassword" type="password" class="validate" >
               <label for="inppassword">Password*</label>
               @error('inppassword')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
@@ -31,7 +31,7 @@
             </div>
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">vpn_key</i>
-              <input name="inpconfirm" id="inpconfirm" type="password" class="validate" required>
+              <input name="inpconfirm" id="inpconfirm" type="password" class="validate" >
               <label for="inpconfirm">Ulangi Password*</label>
               @error('inpconfirm')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
@@ -56,6 +56,7 @@
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" name="inpfoto" value="{{ $pelamar->foto_pelamar }}" type="text">
+                <input type="hidden" name="old_foto" value="{{ $pelamar->foto_pelamar }}">
                 <label for="inpfoto">* foto pelamar saat ini</label>
               </div>
             </div>
@@ -500,46 +501,55 @@
               <div class="file-field input-field col s12">
                 <div class="btn">
                   <span>Izin Suami/Istri/Orang Tua</span>
-                  <input type="file" name="izinsiot" id="izinsiot">
+                  <input type="file" name="inpizin" id="inpizin">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" value="{{ $harapan->izin_keluarga_harapan }}" name="izinsiot" type="text">
+                  <input class="file-path validate" value="{{ $harapan->izin_keluarga_harapan }}" name="inpizin" type="text">
+                  <input type="hidden" value="{{ $harapan->izin_keluarga_harapan }}" name="old_izin" >
                 </div>
               </div>
               <div class="file-field input-field col s12">
                 <div class="btn">
                   <span>Buku Nikah</span>
-                  <input type="file" name="bukunikah" id="bukunikah">
+                  <input type="file" name="inpnikah" id="inpnikah">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" value="{{ $harapan->bukunikah_harapan }}" name="bukunikah" type="text">
+                  <input class="file-path validate" value="{{ $harapan->bukunikah_harapan }}" name="inpnikah" type="text">
+                  <input type="hidden" value="{{ $harapan->bukunikah_harapan }}" name="old_nikah" >
+
                 </div>
               </div>
               <div class="file-field input-field col s12">
                 <div class="btn">
                   <span>Surat Sehat</span>
-                  <input type="file" name="suratsehat" id="suratsehat">
+                  <input type="file" name="inpsehat" id="inpsehat">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" value="{{ $harapan->surat_ket_sehat_harapan }}" name="suratsehat" type="text">
+                  <input class="file-path validate" value="{{ $harapan->surat_ket_sehat_harapan }}" name="inpsehat" type="text">
+                  <input type="hidden" value="{{ $harapan->surat_ket_sehat_harapan }}" name="old_sehat" >
+
                 </div>
               </div>
               <div class="file-field input-field col s12">
                 <div class="btn">
                   <span>Sertifikat Keahlian</span>
-                  <input type="file" name="serifikatahli" id="serifikatahli">
+                  <input type="file" name="inpkeahlian" id="inpkeahlian">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" value="{{ $harapan->sertifikat_keahlian_harapan }}" name="serifikatahli" type="text">
+                  <input class="file-path validate" value="{{ $harapan->sertifikat_keahlian_harapan }}" name="inpkeahlian" type="text">
+                  <input type="hidden" value="{{ $harapan->sertifikat_keahlian_harapan }}" name="old_ahli" >
+
                 </div>
               </div>
               <div class="file-field input-field col s12">
                 <div class="btn">
                   <span>Salinan KTP</span>
-                  <input type="file" name="copyktp" id="copyktp">
+                  <input type="file" name="inpktp" id="inpktp">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" value="{{ $harapan->ktp_harapan }}" name="copyktp" type="text">
+                  <input class="file-path validate" value="{{ $harapan->ktp_harapan }}" name="inpktp" type="text">
+                  <input type="hidden" value="{{ $harapan->ktp_harapan }}" name="old_ktp" >
+
                 </div>
               </div>
             </div>
@@ -563,46 +573,55 @@
                 <div class="file-field input-field col s12">
                   <div class="btn">
                     <span>Izin Suami/Istri/Orang Tua</span>
-                    <input type="file" name="izinsiot" id="izinsiot">
+                    <input type="file" name="inpizin" id="inpizin">
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" value="{{ $harapan->izin_keluarga_harapan }}" name="izinsiot" type="text">
+                    <input class="file-path validate"  name="inpizin" type="text">
+                    <input type="hidden" value="{{ $harapan->izin_keluarga_harapan }}" name="old_izin" >
+
                   </div>
                 </div>
                 <div class="file-field input-field col s12">
                   <div class="btn">
                     <span>Buku Nikah</span>
-                    <input type="file" name="bukunikah" id="bukunikah">
+                    <input type="file" name="inpnikah" id="inpnikah">
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" name="bukunikah" type="text">
+                    <input class="file-path validate" name="inpnikah" type="text">
+                    <input type="hidden" value="{{ $harapan->bukunikah_harapan }}" name="old_nikah" >
+
                   </div>
                 </div>
                 <div class="file-field input-field col s12">
                   <div class="btn">
                     <span>Surat Sehat</span>
-                    <input type="file" name="suratsehat" id="suratsehat">
+                    <input type="file" name="inpsehat" id="inpsehat">
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" name="suratsehat" type="text">
+                    <input class="file-path validate" name="inpsehat" type="text">
+                    <input type="hidden" value="{{ $harapan->surat_ket_sehat_harapan }}" name="old_sehat" >
+
                   </div>
                 </div>
                 <div class="file-field input-field col s12">
                   <div class="btn">
                     <span>Sertifikat Keahlian</span>
-                    <input type="file" name="serifikatahli" id="serifikatahli">
+                    <input type="file" name="inpkeahlian" id="inpkeahlian">
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" name="serifikatahli" type="text">
+                    <input class="file-path validate" name="inpkeahlian" type="text">
+                    <input type="hidden" value="{{ $harapan->sertifikat_keahlian_harapan }}" name="old_ahli" >
+
                   </div>
                 </div>
                 <div class="file-field input-field col s12">
                   <div class="btn">
                     <span>Salinan KTP</span>
-                    <input type="file" name="copyktp" id="copyktp">
+                    <input type="file" name="inpktp" id="inpktp">
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" name="copyktp" type="text">
+                    <input class="file-path validate" name="inpktp" type="text">
+                    <input type="hidden" value="{{ $harapan->ktp_harapan }}" name="old_ktp" >
                   </div>
                 </div>
               </div>
