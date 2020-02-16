@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Feb 2020 pada 09.52
+-- Waktu pembuatan: 16 Feb 2020 pada 14.57
 -- Versi server: 10.4.8-MariaDB
 -- Versi PHP: 7.3.11
 
@@ -206,20 +206,19 @@ CREATE TABLE `tb_harapan_kerja` (
   `bukunikah_harapan` varchar(50) CHARACTER SET latin1 NOT NULL,
   `surat_ket_sehat_harapan` varchar(50) CHARACTER SET latin1 NOT NULL,
   `sertifikat_keahlian_harapan` varchar(50) CHARACTER SET latin1 NOT NULL,
-  `ktp_harapan` varchar(50) CHARACTER SET latin1 NOT NULL
+  `ktp_harapan` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `pengalaman_kerja` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `keterampilan_kerja` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `penguasaan_bahasa` varchar(50) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `tb_harapan_kerja`
 --
 
-INSERT INTO `tb_harapan_kerja` (`id_harapan_kerja`, `id_pelamar_harapan`, `penempatan_harapan`, `provinsi_harapan`, `kota_harapan`, `jabatan_harapan`, `pembayaran_gaji_harapan`, `besar_gaji_harapan`, `negara_luar_harapan`, `izin_keluarga_harapan`, `bukunikah_harapan`, `surat_ket_sehat_harapan`, `sertifikat_keahlian_harapan`, `ktp_harapan`) VALUES
-(1, 12, 'Dalam Negeri', '17', '1703', 5, 'BORONGAN', 3, '-', '-', '-', '-', '-', '-'),
-(2, 13, 'Dalam Negeri', '11', '1118', 2, 'BORONGAN', 5, '-', '-', '-', '-', '-', '-'),
-(3, 14, 'Dalam Negeri', '19', '1903', 11, 'BULANAN', 5, '-', '-', '-', '-', '-', '-'),
-(4, 15, 'Dalam Negeri', '18', '1813', 7, 'MINGGUAN', 3, '-', '-', '-', '-', '-', '-'),
-(5, 16, 'Luar Negeri', '-', '-', 5, 'BORONGAN', 5, 'AI', '2020-02-15-izinkeluarga.pdf', '2020-02-15-nikah.pdf', '2020-02-15-ket_sehat.pdf', '2020-02-15-keahlian.pdf', '2020-02-15-ktp.pdf'),
-(7, 17, 'Luar Negeri', '-', '-', 1, 'BULANAN', 3, 'AL', '2020-02-16-id17updateizin124.pdf', '2020-02-16-id17updatenikah.pdf', '2020-02-16-id17updatesehat.pdf', '2020-02-16-id17updateahlian124.pdf', '2020-02-16-id17updatektp.pdf');
+INSERT INTO `tb_harapan_kerja` (`id_harapan_kerja`, `id_pelamar_harapan`, `penempatan_harapan`, `provinsi_harapan`, `kota_harapan`, `jabatan_harapan`, `pembayaran_gaji_harapan`, `besar_gaji_harapan`, `negara_luar_harapan`, `izin_keluarga_harapan`, `bukunikah_harapan`, `surat_ket_sehat_harapan`, `sertifikat_keahlian_harapan`, `ktp_harapan`, `pengalaman_kerja`, `keterampilan_kerja`, `penguasaan_bahasa`) VALUES
+(5, 16, 'Luar Negeri', '-', '-', 5, 'BORONGAN', 5, 'AI', '2020-02-15-izinkeluarga.pdf', '2020-02-15-nikah.pdf', '2020-02-15-ket_sehat.pdf', '2020-02-15-keahlian.pdf', '2020-02-15-ktp.pdf', '', '', ''),
+(7, 17, 'Luar Negeri', '-', '-', 22, 'BORONGAN', 5, 'AL', '2020-02-16-id17updateizin.pdf', '2020-02-16-id17updatenikah.pdf', '2020-02-16-id17sehat.pdf', '2020-02-16-id17updateahlian.pdf', '2020-02-16-id17updatektp.pdf', '2020-02-16-id17keahliankerja3.pdf', '2020-02-16-id17keterampilan3.pdf', '2020-02-16-id17bahasa3.pdf');
 
 -- --------------------------------------------------------
 
@@ -8285,7 +8284,8 @@ INSERT INTO `tb_pelamar` (`id_pelamar`, `nama_ktp`, `gelardpn_pelamar`, `gelarbl
 (14, 'irfan23', 'sf', 'am', '421245224', 'irfan4', '2efwerwef', 'L', 'madure', '2020-02-13', 'Budha', 'DA', 180, 68, '08567565673', 'irfan@gmail.com', '2020-02-15-Pelatihan -perbakinBigLogo.jpg', 'Tuna Netra', 'WARGA NEGARA ASING (WNA)', 19, 1903, 1903040, '23244', 12, 1204, 'sja', '2008', '3.89', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Non-Aktif'),
 (15, 'irfan23325', 'qwe', 'qwe', '8765434322577', 'yanu64', 'wsd,kfmnwkefnm', 'L', 'madure', '2020-02-27', 'Budha', 'BN', 190, 78, '085675675567', 'irfan@gmail.com', '2020-02-15-Pelatihan -perbakinBigLogo.jpg', 'Tuna Netra', 'WARGA NEGARA ASING (WNA)', 19, 1901, 1901092, '23244', 13, 1311, 'SMA', '2008', '3.42', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Aktif'),
 (16, 'bsgoese', 'we', 'we', '09824242424', 'bagoes', 'eqweqe', 'L', 'madure', '2020-02-13', 'Budha', 'BN', 180, 58, '085675675567', 'bagoes@gmail.com', '2020-02-15-1550855391-cc_dark.png', 'DISABILITAS', 'WARGA NEGARA INDONESIA (WNI)', 21, 2103, 2103061, '23244', 13, 1311, 'SMA', '2008', '2.80', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Aktif'),
-(17, 'irfanwe', 'qwe', 'we', '854485766353452', 'yanu23rs', 'seddghfgnfdgh', 'L', 'bwi', '2020-02-22', 'Kristen', 'BN', 180, 34, '9754578778', 'irfan@gmail.com', '2020-02-16-id17Pelatihan -perbakinBigLogo.jpg', 'Tuna Daksa', 'WARGA NEGARA INDONESIA (WNI)', 11, 1103, 1103020, '23244', 13, 1318, 'SMA', '2008', '3.89', 'd41d8cd98f00b204e9800998ecf8427e', 'd41d8cd98f00b204e9800998ecf8427e', 'Aktif');
+(17, 'irfanwe', 'qwe', 'we', '854485766353452', 'yanu23rs', 'seddghfgnfdgh', 'L', 'bwi', '2020-02-22', 'Kristen', 'BN', 180, 34, '9754578778', 'irfan@gmail.com', '2020-02-16-id17Pelatihan -perbakinBigLogo.jpg', 'Tuna Daksa', 'WARGA NEGARA INDONESIA (WNI)', 11, 1103, 1103020, '23244', 13, 1318, 'SMA', '2008', '3.89', 'd41d8cd98f00b204e9800998ecf8427e', 'd41d8cd98f00b204e9800998ecf8427e', 'Aktif'),
+(18, 'soeltan kaya', 'SSd', 'SDsd', '90656856565', 'soeltan', 'amduywerwe', 'P', 'madure', '2020-02-22', 'Kristen', 'BN', 181, 90, '085252525325', 'soeltan@gmail.com', '2020-02-16-id18soeltan.jpg', 'DISABILITAS', 'WARGA NEGARA INDONESIA (WNI)', 12, 1205, 1205061, '092422', 12, 1201, 'SMA', '2019', '90.0', 'd41d8cd98f00b204e9800998ecf8427e', 'd41d8cd98f00b204e9800998ecf8427e', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -8648,7 +8648,7 @@ ALTER TABLE `tb_det_workshop`
 -- AUTO_INCREMENT untuk tabel `tb_harapan_kerja`
 --
 ALTER TABLE `tb_harapan_kerja`
-  MODIFY `id_harapan_kerja` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_harapan_kerja` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_jabatan`
@@ -8672,7 +8672,7 @@ ALTER TABLE `tb_lowongan`
 -- AUTO_INCREMENT untuk tabel `tb_pelamar`
 --
 ALTER TABLE `tb_pelamar`
-  MODIFY `id_pelamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_pelamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_perusahaan`

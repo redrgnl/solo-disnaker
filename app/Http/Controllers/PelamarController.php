@@ -109,6 +109,21 @@ class PelamarController extends Controller
             $file_E_name = date('Y-m-d') . "-" . "id" . $maxid . $file_E->getClientOriginalName();
 
             $file_E->move($lokasi_berkas, $file_E_name);
+        //Pengalaman kerja
+            $file_F = $insert->file('inppengalaman');
+            $file_F_name = date('Y-m-d') . "-" . "id" . $maxid . $file_F->getClientOriginalName();
+
+            $file_F->move($lokasi_berkas, $file_F_name);
+        //Keterampilan
+            $file_G = $insert->file('inpketerampilan');
+            $file_G_name = date('Y-m-d') . "-" . "id" . $maxid . $file_G->getClientOriginalName();
+
+            $file_G->move($lokasi_berkas, $file_G_name);
+        //Bahasa
+            $file_H = $insert->file('inpbahasa');
+            $file_H_name = date('Y-m-d') . "-" . "id" . $maxid . $file_H->getClientOriginalName();
+
+            $file_H->move($lokasi_berkas, $file_H_name);
         //end berkas pelamar
 
         $checknik = DB::table('tb_pelamar')->where('nik_pelamar', $insert->a)->get()->count();
@@ -131,7 +146,10 @@ class PelamarController extends Controller
                     'surat_ket_sehat_harapan' => "-",
                     'sertifikat_keahlian_harapan' => "-",
                     'ktp_harapan' => "-",
-    
+                    'pengalaman_kerja' => $file_F_name,
+                    'keterampilan_kerja' => $file_G_name,
+                    'penguasaan_bahasa' => $file_H_name,
+
                 ]);
             }else{
 
@@ -149,7 +167,10 @@ class PelamarController extends Controller
                     'surat_ket_sehat_harapan' => $file_C_name,
                     'sertifikat_keahlian_harapan' => $file_D_name,
                     'ktp_harapan' => $file_E_name,
-    
+                    'pengalaman_kerja' => $file_F_name,
+                    'keterampilan_kerja' => $file_G_name,
+                    'penguasaan_bahasa' => $file_H_name,
+
                 ]);
             }
 
@@ -219,6 +240,8 @@ class PelamarController extends Controller
 
     public function update_pelamar(Request $update)
     {
+        $lokasi_berkas = 'berkas_pelamar';
+
         $messages = [
             'required' => 'Field Wajib Diisi *',
             'max' => 'Input Tidak Sesuai'
@@ -253,7 +276,7 @@ class PelamarController extends Controller
         //     $img->move($location, $imgname);
         // }
 
-
+// update foto
         if($update->hasfile('inpfoto')){
 
             $foto_p = $update->file('inpfoto');
@@ -270,6 +293,61 @@ class PelamarController extends Controller
             ]);
 
         }
+// update pengalaman kerja
+            if($update->hasfile('inppengalaman')){
+
+                $file_F = $update->file('inppengalaman');
+                $file_F_name = date('Y-m-d') . "-" . "id" . $update->inpid . $file_F->getClientOriginalName();
+
+                $file_F->move($lokasi_berkas, $file_F_name);
+
+                if($update->old_pengalaman != ""){
+                    $path_F = public_path() . "/berkas_pelamar/" . $update->old_pengalaman;
+                    unlink($path_F);
+                }
+
+            
+                DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $update->inpid)->update([
+                    'pengalaman_kerja' => $file_F_name,
+            
+                ]);
+            }
+// update Keterampilan
+            if($update->hasfile('inpketerampilan')){
+
+                $file_G = $update->file('inpketerampilan');
+                $file_G_name = date('Y-m-d') . "-" . "id" . $update->inpid . $file_G->getClientOriginalName();
+
+                $file_G->move($lokasi_berkas, $file_G_name);
+                if($update->old_keterampilan != ""){
+
+                    $path_G = public_path() . "/berkas_pelamar/" . $update->old_keterampilan;
+                    unlink($path_G);
+                }
+            
+                DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $update->inpid)->update([
+                    'keterampilan_kerja' => $file_G_name,
+            
+                ]);
+            }
+// update Bahasa
+            if($update->hasfile('inpbahasa')){
+
+                $file_H = $update->file('inpbahasa');
+                $file_H_name = date('Y-m-d') . "-" . "id" . $update->inpid . $file_H->getClientOriginalName();
+
+                $file_H->move($lokasi_berkas, $file_H_name);
+                if($update->old_bahasa != ""){
+
+                    $path_H = public_path() . "/berkas_pelamar/" . $update->old_bahasa;
+                    unlink($path_H);
+                }
+            
+                DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $update->inpid)->update([
+                    'penguasaan_bahasa' => $file_H_name,
+            
+                ]);
+            }
 // UPDATE TABLE HARAPAN
 
 
@@ -311,12 +389,14 @@ class PelamarController extends Controller
                 'surat_ket_sehat_harapan' => "-",
                 'sertifikat_keahlian_harapan' => "-",
                 'ktp_harapan' => "-",
+                'pengalaman_kerja' => $file_F_name,
+                'keterampilan_kerja' => $file_G_name,
+                'penguasaan_bahasa' => $file_H_name,
 
             ]);
 
         }else{
             //update  izin keluarga
-            $lokasi_berkas = 'berkas_pelamar';
 
             if($update->hasfile('inpizin')){
 
@@ -421,6 +501,9 @@ class PelamarController extends Controller
                     'pembayaran_gaji_harapan' => $update->sistem_pembayaran_harapan,
                     'besar_gaji_harapan' => $update->harapan_gaji,
                     'negara_luar_harapan' => $update->inpnegarahrpn,
+                    'pengalaman_kerja' => $file_F_name,
+                    'keterampilan_kerja' => $file_G_name,
+                    'penguasaan_bahasa' => $file_H_name,
 
                 ]);
         }

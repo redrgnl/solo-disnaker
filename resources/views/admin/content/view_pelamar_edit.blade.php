@@ -677,22 +677,50 @@
             </div>
             <div class="row">
               <div class="file-field input-field col s12">
-                <div class="file-path-wrapper col s6">
-                  <h6 style="color: blue;">Data Pengalaman Kerja</h6>
+                <div class="btn">
+                  <span>Data Pengalaman Kerja</span>
+                  <input type="file" name="inppengalaman" id="inppengalaman">
                 </div>
-                <div class="col s6">
-                  <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" name="inppengalaman" value="{{ $harapan->pengalaman_kerja }}" type="text">
+                  <input type="hidden" value="{{ $harapan->pengalaman_kerja }}" name="old_pengalaman" >
+
+                  <label for="inppengalaman">* Upload File Dalam Bentuk PDF</label>
+
                 </div>
+                  <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
               </div>
             </div>
             <div class="row">
               <div class="file-field input-field col s12">
-                <div class="file-path-wrapper col s6">
-                  <h6 style="color: blue;">Data Penguasaan Ketrampilan</h6>
+                <div class="btn">
+                  <span>Data Keterampilan</span>
+                  <input type="file" name="inpketerampilan" id="inpketerampilan">
                 </div>
-                <div class="col s6">
-                  <a href="javascript:void(0);" class="waves-effect waves-light btn add_button_k" title="Add field"><i class="material-icons left">add_box</i>Tambah Keterampilan</a>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" name="inpketerampilan" value="{{ $harapan->keterampilan_kerja }}" type="text">
+                  <input type="hidden" value="{{ $harapan->keterampilan_kerja }}" name="old_keterampilan" >
+
+                  <label for="inpketerampilan">* Upload File Dalam Bentuk PDF</label>
+
                 </div>
+                  <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="file-field input-field col s12">
+                <div class="btn">
+                  <span>Data Penguasaan Bahasa</span>
+                  <input type="file" name="inpbahasa" id="inpbahasa">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" name="inpbahasa" value="{{ $harapan->penguasaan_bahasa }}" type="text">
+                  <input type="hidden" value="{{ $harapan->penguasaan_bahasa }}" name="old_bahasa" >
+
+                  <label for="inpbahasa">* Upload File Dalam Bentuk PDF</label>
+
+                </div>
+                  <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
               </div>
             </div>
             <div class="input-field col s12">
