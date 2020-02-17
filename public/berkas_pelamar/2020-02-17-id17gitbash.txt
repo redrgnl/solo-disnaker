@@ -1,0 +1,112 @@
+ini skrg singkronkan localmu dengan remote repo mu 
+
+coba setelah selesai kamu tambahkan file ato ubah file di htdocsnya (localmu)
+
+dah
+
+
+
+cek dulu status localmu fan
+dengan cara 
+coba ketikkan di git bash itu 
+git status
+
+nahh itu kan file yang baru tambahkan 
+
+itu masih dilocal mu 
+
+skrg coba track file itu ke staging area 
+
+dengan cara git add .
+
+git sta
+
+coba lihat bedanya 
+
+coba. apa bedanya ? kira"
+
+bukann gitu fan 
+dengan melakukan git add .
+itu kamu ngetrack file itu ke stagging area
+
+
+setelah itu di staging area kamu itu bikin snapshot
+
+dengan cara commit 
+perintahnya 
+git commit -m '<pesanmu apa disini terserah>'
+
+git status lagi coba 
+
+
+nah setelah bikin snapshot kamu siap untuk push fan 
+
+caranya ya git push nama_remotemu nama branchmu
+
+
+cara lihat remote = git remote -v 
+cara lihat branch = git branch
+
+
+coba kamu lihat dulu . terus kira" nama remote mu apa dan nama branch mu apa
+
+remotenya apa? branch apa?
+
+fetch[ush / salahh. itu remote
+mastER
+
+git push nama_remotemu nama branchmu
+coba push
+
+coba lihat repo mu. ada ga file yg baru kamu tambahin
+
+nah udah gitu
+
+kalo buat anak2 kalo mau access repo ku ?
+
+gmn ?
+
+
+ya invite mereka 
+terus sama kek tadi 
+
+ke htdocs 
+lalu git init 
+
+terus tambahkan remote repomu 
+dengan cara
+git remote add origin https://github.com/guramin01/rest_ci.git
+
+terus 
+lakukan pull agar singkron local dan repo
+
+dengan cara 
+git pull origin master
+mana file gg.php ny ?
+
+udah 
+
+berarti anak2 yg masukan kode di atas tu di git bash mereka ?
+
+yoiii kan di local mereka yang mau singkron ke repo mu 
+
+udah gitu aja ko ? ga ada yg lian ?
+
+
+gak ada fann 
+berarti alur nya
+
+mereka edit > masukan kode + snapshot > push
+gtu >
+
+iya bener fan 
+
+
+woke dah makasih ko mas
+tah
+
+siappp fann 
+mikumm 
+
+
+coba edit file README.md di localmu terus push ke repo

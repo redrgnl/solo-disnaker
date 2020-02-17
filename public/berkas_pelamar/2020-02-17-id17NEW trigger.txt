@@ -1,0 +1,19 @@
+
+//Insert ke Tabel pembelian
+INSERT INTO pembelian ( KodeBarang,nama_user, barang,jumlah_barang ) VALUES ('B0007','irfan', 'ijn', '10'); 
+
+
+
+//Trigger Update Stok
+
+DELIMITER //
+CREATE TRIGGER update_stok
+AFTER INSERT ON pembelian
+FOR EACH ROW
+BEGIN 
+UPDATE tabel_barang 
+SET StokBarang = StokBarang + NEW.jumlah_barang
+WHERE KodeBarang = NEW.KodeBarang;
+END//
+
+

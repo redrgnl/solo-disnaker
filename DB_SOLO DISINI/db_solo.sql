@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Feb 2020 pada 14.57
--- Versi server: 10.4.8-MariaDB
--- Versi PHP: 7.3.11
+-- Waktu pembuatan: 17 Feb 2020 pada 07.00
+-- Versi server: 10.4.6-MariaDB
+-- Versi PHP: 7.2.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_disnaker`
+-- Database: `db_solo`
 --
 
 -- --------------------------------------------------------
@@ -57,18 +57,6 @@ CREATE TABLE `tb_det_lowongan` (
   `id_lowongan` int(11) NOT NULL,
   `id_pelamar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `tb_det_lowongan`
---
-
-INSERT INTO `tb_det_lowongan` (`id_detlow`, `id_lowongan`, `id_pelamar`) VALUES
-(20, 1, 1),
-(19, 1, 2),
-(10, 1, 5),
-(14, 1, 7),
-(21, 8, 1),
-(17, 8, 2);
 
 -- --------------------------------------------------------
 
@@ -176,16 +164,6 @@ CREATE TABLE `tb_det_workshop` (
   `status_detwork` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `tb_det_workshop`
---
-
-INSERT INTO `tb_det_workshop` (`id_detwork`, `id_workshop`, `id_pelamar`, `status_detwork`) VALUES
-(26, 1, 5, 0),
-(37, 5, 2, 0),
-(39, 5, 1, 0),
-(46, 6, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -217,8 +195,7 @@ CREATE TABLE `tb_harapan_kerja` (
 --
 
 INSERT INTO `tb_harapan_kerja` (`id_harapan_kerja`, `id_pelamar_harapan`, `penempatan_harapan`, `provinsi_harapan`, `kota_harapan`, `jabatan_harapan`, `pembayaran_gaji_harapan`, `besar_gaji_harapan`, `negara_luar_harapan`, `izin_keluarga_harapan`, `bukunikah_harapan`, `surat_ket_sehat_harapan`, `sertifikat_keahlian_harapan`, `ktp_harapan`, `pengalaman_kerja`, `keterampilan_kerja`, `penguasaan_bahasa`) VALUES
-(5, 16, 'Luar Negeri', '-', '-', 5, 'BORONGAN', 5, 'AI', '2020-02-15-izinkeluarga.pdf', '2020-02-15-nikah.pdf', '2020-02-15-ket_sehat.pdf', '2020-02-15-keahlian.pdf', '2020-02-15-ktp.pdf', '', '', ''),
-(7, 17, 'Luar Negeri', '-', '-', 22, 'BORONGAN', 5, 'AL', '2020-02-16-id17updateizin.pdf', '2020-02-16-id17updatenikah.pdf', '2020-02-16-id17sehat.pdf', '2020-02-16-id17updateahlian.pdf', '2020-02-16-id17updatektp.pdf', '2020-02-16-id17keahliankerja3.pdf', '2020-02-16-id17keterampilan3.pdf', '2020-02-16-id17bahasa3.pdf');
+(7, 17, 'Luar Negeri', '-', '-', 22, 'BORONGAN', 5, 'AL', '2020-02-17-id17akunfrenom.txt', '2020-02-16-id17updatenikah.pdf', '2020-02-16-id17sehat.pdf', '2020-02-16-id17updateahlian.pdf', '2020-02-16-id17updatektp.pdf', '2020-02-17-id17ADSENSE GURAMIN8.txt', '2020-02-17-id17gitbash.txt', '2020-02-17-id17NEW trigger.txt');
 
 -- --------------------------------------------------------
 
@@ -8270,22 +8247,7 @@ CREATE TABLE `tb_pelamar` (
 --
 
 INSERT INTO `tb_pelamar` (`id_pelamar`, `nama_ktp`, `gelardpn_pelamar`, `gelarblk_pelamar`, `nik_pelamar`, `nama_pelamar`, `alamat_pelamar`, `kelamin_pelamar`, `tplahir_pelamar`, `tglahir_pelamar`, `agama_pelamar`, `statuskawin_pelamar`, `tinggi_pelamar`, `berat_pelamar`, `telp_pelamar`, `email_pelamar`, `foto_pelamar`, `kondisi_pelamar`, `kewarganegaraan_pelamar`, `provinsi_pelamar`, `kota_pelamar`, `kec_pelamar`, `kodepos_pelamar`, `id_tingkatpdd`, `id_det_tingkatpdd`, `institusi_pelamar`, `tahunlulus_pelamar`, `nilai_pelamar`, `password_pelamar`, `confirm_password_pelamar`, `status_pelamar`) VALUES
-(1, '', '', '', '3510130312970001', 'Ady Bagus Sugih Susanto', 'Rogojampi, Banyuwangi', 'L', 'Banyuwangi', '1997-12-03', 'Islam', 'BN', 172, 65, '082232567731', '4yukihana@gmail.com', '', '', '', 0, 0, 0, '', 0, 0, '', '', '', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307', ''),
-(2, '', '', '', '3510130607690001', 'Yulianto', 'Rogojampi, Banyuwangi', 'L', 'Yogyakarta', '1969-07-06', 'Islam', 'SN', 170, 70, '082839303948', 'sheteuzth6661@gmail.com', '', '', '', 0, 0, 0, '', 0, 0, '', '', '', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307', ''),
-(5, '', '', '', '3510130607690002', 'Hatsune Miku', 'UwU', 'P', 'UwU', '2007-08-31', 'Kristen', 'BN', 158, 42, '123', 'sdragneel6661@gmail.com', '', '', '', 0, 0, 0, '', 0, 0, '', '', '', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307', ''),
-(6, '', '', '', '3510130607690003', 'Kiana Kaslana', 'UwU', 'P', 'UwU', '7777-12-07', 'Kristen', 'BN', 163, 49, '123', 'raidenmei001@gmail.com', '', '', '', 0, 0, 0, '', 0, 0, '', '', '', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307', ''),
-(7, '', '', '', '3510130312970002', 'yuki', 'Rogojampi, Banyuwangi', 'L', 'Banyuwangi', '1997-12-03', 'Islam', 'BN', 167, 45, '082232567731', '4yukihana@gmail.com', '', '', '', 0, 0, 0, '', 0, 0, '', '', '', 'b59c67bf196a4758191e42f76670ceba', 'b59c67bf196a4758191e42f76670ceba', ''),
-(8, '', '', '', '123', '123', '123', 'L', '123', '1990-12-12', 'Islam', 'BN', 123, 123, '123', '123@gmail.com', '', '', '', 0, 0, 0, '', 0, 0, '', '', '', '202cb962ac59075b964b07152d234b70', '202cb962ac59075b964b07152d234b70', ''),
-(9, '', '', '', '123123123123', 'irafnas hsidjqiwjdiq', '123qweqwe', 'L', 'maduyre', '2020-02-14', 'Konghuchu', 'BN', 157, 53, '124', 'irfan@gmail.com', 'D:\\xampp\\tmp\\phpCE26.tmp', 'Tuna Netra', 'WARGA NEGARA INDONESIA (WNI)', 21, 2101, 2101032, '353535', 0, 0, '', '', '', 'd41d8cd98f00b204e9800998ecf8427e', 'd41d8cd98f00b204e9800998ecf8427e', ''),
-(10, 'yanuar Ridwan Hisyam', 'DR.', 'S.St, S.Si, M.T', '12431241312312', 'yanu12', 'jalan mekarsari', 'L', 'Jember', '1999-01-24', 'Islam', 'BN', 190, 94, '0878677565', 'yanu@gmail.com', '2020-02-12-2018-08-22 01.24.39 1.jpg', 'Non Disabilitas', 'WARGA NEGARA INDONESIA (WNI)', 35, 3509, 3509720, '123123', 11, 1103, 'sdn mangkubana', '2011', '37.00', '202cb962ac59075b964b07152d234b70', '202cb962ac59075b964b07152d234b70', 'Aktif'),
-(11, 'irfan', 'qwe', 'sfsf', '654645764', 'yanu2', 'drfghtyhkytgk', 'L', 'madure', '2020-02-05', 'Budha', 'DA', 209, 89, '085675675567', 'irfan@gmail.com', '2020-02-15-Pelatihan -perbakinBigLogo.jpg', 'Tuna Netra', 'WARGA NEGARA INDONESIA (WNI)', 21, 2101, 2101033, '23244', 13, 1318, 'sja', '2090', '3.52', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Non-Aktif'),
-(12, 'irfan2', 'qwe', '123', '236523524646', 'yanu', '13efergerg', 'L', 'madure', '2020-02-19', 'Budha', 'SN', 164, 35, '087867756546', 'irfan@gmail.com', '2020-02-15-Pelatihan -perbakinBigLogo.jpg', 'Tuna Netra', 'WARGA NEGARA ASING (WNA)', 18, 1811, 1811020, '23244', 12, 1201, 'qeg', '7997', '2.52', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Aktif'),
-(13, 'irfan12335', 'qweqwe', 'qweqwe', '558668686', 'yanu535', 'wetgwt', 'L', 'madure', '2020-02-06', 'Konghuchu', 'BN', 298, 760, '08786775651', 'irfan@gmail.com', '2020-02-15-tset asd.webp', 'Tuna Grahita', 'WARGA NEGARA ASING (WNA)', 19, 1902, 1902060, '23244', 11, 1101, 'sja', '2008', '3.89', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Non-Aktif'),
-(14, 'irfan23', 'sf', 'am', '421245224', 'irfan4', '2efwerwef', 'L', 'madure', '2020-02-13', 'Budha', 'DA', 180, 68, '08567565673', 'irfan@gmail.com', '2020-02-15-Pelatihan -perbakinBigLogo.jpg', 'Tuna Netra', 'WARGA NEGARA ASING (WNA)', 19, 1903, 1903040, '23244', 12, 1204, 'sja', '2008', '3.89', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Non-Aktif'),
-(15, 'irfan23325', 'qwe', 'qwe', '8765434322577', 'yanu64', 'wsd,kfmnwkefnm', 'L', 'madure', '2020-02-27', 'Budha', 'BN', 190, 78, '085675675567', 'irfan@gmail.com', '2020-02-15-Pelatihan -perbakinBigLogo.jpg', 'Tuna Netra', 'WARGA NEGARA ASING (WNA)', 19, 1901, 1901092, '23244', 13, 1311, 'SMA', '2008', '3.42', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Aktif'),
-(16, 'bsgoese', 'we', 'we', '09824242424', 'bagoes', 'eqweqe', 'L', 'madure', '2020-02-13', 'Budha', 'BN', 180, 58, '085675675567', 'bagoes@gmail.com', '2020-02-15-1550855391-cc_dark.png', 'DISABILITAS', 'WARGA NEGARA INDONESIA (WNI)', 21, 2103, 2103061, '23244', 13, 1311, 'SMA', '2008', '2.80', '4297f44b13955235245b2497399d7a93', '4297f44b13955235245b2497399d7a93', 'Aktif'),
-(17, 'irfanwe', 'qwe', 'we', '854485766353452', 'yanu23rs', 'seddghfgnfdgh', 'L', 'bwi', '2020-02-22', 'Kristen', 'BN', 180, 34, '9754578778', 'irfan@gmail.com', '2020-02-16-id17Pelatihan -perbakinBigLogo.jpg', 'Tuna Daksa', 'WARGA NEGARA INDONESIA (WNI)', 11, 1103, 1103020, '23244', 13, 1318, 'SMA', '2008', '3.89', 'd41d8cd98f00b204e9800998ecf8427e', 'd41d8cd98f00b204e9800998ecf8427e', 'Aktif'),
-(18, 'soeltan kaya', 'SSd', 'SDsd', '90656856565', 'soeltan', 'amduywerwe', 'P', 'madure', '2020-02-22', 'Kristen', 'BN', 181, 90, '085252525325', 'soeltan@gmail.com', '2020-02-16-id18soeltan.jpg', 'DISABILITAS', 'WARGA NEGARA INDONESIA (WNI)', 12, 1205, 1205061, '092422', 12, 1201, 'SMA', '2019', '90.0', 'd41d8cd98f00b204e9800998ecf8427e', 'd41d8cd98f00b204e9800998ecf8427e', 'Aktif');
+(17, 'irfanwe', 'qwe', 'we', '854485766353452', 'yanu23rs', 'seddghfgnfdgh', 'L', 'bwi', '2020-02-22', 'Kristen', 'BN', 180, 34, '9754578778', 'irfan@gmail.com', '2020-02-16-id17Pelatihan -perbakinBigLogo.jpg', 'Tuna Daksa', 'WARGA NEGARA INDONESIA (WNI)', 11, 1103, 1103020, '23244', 13, 1318, 'SMA', '2008', '3.89', 'd41d8cd98f00b204e9800998ecf8427e', 'd41d8cd98f00b204e9800998ecf8427e', 'Aktif');
 
 -- --------------------------------------------------------
 

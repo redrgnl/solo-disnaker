@@ -292,7 +292,9 @@ class PelamarController extends Controller
         
             ]);
 
-        }
+        }else{
+                $foto_name = $update->old_foto;
+            }
 // update pengalaman kerja
             if($update->hasfile('inppengalaman')){
 
@@ -311,6 +313,8 @@ class PelamarController extends Controller
                     'pengalaman_kerja' => $file_F_name,
             
                 ]);
+            }else{
+                $file_F_name = $update->old_pengalaman;
             }
 // update Keterampilan
             if($update->hasfile('inpketerampilan')){
@@ -329,6 +333,8 @@ class PelamarController extends Controller
                     'keterampilan_kerja' => $file_G_name,
             
                 ]);
+            }else{
+                $file_G_name = $update->old_keterampilan;
             }
 // update Bahasa
             if($update->hasfile('inpbahasa')){
@@ -347,6 +353,8 @@ class PelamarController extends Controller
                     'penguasaan_bahasa' => $file_H_name,
             
                 ]);
+            }else{
+                $file_H_name = $update->old_bahasa;
             }
 // UPDATE TABLE HARAPAN
 
