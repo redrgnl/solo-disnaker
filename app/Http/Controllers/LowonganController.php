@@ -23,6 +23,68 @@ class LowonganController extends Controller
         return view ('/admin/content/view_lowongan', $data);
     }
     
+    //filter dalam - luar
+    public function dndisabilitas() {
+        $data = [
+            'title' => "Manajemen Data Lowongan",
+            'breadcrumb' => "Data Lowongan Dalam Negeri - Disabilitas",
+            'lowongan' => DB::table('tb_lowongan')
+                                ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                                ->where('tb_lowongan.kondisi_lowongan', 'Disabilitas')
+                                ->where('tb_lowongan.tempat_lowongan', 'DN')
+                                ->get(),
+            'jabatan' => DB::table('tb_jabatan')->get()
+        ];
+        
+        return view ('/admin/content/view_lowongan', $data);
+    }
+    
+    public function dnnondisabilitas() {
+        $data = [
+            'title' => "Manajemen Data Lowongan",
+            'breadcrumb' => "Data Lowongan",
+            'lowongan' => DB::table('tb_lowongan')
+                                ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                                ->where('tb_lowongan.kondisi_lowongan', 'Non Disabilitas')
+                                ->where('tb_lowongan.tempat_lowongan', 'DN')
+                                ->get(),
+            'jabatan' => DB::table('tb_jabatan')->get()
+        ];
+        
+        return view ('/admin/content/view_lowongan', $data);
+    }
+    
+    public function lndisabilitas() {
+        $data = [
+            'title' => "Manajemen Data Lowongan",
+            'breadcrumb' => "Data Lowongan",
+            'lowongan' => DB::table('tb_lowongan')
+                                ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                                ->where('tb_lowongan.kondisi_lowongan', 'Disabilitas')
+                                ->where('tb_lowongan.tempat_lowongan', 'LN')
+                                ->get(),
+            'jabatan' => DB::table('tb_jabatan')->get()
+        ];
+        
+        return view ('/admin/content/view_lowongan', $data);
+    }
+    
+    public function lnnondisabilitas() {
+        $data = [
+            'title' => "Manajemen Data Lowongan",
+            'breadcrumb' => "Data Lowongan",
+            'lowongan' => DB::table('tb_lowongan')
+                                ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                                ->where('tb_lowongan.kondisi_lowongan', 'Non Disabilitas')
+                                ->where('tb_lowongan.tempat_lowongan', 'LN')
+                                ->get(),
+            'jabatan' => DB::table('tb_jabatan')->get()
+        ];
+        
+        return view ('/admin/content/view_lowongan', $data);
+    }
+    //end filter dalam - luar
+    
     public function tambah_lowongan() {
         $data = [
             'title' => "Form Tambah Lowongan",
@@ -57,6 +119,8 @@ class LowonganController extends Controller
             'id_perusahaan' => $insert->a,
             'posisi_lowongan' => $insert->b,
             'status_lowongan' => $insert->c,
+            'kondisi_lowongan' => $insert->ccc,
+            'tempat_lowongan' => $insert->cccc,
             'gaji_lowongan' => $insert->d,
             'pengalaman_lowongan' => $insert->e,
             'jenis_kompetensi_lowongan' => $insert->cc,
@@ -104,6 +168,8 @@ class LowonganController extends Controller
             'id_perusahaan' => $update->a,
             'posisi_lowongan' => $update->b,
             'status_lowongan' => $update->c,
+            'kondisi_lowongan' => $update->ccc,
+            'tempat_lowongan' => $update->cccc,
             'gaji_lowongan' => $update->d,
             'pengalaman_lowongan' => $update->e,
             'jenis_kompetensi_lowongan' => $update->cc,

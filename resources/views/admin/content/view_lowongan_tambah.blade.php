@@ -70,6 +70,32 @@
               </div>
             </div>
             <div class="row">
+              <div class="input-field col l6">
+                <i class="material-icons prefix">assistant_photo</i>
+                <select name="cccc" id="cccc" required>
+                  <option value="">- Pilih Penempatan -</option>
+                  <option value="DN">Dalam Negeri</option>
+                  <option value="LN">Luar Negeri</option>
+                </select>
+                <label>Penempatan Lowongan</label>
+                @error('cccc')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="input-field col l6">
+                <i class="material-icons prefix">accessibility</i>
+                <select name="ccc" id="ccc" required>
+                  <option value="">- Pilih Kondisi Fisik -</option>
+                  <option value="Non Disabilitas">Non Disabilitas</option>
+                  <option value="Disabilitas">Disabilitas</option>
+                </select>
+                <label>Konfisi Fisik*</label>
+                @error('ccc')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">attach_money</i>
                 <input name="d" id="inpgaji" type="number" class="validate" >

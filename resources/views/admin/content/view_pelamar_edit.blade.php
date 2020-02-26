@@ -184,9 +184,10 @@
                 <option value="Non Disabilitas" <?php if ($pelamar->kondisi_pelamar == "Non Disabilitas") {
                                                   echo "selected";
                                                 } ?>>Non Disabilitas</option>
-                <option value="DISABILITAS" <?php if ($pelamar->kondisi_pelamar == "DISABILITAS") {
+                <option value="Disabilitas" <?php if ($pelamar->kondisi_pelamar == "Disabilitas") {
                                               echo "selected";
-                                            } ?>>DISABILITAS</option>
+                                            } ?>>Disabilitas</option>
+<!--
                 <option value="Tuna Daksa" <?php if ($pelamar->kondisi_pelamar == "Tuna Daksa") {
                                               echo "selected";
                                             } ?>>Tuna Daksa</option>
@@ -205,6 +206,7 @@
                 <option value="Tuna Netra" <?php if ($pelamar->kondisi_pelamar == "Tuna Netra") {
                                               echo "selected";
                                             } ?>>Tuna Ganda</option>
+-->
               </select>
               <label>Konfisi Fisik*</label>
               @error('inpkonfis')
@@ -338,7 +340,7 @@
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">place</i>
-              <input name="inpalamat" id="inpalamat" type="text" class="validate materialize-textarea" value="{{ $pelamar->alamat_pelamar }}" required></input>
+              <input name="inpalamat" id="inpalamat" type="text" class="validate materialize-textarea" value="{{ $pelamar->alamat_pelamar }}" required>
               <label for="inpalamat">Alamat*</label>
               @error('inpalamat')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
@@ -642,7 +644,6 @@
               @error('kelompok_jabatan')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
-              </option>
             </div>
 
             <div class="input-field col s12 m4 l4">

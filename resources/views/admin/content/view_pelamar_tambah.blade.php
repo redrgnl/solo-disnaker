@@ -164,13 +164,15 @@
               <select name="inpkonfis" id="inpkonfis" required>
                 <option value="">- Pilih Kondisi Fisik -</option>
                 <option value="Non Disabilitas">Non Disabilitas</option>
-                <option value="DISABILITAS">DISABILITAS</option>
+                <option value="Disabilitas">Disabilitas</option>
+<!--
                 <option value="Tuna Daksa">Tuna Daksa</option>
                 <option value="Tuna Grahita">Tuna Grahita</option>
                 <option value="Tuna Wicara">Tuna Wicara</option>
                 <option value="Tuna Netra">Tuna Netra</option>
                 <option value="Tuna Netra">Tuna Rungu</option>
                 <option value="Tuna Netra">Tuna Ganda</option>
+-->
               </select>
               <label>Konfisi Fisik*</label>
               @error('inpkonfis')
@@ -457,7 +459,6 @@
               @error('kelompok_jabatan')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
-              </option>
             </div>
 
             <div class="input-field col s12 m4 l4">

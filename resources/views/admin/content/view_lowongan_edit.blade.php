@@ -72,6 +72,32 @@
               </div>
             </div>
             <div class="row">
+              <div class="input-field col l6">
+                <i class="material-icons prefix">assistant_photo</i>
+                <select name="cccc" id="cccc" required>
+                  <option value="">- Pilih Penempatan -</option>
+                  <option value="DN" <?php if ($lowongan->tempat_lowongan == 'DN'){ echo "selected"; }?>>Dalam Negeri</option>
+                  <option value="LN" <?php if ($lowongan->tempat_lowongan == 'LN'){ echo "selected"; }?>>Luar Negeri</option>
+                </select>
+                <label>Penempatan Lowongan</label>
+                @error('cccc')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+              <div class="input-field col l6">
+                <i class="material-icons prefix">accessibility</i>
+                <select name="ccc" id="ccc" required>
+                  <option value="">- Pilih Kondisi Fisik -</option>
+                  <option value="Non Disabilitas" <?php if ($lowongan->kondisi_lowongan == 'Non Disabilitas'){ echo "selected"; }?>>Non Disabilitas</option>
+                  <option value="Disabilitas" <?php if ($lowongan->kondisi_lowongan == 'Disabilitas'){ echo "selected"; }?>>Disabilitas</option>
+                </select>
+                <label>Konfisi Fisik*</label>
+                @error('inpkonfis')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">attach_money</i>
                 <input name="d" id="inpgaji" type="number" class="validate"  value="{{ $lowongan->gaji_lowongan }}">

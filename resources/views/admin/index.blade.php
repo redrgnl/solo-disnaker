@@ -84,7 +84,28 @@
       </li>
       <li class="navigation-header"><a class="navigation-header-text">pendaftaran</a><i class="navigation-header-icon material-icons">more_horiz</i>
       </li>
-      <li class="bold"><a class="waves-effect waves-cyan " href="/admin/halaman-manajemen-lowongan"><i class="material-icons">exit_to_app</i><span class="menu-title" data-i18n="">Lowongan</span></a>
+      <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">exit_to_app</i><span class="menu-title" data-i18n="">Lowongan</span></a>
+        <div class="collapsible-body">
+          <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+            <li><a class="collapsible-body" href="/admin/halaman-manajemen-lowongan" data-i18n=""><i class="material-icons" style="color: red">brightness_1</i><span>Semua Lowongan</span></a></li>
+            <li><a class="collapsible-body collapsible-header waves-effect waves-cyan" href="#" data-i18n=""><i class="material-icons" style="color: yellow">brightness_1</i><span>Dalam Negeri</span></a>
+              <div class="collapsible-body">
+                <ul class="collapsible" data-collapsible="accordion">
+                  <li><a class="collapsible-body" href="/admin/lowongan-dalam-negeri/disabilitas" data-i18n=""><i class="material-icons">radio_button_unchecked</i><span>DN - Disabilitas</span></a></li>
+                  <li><a class="collapsible-body" href="/admin/lowongan-dalam-negeri/non-disabilitas" data-i18n=""><i class="material-icons">radio_button_unchecked</i><span>DN - Non Disabilitas</span></a></li>
+                </ul>
+              </div>
+            </li>
+            <li><a class="collapsible-body collapsible-header waves-effect waves-cyan" href="#" data-i18n=""><i class="material-icons" style="color: green">brightness_1</i><span>Luar Negeri</span></a>
+              <div class="collapsible-body">
+                <ul class="collapsible" data-collapsible="accordion">
+                  <li><a class="collapsible-body" href="/admin/lowongan-luar-negeri/disabilitas" data-i18n=""><i class="material-icons">radio_button_unchecked</i><span>LN - Disabilitas</span></a></li>
+                  <li><a class="collapsible-body" href="/admin/lowongan-luar-negeri/non-disabilitas" data-i18n=""><i class="material-icons">radio_button_unchecked</i><span>LN - Non Disabilitas</span></a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
       </li>
       <li class="bold"><a class="waves-effect waves-cyan " href="/admin/halaman-manajemen-workshop"><i class="material-icons">extension</i><span class="menu-title" data-i18n="">Pelatihan</span></a>
       </li>

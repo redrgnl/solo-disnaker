@@ -60,7 +60,7 @@
           <div class="row">
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">account_balance</i>
-              <input name="inpnpwp" id="inpnpwp" type="text" class="validate" required>
+              <input name="inpnpwp" id="inpnpwp" type="text" class="validate">
               <label for="inpnpwp">NPWP</label>
               @error('c')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
@@ -85,9 +85,9 @@
               <i class="material-icons prefix">class</i>
               <select name="inpkelas" id="inpkelas">
                 <option value="">- Pilih kelas Perusahaan -</option>
-                <option value="Kecil">Kecil</option>
-                <option value="Menengah">Menengah</option>
-                <option value="Besar">Besar</option>
+                <option value="Kecil">Kecil ( &lt; 20 orang )</option>
+                <option value="Menengah">Menengah ( &lt; 100 orang )</option>
+                <option value="Besar">Besar ( &gt; 100 orang )</option>
               </select>
               <label>Kelas Perusahaan</label>
               @error('c1')
@@ -125,14 +125,12 @@
           </div>
           <div class="row">
             <div class="input-field col s6 m6 l6">
-              <i class="material-icons prefix">domain</i>
-              <select name="inpprov" id="prov" required>
+              <select class="browser-default" name="inpprov" id="prov" required>
                 <option value="">- Pilih Provinsi -</option>
                 @foreach($provinsi as $prov)
                 <option value="{{ $prov->id }}">{{ $prov->name }}</option>
                 @endforeach
               </select>
-              <label>Provinsi</label>
               @error('d')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror

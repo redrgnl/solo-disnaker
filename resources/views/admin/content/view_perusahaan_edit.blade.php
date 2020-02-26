@@ -97,13 +97,13 @@
                   <option value="">- Pilih kelas Perusahaan -</option>
                   <option value="Kecil" <?php if ($perusahaan->kelas_perusahaan == "Kecil") {
                                           echo ' selected="selected"';
-                                        } ?>>Kecil</option>
+                                        } ?>>Kecil ( &lt; 20 orang )</option>
                   <option value="Menengah" <?php if ($perusahaan->kelas_perusahaan == "Menengah") {
                                               echo ' selected="selected"';
-                                            } ?>>Menengah</option>
+                                            } ?>>Menengah ( &lt; 100 orang )</option>
                   <option value="Besar" <?php if ($perusahaan->kelas_perusahaan == "Besar") {
                                           echo ' selected="selected"';
-                                        } ?>>Besar</option>
+                                        } ?>>Besar ( &gt; 100 orang )</option>
                 </select>
                 <label>Kelas Perusahaan</label>
                 @error('c1')
@@ -149,8 +149,7 @@
             </div>
             <div class="row">
               <div class="input-field col s6 m6 l6">
-                <i class="material-icons prefix">domain</i>
-                <select name="inpprov" id="inpprov" required>
+                <select class="browser-default" name="inpprov" id="inpprov" required>
                   <option value="">- Pilih Provinsi -</option>
                   @foreach($provinsi as $prov)
                   <?php if ($prov->id == $perusahaan->id_provinsi) {
@@ -161,7 +160,6 @@
                   <option value="{{ $prov->id }}" <?= $slct ?>>{{ $prov->name }}</option>
                   @endforeach
                 </select>
-                <label>Provinsi</label>
                 @error('d')
                 <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
