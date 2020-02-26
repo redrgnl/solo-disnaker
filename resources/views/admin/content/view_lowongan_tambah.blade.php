@@ -43,7 +43,17 @@
               </div>
             </div>
             <div class="row">
-              <div class="input-field col s6">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">description</i>
+                <input name="g" id="inpformasi" type="text" class="validate" required="">
+                <label for="g">Nama Formasi</label>
+                @error('d')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col l12 s12">
                 <i class="material-icons prefix">history</i>
                 <select class="" name="c" id="inpstatus" >
                   <option value="">- Status -</option>
@@ -55,34 +65,55 @@
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
-              <div class="input-field col s6">
+
+            </div>
+            <div class="row">
+              <span class="input-field col s6">
                 <i class="material-icons prefix">chrome_reader_mode</i>
-                <select class="" name="cc" id="inpkompetensi" >
-                  <option value="">- Jenis Kompetensi -</option>
-                  @foreach($kompetensi as $komp)
-                  <option value="{{ $komp->nama_kompetensi }}">{{ $komp->nama_kompetensi }}</option>
+                <select class="" name="cc" id="inptingkatpdd" >
+                  <option value="">- Pendidikan -</option>
+                  @foreach($tingkatpdd as $tpdd)
+                  <option value="{{ $tpdd->id_tingkatpdd }}">{{ $tpdd->jenis_tingkatpdd }}</option>
                   @endforeach
                 </select>
-                <label for="c">Jenis Kompetensi</label>
+                <label for="c">Pendidikan</label>
                 @error('c')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </span>
+            <span class="input-field col s6 m6 l6">
+              <select class="browser-default" name="n" id="inpjurusan">
+                <option value="">- Pilih Jurusan -</option>
+              </select>
+              @error('i')
+              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+              @enderror
+            </span>
+            </div>
+            <div class="field-kej row" style="display: none;">
+              <div class="input-field col s12 s12">
+                <i class="material-icons prefix">description</i>
+                <input name="m" id="inpkejuruan" type="text" value="-" class="validate">
+                <label for="m">Detail Kejuruan</label>
+                @error('d')
                     <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
             </div>
             <div class="row">
-              <div class="input-field col l6">
+              <div class="input-field col l6 s6">
                 <i class="material-icons prefix">assistant_photo</i>
-                <select name="cccc" id="cccc" required>
+                <select name="p" id="p" required>
                   <option value="">- Pilih Penempatan -</option>
                   <option value="DN">Dalam Negeri</option>
                   <option value="LN">Luar Negeri</option>
                 </select>
                 <label>Penempatan Lowongan</label>
-                @error('cccc')
+                @error('p')
                 <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
-              <div class="input-field col l6">
+              <div class="input-field col l6 s6">
                 <i class="material-icons prefix">accessibility</i>
                 <select name="ccc" id="ccc" required>
                   <option value="">- Pilih Kondisi Fisik -</option>
@@ -91,6 +122,72 @@
                 </select>
                 <label>Konfisi Fisik*</label>
                 @error('ccc')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">today</i>
+                <input name="h" id="inpawal" type="date" class="validate">
+                <label for="h">Tanggal Mulai</label>
+                @error('d')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+
+              <div class="input-field col s6">
+                <i class="material-icons prefix">today</i>
+                <input name="i" id="inpakhir" type="date" class="validate">
+                <label for="i">Tanggal Akhir</label>
+                @error('d')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">face</i>
+                <input name="j" id="inppria" type="number" class="validate" >
+                <label for="j">Jumlah Lowongan Pria</label>
+                @error('d')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+
+              <div class="input-field col s6">
+                <i class="material-icons prefix">face</i>
+                <input name="k" id="inpwanita" type="number" class="validate" >
+                <label for="k">Jumlah Lowongan Wanita</label>
+                @error('d')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+            <div class="row">
+            <div class="input-field col l6 s6">
+              <i class="material-icons prefix">group</i>
+              <select class="form-control" name="l" id="sistem_pembayaran_harapan">
+                <option value="">Pilih Sistem Pengupahan Gaji</option>
+                <option value="BORONGAN">BORONGAN</option>
+                <option value="HARIAN">HARIAN</option>
+                <option value="MINGGUAN">MINGGUAN</option>
+                <option value="BULANAN">BULANAN</option>
+              </select>
+              <label>Sistem Pembayaran Gaji</label>
+              @error('sistem_pembayaran_harapan')
+              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+              @enderror
+            </div>
+              <div class="input-field col l6 s6">
+                <i class="material-icons prefix">timeline</i>
+                <select name="o" id="o" required>
+                  <option value="">- Pilih Status Hubungan Kerja -</option>
+                  <option value="WAKTU TERTENTU">WAKTU TERTENTU</option>
+                  <option value="WAKTU TIDAK TERTENTU">WAKTU TIDAK TERTENTU</option>
+                </select>
+                <label>Status Hubungan Kerja*</label>
+                @error('o')
                 <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
               </div>
@@ -105,6 +202,7 @@
                 @enderror
               </div>
             </div>
+
             <div class="row">
               <div class="input-field col s12">
                 <i class="material-icons prefix">airplanemode_active</i>
@@ -140,5 +238,32 @@
 @endsection
 
 @section('customjs')
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#inptingkatpdd').on('change', function(e) {
+      var idprov = e.target.value;
 
+      //ajax
+
+      $.get('/admin/get-dettingkatpdd/' + idprov, function(data) {
+        $('#inpjurusan').html(data)
+      });
+
+    });
+
+     $('#inpjurusan').on('change', function(x) {
+      var idkej = x.target.value;
+
+      //ajax
+
+      if (idkej == "1304" || idkej == "1203" || idkej == "1204") {
+          $('.field-kej').show()
+
+      }else{
+          $(".field-kej").css("display", "none");
+      }
+
+    });   
+  });
+</script>
 @endsection

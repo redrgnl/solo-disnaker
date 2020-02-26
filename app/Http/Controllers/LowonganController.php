@@ -91,7 +91,9 @@ class LowonganController extends Controller
             'breadcrumb' => "Tambah Lowongan",
             'perusahaan' => DB::table('tb_perusahaan')->orderBy('nama_perusahaan', 'asc')->get(),
             'jabatan' => DB::table('tb_jabatan')->get(),
-            'kompetensi' => DB::table('tb_kompetensi')->get()
+            'kompetensi' => DB::table('tb_kompetensi')->get(),
+            'tingkatpdd' => DB::table('tb_tingkatpdd')->get(),
+
         ];
         
         return view ('/admin/content/view_lowongan_tambah', $data);
@@ -111,16 +113,37 @@ class LowonganController extends Controller
             'd' => 'required|max:11',
             'e' => 'required',
             'f' => 'required',
-            'cc' => 'required'
+            'cc' => 'required',
+            'g' => 'required',
+            'h' => 'required',
+            'i' => 'required',
+            'j' => 'required',
+            'k' => 'required',
+            'l' => 'required',
+            'n' => 'required',
+            'o' => 'required',
+            'p' => 'required',
+
 
         ], $messages);
         
         DB::table('tb_lowongan')->insert([
             'id_perusahaan' => $insert->a,
             'posisi_lowongan' => $insert->b,
+            'formasi_jabatan' => $insert->g,
             'status_lowongan' => $insert->c,
             'kondisi_lowongan' => $insert->ccc,
-            'tempat_lowongan' => $insert->cccc,
+            'tempat_lowongan' => $insert->p,
+
+            'tgl_mulai_lowongan' => $insert->h,
+            'tgl_akhir_lowongan' => $insert->i,
+            'jurusan_pdd_lowongan' => $insert->n,
+            'detail_kejuruan_lowongan' => $insert->m,
+            'jml_lowongan_pria' => $insert->j,
+            'jml_lowongan_wanita' => $insert->k,
+            'sistem_pengupahan_gaji' => $insert->l,
+            'status_hubungan_kerja' => $insert->o,
+
             'gaji_lowongan' => $insert->d,
             'pengalaman_lowongan' => $insert->e,
             'jenis_kompetensi_lowongan' => $insert->cc,
@@ -139,7 +162,9 @@ class LowonganController extends Controller
                             ->where('id_lowongan', $id)->first(),
             'perusahaan' => DB::table('tb_perusahaan')->orderBy('nama_perusahaan', 'asc')->get(),
             'jabatan' => DB::table('tb_jabatan')->get(),
-            'kompetensi' => DB::table('tb_kompetensi')->get()
+            'kompetensi' => DB::table('tb_kompetensi')->get(),
+            'tingkatpdd' => DB::table('tb_tingkatpdd')->get(),
+            'detpdd' => DB::table('tb_det_tingkatpdd')->get(),
 
         ];
         
@@ -161,15 +186,43 @@ class LowonganController extends Controller
             'e' => 'required',
             'f' => 'required',
             'cc' => 'required',
-
+            'g' => 'required',
+            'h' => 'required',
+            'i' => 'required',
+            'j' => 'required',
+            'k' => 'required',
+            'l' => 'required',
+            'n' => 'required',
+            'o' => 'required',
+            'p' => 'required',
         ], $messages);
+
+        if ($update->n == "1304" || $update->n == "1203" || $update->n == "1204" ) {
+            DB::table('tb_lowongan')->where('id_lowongan', $update->inpid)->update([
+                'detail_kejuruan_lowongan' => $update->m,
+            ]);
+        } else {
+            DB::table('tb_lowongan')->where('id_lowongan', $update->inpid)->update([
+                'detail_kejuruan_lowongan' => "-",
+            ]);       
+         }
+        
         
         DB::table('tb_lowongan')->where('id_lowongan', $update->inpid)->update([
             'id_perusahaan' => $update->a,
             'posisi_lowongan' => $update->b,
             'status_lowongan' => $update->c,
             'kondisi_lowongan' => $update->ccc,
-            'tempat_lowongan' => $update->cccc,
+            'tempat_lowongan' => $update->p,
+
+            'tgl_mulai_lowongan' => $update->h,
+            'tgl_akhir_lowongan' => $update->i,
+            'jurusan_pdd_lowongan' => $update->n,
+            'jml_lowongan_pria' => $update->j,
+            'jml_lowongan_wanita' => $update->k,
+            'sistem_pengupahan_gaji' => $update->l,
+            'status_hubungan_kerja' => $update->o,
+
             'gaji_lowongan' => $update->d,
             'pengalaman_lowongan' => $update->e,
             'jenis_kompetensi_lowongan' => $update->cc,
