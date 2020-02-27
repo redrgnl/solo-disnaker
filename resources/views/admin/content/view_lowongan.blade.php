@@ -94,6 +94,7 @@
                   <th>Posisi</th>
                   <th>Status</th>
                   <th>Gaji</th>
+                  <th>Tingkat Pendidikan</th>
                   <th>Hubungan Kerja</th>
                   <th>Sistem Pengupahan</th>
                   <th>Pengalaman</th>
@@ -110,6 +111,9 @@
                   <td>{{ $act->posisi_lowongan }}</td>
                   <td>{{ $act->status_lowongan }}</td>
                   <td>Rp. {{ number_format($act->gaji_lowongan) }}</td>
+                  <td>
+                    <a class="truncate" title="{{ $act->jenis_tingkatpdd }}">{!! Str::limit($act->jenis_tingkatpdd, 120, ' ...') !!}</a>
+                  </td>
                   <td>
                     <?php if ($act->status_hubungan_kerja == 'WAKTU TIDAK TERTENTU') {
                       $shk = "<label style='display: none;'>TIDAK</label>WAKTU TIDAK TERTENTU";
@@ -150,6 +154,7 @@
                   <th>Posisi</th>
                   <th>Status</th>
                   <th>Gaji</th>
+                  <th>Tingkat Pendidikan</th>
                   <th>Hubungan Kerja</th>
                   <th>Sistem Pengupahan</th>
                   <th>Pengalaman</th>
@@ -199,7 +204,7 @@
   });
   $('#searchByPdd').on('change', function() {
     var table = $('#page-length-option').DataTable();
-    table.column(2).
+    table.column(5).
     search($(this).val()).draw();
   });
   $('#searchByLoPrshn').on('change', function() {
@@ -214,12 +219,12 @@
   });
   $('#searchBySp').on('change', function() {
     var table = $('#page-length-option').DataTable();
-    table.column(6).
+    table.column(7).
     search($(this).val()).draw();
   });
   $('#searchByShk').on('change', function() {
     var table = $('#page-length-option').DataTable();
-    table.column(5).
+    table.column(6).
     search($(this).val()).draw();
   });
 </script>

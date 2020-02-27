@@ -17,6 +17,8 @@ class LowonganController extends Controller
             'breadcrumb' => "Data Lowongan",
             'lowongan' => DB::table('tb_lowongan')
                 ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                ->join('tb_det_tingkatpdd', 'tb_det_tingkatpdd.id_det_tingkatpdd', '=', 'tb_lowongan.jurusan_pdd_lowongan')
+                ->join('tb_tingkatpdd', 'tb_tingkatpdd.id_tingkatpdd', '=', 'tb_det_tingkatpdd.id_tingkatpdd')
                 ->where('tb_lowongan.tgl_akhir_lowongan', '<', date('Y-m-d'))
                 ->get(),
             'jabatan' => DB::table('tb_jabatan')->get(),
