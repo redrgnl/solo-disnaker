@@ -100,7 +100,7 @@
               <div class="row ml-3">
                 <label style="font-size: 18px">Lokasi Perusahaan &ensp; - &ensp;</label>
                 <label>
-                  <input name="inppos" type="radio" value="1" id="dalam" />
+                  <input name="inppos" type="radio" value="1" id="dalam" onclick="dlm_negeri()" />
                   <span>Dalam Solo</span>
                 </label> &emsp;
                 <label>
@@ -124,7 +124,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="input-field col s6 m6 l6">
+            <div class="input-field col l4">
               <select class="browser-default" name="inpprov" id="prov" required>
                 <option value="">- Pilih Provinsi -</option>
                 @foreach($provinsi as $prov)
@@ -135,11 +135,19 @@
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
             </div>
-            <div class="input-field col s6 m6 l6">
+            <div class="input-field col l4">
               <select class="browser-default" name="inpkota" id="inpkota" required>
                 <option value="">- Pilih Kota -</option>
               </select>
               @error('d')
+              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+              @enderror
+            </div>
+            <div class="input-field col l4">
+              <select class="browser-default" name="inpkecamatan" id="inpkecamatan" required>
+                <option value="">- Pilih Kecamatan* -</option>
+              </select>
+              @error('inpkecamatan')
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
             </div>
@@ -292,7 +300,30 @@
       });
 
     });
+      
+    $('#inpkota').on('change', function(e) {
+      var idkota = e.target.value;
+
+      //ajax
+
+      $.get('/admin/get-kecamatan/' + idkota, function(data) {
+        $('#inpkecamatan').html(data)
+      });
+
+    });
   });
+  function dlm_negeri() {
+    $('#prov').val('33');
+    var idprov = '33';
+    $.get('/admin/get-kota/' + idprov, function(data) {
+      $('#inpkota').html(data)
+      $('#inpkota').val('3372');
+    });
+    var idkota = '3372';
+    $.get('/admin/get-kecamatan/' + idkota, function(data) {
+      $('#inpkecamatan').html(data)
+    });
+  }
 </script>
 
 @endsection

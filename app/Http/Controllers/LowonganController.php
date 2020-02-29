@@ -17,13 +17,18 @@ class LowonganController extends Controller
             'breadcrumb' => "Data Lowongan",
             'lowongan' => DB::table('tb_lowongan')
                 ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                ->join('tb_provinsi', 'tb_provinsi.id', '=', 'tb_lowongan.prov_lowongan')
+                ->join('tb_kota', 'tb_kota.id', '=', 'tb_lowongan.kota_lowongan')
+                ->join('tb_kecamatan', 'tb_kecamatan.id', '=', 'tb_lowongan.kec_lowongan')
+                ->selectRaw('tb_lowongan.*, tb_perusahaan.*, tb_det_tingkatpdd.*, tb_tingkatpdd.*, tb_provinsi.name as provname, tb_kota.name as kotaname, tb_kecamatan.name as kecname')
                 ->join('tb_det_tingkatpdd', 'tb_det_tingkatpdd.id_det_tingkatpdd', '=', 'tb_lowongan.jurusan_pdd_lowongan')
                 ->join('tb_tingkatpdd', 'tb_tingkatpdd.id_tingkatpdd', '=', 'tb_det_tingkatpdd.id_tingkatpdd')
-                ->where('tb_lowongan.tgl_akhir_lowongan', '<', date('Y-m-d'))
+                ->where('tb_lowongan.tgl_akhir_lowongan', '>', date('Y-m-d'))
                 ->get(),
             'jabatan' => DB::table('tb_jabatan')->get(),
             'tingkatPdd' => DB::table('tb_tingkatpdd')->get(),
             'provinsi' => DB::table('tb_provinsi')->get(),
+            'kecamatan' => DB::table('tb_kecamatan')->where('regency_id', '3372')->get(),
             'lu' => DB::table('tb_perusahaan')->get()
         ];
 
@@ -38,13 +43,20 @@ class LowonganController extends Controller
             'breadcrumb' => "Data Lowongan Dalam Negeri - Disabilitas",
             'lowongan' => DB::table('tb_lowongan')
                 ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                ->join('tb_provinsi', 'tb_provinsi.id', '=', 'tb_lowongan.prov_lowongan')
+                ->join('tb_kota', 'tb_kota.id', '=', 'tb_lowongan.kota_lowongan')
+                ->join('tb_kecamatan', 'tb_kecamatan.id', '=', 'tb_lowongan.kec_lowongan')
+                ->selectRaw('tb_lowongan.*, tb_perusahaan.*, tb_det_tingkatpdd.*, tb_tingkatpdd.*, tb_provinsi.name as provname, tb_kota.name as kotaname, tb_kecamatan.name as kecname')
+                ->join('tb_det_tingkatpdd', 'tb_det_tingkatpdd.id_det_tingkatpdd', '=', 'tb_lowongan.jurusan_pdd_lowongan')
+                ->join('tb_tingkatpdd', 'tb_tingkatpdd.id_tingkatpdd', '=', 'tb_det_tingkatpdd.id_tingkatpdd')
                 ->where('tb_lowongan.kondisi_lowongan', 'Disabilitas')
                 ->where('tb_lowongan.tempat_lowongan', 'DN')
-                ->where('tb_lowongan.tgl_akhir_lowongan', '<', date('Y-m-d'))
+                ->where('tb_lowongan.tgl_akhir_lowongan', '>', date('Y-m-d'))
                 ->get(),
             'jabatan' => DB::table('tb_jabatan')->get(),
             'tingkatPdd' => DB::table('tb_tingkatpdd')->get(),
             'provinsi' => DB::table('tb_provinsi')->get(),
+            'kecamatan' => DB::table('tb_kecamatan')->where('regency_id', '3372')->get(),
             'lu' => DB::table('tb_perusahaan')->get()
         ];
 
@@ -58,13 +70,20 @@ class LowonganController extends Controller
             'breadcrumb' => "Data Lowongan",
             'lowongan' => DB::table('tb_lowongan')
                 ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                ->join('tb_provinsi', 'tb_provinsi.id', '=', 'tb_lowongan.prov_lowongan')
+                ->join('tb_kota', 'tb_kota.id', '=', 'tb_lowongan.kota_lowongan')
+                ->join('tb_kecamatan', 'tb_kecamatan.id', '=', 'tb_lowongan.kec_lowongan')
+                ->selectRaw('tb_lowongan.*, tb_perusahaan.*, tb_det_tingkatpdd.*, tb_tingkatpdd.*, tb_provinsi.name as provname, tb_kota.name as kotaname, tb_kecamatan.name as kecname')
+                ->join('tb_det_tingkatpdd', 'tb_det_tingkatpdd.id_det_tingkatpdd', '=', 'tb_lowongan.jurusan_pdd_lowongan')
+                ->join('tb_tingkatpdd', 'tb_tingkatpdd.id_tingkatpdd', '=', 'tb_det_tingkatpdd.id_tingkatpdd')
                 ->where('tb_lowongan.kondisi_lowongan', 'Non Disabilitas')
                 ->where('tb_lowongan.tempat_lowongan', 'DN')
-                ->where('tb_lowongan.tgl_akhir_lowongan', '<', date('Y-m-d'))
+                ->where('tb_lowongan.tgl_akhir_lowongan', '>', date('Y-m-d'))
                 ->get(),
             'jabatan' => DB::table('tb_jabatan')->get(),
             'tingkatPdd' => DB::table('tb_tingkatpdd')->get(),
             'provinsi' => DB::table('tb_provinsi')->get(),
+            'kecamatan' => DB::table('tb_kecamatan')->where('regency_id', '3372')->get(),
             'lu' => DB::table('tb_perusahaan')->get()
         ];
 
@@ -78,13 +97,20 @@ class LowonganController extends Controller
             'breadcrumb' => "Data Lowongan",
             'lowongan' => DB::table('tb_lowongan')
                 ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                ->join('tb_provinsi', 'tb_provinsi.id', '=', 'tb_lowongan.prov_lowongan')
+                ->join('tb_kota', 'tb_kota.id', '=', 'tb_lowongan.kota_lowongan')
+                ->join('tb_kecamatan', 'tb_kecamatan.id', '=', 'tb_lowongan.kec_lowongan')
+                ->selectRaw('tb_lowongan.*, tb_perusahaan.*, tb_det_tingkatpdd.*, tb_tingkatpdd.*, tb_provinsi.name as provname, tb_kota.name as kotaname, tb_kecamatan.name as kecname')
+                ->join('tb_det_tingkatpdd', 'tb_det_tingkatpdd.id_det_tingkatpdd', '=', 'tb_lowongan.jurusan_pdd_lowongan')
+                ->join('tb_tingkatpdd', 'tb_tingkatpdd.id_tingkatpdd', '=', 'tb_det_tingkatpdd.id_tingkatpdd')
                 ->where('tb_lowongan.kondisi_lowongan', 'Disabilitas')
                 ->where('tb_lowongan.tempat_lowongan', 'LN')
-                ->where('tb_lowongan.tgl_akhir_lowongan', '<', date('Y-m-d'))
+                ->where('tb_lowongan.tgl_akhir_lowongan', '>', date('Y-m-d'))
                 ->get(),
             'jabatan' => DB::table('tb_jabatan')->get(),
             'tingkatPdd' => DB::table('tb_tingkatpdd')->get(),
             'provinsi' => DB::table('tb_provinsi')->get(),
+            'kecamatan' => DB::table('tb_kecamatan')->where('regency_id', '3372')->get(),
             'lu' => DB::table('tb_perusahaan')->get()
         ];
 
@@ -98,13 +124,45 @@ class LowonganController extends Controller
             'breadcrumb' => "Data Lowongan",
             'lowongan' => DB::table('tb_lowongan')
                 ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                ->join('tb_provinsi', 'tb_provinsi.id', '=', 'tb_lowongan.prov_lowongan')
+                ->join('tb_kota', 'tb_kota.id', '=', 'tb_lowongan.kota_lowongan')
+                ->join('tb_kecamatan', 'tb_kecamatan.id', '=', 'tb_lowongan.kec_lowongan')
+                ->selectRaw('tb_lowongan.*, tb_perusahaan.*, tb_det_tingkatpdd.*, tb_tingkatpdd.*, tb_provinsi.name as provname, tb_kota.name as kotaname, tb_kecamatan.name as kecname')
+                ->join('tb_det_tingkatpdd', 'tb_det_tingkatpdd.id_det_tingkatpdd', '=', 'tb_lowongan.jurusan_pdd_lowongan')
+                ->join('tb_tingkatpdd', 'tb_tingkatpdd.id_tingkatpdd', '=', 'tb_det_tingkatpdd.id_tingkatpdd')
                 ->where('tb_lowongan.kondisi_lowongan', 'Non Disabilitas')
                 ->where('tb_lowongan.tempat_lowongan', 'LN')
+                ->where('tb_lowongan.tgl_akhir_lowongan', '>', date('Y-m-d'))
+                ->get(),
+            'jabatan' => DB::table('tb_jabatan')->get(),
+            'tingkatPdd' => DB::table('tb_tingkatpdd')->get(),
+            'provinsi' => DB::table('tb_provinsi')->get(),
+            'kecamatan' => DB::table('tb_kecamatan')->where('regency_id', '3372')->get(),
+            'lu' => DB::table('tb_perusahaan')->get()
+        ];
+
+        return view('/admin/content/view_lowongan', $data);
+    }
+    
+    public function lownonaktif()
+    {
+        $data = [
+            'title' => "Manajemen Data Lowongan",
+            'breadcrumb' => "Data Lowongan",
+            'lowongan' => DB::table('tb_lowongan')
+                ->join('tb_perusahaan', 'tb_perusahaan.id_perusahaan', '=', 'tb_lowongan.id_perusahaan')
+                ->join('tb_provinsi', 'tb_provinsi.id', '=', 'tb_lowongan.prov_lowongan')
+                ->join('tb_kota', 'tb_kota.id', '=', 'tb_lowongan.kota_lowongan')
+                ->join('tb_kecamatan', 'tb_kecamatan.id', '=', 'tb_lowongan.kec_lowongan')
+                ->selectRaw('tb_lowongan.*, tb_perusahaan.*, tb_det_tingkatpdd.*, tb_tingkatpdd.*, tb_provinsi.name as provname, tb_kota.name as kotaname, tb_kecamatan.name as kecname')
+                ->join('tb_det_tingkatpdd', 'tb_det_tingkatpdd.id_det_tingkatpdd', '=', 'tb_lowongan.jurusan_pdd_lowongan')
+                ->join('tb_tingkatpdd', 'tb_tingkatpdd.id_tingkatpdd', '=', 'tb_det_tingkatpdd.id_tingkatpdd')
                 ->where('tb_lowongan.tgl_akhir_lowongan', '<', date('Y-m-d'))
                 ->get(),
             'jabatan' => DB::table('tb_jabatan')->get(),
             'tingkatPdd' => DB::table('tb_tingkatpdd')->get(),
             'provinsi' => DB::table('tb_provinsi')->get(),
+            'kecamatan' => DB::table('tb_kecamatan')->where('regency_id', '3372')->get(),
             'lu' => DB::table('tb_perusahaan')->get()
         ];
 

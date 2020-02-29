@@ -45,7 +45,7 @@ class PerusahaanController extends Controller
         $this->validate($insert, [
             'inpnama' => 'required|max:100',
             'inplengkap' => 'required',
-            'inpnpwp' => 'required|max:50',
+            'inpnpwp' => 'max:50',
             'inpalamat' => 'required',
             'inpprov' => 'required',
             'inpkota' => 'required',
@@ -81,6 +81,7 @@ class PerusahaanController extends Controller
             'alamat_perusahaan' => $insert->inpalamat,
             'id_provinsi' => $insert->inpprov,
             'id_kota' => $insert->inpkota,
+            'id_kecamatan' => $insert->inpkecamatan,
             'map_perusahaan' => $insert->inpmap,
             'id_jenis' => $insert->inpjenis,
             'kelas_perusahaan' => $insert->inpkelas,
@@ -130,7 +131,7 @@ class PerusahaanController extends Controller
         $this->validate($update, [
             'inpnama' => 'required|max:100',
             'inplengkap' => 'required',
-            'inpnpwp' => 'required|max:50',
+            'inpnpwp' => 'max:50',
             'inpalamat' => 'required',
             'inpprov' => 'required',
             'inpkota' => 'required',
@@ -148,7 +149,6 @@ class PerusahaanController extends Controller
             'inptelepon' => 'required|max:15',
             'inpfax' => 'required|max:15',
             'inpemail' => 'required|max:50|email',
-            'inppict' => 'required',
             'inppassword' => 'required|max:64',
             'inpconfirm' => 'required|max:64'
         ], $messages);
@@ -171,6 +171,7 @@ class PerusahaanController extends Controller
             'alamat_perusahaan' => $update->inpalamat,
             'id_provinsi' => $update->inpprov,
             'id_kota' => $update->inpkota,
+            'id_kecamatan' => $update->inpkecamatan,
             'map_perusahaan' => $update->inpmap,
             'id_jenis' => $update->inpjenis,
             'kelas_perusahaan' => $update->inpkelas,

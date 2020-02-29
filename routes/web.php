@@ -80,6 +80,7 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::get('/admin/halaman-edit-lowongan/{id}', 'LowonganController@edit_lowongan');
     Route::post('/admin/update-data-lowongan', 'LowonganController@update_lowongan');
     Route::post('/admin/delete-data-lowongan', 'LowonganController@delete_lowongan');
+    Route::get('/admin/lowongan-non-aktif', 'LowonganController@lownonaktif');
     
     //Route Filter
     Route::get('/admin/lowongan-dalam-negeri/disabilitas', 'LowonganController@dndisabilitas');    
@@ -140,5 +141,6 @@ Route::get('/logout', 'AdminController@logout');
 //Route Login Perusahaan
 Route::get('/halaman-daftar-perusahaan', 'AdminController@daftar_perusahaan');
 Route::get('/get-kota/{id}', 'PerusahaanController@get_kota');
+Route::get('/get-kecamatan/{id}', 'PelamarController@get_kecamatan');
 Route::post('/post-perusahaan', 'AdminController@postPerusahaan');
 Route::post('/save-perusahaan', 'AdminController@storePerusahaan');

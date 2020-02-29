@@ -104,6 +104,7 @@
                 </ul>
               </div>
             </li>
+            <li><a class="collapsible-body" href="/admin/lowongan-non-aktif" data-i18n=""><i class="material-icons" style="color: blue">brightness_1</i><span>Lowongan Non-Aktif</span></a></li>
           </ul>
         </div>
       </li>

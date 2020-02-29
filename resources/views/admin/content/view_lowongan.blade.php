@@ -1,87 +1,126 @@
 @extends('admin/index')
 
 @section('content')
+<style>
+    .dsply-none {
+        display: none;
+    }
+</style>
 <div class="row">
+  <a href="/admin/halaman-tambah-lowongan" class="waves-effect waves-light btn gradient-45deg-light-blue-cyan gradient-shadow mt-2">TAMBAH LOWONGAN<i class="material-icons right">vpn_key</i></a>
   <div class="col s12">
-    <div class="card">
-      <a href="/admin/halaman-tambah-lowongan" class="waves-effect waves-light btn gradient-45deg-light-blue-cyan gradient-shadow mt-2">TAMBAH LOWONGAN<i class="material-icons right">vpn_key</i></a>
-      <div class="card-content">
-        <div class="row">
-          <div class="input-field col l2"><label style="color: blue; font-weight: bold">Jabatan</label></div>
-          <div class="input-field col l10">
-            <select class="browser-default" name="FilterSktr" id="searchByJabatan">
-              <option value="">Filter Jabatan</option>
-              @if(!empty($jabatan))
-              @foreach($jabatan as $s)
-              <option value="{{ $s->nama_jabatan }}">{{ $s->nama_jabatan }}</option>
-              @endforeach
-              @endif
-            </select>
-          </div>
+     <div id="profile-card" class="card" style="overflow: hidden;">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="{{ asset('admin/images/gallery/breadcrumb-bg.jpg') }}" alt="user bg">
         </div>
-        <div class="row">
-          <div class="input-field col l2"><label style="color: blue; font-weight: bold">Tingkat Pendidikan</label></div>
-          <div class="input-field col l3">
-            <select class="browser-default" name="FilterSktr" id="searchByPdd">
-              <option value="">Filter Tingkat Pendidikan</option>
-              @if(!empty($tingkatPdd))
-              @foreach($tingkatPdd as $s)
-              <option value="{{ $s->jenis_tingkatpdd }}">{{ $s->jenis_tingkatpdd }}</option>
-              @endforeach
-              @endif
-            </select>
-          </div>
+        <div class="card-content">
+           <h5 class="card-title activator grey-text text-darken-4">Filter Lowongan</h5>
+           <a class="btn-floating activator btn-move-up waves-effect waves-light blue accent-2 z-depth-4 right">
+              <i class="material-icons">domain</i>
+           </a>
         </div>
-        <div class="row">
-          <div class="input-field col l2"><label style="color: blue; font-weight: bold">Lokasi Perusahaan</label></div>
-          <div class="input-field col l5">
-            <select class="browser-default" name="FilterSktr" id="searchByLoPrshn">
-              <option value="">Filter Jabatan</option>
-              @if(!empty($jabatan))
-              @foreach($jabatan as $s)
-              <option value="{{ $s->nama_jabatan }}">{{ $s->nama_jabatan }}</option>
-              @endforeach
-              @endif
-            </select>
-          </div>
+        <div class="card-reveal" style="display: none; transform: translateY(0%);">
+           <span class="card-title grey-text text-darken-4">Filter Lowongan <i class="material-icons right">close</i>
+           </span>
+           <div class="row">
+              <div class="input-field col l2"><label style="color: blue; font-weight: bold">Jabatan</label></div>
+              <div class="input-field col l10">
+                <select class="browser-default" name="FilterSktr" id="searchByJabatan">
+                  <option value="">Pilih Jabatan</option>
+                  @if(!empty($jabatan))
+                  @foreach($jabatan as $s)
+                  <option value="{{ $s->nama_jabatan }}">{{ $s->nama_jabatan }}</option>
+                  @endforeach
+                  @endif
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col l2"><label style="color: blue; font-weight: bold">Tingkat Pendidikan</label></div>
+              <div class="input-field col l10">
+                <select class="browser-default" name="FilterSktr" id="searchByPdd">
+                  <option value="">Pilih Tingkat Pendidikan</option>
+                  @if(!empty($tingkatPdd))
+                  @foreach($tingkatPdd as $s)
+                  <option value="{{ $s->jenis_tingkatpdd }}">{{ $s->jenis_tingkatpdd }}</option>
+                  @endforeach
+                  @endif
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col l2"><label style="color: blue; font-weight: bold">Lokasi Perusahaan</label></div>
+              <div class="input-field col l10">
+                <select class="browser-default" name="FilterSktr" id="searchByLoPrshn">
+                  <option value="">Pilih Jabatan</option>
+                  @if(!empty($jabatan))
+                  @foreach($jabatan as $s)
+                  <option value="{{ $s->nama_jabatan }}">{{ $s->nama_jabatan }}</option>
+                  @endforeach
+                  @endif
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col l2"><label style="color: blue; font-weight: bold">Lapangan Usaha</label></div>
+              <div class="input-field col l10">
+                <select class="browser-default" name="FilterSktr" id="searchByLu">
+                  <option value="">Pilih Lapangan Usaha</option>
+                  @if(!empty($lu))
+                  @foreach($lu as $s)
+                  <option value="{{ $s->nama_perusahaan }}">{{ $s->nama_perusahaan }}</option>
+                  @endforeach
+                  @endif
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col l2"><label style="color: blue; font-weight: bold">Sistem Pengupahan</label></div>
+              <div class="input-field col l10">
+                <select class="browser-default" name="FilterSktr" id="searchBySp">
+                  <option value="">Pilih Sistem Pengupahan</option>
+                  <option value="BORONGAN">BORONGAN</option>
+                  <option value="HARIAN">HARIAN</option>
+                  <option value="MINGGUAN">MINGGUAN</option>
+                  <option value="BULANAN">BULANAN</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col l2"><label style="color: blue; font-weight: bold">Status Hubungan Kerja</label></div>
+              <div class="input-field col l10">
+                <select class="browser-default" name="FilterSktr" id="searchByShk">
+                  <option value="">Pilih Status Hubungan Kerja</option>
+                  <option value="IYA">WAKTU TERTENTU</option>
+                  <option value="TIDAK">WAKTU TIDAK TERTENTU</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col l2"><label style="color: blue; font-weight: bold">Lokasi Perusahaan</label></div>
+              <div class="input-field col l10">
+                <select class="browser-default" name="FilterLks" id="searchByLks" onchange="appkec()">
+                  <option value="">Pilih Lokasi Perusahaan</option>
+                  <option value="">Luar Kota</option>
+                  <option value="KOTA SURAKARTA">Dalam Kota</option>
+                </select>
+              </div>
+            </div>
+            <div class="row dsply-none" id="row_kec">
+              <div class="input-field col l2"><label style="color: blue; font-weight: bold">Dalam Kota</label></div>
+              <div class="input-field col l10">
+                <select class="browser-default" name="FilterKec" id="searchByKec">
+                  <option value="">Pilih Kecamatan</option>
+                  @foreach($kecamatan as $kcc)
+                  <option value="{{ $kcc->name }}">{{ $kcc->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
         </div>
-        <div class="row">
-          <div class="input-field col l2"><label style="color: blue; font-weight: bold">Lapangan Usaha</label></div>
-          <div class="input-field col l10">
-            <select class="browser-default" name="FilterSktr" id="searchByLu">
-              <option value="">Filter Lapangan Usaha</option>
-              @if(!empty($lu))
-              @foreach($lu as $s)
-              <option value="{{ $s->nama_perusahaan }}">{{ $s->nama_perusahaan }}</option>
-              @endforeach
-              @endif
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col l2"><label style="color: blue; font-weight: bold">Sistem Pengupahan</label></div>
-          <div class="input-field col l10">
-            <select class="browser-default" name="FilterSktr" id="searchBySp">
-              <option value="">Filter Sistem Pengupahan</option>
-              <option value="BORONGAN">BORONGAN</option>
-              <option value="HARIAN">HARIAN</option>
-              <option value="MINGGUAN">MINGGUAN</option>
-              <option value="BULANAN">BULANAN</option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col l2"><label style="color: blue; font-weight: bold">Status Hubungan Kerja</label></div>
-          <div class="input-field col l10">
-            <select class="browser-default" name="FilterSktr" id="searchByShk">
-              <option value="">Filter Status Hubungan Kerja</option>
-              <option value="IYA">WAKTU TERTENTU</option>
-              <option value="TIDAK">WAKTU TIDAK TERTENTU</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
+     </div>
+  </div>
+  <div class="col s12">
     <div class="card">
       <div class="card-content">
         <div class="row">
@@ -98,6 +137,9 @@
                   <th>Hubungan Kerja</th>
                   <th>Sistem Pengupahan</th>
                   <th>Pengalaman</th>
+                  <th>Provinsi</th>
+                  <th>Kabupaten</th>
+                  <th>Kecamatan</th>
                   <th>Deskripsi</th>
                   <th>#</th>
                 </tr>
@@ -108,9 +150,12 @@
 
                 <tr>
                   <td>{{ $no++ }}</td>
-                  <td>{{ $act->nama_perusahaan }}</td>
+                  <td>
+                      <a href="/admin/halaman-detail-perusahaan/{{ $act->id_perusahaan }}">
+                        {{ $act->nama_perusahaan }}
+                      </a>
+                  </td>
                   <td>{{ $act->posisi_lowongan }}</td>
-
                   <td>{{ $act->status_lowongan }}</td>
                   <td>Rp. {{ number_format($act->gaji_lowongan) }}</td>
                   <td>
@@ -130,6 +175,9 @@
                   <td>
                     <a class="truncate" title="{{ $act->pengalaman_lowongan }}">{!! Str::limit($act->pengalaman_lowongan, 120, ' ...') !!}</a>
                   </td>
+                  <td>{{ $act->provname }}</td>
+                  <td>{{ $act->kotaname }}</td>
+                  <td>{{ $act->kecname }}</td>
                   <td>
                     <a class="truncate" title="{{ $act->desk_lowongan }}">{!! Str::limit($act->desk_lowongan, 120, ' ...') !!}</a>
                   </td>
@@ -147,7 +195,6 @@
                     </a>
                   </td>
                 </tr>
-
                 @endforeach
               </tbody>
               <tfoot>
@@ -161,6 +208,9 @@
                   <th>Hubungan Kerja</th>
                   <th>Sistem Pengupahan</th>
                   <th>Pengalaman</th>
+                  <th>Provinsi</th>
+                  <th>Kabupaten</th>
+                  <th>Kecamatan</th>
                   <th>Deskripsi</th>
                   <th>#</th>
                 </tr>
@@ -230,5 +280,22 @@
     table.column(6).
     search($(this).val()).draw();
   });
+  $('#searchByLks').on('change', function() {
+    var table = $('#page-length-option').DataTable();
+    table.column(10).
+    search($(this).val()).draw();
+  });
+  $('#searchByKec').on('change', function() {
+    var table = $('#page-length-option').DataTable();
+    table.column(10).
+    search($(this).val()).draw();
+  });
+  function appkec() {
+      if ($('#searchByLks').val() == 'KOTA SURAKARTA') {
+          $('#row_kec').removeClass('dsply-none')
+      } else {
+          $('#row_kec').addClass('dsply-none')
+      }
+  }
 </script>
 @endsection
