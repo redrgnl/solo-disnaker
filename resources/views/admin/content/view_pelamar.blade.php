@@ -4,8 +4,10 @@
 <div class="row">
   <div class="col s12">
     <div class="card">
-      <a href="/admin/halaman-tambah-pelamar" class="waves-effect waves-light btn gradient-45deg-light-blue-cyan gradient-shadow mt-2">TAMBAH PELAMAR<i class="material-icons right">vpn_key</i></a>
-      <div class="card-content">
+      <a href="/admin/halaman-tambah-pelamar" class="waves-effect waves-light btn gradient-45deg-light-blue-cyan gradient-shadow mt-2">TAMBAH PELAMAR REGULAR<i class="material-icons right">vpn_key</i></a>
+      
+      <a href="/admin/halaman-tambah-pelamar-pelaku-usaha" class="waves-effect waves-light btn gradient-45deg-light-blue-cyan gradient-shadow mt-2">TAMBAH PELAMAR PELAKU USAHA<i class="material-icons right">vpn_key</i></a>
+<div class="card-content">
         <div class="row">
           <div class="col s12">
             <table id="page-length-option" class="display">
@@ -13,6 +15,7 @@
                 <tr>
                   <th>NIK</th>
                   <th>Nama</th>
+                  <th>Jenis</th>
                   <th>Alamat</th>
                   <th>Gender</th>
                   <th>Tempat / Tanggal Lahir</th>
@@ -30,6 +33,8 @@
                 <tr>
                   <td>{{ $pl->nik_pelamar }}</td>
                   <td>{{ $pl->nama_pelamar }}</td>
+                  <td>{{ $pl->tipe_pelamar }}</td>
+
                   <td>
                     <a class="truncate" title="{{ $pl->alamat_pelamar }}">{!! Str::limit($pl->alamat_pelamar, 120, ' ...') !!}</a>
                   </td>
@@ -61,6 +66,7 @@
                 <tr>
                   <th>NIK</th>
                   <th>Nama</th>
+                  <th>Jenis</th>
                   <th>Alamat</th>
                   <th>Gender</th>
                   <th>Tempat / Tanggal Lahir</th>

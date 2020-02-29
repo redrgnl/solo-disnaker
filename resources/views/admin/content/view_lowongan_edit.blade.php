@@ -127,7 +127,7 @@
               <select class="" name="cc" id="inptingkatpdd">
                 <option value="">- Pendidikan -</option>
                 @foreach($tingkatpdd as $komp)
-                <option value="{{ $komp->id_tingkatpdd }}" <?php if ($lowongan->jenis_kompetensi_lowongan == $komp->id_tingkatpdd) {
+                <option value="{{ $komp->id_tingkatpdd }}" <?php if ($lowongan->id_tingkatpdd_lowongan == $komp->id_tingkatpdd) {
                                                               echo "selected";
                                                             } ?>>{{ $komp->jenis_tingkatpdd }}</option>
                 @endforeach

@@ -6,7 +6,12 @@
     <div id="validation" class="card card card-default scrollspy">
       <div class="card-content">
         <h4 class="card-title">Form Data Pelamar</h4>
+        @if($pelamar->tipe_pelamar == "REGULAR")
         <form class="col s12" method="post" action="/admin/update-data-pelamar" enctype="multipart/form-data">
+        @else
+        <form class="col s12" method="post" action="/admin/update-data-pelamar-pelaku-usaha" enctype="multipart/form-data">
+        @endif
+
           @csrf
           <h6 style="color: blue;">Akun Pelamar</h6>
           <div class="row">
@@ -405,6 +410,8 @@
               @enderror
             </div>
           </div>
+<!-- =================================================TIPE PELAMAR REGULAR=============================================================== -->
+@if($pelamar->tipe_pelamar == "REGULAR")
           <h6 style="color: blue;">Data Harapan Kerja</h6>
           <div class="row">
             <div class="input-field col s12 l12 ml">
@@ -483,7 +490,7 @@
           @endif
 <!-- END DALAM NEGERI -->
 <!-- LUAR NEGERI -->
-@if($harapan->penempatan_harapan == "Luar Negeri")
+  @if($harapan->penempatan_harapan == "Luar Negeri")
 
           <div class="field-b">
             <div class="row">
@@ -556,7 +563,7 @@
               </div>
             </div>
           </div>
-@else
+  @else
   <div class="field-b" style="display: none">
               <div class="row">
                 <div class="input-field col s12 m4 l4">
@@ -628,7 +635,8 @@
                 </div>
               </div>
             </div>
-@endif
+ 
+  @endif
 <!-- END LUAR NEGERI -->
 
           <div class="row">
@@ -724,6 +732,55 @@
                   <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
               </div>
             </div>
+<!-- ================================================= END TIPE PELAMAR REGULAR ========================================================== -->
+
+@else
+<!-- =============================================== TIPE PELAMAR PELAKU USAHA =========================================================== -->
+<h6 style="color: blue;">Data Pelaku Usaha</h6>
+          <div class="row">
+            <div class="input-field col s6 m6 l6">
+              <i class="material-icons prefix">attach_money
+</i>
+              <input name="inpmodal" id="inpmodal" type="number" value='{{ $usaha->modal_usaha }}' class="validate">
+              <label for="inpmodal">Modal yang dimiliki(Rp)</label>
+              @error('inpmodal')
+              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+              @enderror
+            </div>
+            <div class="input-field col s6 m6 l6">
+              <i class="material-icons prefix">attach_money
+</i>
+              <input name="inpomzet" id="inpomzet" type="number" value='{{ $usaha->omzet_usaha }}' class="validate">
+              <label for="inpomzet">Omzet tiap bulan (Rp)</label>
+              @error('inpomzet')
+              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+              @enderror
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+            <i class="material-icons prefix">assignment</i>
+              <textarea id="deskripsi_bisnis" name="deskripsi_bisnis"  class="materialize-textarea">{{ $usaha->deskripsi_usaha }}</textarea>
+              <label for="deskripsi_bisnis">Deskripsi usaha/ bisnis yang digeluti </label>
+            </div>
+         </div>
+          <div class="row">
+
+              <div class="file-field input-field col s12">
+                <div class="btn">
+                  <span>Salinan KTP</span>
+                  <input type="hidden" value="{{$usaha->ktp_pelamar_wirausaha}}" name="old_ktp" >
+                  <input type="file" name="inpktp" id="inpktp">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" name="inpktp" value='{{ $usaha->ktp_pelamar_wirausaha }}' type="text">
+                </div>
+            </div>
+          </div>
+<!-- =============================================== END TIPE PELAMAR PELAKU USAHA ======================================================= -->
+
+@endif
+
             <div class="input-field col s12">
               <button class="btn waves-effect waves-light gradient-45deg-light-blue-cyan gradient-shadow right text-white" type="submit" name="action">Submit
                 <i class="material-icons right">send</i>

@@ -18,7 +18,23 @@ class PelamarController extends Controller
 
         return view('/admin/content/view_pelamar', $data);
     }
+// ======================VIEW PELAMAR TAMBAH WIRAUSAHA=============================
 
+public function tambah_pelamar_wirausaha()
+{
+    $data = [
+        'title' => "Form Tambah Pelamar Pelaku usaha",
+        'breadcrumb' => "Tambah Pelamar Pelaku usaha",
+        'provinsi' => DB::table('tb_provinsi')->get(),
+        'jabatan' => DB::table('tb_jabatan')->get(),
+        'tingkatpdd' => DB::table('tb_tingkatpdd')->get(),
+        'kwn' => DB::table('tb_kwn')->get()
+
+    ];
+
+    return view('/admin/content/view_pelamar_tambah_w', $data);
+}
+// ======================VIEW PELAMAR TAMBAH=============================
     public function tambah_pelamar()
     {
         $data = [
@@ -34,8 +50,12 @@ class PelamarController extends Controller
         return view('/admin/content/view_pelamar_tambah', $data);
     }
 
+// ======================PROSES PELAMAR TAMBAH =============================
+
     public function store_pelamar(Request $insert)
     {
+        $lokasi_berkas = 'berkas_pelamar';
+
         $messages = [
             'required' => 'Field :attribute Wajib Diisi *',
             'max' => 'Input :attribute Tidak Sesuai',
@@ -83,47 +103,95 @@ class PelamarController extends Controller
             $location = 'pelamar';
             $img->move($location, $imgname);
         //izin keluarga
+        if($insert->hasfile('inpizin')){
+
             $file_A = $insert->file('inpizin');
             $file_A_name = date('Y-m-d') . "-" . "id" . $maxid . $file_A->getClientOriginalName();
 
             $lokasi_berkas = 'berkas_pelamar';
 
             $file_A->move($lokasi_berkas, $file_A_name);
+        }else{
+            $file_A_name = "-";
+
+        }
         //buku nikah
+        if($insert->hasfile('inpnikah')){
+
             $file_B = $insert->file('inpnikah');
             $file_B_name = date('Y-m-d') . "-" . "id" . $maxid . $file_B->getClientOriginalName();
 
             $file_B->move($lokasi_berkas, $file_B_name);
+        }else{
+            $file_B_name = "-";
+
+        }
         //surat sehat
+        if($insert->hasfile('inpsehat')){
+
             $file_C = $insert->file('inpsehat');
             $file_C_name = date('Y-m-d') . "-" . "id" . $maxid . $file_C->getClientOriginalName();
 
             $file_C->move($lokasi_berkas, $file_C_name);
+        }else{
+            $file_C_name = "-";
+
+        }
         //sertifikat keahlian
+        if($insert->hasfile('inpkeahlian')){
+
             $file_D = $insert->file('inpkeahlian');
             $file_D_name = date('Y-m-d') . "-" . "id" . $maxid . $file_D->getClientOriginalName();
 
             $file_D->move($lokasi_berkas, $file_D_name);
+        }else{
+            $file_D_name = "-";
+
+        }
         //KTP
+        if($insert->hasfile('inpktp')){
+
             $file_E = $insert->file('inpktp');
             $file_E_name = date('Y-m-d') . "-" . "id" . $maxid . $file_E->getClientOriginalName();
 
             $file_E->move($lokasi_berkas, $file_E_name);
+        }else{
+            $file_E_name = "-";
+
+        }
         //Pengalaman kerja
+        if($insert->hasfile('inppengalaman')){
+
             $file_F = $insert->file('inppengalaman');
             $file_F_name = date('Y-m-d') . "-" . "id" . $maxid . $file_F->getClientOriginalName();
 
             $file_F->move($lokasi_berkas, $file_F_name);
+        }else{
+            $file_F_name = "-";
+
+        }
         //Keterampilan
+        if($insert->hasfile('inpketerampilan')){
+
             $file_G = $insert->file('inpketerampilan');
             $file_G_name = date('Y-m-d') . "-" . "id" . $maxid . $file_G->getClientOriginalName();
 
             $file_G->move($lokasi_berkas, $file_G_name);
+        }else{
+            $file_G_name = "-";
+
+        }
         //Bahasa
+        if($insert->hasfile('inpbahasa')){
+
             $file_H = $insert->file('inpbahasa');
             $file_H_name = date('Y-m-d') . "-" . "id" . $maxid . $file_H->getClientOriginalName();
 
             $file_H->move($lokasi_berkas, $file_H_name);
+        }else{
+            $file_H_name = "-";
+
+        }
         //end berkas pelamar
 
         $checknik = DB::table('tb_pelamar')->where('nik_pelamar', $insert->a)->get()->count();
@@ -178,6 +246,7 @@ class PelamarController extends Controller
 
             DB::table('tb_pelamar')->insert([
                 'id_pelamar' => $maxid,
+                'tipe_pelamar' => $insert->tipe_pelamar,
                 'nama_pelamar' => $insert->inpusername,
                 'email_pelamar' => $insert->inpemail,
                 'status_pelamar' => $insert->inpstatus,
@@ -218,6 +287,7 @@ class PelamarController extends Controller
             return redirect('/admin/halaman-tambah-pelamar')->with('error-alert', 'Pelamar Telah Terdaftar Sebelumnya');
         }
     }
+// ======================VIEW PELAMAR EDIT =============================
 
     public function edit_pelamar($id)
     {
@@ -232,11 +302,14 @@ class PelamarController extends Controller
             'tingkatpdd' => DB::table('tb_tingkatpdd')->get(),
             'dettingkatpdd' => DB::table('tb_det_tingkatpdd')->get(),
             'kwn' => DB::table('tb_kwn')->get(),
-            'harapan' => DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $id)->first()
+            'harapan' => DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', $id)->first(),
+            'usaha' => DB::table('tb_data_pelaku_usaha')->where('id_pelamar_wirausaha', $id)->first()
+
         ];
 
         return view('/admin/content/view_pelamar_edit', $data);
     }
+// ======================PROSES PELAMAR EDIT =============================
 
     public function update_pelamar(Request $update)
     {
@@ -555,13 +628,16 @@ class PelamarController extends Controller
 
         return redirect('/admin/halaman-manajemen-pelamar')->with('success-alert', 'Disimpan');
     }
+// ======================PROSES PELAMAR EDIT =============================
 
     public function delete_pelamar(Request $delete)
     {
         DB::table('tb_pelamar')->where('id_pelamar', $delete->idpelamar)->delete();
+        DB::table('tb_harapan_kerja')->where('id_pelamar', $delete->idpelamar)->delete();
 
         return redirect('/admin/halaman-manajemen-pelamar')->with('success-alert', 'Dihapus');
     }
+// ======================VIEW RIWAYAT PELAMAR  =============================
 
     public function riwayat_pelamar($id)
     {

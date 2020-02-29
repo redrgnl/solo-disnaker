@@ -105,10 +105,12 @@
               <tbody>
                 <?php $no = 1; ?>
                 @foreach($lowongan as $act)
+
                 <tr>
                   <td>{{ $no++ }}</td>
                   <td>{{ $act->nama_perusahaan }}</td>
                   <td>{{ $act->posisi_lowongan }}</td>
+
                   <td>{{ $act->status_lowongan }}</td>
                   <td>Rp. {{ number_format($act->gaji_lowongan) }}</td>
                   <td>
@@ -145,6 +147,7 @@
                     </a>
                   </td>
                 </tr>
+
                 @endforeach
               </tbody>
               <tfoot>

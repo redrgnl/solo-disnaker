@@ -54,7 +54,7 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::post('/admin/ganti-profile-perusahaan', 'PerusahaanController@change_pro_perusahaan');
     Route::get('/admin/get-kota/{id}', 'PerusahaanController@get_kota');    
 
-    //Route Pelamar
+    //Route Pelamar Regular
     Route::get('/admin/halaman-manajemen-pelamar', 'PelamarController@index');
     Route::get('/admin/halaman-tambah-pelamar', 'PelamarController@tambah_pelamar');
     Route::post('/admin/simpan-data-pelamar', 'PelamarController@store_pelamar');
@@ -64,6 +64,14 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::get('/admin/riwayat-lamaran/{id}', 'PelamarController@riwayat_pelamar');
     Route::get('/admin/get-kecamatan/{id}', 'PelamarController@get_kecamatan');
     Route::get('/admin/get-dettingkatpdd/{id}', 'PerusahaanController@get_dettingkatpdd');
+    //Route Pelamar Pelaku Usaha
+    Route::get('/admin/halaman-manajemen-pelamar-pelaku-usaha', 'PelamarWirausahaController@index');
+    Route::get('/admin/halaman-tambah-pelamar-pelaku-usaha', 'PelamarWirausahaController@tambah_pelamar_wirausaha');
+    Route::post('/admin/simpan-data-pelamar-pelaku-usaha', 'PelamarWirausahaController@store_pelamar');
+    Route::get('/admin/halaman-edit-pelamar-pelaku-usaha/{id}', 'PelamarWirausahaController@edit_pelamar');
+    Route::post('/admin/update-data-pelamar-pelaku-usaha', 'PelamarWirausahaController@update_pelamar');
+    Route::post('/admin/delete-data-pelamar-pelaku-usaha', 'PelamarWirausahaController@delete_pelamar');
+    Route::get('/admin/riwayat-lamaran-pelaku-usaha/{id}', 'PelamarWirausahaController@riwayat_pelamar');
 
     //Route Lowongan
     Route::get('/admin/halaman-manajemen-lowongan', 'LowonganController@index');

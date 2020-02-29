@@ -179,7 +179,7 @@ class LowonganController extends Controller
             'kec_lowongan' => $insert->inpkecamatan,
             'gaji_lowongan' => $insert->d,
             'pengalaman_lowongan' => $insert->e,
-            'jenis_kompetensi_lowongan' => $insert->cc,
+            'id_tingkatpdd_lowongan' => $insert->cc,
             'desk_lowongan' => $insert->f
         ]);
 
@@ -266,7 +266,7 @@ class LowonganController extends Controller
             'kec_lowongan' => $update->inpkecamatan,
             'gaji_lowongan' => $update->d,
             'pengalaman_lowongan' => $update->e,
-            'jenis_kompetensi_lowongan' => $update->cc,
+            'id_tingkatpdd_lowongan' => $update->cc,
             'desk_lowongan' => $update->f
         ]);
 
