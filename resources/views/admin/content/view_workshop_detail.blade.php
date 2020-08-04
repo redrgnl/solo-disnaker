@@ -19,7 +19,6 @@
                     <th>NIK</th>
                     <th>Nama</th>
                     <?php if ($detpelamar->count() == 0) { } else { ?>
-                    <th>NPWP</th>
                     <th>Alamat</th>
                     <th>Gender</th>
                     <th>Tempat / Tanggal Lahir</th>
@@ -39,7 +38,6 @@
                     @if($pll->status_detwork == 1)<td><a style="color: green; font-weight: bold">Approved</a></td> @else <td><a style="color: red; font-weight: bold">Tunda</a></td> @endif
                     <td>{{ $pll->nik_pelamar }}</td>
                     <td>{{ $pll->nama_pelamar }}</td>
-                    <td>{{ $pll->npwp_pelamar }}</td>
                     <td>
                         <a class="truncate" title="{{ $pll->alamat_pelamar }}">{!! Str::limit($pll->alamat_pelamar, 120, ' ...') !!}</a>
                     </td>
@@ -70,7 +68,6 @@
                     <th>NIK</th>
                     <th>Nama</th>
                     <?php if ($detpelamar->count() == 0) { } else { ?>
-                    <th>NPWP</th>
                     <th>Alamat</th>
                     <th>Gender</th>
                     <th>Tempat / Tanggal Lahir</th>
@@ -87,7 +84,7 @@
               </table>
             </div>
             <div class="col s4 l4 right-content border-radius-6">
-              <ul class="navbar-list right mt-0">               
+              <ul class="navbar-list right mt-0">
                 <li class="hide-on-med-and-down">
                   <a class="waves-effect waves-block waves-light modal-trigger" href="#modallog">
                     <i class="material-icons float-right">more_vert</i>

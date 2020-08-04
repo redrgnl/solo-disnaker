@@ -14,11 +14,11 @@ class PelamarWirausahaController extends Controller
                 'breadcrumb' => "Data Pelamar",
                 'pelamar' => DB::table('tb_pelamar')->get(),
             ];
-    
+
             return view('/admin/content/view_pelamar_wirausaha', $data);
         }
     // ======================VIEW PELAMAR TAMBAH WIRAUSAHA=============================
-    
+
     public function tambah_pelamar_wirausaha()
     {
         $data = [
@@ -28,15 +28,15 @@ class PelamarWirausahaController extends Controller
             'jabatan' => DB::table('tb_jabatan')->get(),
             'tingkatpdd' => DB::table('tb_tingkatpdd')->get(),
             'kwn' => DB::table('tb_kwn')->get()
-    
+
         ];
-    
+
         return view('/admin/content/view_pelamar_tambah_w', $data);
     }
 
-    
+
     // ======================PROSES PELAMAR TAMBAH =============================
-    
+
         public function store_pelamar(Request $insert)
         {
             $lokasi_berkas = 'berkas_pelamar';
@@ -46,7 +46,7 @@ class PelamarWirausahaController extends Controller
                 'max' => 'Input :attribute Tidak Sesuai',
                 'email' => 'Format Email Salah'
             ];
-    
+
             //validasi form
             $this->validate($insert, [
                 'inpnik' => 'required|max:17',
@@ -62,30 +62,16 @@ class PelamarWirausahaController extends Controller
                 'inpberat' => 'required|max:3',
                 'inptelepon' => 'required|max:15',
                 'inpkodepos' => 'required|max:6',
-                //irfan
-                // 'inppos' => 'required',
-                // 'prov_pdd' => 'required',
-                // 'kota_pdd' => 'required',
-                // 'kelompok_jabatan' => 'required',
-                // 'sistem_pembayaran_harapan' => 'required',
-                // 'harapan_gaji' => 'required',
-                // 'penempatan_harapan' => 'required',
-                // 'inpizin' => 'required',
-                // 'inpnikah' => 'required',
-                // 'inpsehat' => 'required',
-                // 'inpkeahlian' => 'required',
-                // 'inpktp' => 'required',
-    
             ], $messages);
-    
+
             $maxid = DB::table('tb_pelamar')->max('id_pelamar') + 1;
-    
-    
+
+
             // foto pelamar
 
                 $img = $insert->file('inpfoto');
                 $imgname = date('Y-m-d') . "-" . "id" . $maxid . $img->getClientOriginalName();
-    
+
                 $location = 'pelamar';
                 $img->move($location, $imgname);
 
@@ -93,28 +79,25 @@ class PelamarWirausahaController extends Controller
             //KTP
                 $file_E = $insert->file('inpktp');
                 $file_E_name = date('Y-m-d') . "-" . "id" . $maxid . $file_E->getClientOriginalName();
-    
+
                 $file_E->move($lokasi_berkas, $file_E_name);
 
             //end berkas pelamar
-    
+
             $checknik = DB::table('tb_pelamar')->where('nik_pelamar', $insert->a)->get()->count();
-    
-    
+
+
             if ($checknik == 0) {
-    
+
                     DB::table('tb_data_pelaku_usaha')->insert([
                         'id_pelamar_wirausaha' => $maxid,
                         'modal_usaha' => $insert->inpmodal,
                         'omzet_usaha' => $insert->inpomzet,
                         'deskripsi_usaha' => $insert->deskripsi_bisnis,
                         'ktp_pelamar_wirausaha' => $file_E_name,
-    
+
                     ]);
 
-    
-    
-    
                 DB::table('tb_pelamar')->insert([
                     'id_pelamar' => $maxid,
                     'tipe_pelamar' => $insert->tipe_pelamar,
@@ -139,7 +122,6 @@ class PelamarWirausahaController extends Controller
                     'institusi_pelamar' => $insert->inpinstitusi,
                     'tahunlulus_pelamar' => $insert->inpthnlulus,
                     'nilai_pelamar' => $insert->inpnilai,
-                    //baru di tambahkan irfan
                     'foto_pelamar' => $imgname,
                     'kondisi_pelamar' => $insert->inpkonfis,
                     'kewarganegaraan_pelamar' => $insert->inpkewarganegaraan,
@@ -147,12 +129,10 @@ class PelamarWirausahaController extends Controller
                     'kota_pelamar' => $insert->inpkota,
                     'kec_pelamar' => $insert->inpkecamatan,
                     'kodepos_pelamar' => $insert->inpkodepos,
-    
-                    //end irfan
                     'password_pelamar' => md5($insert->inppassword),
                     'confirm_password_pelamar' => md5($insert->inpconfirm)
                 ]);
-    
+
                 return redirect('/admin/halaman-manajemen-pelamar')->with('success-alert', 'Disimpan');
             } else {
                 return redirect('/admin/halaman-tambah-pelamar')->with('error-alert', 'Pelamar Telah Terdaftar Sebelumnya');
@@ -160,16 +140,16 @@ class PelamarWirausahaController extends Controller
         }
 
     // ======================PROSES PELAMAR EDIT =============================
-    
+
         public function update_pelamar(Request $update)
         {
             $lokasi_berkas = 'berkas_pelamar';
-    
+
             $messages = [
                 'required' => 'Field Wajib Diisi *',
                 'max' => 'Input Tidak Sesuai'
             ];
-    
+
     //VALIDASI FORM
             $this->validate($update, [
                 'inpnik' => 'required|max:17',
@@ -186,62 +166,51 @@ class PelamarWirausahaController extends Controller
                 'inptelepon' => 'required|max:15',
                 'inpkodepos' => 'required|max:6',
             ], $messages);
-    
-    
-    
+
+
+
     // update foto
                 if($update->hasfile('inpfoto')){
-    
+
                 $foto_p = $update->file('inpfoto');
                 $foto_name = date('Y-m-d') . "-" . "id" . $update->inpid . $foto_p->getClientOriginalName();
                 $lokasi_foto = 'pelamar';
                 $foto_p->move($lokasi_foto, $foto_name);
-    
+
                     $path_A = public_path() . "/pelamar/" . $update->old_foto;
                     unlink($path_A);
-            
+
                 DB::table('tb_pelamar')->where('id_pelamar', $update->inpid)->update([
                     'foto_pelamar' => $foto_name,
-            
+
                 ]);
-    
+
                }else{
                     $foto_name = $update->old_foto;
                }
 
-    
-                // hapus berkas pelamar kalau ada
-                // $check_berkas = DB::table('tb_data_pelaku_usaha')->where('id_pelamar_wirausaha', $update->inpid)->first();
-
-                // if($check_berkas->ktp_pelamar_wirausaha != "-"){
-                //     $path_E = public_path() . "/berkas_pelamar/" . $check_berkas->ktp_pelamar_wirausaha;
-                //     unlink($path_E);
-                // }
-                // end hapus berkas
-
-    
                 //update KTP
                 if($update->hasfile('inpktp')){
-    
+
                     $file_E = $update->file('inpktp');
                     $file_E_name = date('Y-m-d') . "-" . "id" . $update->inpid . $file_E->getClientOriginalName();
-    
+
                     $file_E->move($lokasi_berkas, $file_E_name);
 
-                
+
                     DB::table('tb_data_pelaku_usaha')->where('id_pelamar_wirausaha', $update->inpid)->update([
                         'ktp_pelamar_wirausaha' => $file_E_name,
-                
+
                     ]);
                     if($update->old_ktp != "-"){
                         $path_E = public_path() . "/berkas_pelamar/" . $update->old_ktp;
                         unlink($path_E);
                     }
                 }
-    
+
                 //end update  berkas pelamar
-    
-    
+
+
                 DB::table('tb_data_pelaku_usaha')->where('id_pelamar_wirausaha', $update->inpid)->update([
                     'modal_usaha' => $update->inpmodal,
                     'omzet_usaha' => $update->inpomzet,
@@ -249,8 +218,8 @@ class PelamarWirausahaController extends Controller
 
                 ]);
     // END UPDATE TABLE HARAPAN
-    
-    
+
+
     // UPDATE TABLE PELAMAR
             DB::table('tb_pelamar')->where('id_pelamar', $update->inpid)->update([
                 'nama_pelamar' => $update->inpusername,
@@ -284,12 +253,12 @@ class PelamarWirausahaController extends Controller
                 'confirm_password_pelamar' => md5($update->inpconfirm)
             ]);
     // END UPDATE TABLE PELAMAR
-    
-    
+
+
             return redirect('/admin/halaman-manajemen-pelamar')->with('success-alert', 'Disimpan');
         }
     // ======================PROSES PELAMAR EDIT =============================
-    
+
         public function delete_pelamar(Request $delete)
         {
             DB::table('tb_pelamar')->where('id_pelamar', $delete->idpelamar)->delete();
@@ -298,7 +267,7 @@ class PelamarWirausahaController extends Controller
             return redirect('/admin/halaman-manajemen-pelamar')->with('success-alert', 'Dihapus');
         }
     // ======================VIEW RIWAYAT PELAMAR  =============================
-    
+
         public function riwayat_pelamar($id)
         {
             $data = [
@@ -310,11 +279,11 @@ class PelamarWirausahaController extends Controller
                     ->join('tb_pelamar', 'tb_pelamar.id_pelamar', '=', 'tb_det_workshop.id_pelamar')
                     ->where('tb_pelamar.id_pelamar', $id)->get()
             ];
-    
+
             return view('/admin/content/view_pelamar_riwayat', $data);
         }
-    
 
-    
-    
+
+
+
 }

@@ -333,7 +333,7 @@
               @enderror
             </div>
             <div class="input-field col s6 m6 l6">
-              <i class="material-icons prefix">call</i>
+              <i class="material-icons prefix"></i>
               <input name="inpnilai" id="inpnilai" type="text" class="validate">
               <label for="inpnilai">Nilai (Ijazah/IPK)</label>
               @error('inpnilai')
@@ -484,14 +484,14 @@
     cc ')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div><div class="input-field col s6"><i class="material-icons prefix">attach_money</i><input name="dd[]" id="dd" type="text" class="validate"><label for="dd">Besar Gaji</label>@error('
     dd ')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div></div><div class="row"><div class="input-field col s12 m6 l6"><i class="material-icons prefix"></i><input type="date" name="ee[]" class="datepicker"><label for="inpgelardepan">Lama Kerja Dari</label>@error('
     ee ')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div><div class="input-field col s12 m6 l6"><input type="date" id="ff" name="ff[]" class="datepicker"><label for="ff">Sampai</label>@error('
-    ff ')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div></div><a href="javascript:void(0);" class="remove_button"><i class="material-icons red-text">delete_forever</i></a></div> '; //input field html 
+    ff ')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div></div><a href="javascript:void(0);" class="remove_button"><i class="material-icons red-text">delete_forever</i></a></div> '; //input field html
 
 
     var x = 1; //Inisiasi 1
 
     //Tombol Terklik
     $(addButton).click(function() {
-      //Check maximum 
+      //Check maximum
       if (x < maxField) {
         x++; //Field Hituing
         $(wrapper).append(fieldHTML); //Add field html

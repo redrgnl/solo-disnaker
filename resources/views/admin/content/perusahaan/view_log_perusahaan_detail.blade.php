@@ -12,7 +12,6 @@
                 <thead>
                   <tr>
                     <th>NIK</th>
-                    <th>NPWP</th>
                     <th>Nama</th>
                     <th>Alamat</th>
                     <th>Gender</th>
@@ -30,7 +29,6 @@
                 @foreach($detpelamar as $pll)
                   <tr>
                     <td>{{ $pll->nik_pelamar }}</td>
-                    <td>{{ $pll->npwp_pelamar }}</td>
                     <td>{{ $pll->nama_pelamar }}</td>
                     <td>
                         <a class="truncate" title="{{ $pll->alamat_pelamar }}">{!! Str::limit($pll->alamat_pelamar, 120, ' ...') !!}</a>
@@ -54,7 +52,6 @@
                 <tfoot>
                   <tr>
                     <th>NIK</th>
-                    <th>NPWP</th>
                     <th>Nama</th>
                     <th>Alamat</th>
                     <th>Gender</th>
@@ -135,7 +132,7 @@
       </tfoot>
     </table>
   </div>
-</div> 
+</div>
 @endsection
 
 @section('customjs')

@@ -1,0 +1,1046 @@
+{
+	"info": {
+		"_postman_id": "3054b51d-e010-4236-8bc0-01d14a36b682",
+		"name": "Disnaker Solo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Pelamar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/pelamar/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"pelamar",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pelamar By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/pelamar/{id}",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"pelamar",
+						"{id}"
+					]
+				},
+				"description": "int id_pelamar : id pelamar"
+			},
+			"response": []
+		},
+		{
+			"name": "Daftar Workshop",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/pelamar/workshop/{idworkshop}/{idpelamar}",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"pelamar",
+						"workshop",
+						"{idworkshop}",
+						"{idpelamar}"
+					]
+				},
+				"description": "int id_workshop : id pelatihan\r\nint id_pelamar : id pelamar"
+			},
+			"response": []
+		},
+		{
+			"name": "Daftar Lowongan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/pelamar/perusahaan/{idlowongan}/{idpelamar}",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"pelamar",
+						"perusahaan",
+						"{idlowongan}",
+						"{idpelamar}"
+					]
+				},
+				"description": "int id_lowongan : id lowongan\r\nint id_pelamar : id pelamar"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pelatihan All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/workshop/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"workshop",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Lowongan All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/lowongan/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"lowongan",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Up Perusahaan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "inpnama",
+							"value": "",
+							"description": "varchar : nama perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inplengkap",
+							"value": "",
+							"description": "text : nama lengkap perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inpnpwp",
+							"value": "",
+							"description": "varchar : npwp perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inpalamat",
+							"value": "",
+							"description": "text : alamat perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inpprov",
+							"value": "",
+							"description": "int : id provinsi - tb_provinsi",
+							"type": "text"
+						},
+						{
+							"key": "inpkota",
+							"value": "",
+							"description": "int : id kota - tb_kota",
+							"type": "text"
+						},
+						{
+							"key": "inpkecamatan",
+							"value": "",
+							"description": "int : id kecamatan - tb_kec",
+							"type": "text"
+						},
+						{
+							"key": "inpmap",
+							"value": "",
+							"description": "text : link google map perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inpjenis",
+							"value": "",
+							"description": "int : id jenis perusahaan - tb_jenisper",
+							"type": "text"
+						},
+						{
+							"key": "inpkelas",
+							"value": "",
+							"description": "varchar : (kecil, menengah, besar)",
+							"type": "text"
+						},
+						{
+							"key": "inppos",
+							"value": "",
+							"description": "int : (1 - dalam solo, 2 - luar solo)",
+							"type": "text"
+						},
+						{
+							"key": "inpkode",
+							"value": "",
+							"description": "int : kodepos",
+							"type": "text"
+						},
+						{
+							"key": "inpweb",
+							"value": "",
+							"description": "text : link web perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inpdesk",
+							"value": "",
+							"description": "text : deskripsi perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inpaktivitas",
+							"value": "",
+							"description": "varchar : aktifitas perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inpproduk",
+							"value": "",
+							"description": "varchar : produk perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inpjawab",
+							"value": "",
+							"description": "varchar : penanggung jawab prusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inptelepon",
+							"value": "",
+							"description": "varchar : telepon perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inpfax",
+							"value": "",
+							"description": "varchar : fax perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inpemail",
+							"value": "",
+							"description": "varchar : email perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inppict",
+							"value": "",
+							"description": "varchar : logo perusahaan (input file)",
+							"type": "text"
+						},
+						{
+							"key": "inpasso",
+							"value": "",
+							"description": "varchar : asosiasi perusahaan",
+							"type": "text"
+						},
+						{
+							"key": "inppassword",
+							"value": "",
+							"description": "varchar : password",
+							"type": "text"
+						},
+						{
+							"key": "inpconfirm",
+							"value": "",
+							"description": "varchar : konfirmasi password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/perusahaan/sign-up",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"perusahaan",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Up Pelamar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "inpusername",
+							"value": "sss",
+							"description": "varchar(50)",
+							"type": "text"
+						},
+						{
+							"key": "inpemail",
+							"value": "sss@sss",
+							"description": "varchar(50)",
+							"type": "text"
+						},
+						{
+							"key": "inpstatuskwn",
+							"value": "BN",
+							"description": "varchar(2) : BN, SN, DA, JA",
+							"type": "text"
+						},
+						{
+							"key": "inpnik",
+							"value": "22",
+							"description": "varchar(17)",
+							"type": "text"
+						},
+						{
+							"key": "inpnama",
+							"value": "ss",
+							"description": "varchar(100)",
+							"type": "text"
+						},
+						{
+							"key": "inpgelardepan",
+							"value": "ss",
+							"description": "varchar(15)",
+							"type": "text"
+						},
+						{
+							"key": "inpgelarbelakang",
+							"value": "ss",
+							"description": "varchar(15)",
+							"type": "text"
+						},
+						{
+							"key": "inpkelamin",
+							"value": "L",
+							"description": "varchar(1) : L, P",
+							"type": "text"
+						},
+						{
+							"key": "inptempatlhr",
+							"value": "ss",
+							"description": "varchar(50)",
+							"type": "text"
+						},
+						{
+							"key": "inptanggallhr",
+							"value": "2020-02-22",
+							"description": "date",
+							"type": "text"
+						},
+						{
+							"key": "inpagama",
+							"value": "Islam",
+							"description": "varchar(10) : Islam, Kristen, Katolik, Hindu, Budha, Konghuchu",
+							"type": "text"
+						},
+						{
+							"key": "inptinggi",
+							"value": "22",
+							"description": "int(3)",
+							"type": "text"
+						},
+						{
+							"key": "inpberat",
+							"value": "22",
+							"description": "int(3)",
+							"type": "text"
+						},
+						{
+							"key": "inptelepon",
+							"value": "22",
+							"description": "varchar(15)",
+							"type": "text"
+						},
+						{
+							"key": "inpalamat",
+							"value": "22",
+							"description": "text",
+							"type": "text"
+						},
+						{
+							"key": "inptingkatpdd",
+							"value": "13",
+							"description": "int(2) - id tingkat pendidikan",
+							"type": "text"
+						},
+						{
+							"key": "inpjurusan",
+							"value": "1318",
+							"description": "int(4) - id detail tingkat pendidikan",
+							"type": "text"
+						},
+						{
+							"key": "inpinstitusi",
+							"value": "ss",
+							"description": "varchar(100)",
+							"type": "text"
+						},
+						{
+							"key": "inpthnlulus",
+							"value": "22",
+							"description": "varchar(4)",
+							"type": "text"
+						},
+						{
+							"key": "inpnilai",
+							"value": "22",
+							"description": "varchar(5)",
+							"type": "text"
+						},
+						{
+							"key": "inpkonfis",
+							"value": "Non Disabilitas",
+							"description": "varchar(30) : Disabilitas, Non Disabilitas",
+							"type": "text"
+						},
+						{
+							"key": "inpkewarganegaraan",
+							"value": "WARGA NEGARA INDONESIA (WNI)",
+							"description": "varchar(30) : WARGA NEGARA INDONESIA (WNI), WARGA NEGARA ASING (WNA)",
+							"type": "text"
+						},
+						{
+							"key": "inpprov",
+							"value": "11",
+							"description": "int(5) : id provinsi",
+							"type": "text"
+						},
+						{
+							"key": "inpkota",
+							"value": "1103",
+							"description": "int(5) : id kota",
+							"type": "text"
+						},
+						{
+							"key": "inpkecamatan",
+							"value": "1103020",
+							"description": "int : id kec",
+							"type": "text"
+						},
+						{
+							"key": "inpkodepos",
+							"value": "151253",
+							"description": "varchar(10)",
+							"type": "text"
+						},
+						{
+							"key": "inppassword",
+							"value": "3108",
+							"description": "varchar(20)",
+							"type": "text"
+						},
+						{
+							"key": "inpconfirm",
+							"value": "3108",
+							"description": "varchar(20)",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/pelamar/sign-up",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"pelamar",
+						"sign-up"
+					]
+				},
+				"description": "BN : belum nikah\r\nSN : sudah nikah\r\nDA : duda\r\nJA : janda"
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Up Pelamar Workshop",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "inpusername",
+							"value": "sss",
+							"description": "varchar(50)",
+							"type": "text"
+						},
+						{
+							"key": "inpemail",
+							"value": "sss@sss",
+							"description": "varchar(50)",
+							"type": "text"
+						},
+						{
+							"key": "inpstatuskwn",
+							"value": "BN",
+							"description": "varchar(2) : BN, SN, DA, JA",
+							"type": "text"
+						},
+						{
+							"key": "inpnik",
+							"value": "22",
+							"description": "varchar(17)",
+							"type": "text"
+						},
+						{
+							"key": "inpnama",
+							"value": "ss",
+							"description": "varchar(100)",
+							"type": "text"
+						},
+						{
+							"key": "inpgelardepan",
+							"value": "ss",
+							"description": "varchar(15)",
+							"type": "text"
+						},
+						{
+							"key": "inpgelarbelakang",
+							"value": "ss",
+							"description": "varchar(15)",
+							"type": "text"
+						},
+						{
+							"key": "inpkelamin",
+							"value": "L",
+							"description": "varchar(1) : L, P",
+							"type": "text"
+						},
+						{
+							"key": "inptempatlhr",
+							"value": "ss",
+							"description": "varchar(50)",
+							"type": "text"
+						},
+						{
+							"key": "inptanggallhr",
+							"value": "2020-02-22",
+							"description": "date",
+							"type": "text"
+						},
+						{
+							"key": "inpagama",
+							"value": "Islam",
+							"description": "varchar(10) : Islam, Kristen, Katolik, Hindu, Budha, Konghuchu",
+							"type": "text"
+						},
+						{
+							"key": "inptinggi",
+							"value": "22",
+							"description": "int(3)",
+							"type": "text"
+						},
+						{
+							"key": "inpberat",
+							"value": "22",
+							"description": "int(3)",
+							"type": "text"
+						},
+						{
+							"key": "inptelepon",
+							"value": "22",
+							"description": "varchar(15)",
+							"type": "text"
+						},
+						{
+							"key": "inpalamat",
+							"value": "22",
+							"description": "text",
+							"type": "text"
+						},
+						{
+							"key": "inptingkatpdd",
+							"value": "13",
+							"description": "int(2) - id tingkat pendidikan",
+							"type": "text"
+						},
+						{
+							"key": "inpjurusan",
+							"value": "1318",
+							"description": "int(4) - id detail tingkat pendidikan",
+							"type": "text"
+						},
+						{
+							"key": "inpinstitusi",
+							"value": "ss",
+							"description": "varchar(100)",
+							"type": "text"
+						},
+						{
+							"key": "inpthnlulus",
+							"value": "22",
+							"description": "varchar(4)",
+							"type": "text"
+						},
+						{
+							"key": "inpnilai",
+							"value": "22",
+							"description": "varchar(5)",
+							"type": "text"
+						},
+						{
+							"key": "inpkonfis",
+							"value": "Non Disabilitas",
+							"description": "varchar(30) : Disabilitas, Non Disabilitas",
+							"type": "text"
+						},
+						{
+							"key": "inpkewarganegaraan",
+							"value": "WARGA NEGARA INDONESIA (WNI)",
+							"description": "varchar(30) : WARGA NEGARA INDONESIA (WNI), WARGA NEGARA ASING (WNA)",
+							"type": "text"
+						},
+						{
+							"key": "inpprov",
+							"value": "11",
+							"description": "int(5) : id provinsi",
+							"type": "text"
+						},
+						{
+							"key": "inpkota",
+							"value": "1103",
+							"description": "int(5) : id kota",
+							"type": "text"
+						},
+						{
+							"key": "inpkecamatan",
+							"value": "1103020",
+							"description": "int : id kec",
+							"type": "text"
+						},
+						{
+							"key": "inpkodepos",
+							"value": "151253",
+							"description": "varchar(10)",
+							"type": "text"
+						},
+						{
+							"key": "inppassword",
+							"value": "3108",
+							"description": "varchar(20)",
+							"type": "text"
+						},
+						{
+							"key": "inpconfirm",
+							"value": "3108",
+							"description": "varchar(20)",
+							"type": "text"
+						},
+						{
+							"key": "inpidworkshop",
+							"value": "12",
+							"description": "int : id pelatihan",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/pelamar-workshop/sign-up",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"pelamar-workshop",
+						"sign-up"
+					]
+				},
+				"description": "BN : belum nikah\r\nSN : sudah nikah\r\nDA : duda\r\nJA : janda"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tingkat Pendidikan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/tingkat-pendidikan/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"tingkat-pendidikan",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tingkat Pendidikan By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/tingkat-pendidikan/{id}",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"tingkat-pendidikan",
+						"{id}"
+					]
+				},
+				"description": "int id_tingkatpdd"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Detail Tingkat Pendidikan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/detail-tingkat-pendidikan/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"detail-tingkat-pendidikan",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Detail Tingkat Pendidikan By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/detail-tingkat-pendidikan/{id}",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"detail-tingkat-pendidikan",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Provinsi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/provinsi/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"provinsi",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Provinsi By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/provinsi/11",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"provinsi",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Kota",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/kota/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"kota",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Kota By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/kota/1101",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"kota",
+						"1101"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Kecamatan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/kecamatan/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"kecamatan",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Kecamatan By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/kecamatan/3510120",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"kecamatan",
+						"3510120"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Provinsi - Kabupaten",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/provinsi-kabupaten/11",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"provinsi-kabupaten",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Kabupaten - Kecamatan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/api-service/kabupaten-kecamatan/1101",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"api-service",
+						"kabupaten-kecamatan",
+						"1101"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

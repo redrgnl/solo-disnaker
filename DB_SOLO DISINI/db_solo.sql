@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 29, 2020 at 12:13 PM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.3.11
+-- Generation Time: Jul 25, 2020 at 11:08 AM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -79,6 +78,13 @@ CREATE TABLE `tb_det_lowongan` (
   `id_lowongan` int(11) NOT NULL,
   `id_pelamar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_det_lowongan`
+--
+
+INSERT INTO `tb_det_lowongan` (`id_detlow`, `id_lowongan`, `id_pelamar`) VALUES
+(22, 20, 17);
 
 -- --------------------------------------------------------
 
@@ -185,6 +191,14 @@ CREATE TABLE `tb_det_workshop` (
   `id_pelamar` int(11) NOT NULL,
   `status_detwork` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_det_workshop`
+--
+
+INSERT INTO `tb_det_workshop` (`id_detwork`, `id_workshop`, `id_pelamar`, `status_detwork`) VALUES
+(47, 12, 17, 0),
+(54, 12, 19, 0);
 
 -- --------------------------------------------------------
 
@@ -8236,7 +8250,8 @@ INSERT INTO `tb_lowongan` (`id_lowongan`, `id_perusahaan`, `posisi_lowongan`, `f
 (16, 22, 'KEPALA STAF UMUM TNI (KASUM TNI)', 'STAF TNI', 'Disabilitas', 'LN', 'Non-Active', '2020-02-07', '2020-02-25', '12', '1202', '-', 12, 22, 'BORONGAN', 'WAKTU TERTENTU', 49999992, 'STAF2', 'STAF DLU YA2', 11, 1103, 1103020),
 (17, 22, 'ASISTEN KEBIJAKAN STRATEGIS DAN PERENCANAAN UMUM PANGLIMA TNI (ASRENUM PANGLIMA TNI)', 'ASISTEN', 'Non Disabilitas', 'DN', 'Active', '2020-02-01', '2020-02-28', '13', '1304', 'TEKNIK KAPAL', 1, 2, 'BULANAN', 'WAKTU TIDAK TERTENTU', 10000000, 'gak ada', 'ASISTEN KEPALA', 11, 1103, 1103020),
 (18, 22, 'ASISTEN OPERASI PANGLIMA TNI (ASOPS PANGLIMA TNI)', 'asdasd', 'Disabilitas', 'DN', 'Active', '2020-02-08', '2020-02-18', '12', '1201', '-', 2, 3, 'HARIAN', 'WAKTU TIDAK TERTENTU', 20000000, 'gk ada', 'gk ada', 11, 1103, 1103020),
-(19, 22, 'ASISTEN INTELIJEN PANGLIMA TNI (ASINTEL PANGLIMA TNI)', 'TNI', 'Non Disabilitas', 'DN', 'Active', '2020-02-15', '2020-03-27', '12', '1203', 'SARJANA WOW', 2, 3, 'BORONGAN', 'WAKTU TERTENTU', 30000000, 'TERJUN', 'asdasdasdasd', 11, 1103, 1103012);
+(19, 22, 'ASISTEN INTELIJEN PANGLIMA TNI (ASINTEL PANGLIMA TNI)', 'TNI', 'Non Disabilitas', 'DN', 'Active', '2020-02-15', '2020-03-27', '12', '1203', 'SARJANA WOW', 2, 3, 'BORONGAN', 'WAKTU TERTENTU', 30000000, 'TERJUN', 'asdasdasdasd', 11, 1103, 1103012),
+(20, 22, 'ASISTEN PERSONALIA PANGLIMA TNI (ASPERS PANGLIMA TNI)', 'SSTAF', 'Non Disabilitas', 'DN', 'Active', '2020-07-25', '2020-07-31', '11', '1102', '-', 10, 10, 'BULANAN', 'WAKTU TERTENTU', 99998, '10', '10', 16, 1613, 1613030);
 
 -- --------------------------------------------------------
 
@@ -8286,7 +8301,7 @@ CREATE TABLE `tb_pelamar` (
 INSERT INTO `tb_pelamar` (`id_pelamar`, `tipe_pelamar`, `nama_ktp`, `gelardpn_pelamar`, `gelarblk_pelamar`, `nik_pelamar`, `nama_pelamar`, `alamat_pelamar`, `kelamin_pelamar`, `tplahir_pelamar`, `tglahir_pelamar`, `agama_pelamar`, `statuskawin_pelamar`, `tinggi_pelamar`, `berat_pelamar`, `telp_pelamar`, `email_pelamar`, `foto_pelamar`, `kondisi_pelamar`, `kewarganegaraan_pelamar`, `provinsi_pelamar`, `kota_pelamar`, `kec_pelamar`, `kodepos_pelamar`, `id_tingkatpdd`, `id_det_tingkatpdd`, `institusi_pelamar`, `tahunlulus_pelamar`, `nilai_pelamar`, `password_pelamar`, `confirm_password_pelamar`, `status_pelamar`) VALUES
 (17, 'REGULAR', 'Boy', 'qwe', 'we', '854485766353452', 'boy23', 'seddghfgnfdgh', 'L', 'bwi', '2020-02-22', 'Kristen', 'BN', 180, 34, '9754578778', 'boy23@gmail.com', '2020-02-16-id17Pelatihan -perbakinBigLogo.jpg', 'Tuna Daksa', 'WARGA NEGARA INDONESIA (WNI)', 11, 1103, 1103020, '23244', 13, 1318, 'SMA', '2008', '3.89', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307', 'Aktif'),
 (18, 'PELAKU USAHA', 'asdasdasd', 'asd', 'ads', '56235235235', 'yuki12', 'asdasdasd', 'P', 'asd', '2020-02-24', 'Islam', 'BN', 155, 55, '5235235235', 'asd@gmail.com', '2020-02-29-id18soeltan.jpg', 'Disabilitas', 'WARGA NEGARA INDONESIA (WNI)', 19, 1905, 1905050, '151253', 13, 1316, 'SMA', '1989', '89', 'd41d8cd98f00b204e9800998ecf8427e', 'd41d8cd98f00b204e9800998ecf8427e', 'Aktif'),
-(19, 'REGULAR', 'irfan', 'asd', 'asd', '4575694334', 'yuki2', '4124asdasd', 'L', 'asdasd', '2020-02-13', 'Konghuchu', 'DA', 177, 66, '08581267518', 'GURAMIN@gmail.com', '2020-02-29-id19tset asd.webp', 'Non Disabilitas', 'WARGA NEGARA INDONESIA (WNI)', 31, 3175, 3175050, '9002', 12, 1202, 'SMA', '2189', '90', 'd41d8cd98f00b204e9800998ecf8427e', 'd41d8cd98f00b204e9800998ecf8427e', 'Aktif');
+(19, 'REGULAR', 'irfan', 'asd', 'asd', '4575694334', 'yuki2', '4124asdasd', 'L', 'asdasd', '2020-02-13', 'Konghuchu', 'DA', 177, 66, '08581267518', '4yukihana@gmail.com', '2020-02-29-id19tset asd.webp', 'Non Disabilitas', 'WARGA NEGARA INDONESIA (WNI)', 31, 3175, 3175050, '9002', 12, 1202, 'SMA', '2189', '90', 'ffbd6cbb019a1413183c8d08f2929307', 'ffbd6cbb019a1413183c8d08f2929307', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -8487,8 +8502,8 @@ CREATE TABLE `tb_workshop` (
 --
 
 INSERT INTO `tb_workshop` (`id_workshop`, `nama_workshop`, `lokasi_workshop`, `maps_workshop`, `tanggal_workshop`, `str_workshop`, `end_workshop`, `kuota_workshop`, `kategori_workshop`, `kategori_wirausaha`, `jenis_kompetensi_workshop`, `poster_workshop`, `persyaratan_workshop`, `status_workshop`) VALUES
-(12, 'Perang', 'Bataleon 5 Jember', 'https://www.google.com/maps/place/Ayam+Goreng+Nelongso+Mastrip+Jember/@-8.1664779,113.7244358,16.75z/data=!4m5!3m4!1s0x2dd695cf27181faf:0xf78d065b26a0c618!8m2!3d-8.1665196!4d113.7247851', '2020-02-29', '2020-02-17', '2020-02-28', 20, 'Pencari Kerja', '-', 'Jaringan', '2020-02-17-71585754_1391950374302550_8065105076080869376_n.jpg', 'Berani Perang', 'Active'),
-(13, 'Perangko', 'jembr', 'https://www.google.com/maps/place/Perumahan+Mastrip/@-8.1706634,113.7275817,15z/data=!4m5!3m4!1s0x2dd695c969142ee7:0x24a145826a7489dc!8m2!3d-8.1669577!4d113.7233502', '2020-02-28', '2020-02-25', '2020-02-27', 10, 'Pencari Kerja', '-', 'Jaringan', '2020-02-25-0.jpg', 'uwu', 'Active');
+(12, 'Perang', 'Bataleon 5 Jember', 'https://www.google.com/maps/place/Ayam+Goreng+Nelongso+Mastrip+Jember/@-8.1664779,113.7244358,16.75z/data=!4m5!3m4!1s0x2dd695cf27181faf:0xf78d065b26a0c618!8m2!3d-8.1665196!4d113.7247851', '2020-02-29', '2020-02-17', '2020-09-30', 20, 'Pencari Kerja', '-', 'Jaringan', '2020-02-17-71585754_1391950374302550_8065105076080869376_n.jpg', 'Berani Perang', 'Active'),
+(13, 'Perangko', 'jembr', 'https://www.google.com/maps/place/Perumahan+Mastrip/@-8.1706634,113.7275817,15z/data=!4m5!3m4!1s0x2dd695c969142ee7:0x24a145826a7489dc!8m2!3d-8.1669577!4d113.7233502', '2020-02-28', '2020-02-25', '2020-10-29', 10, 'Pencari Kerja', '-', 'Jaringan', '2020-02-25-0.jpg', 'uwu', 'Active');
 
 --
 -- Indexes for dumped tables
@@ -8553,6 +8568,12 @@ ALTER TABLE `tb_jenisper`
 ALTER TABLE `tb_kecamatan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `districts_regency_id_index` (`regency_id`);
+
+--
+-- Indexes for table `tb_kompetensi`
+--
+ALTER TABLE `tb_kompetensi`
+  ADD PRIMARY KEY (`id_kompetensi`);
 
 --
 -- Indexes for table `tb_kota`
@@ -8638,13 +8659,13 @@ ALTER TABLE `tb_det_gallery`
 -- AUTO_INCREMENT for table `tb_det_lowongan`
 --
 ALTER TABLE `tb_det_lowongan`
-  MODIFY `id_detlow` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_detlow` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tb_det_workshop`
 --
 ALTER TABLE `tb_det_workshop`
-  MODIFY `id_detwork` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_detwork` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `tb_harapan_kerja`
@@ -8659,6 +8680,12 @@ ALTER TABLE `tb_jabatan`
   MODIFY `id_jabatan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
+-- AUTO_INCREMENT for table `tb_kompetensi`
+--
+ALTER TABLE `tb_kompetensi`
+  MODIFY `id_kompetensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `tb_kwn`
 --
 ALTER TABLE `tb_kwn`
@@ -8668,7 +8695,7 @@ ALTER TABLE `tb_kwn`
 -- AUTO_INCREMENT for table `tb_lowongan`
 --
 ALTER TABLE `tb_lowongan`
-  MODIFY `id_lowongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_lowongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tb_pelamar`

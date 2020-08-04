@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//check login admin 
+//check login admin
 // Route::get('/check', function(){
 //     $check_berkas = DB::table('tb_harapan_kerja')->where('id_pelamar_harapan', 15)->first();
 //     return $check_berkas->bukunikah_harapan;
@@ -52,7 +52,7 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::get('/admin/halaman-detail-perusahaan/{id}', 'PerusahaanController@detail_perusahaan');
     Route::post('/admin/tambah-gallery', 'PerusahaanController@store_gal_perusahaan');
     Route::post('/admin/ganti-profile-perusahaan', 'PerusahaanController@change_pro_perusahaan');
-    Route::get('/admin/get-kota/{id}', 'PerusahaanController@get_kota');    
+    Route::get('/admin/get-kota/{id}', 'PerusahaanController@get_kota');
 
     //Route Pelamar Regular
     Route::get('/admin/halaman-manajemen-pelamar', 'PelamarController@index');
@@ -81,13 +81,13 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::post('/admin/update-data-lowongan', 'LowonganController@update_lowongan');
     Route::post('/admin/delete-data-lowongan', 'LowonganController@delete_lowongan');
     Route::get('/admin/lowongan-non-aktif', 'LowonganController@lownonaktif');
-    
+
     //Route Filter
-    Route::get('/admin/lowongan-dalam-negeri/disabilitas', 'LowonganController@dndisabilitas');    
-    Route::get('/admin/lowongan-dalam-negeri/non-disabilitas', 'LowonganController@dnnondisabilitas');    
-    Route::get('/admin/lowongan-luar-negeri/disabilitas', 'LowonganController@lndisabilitas');    
+    Route::get('/admin/lowongan-dalam-negeri/disabilitas', 'LowonganController@dndisabilitas');
+    Route::get('/admin/lowongan-dalam-negeri/non-disabilitas', 'LowonganController@dnnondisabilitas');
+    Route::get('/admin/lowongan-luar-negeri/disabilitas', 'LowonganController@lndisabilitas');
     Route::get('/admin/lowongan-luar-negeri/non-disabilitas', 'LowonganController@lnnondisabilitas');
-    
+
     // - Detail Lowongan
     Route::get('/admin/halaman-detail-lowongan/{id}/{per}', 'LowonganController@detail_lowongan')->name('detail_lowongan');
     Route::get('/admin/tambah-pelamar-lowongan/{low}/{pl}/{per}', 'LowonganController@tambah_detail_lowongan');
@@ -106,6 +106,11 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::get('/admin/tambah-detail-workshop/{idpl}/{idwr}', 'WorkshopController@tambah_detail_workshop');
     Route::post('/admin/delete-data-detail-workshop', 'WorkshopController@delete_detail_workshop');
     Route::get('/admin/approve-data-workshop/{iddet}/{idwr}', 'WorkshopController@approve_workshop');
+    //kompetensi
+    Route::get('/admin/halaman-kompetensi-workshop', 'WorkshopController@kompetensi');
+    Route::post('/admin/simpan-data-kompetensi', 'WorkshopController@store_kompetensi');
+    Route::post('/admin/update-data-kompetensi', 'WorkshopController@update_kompetensi');
+    Route::post('/admin/delete-data-kompetensi', 'WorkshopController@delete_kompetensi');
 });
 
 //Check Login Perusahaan
@@ -127,11 +132,9 @@ Route::group(['middleware' => 'perusahaansession'], function () {
     Route::post('/perusahaan/delete-data-detail-lowongan', 'PerusahaanController@delete_detail_lowongan');
 });
 
-//dev test
-//Route::get('/kirimemail','LowonganController@emailll');
-//Route::get('/testemail','LowonganController@emailllo');
-Route::get('/testpostview', 'ApiController@testpost');
-//dev test
+Route::get('/halaman-tidak-ditemukan', function() {
+    return view('admin.error');
+});
 
 //Route Login Admin
 Route::get('/', 'AdminController@login')->name('login');

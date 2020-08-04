@@ -462,7 +462,6 @@
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
             </div>
-
             <div class="input-field col s12 m4 l4">
               <i class="material-icons prefix">group</i>
               <select class="form-control" name="sistem_pembayaran_harapan" id="sistem_pembayaran_harapan">
@@ -504,7 +503,6 @@
                   <label for="inppengalaman">* Upload File Dalam Bentuk PDF</label>
 
                 </div>
-                  <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
               </div>
             </div>
             <div class="row">
@@ -518,7 +516,6 @@
                   <label for="inpketerampilan">* Upload File Dalam Bentuk PDF</label>
 
                 </div>
-                  <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
               </div>
             </div>
             <div class="row">
@@ -540,6 +537,7 @@
                 <i class="material-icons right">send</i>
               </button>
             </div>
+          </div>
         </form>
       </div>
     </div>
@@ -636,14 +634,14 @@
     cc ')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div><div class="input-field col s6"><i class="material-icons prefix">attach_money</i><input name="dd[]" id="dd" type="text" class="validate"><label for="dd">Besar Gaji</label>@error('
     dd ')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div></div><div class="row"><div class="input-field col s12 m6 l6"><i class="material-icons prefix"></i><input type="date" name="ee[]" class="datepicker"><label for="inpgelardepan">Lama Kerja Dari</label>@error('
     ee ')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div><div class="input-field col s12 m6 l6"><input type="date" id="ff" name="ff[]" class="datepicker"><label for="ff">Sampai</label>@error('
-    ff ')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div></div><a href="javascript:void(0);" class="remove_button"><i class="material-icons red-text">delete_forever</i></a></div> '; //input field html 
+    ff ')<span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>@enderror</div></div><a href="javascript:void(0);" class="remove_button"><i class="material-icons red-text">delete_forever</i></a></div> '; //input field html
 
 
     var x = 1; //Inisiasi 1
 
     //Tombol Terklik
     $(addButton).click(function() {
-      //Check maximum 
+      //Check maximum
       if (x < maxField) {
         x++; //Field Hituing
         $(wrapper).append(fieldHTML); //Add field html

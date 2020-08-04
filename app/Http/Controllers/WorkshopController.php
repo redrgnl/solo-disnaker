@@ -52,6 +52,7 @@ class WorkshopController extends Controller
             'd' => 'required|max:11',
             'e' => 'required|max:10',
             'e1' => 'required',
+            'ee2' => 'required',
             'f' => 'required',
             'p' => 'required',
         ], $messages);
@@ -72,7 +73,7 @@ class WorkshopController extends Controller
             'kuota_workshop' => $insert->d,
             'status_workshop' => $insert->e,
             'kategori_workshop' => $insert->e1,
-            'kategori_wirausaha' => $insert->e2,
+            'kategori_wirausaha' => '-',
             'jenis_kompetensi_workshop' => $insert->ee2,
             'persyaratan_workshop' => $insert->p,
             'poster_workshop' => $imgname
@@ -112,31 +113,16 @@ class WorkshopController extends Controller
             'd' => 'required|max:11',
             'e' => 'required|max:10',
             'e1' => 'required',
+            'e2' => 'required',
             'p' => 'required'
 
         ], $messages);
 
-            if($update->ee2 == "Kompetensi Jabatan"){
-                $up_k = "Kompetensi Jabatan";
-                $up_w = "-";
-            }
-            if($update->e2 == "IKM"){
-                $up_k = "-"; 
-                $up_w = "IKM";
-
-            }      
-            if($update->e2 == "Wirausaha baru"){
-                $up_k = "-"; 
-                $up_w = "Wirausaha baru";
-
-            }
-
-
-            if($update->hasfile('f')){
+        if($update->hasfile('f')){
 
             $img = $update->file('f');
             $imgname = date('Y-m-d') . "-" . $img->getClientOriginalName();
-    
+
             $location = 'workshop';
             $img->move($location, $imgname);
 
@@ -150,8 +136,8 @@ class WorkshopController extends Controller
                 'kuota_workshop' => $update->d,
                 'status_workshop' => $update->e,
                 'kategori_workshop' => $update->e1,
-                'kategori_wirausaha' => $up_w,
-                'jenis_kompetensi_workshop' => $up_k,
+                'kategori_wirausaha' => '-',
+                'jenis_kompetensi_workshop' => $update->e2,
                 'persyaratan_workshop' => $update->p,
                 'poster_workshop' => $imgname
 
@@ -171,14 +157,12 @@ class WorkshopController extends Controller
                 'kuota_workshop' => $update->d,
                 'status_workshop' => $update->e,
                 'kategori_workshop' => $update->e1,
-                'kategori_wirausaha' => $up_w,
-                'jenis_kompetensi_workshop' => $up_k,
+                'kategori_wirausaha' => '-',
+                'jenis_kompetensi_workshop' => $update->e2,
                 'persyaratan_workshop' => $update->p
-    
+
             ]);
         }
-
-
 
         return redirect('/admin/halaman-manajemen-workshop')->with('success-alert', 'Disimpan');
     }
@@ -350,5 +334,37 @@ class WorkshopController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function kompetensi() {
+        $data = [
+            'title' => "Manajemen Kompetensi",
+            'breadcrumb' => "Manajemen Kompetensi",
+            'kompetensi' => DB::table('tb_kompetensi')->get()
+        ];
+
+        return view('/admin/content/view_workshop_kompetensi', $data);
+    }
+
+    public function store_kompetensi(Request $insert) {
+        DB::table('tb_kompetensi')->insert([
+            'nama_kompetensi' => $insert->inpkompetensi
+        ]);
+
+        return redirect('/admin/halaman-kompetensi-workshop');
+    }
+
+    public function update_kompetensi(Request $update) {
+        DB::table('tb_kompetensi')->where('id_kompetensi', $update->edid)->update([
+            'nama_kompetensi' => $update->edkompetensi
+        ]);
+
+        return redirect('/admin/halaman-kompetensi-workshop');
+    }
+
+    public function delete_kompetensi(Request $delete) {
+        DB::table('tb_kompetensi')->where('id_kompetensi', $delete->delid)->delete();
+
+        return redirect('/admin/halaman-kompetensi-workshop');
     }
 }

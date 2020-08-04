@@ -74,7 +74,7 @@
           <div class="row">
             <div class="input-field col s6 m6 l6">
               <i class="material-icons prefix">dvr</i>
-              <select class="js-example-basic-single" name="e1" id="katpel">
+              <select class="js-example-basic-single" name="e1" required>
                 <option value="">- Kategori Pelatihan -</option>
                 <option value="Pencari Kerja">Pencari Kerja</option>
                 <option value="Wirausaha">Wirausaha</option>
@@ -84,25 +84,10 @@
               <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
               @enderror
             </div>
-            <div class="field-a" style="display: none">
-              <div class="input-field col s6 m6 l6">
+            <div class="input-field col s6 m6 l6">
                 <i class="material-icons prefix"></i>
-                <select class="js-example-basic-single" name="e2" id="inpstatus">
-                  <option value="-">- Kategori Wirausaha -</option>
-                  <option value="Wirausaha baru">Wirausaha baru</option>
-                  <option value="IKM">IKM</option>
-                </select>
-                <label for="e1">Kategori Wirausaha</label>
-                @error('e2')
-                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-                @enderror
-              </div>
-            </div>
-            <div class="field-b" style="display: none">
-              <div class="input-field col s6 m6 l6">
-                <i class="material-icons prefix"></i>
-                <select class="js-example-basic-single" name="ee2" id="inpstatus">
-                  <option value="-">- Kompetensi Pelatihan -</option>
+                <select class="js-example-basic-single" name="ee2" required>
+                  <option value="">- Kompetensi Pelatihan -</option>
                   @foreach($kompetensi as $komp)
                   <option value="{{ $komp->nama_kompetensi }}">{{ $komp->nama_kompetensi }}</option>
                   @endforeach
@@ -111,7 +96,6 @@
                 @error('ee2')
                 <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
-              </div>
             </div>
           </div>
           <div class="row">
@@ -185,23 +169,6 @@
   }
 </script>
 <script>
-  $(document).ready(function() {
-    $("#katpel").change(function() {
-      var val = $(this).val();
-      if (val == "Wirausaha") {
-        $('.field-a').show()
-        $('.field-b').hide()
 
-      } else if (val == "Pencari Kerja") {
-        $('.field-a').hide()
-        $('.field-b').show()
-
-      }else{
-        $('.field-a').hide()
-        $('.field-b').hide()
-
-      }
-    });
-  });
 </script>
 @endsection

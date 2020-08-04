@@ -6,9 +6,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-  <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
-  <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
-  <meta name="author" content="ThemeSelect">
+  <meta name="description" content="2019 - Dinas Tenaga Kerja Kota Solo">
+  <meta name="keywords" content="">
+  <meta name="author" content="Guramin, Yanuardelta, Re">
   <title>Dinas Tenaga Kerja - {{ $title }}</title>
   <link rel="apple-touch-icon" href="{{ asset('admin/images/favicon/apple-touch-icon-152x152.png') }}">
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin/images/favicon/favicon-32x32.png') }}">
@@ -108,7 +108,13 @@
           </ul>
         </div>
       </li>
-      <li class="bold"><a class="waves-effect waves-cyan " href="/admin/halaman-manajemen-workshop"><i class="material-icons">extension</i><span class="menu-title" data-i18n="">Pelatihan</span></a>
+      <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">extension</i><span class="menu-title" data-i18n="">Pelatihan</span></a>
+        <div class="collapsible-body">
+            <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+              <li><a class="collapsible-body" href="/admin/halaman-manajemen-workshop" data-i18n=""><i class="material-icons" style="color: red">brightness_1</i><span>Daftar Pelatihan</span></a></li>
+              <li><a class="collapsible-body" href="/admin/halaman-kompetensi-workshop" data-i18n=""><i class="material-icons" style="color: orange">brightness_1</i><span>Kompetensi Pelatihan</span></a></li>
+            </ul>
+          </div>
       </li>
       @elseif (Session::get('login-pr') == true)
       <li class="navigation-header"><a class="navigation-header-text">main menu</a><i class="navigation-header-icon material-icons">more_horiz</i>

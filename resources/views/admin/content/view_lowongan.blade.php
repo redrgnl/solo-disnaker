@@ -49,19 +49,6 @@
               </div>
             </div>
             <div class="row">
-              <div class="input-field col l2"><label style="color: blue; font-weight: bold">Lokasi Perusahaan</label></div>
-              <div class="input-field col l10">
-                <select class="browser-default" name="FilterSktr" id="searchByLoPrshn">
-                  <option value="">Pilih Jabatan</option>
-                  @if(!empty($jabatan))
-                  @foreach($jabatan as $s)
-                  <option value="{{ $s->nama_jabatan }}">{{ $s->nama_jabatan }}</option>
-                  @endforeach
-                  @endif
-                </select>
-              </div>
-            </div>
-            <div class="row">
               <div class="input-field col l2"><label style="color: blue; font-weight: bold">Lapangan Usaha</label></div>
               <div class="input-field col l10">
                 <select class="browser-default" name="FilterSktr" id="searchByLu">

@@ -192,26 +192,6 @@
                 <option value="Disabilitas" <?php if ($pelamar->kondisi_pelamar == "Disabilitas") {
                                               echo "selected";
                                             } ?>>Disabilitas</option>
-<!--
-                <option value="Tuna Daksa" <?php if ($pelamar->kondisi_pelamar == "Tuna Daksa") {
-                                              echo "selected";
-                                            } ?>>Tuna Daksa</option>
-                <option value="Tuna Grahita" <?php if ($pelamar->kondisi_pelamar == "Tuna Grahita") {
-                                                echo "selected";
-                                              } ?>>Tuna Grahita</option>
-                <option value="Tuna Wicara" <?php if ($pelamar->kondisi_pelamar == "Tuna Wicara") {
-                                              echo "selected";
-                                            } ?>>Tuna Wicara</option>
-                <option value="Tuna Netra" <?php if ($pelamar->kondisi_pelamar == "Tuna Netra") {
-                                              echo "selected";
-                                            } ?>>Tuna Netra</option>
-                <option value="Tuna Netra" <?php if ($pelamar->kondisi_pelamar == "Tuna Netra") {
-                                              echo "selected";
-                                            } ?>>Tuna Rungu</option>
-                <option value="Tuna Netra" <?php if ($pelamar->kondisi_pelamar == "Tuna Netra") {
-                                              echo "selected";
-                                            } ?>>Tuna Ganda</option>
--->
               </select>
               <label>Konfisi Fisik*</label>
               @error('inpkonfis')
@@ -410,376 +390,604 @@
               @enderror
             </div>
           </div>
-<!-- =================================================TIPE PELAMAR REGULAR=============================================================== -->
-@if($pelamar->tipe_pelamar == "REGULAR")
-          <h6 style="color: blue;">Data Harapan Kerja</h6>
-          <div class="row">
-            <div class="input-field col s12 l12 ml">
-              <div class="row ml-3">
-                <label style="font-size: 18px">Harapan Penempatan</label>
-                <label>
-                  <input name="inppos" type="radio" value="Dalam Negeri" <?php if($harapan->penempatan_harapan == "Dalam Negeri"){echo "checked";} ?> />
-                  <span>Dalam Negeri</span>
-                </label> &emsp;
-                <label>
-                  <input name="inppos" type="radio" value="Luar Negeri" <?php if($harapan->penempatan_harapan == "Luar Negeri"){echo "checked";} ?> />
-                  <span>Luar Negeri</span>
-                </label>
-              </div>
-              @error('inppos')
-              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-              @enderror
-            </div>
-          </div>
-<!-- DALAM NEGERI -->
-          @if($harapan->penempatan_harapan == "Dalam Negeri")
-          <div class="field-a">
+        <!-- =================================================TIPE PELAMAR REGULAR=============================================================== -->
+        @if($pelamar->tipe_pelamar == "REGULAR")
+            @if($harapan != 'false')
+                <input type="hidden" name="inppelamarapi" value="false">
+                <h6 style="color: blue;">Data Harapan Kerja</h6>
+                <div class="row">
+                    <div class="input-field col s12 l12 ml">
+                    <div class="row ml-3">
+                        <label style="font-size: 18px">Harapan Penempatan</label>
+                        <label>
+                        <input name="inppos" type="radio" value="Dalam Negeri" <?php if($harapan->penempatan_harapan == "Dalam Negeri"){echo "checked";} ?> />
+                        <span>Dalam Negeri</span>
+                        </label> &emsp;
+                        <label>
+                        <input name="inppos" type="radio" value="Luar Negeri" <?php if($harapan->penempatan_harapan == "Luar Negeri"){echo "checked";} ?> />
+                        <span>Luar Negeri</span>
+                        </label>
+                    </div>
+                    @error('inppos')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                    @enderror
+                    </div>
+                </div>
+                <!-- DALAM NEGERI -->
+                @if($harapan->penempatan_harapan == "Dalam Negeri")
+                <div class="field-a">
+                    <div class="row">
+                    <div class="input-field col s12 m4 l4">
+                        <i class="material-icons prefix">domain</i>
+                        <select name="prov_pdd" id="prov_pdd">
+                        <option value="">- Pilih Provinsi -</option>
+                        @foreach($provinsi as $prov)
+                        <option value="{{ $prov->id }}" <?php if($harapan->provinsi_harapan == $prov->id){echo "selected";} ?> >{{ $prov->name }}</option>
+                        @endforeach
+                        </select>
+                        <label>Provinsi</label>
+                        @error('prov_pdd')
+                        <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="input-field col s12 m4 l4">
+                        <select class="browser-default" name="kota_pdd" id="kota_pdd">
+                        <option value="">- Pilih Kota -</option>
+                        @foreach($kota as $kot)
+                        <option value="{{ $kot->id }}" <?php if($harapan->kota_harapan == $kot->id){echo "selected";} ?> >{{ $kot->name }}</option>
+                        @endforeach
+                        </select>
+                        @error('kota_pdd')
+                        <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    </div>
+                </div>
+                @else
+                <div class="field-a" style="display: none;">
+                    <div class="row">
+                    <div class="input-field col s12 m4 l4">
+                        <i class="material-icons prefix">domain</i>
+                        <select name="prov_pdd" id="prov_pdd">
+                        <option value="">- Pilih Provinsi -</option>
+                        @foreach($provinsi as $prov)
+                        <option value="{{ $prov->id }}">{{ $prov->name }}</option>
+                        @endforeach
+                        </select>
+                        <label>Provinsi</label>
+                        @error('prov_pdd')
+                        <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="input-field col s12 m4 l4">
+                        <select class="browser-default" name="kota_pdd" id="kota_pdd">
+                        <option value="">- Pilih Kota -</option>
+                        </select>
+                        @error('kota_pdd')
+                        <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    </div>
+                </div>
+                @endif
+                <!-- END DALAM NEGERI -->
+                <!-- LUAR NEGERI -->
+                @if($harapan->penempatan_harapan == "Luar Negeri")
+                <div class="field-b">
+                    <div class="row">
+                    <div class="input-field col s12 m4 l4">
+                        <i class="material-icons prefix">domain</i>
+                        <select name="inpnegarahrpn" id="inpnegarahrpn">
+                        <option value="">- Pilih Negara -</option>
+                        @foreach($kwn as $kwn)
+                        <option value="{{ $kwn->country_code }}" <?php if($harapan->negara_luar_harapan == $kwn->country_code){echo "selected";} ?>>{{ $kwn->country_name }}</option>
+                        @endforeach
+                        </select>
+                        <label>Negara</label>
+                        @error('inpnegarahrpn')
+                        <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="file-field input-field col s12">
+                        <div class="btn">
+                        <span>Izin Suami/Istri/Orang Tua</span>
+                        <input type="file" name="inpizin" id="inpizin">
+                        </div>
+                        <div class="file-path-wrapper">
+                        <input class="file-path validate" value="{{ $harapan->izin_keluarga_harapan }}" name="inpizin" type="text">
+                        <input type="hidden" value="{{ $harapan->izin_keluarga_harapan }}" name="old_izin" >
+                        </div>
+                    </div>
+                    <div class="file-field input-field col s12">
+                        <div class="btn">
+                        <span>Buku Nikah</span>
+                        <input type="file" name="inpnikah" id="inpnikah">
+                        </div>
+                        <div class="file-path-wrapper">
+                        <input class="file-path validate" value="{{ $harapan->bukunikah_harapan }}" name="inpnikah" type="text">
+                        <input type="hidden" value="{{ $harapan->bukunikah_harapan }}" name="old_nikah" >
+
+                        </div>
+                    </div>
+                    <div class="file-field input-field col s12">
+                        <div class="btn">
+                        <span>Surat Sehat</span>
+                        <input type="file" name="inpsehat" id="inpsehat">
+                        </div>
+                        <div class="file-path-wrapper">
+                        <input class="file-path validate" value="{{ $harapan->surat_ket_sehat_harapan }}" name="inpsehat" type="text">
+                        <input type="hidden" value="{{ $harapan->surat_ket_sehat_harapan }}" name="old_sehat" >
+
+                        </div>
+                    </div>
+                    <div class="file-field input-field col s12">
+                        <div class="btn">
+                        <span>Sertifikat Keahlian</span>
+                        <input type="file" name="inpkeahlian" id="inpkeahlian">
+                        </div>
+                        <div class="file-path-wrapper">
+                        <input class="file-path validate" value="{{ $harapan->sertifikat_keahlian_harapan }}" name="inpkeahlian" type="text">
+                        <input type="hidden" value="{{ $harapan->sertifikat_keahlian_harapan }}" name="old_ahli" >
+
+                        </div>
+                    </div>
+                    <div class="file-field input-field col s12">
+                        <div class="btn">
+                        <span>Salinan KTP</span>
+                        <input type="file" name="inpktp" id="inpktp">
+                        </div>
+                        <div class="file-path-wrapper">
+                        <input class="file-path validate" value="{{ $harapan->ktp_harapan }}" name="inpktp" type="text">
+                        <input type="hidden" value="{{ $harapan->ktp_harapan }}" name="old_ktp" >
+
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                @else
+                <div class="field-b" style="display: none">
+                    <div class="row">
+                        <div class="input-field col s12 m4 l4">
+                        <i class="material-icons prefix">domain</i>
+                        <select name="inpnegarahrpn" id="inpnegarahrpn">
+                            <option value="">- Pilih Negara -</option>
+                            @foreach($kwn as $kwn)
+                            <option value="{{ $kwn->country_code }}">{{ $kwn->country_name }}</option>
+                            @endforeach
+                        </select>
+                        <label>Negara</label>
+                        @error('inpnegarahrpn')
+                        <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                        @enderror
+                        </div>
+                        <div class="file-field input-field col s12">
+                        <div class="btn">
+                            <span>Izin Suami/Istri/Orang Tua</span>
+                            <input type="file" name="inpizin" id="inpizin">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate"  name="inpizin" type="text">
+                            <input type="hidden" value="{{ $harapan->izin_keluarga_harapan }}" name="old_izin" >
+                        </div>
+                        </div>
+                        <div class="file-field input-field col s12">
+                        <div class="btn">
+                            <span>Buku Nikah</span>
+                            <input type="file" name="inpnikah" id="inpnikah">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" name="inpnikah" type="text">
+                            <input type="hidden" value="{{ $harapan->bukunikah_harapan }}" name="old_nikah" >
+
+                        </div>
+                        </div>
+                        <div class="file-field input-field col s12">
+                        <div class="btn">
+                            <span>Surat Sehat</span>
+                            <input type="file" name="inpsehat" id="inpsehat">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" name="inpsehat" type="text">
+                            <input type="hidden" value="{{ $harapan->surat_ket_sehat_harapan }}" name="old_sehat" >
+
+                        </div>
+                        </div>
+                        <div class="file-field input-field col s12">
+                        <div class="btn">
+                            <span>Sertifikat Keahlian</span>
+                            <input type="file" name="inpkeahlian" id="inpkeahlian">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" name="inpkeahlian" type="text">
+                            <input type="hidden" value="{{ $harapan->sertifikat_keahlian_harapan }}" name="old_ahli" >
+
+                        </div>
+                        </div>
+                        <div class="file-field input-field col s12">
+                        <div class="btn">
+                            <span>Salinan KTP</span>
+                            <input type="file" name="inpktp" id="inpktp">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" name="inpktp" type="text">
+                            <input type="hidden" value="{{ $harapan->ktp_harapan }}" name="old_ktp" >
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                <!-- END LUAR NEGERI -->
+                <div class="row">
+                    <div class="input-field col s12 m4 l4">
+                    <i class="material-icons prefix">group</i>
+                    <select class="form-control select2" name="kelompok_jabatan" id="kelompok_jabatan" data-placeholder="Pilih Kelompok Jabatan">
+                        <option value="">Semua Jabatan</option>
+                        @foreach($jabatan as $jab)
+                        <option value="{{ $jab->id_jabatan }}" <?php if($harapan->jabatan_harapan == $jab->id_jabatan){echo "selected";} ?>>{{ $jab->nama_jabatan }}</option>
+                        @endforeach
+                    </select>
+                    <label>Jabatan Yang Diminati*</label>
+                    @error('kelompok_jabatan')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                    @enderror
+                    </div>
+
+                    <div class="input-field col s12 m4 l4">
+                    <i class="material-icons prefix">group</i>
+                    <select class="form-control" name="sistem_pembayaran_harapan" id="sistem_pembayaran_harapan">
+                        <option value="">Pilih Sistem Pengupahan Gaji</option>
+                        <option value="BORONGAN" <?php if($harapan->pembayaran_gaji_harapan == "BORONGAN"){echo "selected";} ?>>BORONGAN</option>
+                        <option value="HARIAN"<?php if($harapan->pembayaran_gaji_harapan == "HARIAN"){echo "selected";} ?>>HARIAN</option>
+                        <option value="MINGGUAN"<?php if($harapan->pembayaran_gaji_harapan == "MINGGUAN"){echo "selected";} ?>>MINGGUAN</option>
+                        <option value="BULANAN"<?php if($harapan->pembayaran_gaji_harapan == "BULANAN"){echo "selected";} ?>>BULANAN</option>
+                    </select>
+                    <label>Sistem Pembayaran Gaji</label>
+                    @error('sistem_pembayaran_harapan')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                    @enderror
+                    </div>
+                    <div class="input-field col s12 m4 l4">
+                    <i class="material-icons prefix">group</i>
+                    <select name="harapan_gaji" id="harapan_gaji">
+                        <option value="">- Pilih Harapan Gaji Per Bulan -</option>
+                        <option value="1" <?php if($harapan->besar_gaji_harapan == "1"){echo "selected";} ?>>&lt; 1 jt</option>
+                        <option value="2" <?php if($harapan->besar_gaji_harapan == "2"){echo "selected";} ?>>&gt; 1 jt - 2 jt</option>
+                        <option value="3" <?php if($harapan->besar_gaji_harapan == "3"){echo "selected";} ?>>&gt; 2 jt - 3 jt</option>
+                        <option value="4" <?php if($harapan->besar_gaji_harapan == "4"){echo "selected";} ?>>&gt; 3 jt - 4 jt</option>
+                        <option value="5" <?php if($harapan->besar_gaji_harapan == "5"){echo "selected";} ?>>&gt; 4jt - 5 jt</option>
+                        <option value="6" <?php if($harapan->besar_gaji_harapan == "6"){echo "selected";} ?>>5 jt ke atas</option>
+                    </select>
+                    <label>Harapan Gaji Per Bulan</label>
+                    @error('harapan_gaji')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                    @enderror
+                    </div>
+                    <div class="row">
+                    <div class="file-field input-field col s12">
+                        <div class="btn">
+                        <span>Data Pengalaman Kerja</span>
+                        <input type="file" name="inppengalaman" id="inppengalaman">
+                        </div>
+                        <div class="file-path-wrapper">
+                        <input class="file-path validate" name="inppengalaman" value="{{ $harapan->pengalaman_kerja }}" type="text">
+                        <input type="hidden" value="{{ $harapan->pengalaman_kerja }}" name="old_pengalaman" >
+
+                        <label for="inppengalaman">* Upload File Dalam Bentuk PDF</label>
+
+                        </div>
+                        <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="file-field input-field col s12">
+                        <div class="btn">
+                        <span>Data Keterampilan</span>
+                        <input type="file" name="inpketerampilan" id="inpketerampilan">
+                        </div>
+                        <div class="file-path-wrapper">
+                        <input class="file-path validate" name="inpketerampilan" value="{{ $harapan->keterampilan_kerja }}" type="text">
+                        <input type="hidden" value="{{ $harapan->keterampilan_kerja }}" name="old_keterampilan" >
+
+                        <label for="inpketerampilan">* Upload File Dalam Bentuk PDF</label>
+
+                        </div>
+                        <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="file-field input-field col s12">
+                        <div class="btn">
+                        <span>Data Penguasaan Bahasa</span>
+                        <input type="file" name="inpbahasa" id="inpbahasa">
+                        </div>
+                        <div class="file-path-wrapper">
+                        <input class="file-path validate" name="inpbahasa" value="{{ $harapan->penguasaan_bahasa }}" type="text">
+                        <input type="hidden" value="{{ $harapan->penguasaan_bahasa }}" name="old_bahasa" >
+
+                        <label for="inpbahasa">* Upload File Dalam Bentuk PDF</label>
+
+                        </div>
+                        <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
+                    </div>
+                    </div>
+                </div>
+                <!-- ================================================= END TIPE PELAMAR REGULAR ========================================================== -->
+            @else
+            <input type="hidden" name="inppelamarapi" value="true">
+            <h6 style="color: blue;">Data Harapan Kerja</h6>
             <div class="row">
-              <div class="input-field col s12 m4 l4">
-                <i class="material-icons prefix">domain</i>
-                <select name="prov_pdd" id="prov_pdd">
-                  <option value="">- Pilih Provinsi -</option>
-                  @foreach($provinsi as $prov)
-                  <option value="{{ $prov->id }}" <?php if($harapan->provinsi_harapan == $prov->id){echo "selected";} ?> >{{ $prov->name }}</option>
-                  @endforeach
-                </select>
-                <label>Provinsi</label>
-                @error('prov_pdd')
+                <div class="input-field col s12 l12 ml">
+                <div class="row ml-3">
+                    <label style="font-size: 18px">Harapan Penempatan</label>
+                    <label>
+                    <input name="inppos" type="radio" value="Dalam Negeri" checked />
+                    <span>Dalam Negeri</span>
+                    </label> &emsp;
+                    <label>
+                    <input name="inppos" type="radio" value="Luar Negeri" />
+                    <span>Luar Negeri</span>
+                    </label>
+                </div>
+                @error('inppos')
                 <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                 @enderror
-              </div>
-              <div class="input-field col s12 m4 l4">
-                <select class="browser-default" name="kota_pdd" id="kota_pdd">
-                  <option value="">- Pilih Kota -</option>
-                  @foreach($kota as $kot)
-                  <option value="{{ $kot->id }}" <?php if($harapan->kota_harapan == $kot->id){echo "selected";} ?> >{{ $kot->name }}</option>
-                  @endforeach
-                </select>
-                @error('kota_pdd')
-                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-                @enderror
-              </div>
+                </div>
             </div>
-          </div>
-          @else
-          <div class="field-a" style="display: none;">
-            <div class="row">
-              <div class="input-field col s12 m4 l4">
-                <i class="material-icons prefix">domain</i>
-                <select name="prov_pdd" id="prov_pdd">
-                  <option value="">- Pilih Provinsi -</option>
-                  @foreach($provinsi as $prov)
-                  <option value="{{ $prov->id }}">{{ $prov->name }}</option>
-                  @endforeach
-                </select>
-                <label>Provinsi</label>
-                @error('prov_pdd')
-                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-                @enderror
-              </div>
-              <div class="input-field col s12 m4 l4">
-                <select class="browser-default" name="kota_pdd" id="kota_pdd">
-                  <option value="">- Pilih Kota -</option>
-                </select>
-                @error('kota_pdd')
-                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-                @enderror
-              </div>
-            </div>
-          </div>
-          @endif
-<!-- END DALAM NEGERI -->
-<!-- LUAR NEGERI -->
-  @if($harapan->penempatan_harapan == "Luar Negeri")
-
-          <div class="field-b">
-            <div class="row">
-              <div class="input-field col s12 m4 l4">
-                <i class="material-icons prefix">domain</i>
-                <select name="inpnegarahrpn" id="inpnegarahrpn">
-                  <option value="">- Pilih Negara -</option>
-                  @foreach($kwn as $kwn)
-                  <option value="{{ $kwn->country_code }}" <?php if($harapan->negara_luar_harapan == $kwn->country_code){echo "selected";} ?>>{{ $kwn->country_name }}</option>
-                  @endforeach
-                </select>
-                <label>Negara</label>
-                @error('inpnegarahrpn')
-                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-                @enderror
-              </div>
-              <div class="file-field input-field col s12">
-                <div class="btn">
-                  <span>Izin Suami/Istri/Orang Tua</span>
-                  <input type="file" name="inpizin" id="inpizin">
-                </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" value="{{ $harapan->izin_keluarga_harapan }}" name="inpizin" type="text">
-                  <input type="hidden" value="{{ $harapan->izin_keluarga_harapan }}" name="old_izin" >
-                </div>
-              </div>
-              <div class="file-field input-field col s12">
-                <div class="btn">
-                  <span>Buku Nikah</span>
-                  <input type="file" name="inpnikah" id="inpnikah">
-                </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" value="{{ $harapan->bukunikah_harapan }}" name="inpnikah" type="text">
-                  <input type="hidden" value="{{ $harapan->bukunikah_harapan }}" name="old_nikah" >
-
-                </div>
-              </div>
-              <div class="file-field input-field col s12">
-                <div class="btn">
-                  <span>Surat Sehat</span>
-                  <input type="file" name="inpsehat" id="inpsehat">
-                </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" value="{{ $harapan->surat_ket_sehat_harapan }}" name="inpsehat" type="text">
-                  <input type="hidden" value="{{ $harapan->surat_ket_sehat_harapan }}" name="old_sehat" >
-
-                </div>
-              </div>
-              <div class="file-field input-field col s12">
-                <div class="btn">
-                  <span>Sertifikat Keahlian</span>
-                  <input type="file" name="inpkeahlian" id="inpkeahlian">
-                </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" value="{{ $harapan->sertifikat_keahlian_harapan }}" name="inpkeahlian" type="text">
-                  <input type="hidden" value="{{ $harapan->sertifikat_keahlian_harapan }}" name="old_ahli" >
-
-                </div>
-              </div>
-              <div class="file-field input-field col s12">
-                <div class="btn">
-                  <span>Salinan KTP</span>
-                  <input type="file" name="inpktp" id="inpktp">
-                </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" value="{{ $harapan->ktp_harapan }}" name="inpktp" type="text">
-                  <input type="hidden" value="{{ $harapan->ktp_harapan }}" name="old_ktp" >
-
-                </div>
-              </div>
-            </div>
-          </div>
-  @else
-  <div class="field-b" style="display: none">
-              <div class="row">
+            <div class="field-a">
+                <div class="row">
                 <div class="input-field col s12 m4 l4">
-                  <i class="material-icons prefix">domain</i>
-                  <select name="inpnegarahrpn" id="inpnegarahrpn">
-                    <option value="">- Pilih Negara -</option>
+                    <i class="material-icons prefix">domain</i>
+                    <select name="prov_pdd" id="prov_pdd">
+                    <option value="">- Pilih Provinsi -</option>
+                    @foreach($provinsi as $prov)
+                    <option value="{{ $prov->id }}">{{ $prov->name }}</option>
+                    @endforeach
+                    </select>
+                    <label>Provinsi</label>
+                    @error('prov_pdd')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="input-field col s12 m4 l4">
+                    <select class="browser-default" name="kota_pdd" id="kota_pdd">
+                    <option value="">- Pilih Kota -</option>
+                    </select>
+                    @error('kota_pdd')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                    @enderror
+                </div>
+                </div>
+            </div>
+            <div class="field-b" style="display: none">
+                <div class="row">
+                <div class="input-field col s12 m4 l4">
+                    <i class="material-icons prefix">domain</i>
+                    <select name="inpnegarahrpn" id="inpnegarahrpn">
+                    <option value="-">- Pilih Negara -</option>
                     @foreach($kwn as $kwn)
                     <option value="{{ $kwn->country_code }}">{{ $kwn->country_name }}</option>
                     @endforeach
+                    </select>
+                    <label>Negara</label>
+                    @error('inpnegarahrpn')
+                    <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="file-field input-field col s12">
+                    <div class="btn">
+                    <span>Izin Suami/Istri/Orang Tua</span>
+                    <input type="file" name="inpizin" id="inpizin">
+                    </div>
+                    <div class="file-path-wrapper">
+                    <input class="file-path validate" name="inpizin" type="text">
+                    </div>
+                </div>
+                <div class="file-field input-field col s12">
+                    <div class="btn">
+                    <span>Buku Nikah</span>
+                    <input type="file" name="inpnikah" id="inpnikah">
+                    </div>
+                    <div class="file-path-wrapper">
+                    <input class="file-path validate" name="inpnikah" type="text">
+                    </div>
+                </div>
+                <div class="file-field input-field col s12">
+                    <div class="btn">
+                    <span>Surat Sehat</span>
+                    <input type="file" name="inpsehat" id="inpsehat">
+                    </div>
+                    <div class="file-path-wrapper">
+                    <input class="file-path validate" name="inpsehat" type="text">
+                    </div>
+                </div>
+                <div class="file-field input-field col s12">
+                    <div class="btn">
+                    <span>Sertifikat Keahlian</span>
+                    <input type="file" name="inpkeahlian" id="inpkeahlian">
+                    </div>
+                    <div class="file-path-wrapper">
+                    <input class="file-path validate" name="inpkeahlian" type="text">
+                    </div>
+                </div>
+                <div class="file-field input-field col s12">
+                    <div class="btn">
+                    <span>Salinan KTP</span>
+                    <input type="file" name="inpktp" id="inpktp">
+                    </div>
+                    <div class="file-path-wrapper">
+                    <input class="file-path validate" name="inpktp" type="text">
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m4 l4">
+                  <i class="material-icons prefix">group</i>
+                  <select class="form-control select2" name="kelompok_jabatan" id="kelompok_jabatan" data-placeholder="Pilih Kelompok Jabatan">
+                    <option value="">Semua Jabatan</option>
+                    @foreach($jabatan as $jab)
+                    <option value="{{ $jab->id_jabatan }}">{{ $jab->nama_jabatan }}</option>
+                    @endforeach
                   </select>
-                  <label>Negara</label>
-                  @error('inpnegarahrpn')
+                  <label>Jabatan Yang Diminati*</label>
+                  @error('kelompok_jabatan')
                   <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
                   @enderror
                 </div>
-                <div class="file-field input-field col s12">
-                  <div class="btn">
-                    <span>Izin Suami/Istri/Orang Tua</span>
-                    <input type="file" name="inpizin" id="inpizin">
-                  </div>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate"  name="inpizin" type="text">
-                    <input type="hidden" value="{{ $harapan->izin_keluarga_harapan }}" name="old_izin" >
+                <div class="input-field col s12 m4 l4">
+                  <i class="material-icons prefix">group</i>
+                  <select class="form-control" name="sistem_pembayaran_harapan" id="sistem_pembayaran_harapan">
+                    <option value="">Pilih Sistem Pengupahan Gaji</option>
+                    <option value="BORONGAN">BORONGAN</option>
+                    <option value="HARIAN">HARIAN</option>
+                    <option value="MINGGUAN">MINGGUAN</option>
+                    <option value="BULANAN">BULANAN</option>
+                  </select>
+                  <label>Sistem Pembayaran Gaji</label>
+                  @error('sistem_pembayaran_harapan')
+                  <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                  @enderror
+                </div>
+                <div class="input-field col s12 m4 l4">
+                  <i class="material-icons prefix">group</i>
+                  <select name="harapan_gaji" id="harapan_gaji">
+                    <option value="">- Pilih Harapan Gaji Per Bulan -</option>
+                    <option value="1">&lt; 1 jt</option>
+                    <option value="2">&gt; 1 jt - 2 jt</option>
+                    <option value="3">&gt; 2 jt - 3 jt</option>
+                    <option value="4">&gt; 3 jt - 4 jt</option>
+                    <option value="5">&gt; 4jt - 5 jt</option>
+                    <option value="6">5 jt ke atas</option>
+                  </select>
+                  <label>Harapan Gaji Per Bulan</label>
+                  @error('harapan_gaji')
+                  <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                  @enderror
+                </div>
+                <div class="row">
+                  <div class="file-field input-field col s12">
+                    <div class="btn">
+                      <span>Data Pengalaman Kerja</span>
+                      <input type="file" name="inppengalaman" id="inppengalaman">
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" name="inppengalaman" type="text">
+                      <label for="inppengalaman">* Upload File Dalam Bentuk PDF</label>
 
+                    </div>
                   </div>
                 </div>
-                <div class="file-field input-field col s12">
-                  <div class="btn">
-                    <span>Buku Nikah</span>
-                    <input type="file" name="inpnikah" id="inpnikah">
-                  </div>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate" name="inpnikah" type="text">
-                    <input type="hidden" value="{{ $harapan->bukunikah_harapan }}" name="old_nikah" >
+                <div class="row">
+                  <div class="file-field input-field col s12">
+                    <div class="btn">
+                      <span>Data Keterampilan</span>
+                      <input type="file" name="inpketerampilan" id="inpketerampilan">
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" name="inpketerampilan" type="text">
+                      <label for="inpketerampilan">* Upload File Dalam Bentuk PDF</label>
 
+                    </div>
                   </div>
                 </div>
-                <div class="file-field input-field col s12">
-                  <div class="btn">
-                    <span>Surat Sehat</span>
-                    <input type="file" name="inpsehat" id="inpsehat">
-                  </div>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate" name="inpsehat" type="text">
-                    <input type="hidden" value="{{ $harapan->surat_ket_sehat_harapan }}" name="old_sehat" >
+                <div class="row">
+                  <div class="file-field input-field col s12">
+                    <div class="btn">
+                      <span>Data Penguasaan Bahasa</span>
+                      <input type="file" name="inpbahasa" id="inpbahasa">
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" name="inpbahasa" type="text">
+                      <label for="inpbahasa">* Upload File Dalam Bentuk PDF</label>
 
+                    </div>
+                      <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
                   </div>
                 </div>
-                <div class="file-field input-field col s12">
-                  <div class="btn">
-                    <span>Sertifikat Keahlian</span>
-                    <input type="file" name="inpkeahlian" id="inpkeahlian">
-                  </div>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate" name="inpkeahlian" type="text">
-                    <input type="hidden" value="{{ $harapan->sertifikat_keahlian_harapan }}" name="old_ahli" >
-
-                  </div>
+            </div>
+            @endif
+        @else
+            @if($usaha != 'false')
+            <!-- =============================================== TIPE PELAMAR PELAKU USAHA =========================================================== -->
+            <h6 style="color: blue;">Data Pelaku Usaha</h6>
+            <div class="row">
+                <div class="input-field col s6 m6 l6">
+                <i class="material-icons prefix">attach_money</i>
+                <input name="inpmodal" id="inpmodal" type="number" value='{{ $usaha->modal_usaha }}' class="validate">
+                <label for="inpmodal">Modal yang dimiliki(Rp)</label>
+                @error('inpmodal')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
                 </div>
+                <div class="input-field col s6 m6 l6">
+                <i class="material-icons prefix">attach_money</i>
+                <input name="inpomzet" id="inpomzet" type="number" value='{{ $usaha->omzet_usaha }}' class="validate">
+                <label for="inpomzet">Omzet tiap bulan (Rp)</label>
+                @error('inpomzet')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                <i class="material-icons prefix">assignment</i>
+                <textarea id="deskripsi_bisnis" name="deskripsi_bisnis"  class="materialize-textarea">{{ $usaha->deskripsi_usaha }}</textarea>
+                <label for="deskripsi_bisnis">Deskripsi usaha/ bisnis yang digeluti </label>
+                </div>
+            </div>
+            <div class="row">
                 <div class="file-field input-field col s12">
-                  <div class="btn">
+                    <div class="btn">
+                    <span>Salinan KTP</span>
+                    <input type="hidden" value="{{$usaha->ktp_pelamar_wirausaha}}" name="old_ktp" >
+                    <input type="file" name="inpktp" id="inpktp">
+                    </div>
+                    <div class="file-path-wrapper">
+                    <input class="file-path validate" name="inpktp" value='{{ $usaha->ktp_pelamar_wirausaha }}' type="text">
+                    </div>
+                </div>
+            </div>
+            <!-- =============================================== END TIPE PELAMAR PELAKU USAHA ======================================================= -->
+            @else
+            <h6 style="color: blue;">Data Pelaku Usaha</h6>
+            <div class="row">
+                <div class="input-field col s6 m6 l6">
+                <i class="material-icons prefix">attach_money</i>
+                <input name="inpmodal" id="inpmodal" type="number" class="validate">
+                <label for="inpmodal">Modal yang dimiliki(Rp)</label>
+                @error('inpmodal')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+                </div>
+                <div class="input-field col s6 m6 l6">
+                <i class="material-icons prefix">attach_money</i>
+                <input name="inpomzet" id="inpomzet" type="number" class="validate">
+                <label for="inpomzet">Omzet tiap bulan (Rp)</label>
+                @error('inpomzet')
+                <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
+                @enderror
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                <i class="material-icons prefix">assignment</i>
+                <textarea id="deskripsi_bisnis" name="deskripsi_bisnis"  class="materialize-textarea"></textarea>
+                <label for="deskripsi_bisnis">Deskripsi usaha/ bisnis yang digeluti </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="file-field input-field col s12">
+                    <div class="btn">
                     <span>Salinan KTP</span>
                     <input type="file" name="inpktp" id="inpktp">
-                  </div>
-                  <div class="file-path-wrapper">
+                    </div>
+                    <div class="file-path-wrapper">
                     <input class="file-path validate" name="inpktp" type="text">
-                    <input type="hidden" value="{{ $harapan->ktp_harapan }}" name="old_ktp" >
-                  </div>
-                </div>
-              </div>
-            </div>
- 
-  @endif
-<!-- END LUAR NEGERI -->
-
-          <div class="row">
-            <div class="input-field col s12 m4 l4">
-              <i class="material-icons prefix">group</i>
-              <select class="form-control select2" name="kelompok_jabatan" id="kelompok_jabatan" data-placeholder="Pilih Kelompok Jabatan">
-                <option value="">Semua Jabatan</option>
-                @foreach($jabatan as $jab)
-                <option value="{{ $jab->id_jabatan }}" <?php if($harapan->jabatan_harapan == $jab->id_jabatan){echo "selected";} ?>>{{ $jab->nama_jabatan }}</option>
-                @endforeach
-              </select>
-              <label>Jabatan Yang Diminati*</label>
-              @error('kelompok_jabatan')
-              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-              @enderror
-            </div>
-
-            <div class="input-field col s12 m4 l4">
-              <i class="material-icons prefix">group</i>
-              <select class="form-control" name="sistem_pembayaran_harapan" id="sistem_pembayaran_harapan">
-                <option value="">Pilih Sistem Pengupahan Gaji</option>
-                <option value="BORONGAN" <?php if($harapan->pembayaran_gaji_harapan == "BORONGAN"){echo "selected";} ?>>BORONGAN</option>
-                <option value="HARIAN"<?php if($harapan->pembayaran_gaji_harapan == "HARIAN"){echo "selected";} ?>>HARIAN</option>
-                <option value="MINGGUAN"<?php if($harapan->pembayaran_gaji_harapan == "MINGGUAN"){echo "selected";} ?>>MINGGUAN</option>
-                <option value="BULANAN"<?php if($harapan->pembayaran_gaji_harapan == "BULANAN"){echo "selected";} ?>>BULANAN</option>
-              </select>
-              <label>Sistem Pembayaran Gaji</label>
-              @error('sistem_pembayaran_harapan')
-              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-              @enderror
-            </div>
-            <div class="input-field col s12 m4 l4">
-              <i class="material-icons prefix">group</i>
-              <select name="harapan_gaji" id="harapan_gaji">
-                <option value="">- Pilih Harapan Gaji Per Bulan -</option>
-                <option value="1" <?php if($harapan->besar_gaji_harapan == "1"){echo "selected";} ?>>&lt; 1 jt</option>
-                <option value="2" <?php if($harapan->besar_gaji_harapan == "2"){echo "selected";} ?>>&gt; 1 jt - 2 jt</option>
-                <option value="3" <?php if($harapan->besar_gaji_harapan == "3"){echo "selected";} ?>>&gt; 2 jt - 3 jt</option>
-                <option value="4" <?php if($harapan->besar_gaji_harapan == "4"){echo "selected";} ?>>&gt; 3 jt - 4 jt</option>
-                <option value="5" <?php if($harapan->besar_gaji_harapan == "5"){echo "selected";} ?>>&gt; 4jt - 5 jt</option>
-                <option value="6" <?php if($harapan->besar_gaji_harapan == "6"){echo "selected";} ?>>5 jt ke atas</option>
-              </select>
-              <label>Harapan Gaji Per Bulan</label>
-              @error('harapan_gaji')
-              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-              @enderror
-            </div>
-            <div class="row">
-              <div class="file-field input-field col s12">
-                <div class="btn">
-                  <span>Data Pengalaman Kerja</span>
-                  <input type="file" name="inppengalaman" id="inppengalaman">
-                </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" name="inppengalaman" value="{{ $harapan->pengalaman_kerja }}" type="text">
-                  <input type="hidden" value="{{ $harapan->pengalaman_kerja }}" name="old_pengalaman" >
-
-                  <label for="inppengalaman">* Upload File Dalam Bentuk PDF</label>
-
-                </div>
-                  <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
-              </div>
-            </div>
-            <div class="row">
-              <div class="file-field input-field col s12">
-                <div class="btn">
-                  <span>Data Keterampilan</span>
-                  <input type="file" name="inpketerampilan" id="inpketerampilan">
-                </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" name="inpketerampilan" value="{{ $harapan->keterampilan_kerja }}" type="text">
-                  <input type="hidden" value="{{ $harapan->keterampilan_kerja }}" name="old_keterampilan" >
-
-                  <label for="inpketerampilan">* Upload File Dalam Bentuk PDF</label>
-
-                </div>
-                  <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
-              </div>
-            </div>
-            <div class="row">
-              <div class="file-field input-field col s12">
-                <div class="btn">
-                  <span>Data Penguasaan Bahasa</span>
-                  <input type="file" name="inpbahasa" id="inpbahasa">
-                </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" name="inpbahasa" value="{{ $harapan->penguasaan_bahasa }}" type="text">
-                  <input type="hidden" value="{{ $harapan->penguasaan_bahasa }}" name="old_bahasa" >
-
-                  <label for="inpbahasa">* Upload File Dalam Bentuk PDF</label>
-
-                </div>
-                  <!-- <a href="javascript:void(0);" class="waves-effect waves-light btn add_button" title="Add field"><i class="material-icons left">add_box</i>Tambah Pengalaman</a> -->
-              </div>
-            </div>
-<!-- ================================================= END TIPE PELAMAR REGULAR ========================================================== -->
-
-@else
-<!-- =============================================== TIPE PELAMAR PELAKU USAHA =========================================================== -->
-<h6 style="color: blue;">Data Pelaku Usaha</h6>
-          <div class="row">
-            <div class="input-field col s6 m6 l6">
-              <i class="material-icons prefix">attach_money
-</i>
-              <input name="inpmodal" id="inpmodal" type="number" value='{{ $usaha->modal_usaha }}' class="validate">
-              <label for="inpmodal">Modal yang dimiliki(Rp)</label>
-              @error('inpmodal')
-              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-              @enderror
-            </div>
-            <div class="input-field col s6 m6 l6">
-              <i class="material-icons prefix">attach_money
-</i>
-              <input name="inpomzet" id="inpomzet" type="number" value='{{ $usaha->omzet_usaha }}' class="validate">
-              <label for="inpomzet">Omzet tiap bulan (Rp)</label>
-              @error('inpomzet')
-              <span class="helper-text" data-error="wrong" data-success="right" style="color: red">{{ $message }}</span>
-              @enderror
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-            <i class="material-icons prefix">assignment</i>
-              <textarea id="deskripsi_bisnis" name="deskripsi_bisnis"  class="materialize-textarea">{{ $usaha->deskripsi_usaha }}</textarea>
-              <label for="deskripsi_bisnis">Deskripsi usaha/ bisnis yang digeluti </label>
-            </div>
-         </div>
-          <div class="row">
-
-              <div class="file-field input-field col s12">
-                <div class="btn">
-                  <span>Salinan KTP</span>
-                  <input type="hidden" value="{{$usaha->ktp_pelamar_wirausaha}}" name="old_ktp" >
-                  <input type="file" name="inpktp" id="inpktp">
-                </div>
-                <div class="file-path-wrapper">
-                  <input class="file-path validate" name="inpktp" value='{{ $usaha->ktp_pelamar_wirausaha }}' type="text">
+                    </div>
                 </div>
             </div>
-          </div>
-<!-- =============================================== END TIPE PELAMAR PELAKU USAHA ======================================================= -->
-
-@endif
+            @endif
+        @endif
 
             <div class="input-field col s12">
               <button class="btn waves-effect waves-light gradient-45deg-light-blue-cyan gradient-shadow right text-white" type="submit" name="action">Submit
